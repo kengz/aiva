@@ -129,7 +129,6 @@ typedCmd =
       /I am(?! in| at) (.*)/i
       /I\'*\’*m(?! in| at) (.*)/i
       /My name is(?! in| at) (.*)/i
-      /((?:(?!is)\w)*) is(?! in| at) (.*)/i
       /who is (.*)/i
       /who am I/i
       /clear alias for (.*)/i
