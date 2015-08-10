@@ -88,6 +88,7 @@ function upload(path, memObj) {
     var memory = memObj == undefined ?
         require(rootdir + path) :
         memObj;
+    fs.writeFile(rootdir + path, JSON.stringify(memory));
     return req(optGet(path))
         .then(getSHA)
         .then(optUpdate.bind(null, path, memory))

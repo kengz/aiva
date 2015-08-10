@@ -106,7 +106,8 @@ typedCmd =
       /time( at)? ([\w\-]+)/i
       /((?:(?!is).)*) is (in|at) (.*)/i
       /I\'*\’*m (in|at) (.*)/i
-      /where is ([\w\-]+)/i
+      /I am (in|at) (.*)/i
+      /where is (.+)/i
       /where am I/i
       /weather( at)? ?(.+)?/i
     ],

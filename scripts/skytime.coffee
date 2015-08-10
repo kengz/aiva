@@ -162,11 +162,7 @@ module.exports = (robot) ->
   # This part henceforth is Darksky: uses either location or username
   robot.respond /weather( at)? ?(.+)?/i, (msg) ->
     user = userId(robot, msg.match[2], msg)
-    # first assuming is given location
-    location = user || process.env.HUBOT_DARK_SKY_DEFAULT_LOCATION
-    # check if is actually a username, then reset
-    if user? and robot.brain.data.locations[user]?
-      location = robot.brain.data.locations[user].stringLocation
+    location = if user? and robot.brain.data.locations[user]? then robot.brain.data.locations[user].stringLocation else msg.match[2]
 
     options =
       separator: process.env.HUBOT_DARK_SKY_SEPARATOR

@@ -10,10 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/kengz/jarvis"
   },
   "keywords": [
-    "Jarvis"
+    "Jarvis",
+    "hubot",
+    "slack",
+    "bot",
+    "AI",
+    "machine learning",
+    "assistant"
   ],
   "license": "MIT",
   "bugs": {
