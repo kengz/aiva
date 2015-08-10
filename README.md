@@ -11,7 +11,7 @@ Clone this git repo:
 git clone <the-url-of-this-repo>
 ```
 
-Also available as an NPM package:
+Also available as an [NPM package](https://www.npmjs.com/package/jarvis-bot):
 
 ```
 npm install jarvis-bot
