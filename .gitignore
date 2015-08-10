@@ -1,0 +1,12 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+node_modules/
+.tmp/
+.hubot_history
+
+# Other files and folders
+.settings/
+
+# System files
+.DS_Store

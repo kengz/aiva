@@ -1,0 +1,63 @@
+{
+  "name": "jarvis-bot",
+  "version": "0.0.1",
+  "author": "kengz",
+  "description": "Jarvis for Global Hackers",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "./bin/hubot -a slack"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "Jarvis"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "body-parser": "^1.13.1",
+    "chrono-node": "^1.0.6",
+    "cron": "^1.0.9",
+    "ejs": "^2.3.2",
+    "express": "^4.13.0",
+    "forever-monitor": "^1.6.0",
+    "hn.js": "^0.2.0",
+    "hubot": "^2.13.2",
+    "hubot-codinglove": "^0.2.6",
+    "hubot-cronjob": "^0.2.0",
+    "hubot-dev-excuse-reply": "0.0.4",
+    "hubot-diagnostics": "0.0.1",
+    "hubot-flirt": "^1.0.1",
+    "hubot-google-images": "^0.1.5",
+    "hubot-meme": "^1.1.1",
+    "hubot-redis-brain": "0.0.3",
+    "hubot-rules": "^0.1.1",
+    "hubot-schedule": "^0.2.0",
+    "hubot-scripts": "^2.16.1",
+    "hubot-shipit": "^0.2.0",
+    "hubot-slack": "^3.3.0",
+    "hubot-victory": "^1.3.0",
+    "indico.io": "^0.4.1",
+    "lomath": "^0.2.2",
+    "mitsuku-api": "^0.1.1",
+    "moment": "^2.10.3",
+    "morgan": "^1.6.0",
+    "multer": "^0.1.8",
+    "node-env-file": "^0.1.7",
+    "node-geocoder": "^2.22.0",
+    "q": "^1.4.1",
+    "reqscraper": "0.0.2",
+    "tinyurl": "^1.0.8",
+    "twit": "^2.1.0",
+    "twitter": "^1.2.5"
+  },
+  "engines": {
+    "node": "0.12.x"
+  }
+}

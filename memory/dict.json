@@ -1,0 +1,10 @@
+{
+	"your name|who are you": ["I'm", "My name is", "Call me"],
+	"hey": ["Hello!", "Hi", "Yo", "Wassup", "Hey", "Hey there", "Waddup bitch", "How's it going?", "How's your day been?"],
+	"bye|see you": ["See you!", "Bye", "Ciao", ":)"],
+	"morning": ["Good morning", "Morning", "Guten Morgen", "早安"],
+	"night": ["Good night", "Sleep well", "Sweet dreams", "Nights", "晚安"],
+	"for you": ["Thank you", "Thanks", "谢谢"],
+	"thank": ["You're welcome", "No problem", "Glad I could help", "My pleasure", "You have a good day", "不客气"],
+	"fuck you|screw you": ["Well fuck you too", "Fuck you Prata", "Fuck sake", "Shut the fuck up"]
+}
