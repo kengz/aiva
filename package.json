@@ -1,9 +1,9 @@
 {
   "name": "jarvis-bot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "kengz",
-  "description": "Jarvis for Global Hackers",
-  "main": "index.js",
+  "description": "A JARVIS for your team - your most powerful bot and loyal butler.",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "./bin/hubot -a slack"

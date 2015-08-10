@@ -31,7 +31,9 @@ module.exports = (robot) ->
 
   upload = (msg) ->
     memsync.upload('memory/braindata.json', robot.brain.data)
-    .then(msg.send 'brain uploaded to Github')
+    .then(() ->
+      if msg? then msg.send 'brain uploaded to Github' else robot.messageRoom('jarvis-dev', 'brain uploaded to Github')
+      )
     
   # check if you are an admin
   robot.respond /(vision)$/i, (msg) ->
