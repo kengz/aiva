@@ -66,3 +66,6 @@ module.exports = (robot) ->
 		if !_.size isCmd 
 			if _.size isJ then jtalk dict[isJ], msg, robot else mtalk txt, msg, robot
 
+	# greeting for when new member enters the room
+	robot.enter (res) ->
+	  res.send "Hello #{res.envelope.user.name}, welcome to the team. I'm #{robot.name}. See what I can do by typing `#{robot.name} help`"

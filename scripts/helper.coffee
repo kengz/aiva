@@ -103,7 +103,7 @@ typedCmd =
       /twitter (\S+)\s*(.+)?/i
     ]
     "where": [
-      /time( at)? ([\w\-]+)/i
+      /time( at)? ?(.+)?/i
       /((?:(?!is).)*) is (in|at) (.*)/i
       /I\'*\’*m (in|at) (.*)/i
       /I am (in|at) (.*)/i

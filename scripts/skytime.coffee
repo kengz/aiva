@@ -112,13 +112,21 @@ timeAtLatitudeAndLongitude = (robot, location, cb) ->
 module.exports = (robot) ->
   robot.brain.data.locations ?= {}
 
-  robot.respond /time( at)? ([\w\-]+)/i, (msg) ->
+  robot.respond /time( at)? ?(.+)?/i, (msg) ->
     user = userId(robot, msg.match[2], msg)
+    location = if user? and robot.brain.data.locations[user]? then robot.brain.data.locations[user].stringLocation else msg.match[2]
 
-    if user? and robot.brain.data.locations[user]?
-      location = robot.brain.data.locations[user]
-      timeAtLatitudeAndLongitude robot, location, (message) ->
-        msg.send message
+    if location?
+      geocoder.geocode location, (err, res) ->
+        if err
+          msg.send "Sorry, I don't know where #{location} is"
+        else
+          codedlocation = {}
+          codedlocation['stringLocation'] = location
+          codedlocation['lat'] = res[0].latitude
+          codedlocation['lon'] = res[0].longitude
+          timeAtLatitudeAndLongitude robot, codedlocation, (message) ->
+            msg.send message
     else
       msg.send "Sorry, I don't know where #{user} is so I can't tell what time zone he or she is in. :("
 
