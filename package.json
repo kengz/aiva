@@ -1,6 +1,6 @@
 {
   "name": "jarvis-bot",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "author": "kengz",
   "description": "A JARVIS for your team - your most powerful bot and loyal butler.",
   "main": "app.js",
@@ -27,11 +27,8 @@
   },
   "homepage": "",
   "dependencies": {
-    "body-parser": "^1.13.1",
     "chrono-node": "^1.0.6",
     "cron": "^1.0.9",
-    "ejs": "^2.3.2",
-    "express": "^4.13.0",
     "forever-monitor": "^1.6.0",
     "hn.js": "^0.2.0",
     "hubot": "^2.13.2",
@@ -53,8 +50,6 @@
     "lomath": "^0.2.2",
     "mitsuku-api": "^0.1.1",
     "moment": "^2.10.3",
-    "morgan": "^1.6.0",
-    "multer": "^0.1.8",
     "node-env-file": "^0.1.7",
     "node-geocoder": "^2.22.0",
     "q": "^1.4.1",

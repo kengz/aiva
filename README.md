@@ -27,6 +27,15 @@ Then [setup](#setup) and [deploy](#deploy).
 
 *Tl;dr*: If you're using Slack, just fill the `.env-jarvis` with API tokens and run `npm start`.
 
+#### forever
+
+If you use [`forever`](https://github.com/foreverjs/forever) from the terminal, you can deploy/stop multiple instances (after specifying the right file in `.env`) like below:
+
+```
+forever start -a -l jarvis.log --uid "jarvis" app.js
+forever start -a -l veronica.log --uid "veronica" app.js
+```
+
 ## <a name="setup"></a>Setup
 
 
@@ -109,7 +118,7 @@ We lost count on the number of features. There's currently over 30 modular scrip
 | [Lomath](#lomath) |
 | [Chatbot](#chat) |
 | [Memes and jokes](#meme) |
-| [View window](#view) |
+<!-- | [View window](#view) | -->
 
 
 #### <a name="minimal"></a>Minimal setup, quick deployment
@@ -243,8 +252,8 @@ This is easily the most-used feature. **Warning:** this may cause dramatic swing
 
 
 
-#### <a name="view"></a>View window
-There is an HTML view window in `run.js` that runs on `express`. This is so that you can set up your own webpage (maybe having your own Jarvis web interface, or to display some usage stats) if you'd like.
+<!-- #### <a name="view"></a>View window
+There is an HTML view window in `run.js` that runs on `express`. This is so that you can set up your own webpage (maybe having your own Jarvis web interface, or to display some usage stats) if you'd like. -->
 
 
 ## Roadmap
@@ -257,3 +266,29 @@ There is an HTML view window in `run.js` that runs on `express`. This is so that
 - multi-instances, distributed deployment for backing up
 - personal scheduling
 - Integration with Google Now (waiting for Google to open source it)
+
+
+## Changelog 
+`Aug 25`
+- removed view window to allow for multiple instances to be deployed on the same machine.
+
+`Aug 8`
+- √external universal set env
+- √request slack voice api
+- √fix ME regex
+- √change upload command
+- √genlize n export n unify cmdregex
+- √new meme: Shia Labeouf just do it
+- √donald trump
+- √username aliasing
+- √todolist
+- √rate-limiting on pugs/cats
+- √remove heroku app.json
+- √safeguard tokens for open-sourcing
+- √fix regex to catch first
+- √add user? cond to all
+- √serialize chatbot
+- √twitter
+- √indico
+- √isAdmin method
+- √fixed memsync, now reply to user
