@@ -32,8 +32,8 @@ Then [setup](#setup) and [deploy](#deploy).
 If you use [`forever`](https://github.com/foreverjs/forever) from the terminal, you can deploy/stop multiple instances (after specifying the right file in `.env`) like below:
 
 ```
-forever start -a -l jarvis.log --uid "jarvis" app.js
-forever start -a -l veronica.log --uid "veronica" app.js
+forever start -a -l jarvis.log --uid "jarvis" run.js
+forever start -a -l veronica.log --uid "veronica" run.js
 ```
 
 ## <a name="setup"></a>Setup

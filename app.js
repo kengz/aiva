@@ -9,12 +9,12 @@
 
 var forever = require('forever-monitor');
 
-// set the env based on who you're deploying
-var env = require('node-env-file');
-// set env to see which bot is being deployed
-env(__dirname + '/bin/.env');
-// then set env by the deployed bot
-env(__dirname + '/bin/'+process.env.DEPLOY);
+// // set the env based on who you're deploying
+// var env = require('node-env-file');
+// // set env to see which bot is being deployed
+// env(__dirname + '/bin/.env');
+// // then set env by the deployed bot
+// env(__dirname + '/bin/'+process.env.DEPLOY);
 
 // quasi-immortality: restart run.js upon death, for max of 100 times
 var child = new (forever.Monitor)('run.js', {

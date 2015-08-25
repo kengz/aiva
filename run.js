@@ -49,6 +49,12 @@ var cp = require('child_process');
 //     console.log('Node app is running on port', app.get('port'));
 // });
 
+// set the env based on who you're deploying
+var env = require('node-env-file');
+// set env to see which bot is being deployed
+env(__dirname + '/bin/.env');
+// then set env by the deployed bot
+env(__dirname + '/bin/'+process.env.DEPLOY);
 
 // Deploying bot
 // terminal exec task with promise: use as exec.bind(<command>)
