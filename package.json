@@ -1,6 +1,6 @@
 {
   "name": "jarvis-bot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "kengz",
   "description": "A JARVIS for your team - your most powerful bot and loyal butler.",
   "main": "app.js",

@@ -32,8 +32,8 @@ Then [setup](#setup) and [deploy](#deploy).
 If you use [`forever`](https://github.com/foreverjs/forever) from the terminal, you can deploy/stop multiple instances (after specifying the right file in `.env`) like below:
 
 ```
-forever command forever start --killSignal=SIGTERM -a -l jarvis.log --uid "jarvis" run.js
-forever command forever start --killSignal=SIGTERM -a -l veronica.log --uid "veronica" run.js
+forever start --killSignal=SIGTERM -a -l jarvis.log --uid "jarvis" run.js
+forever start --killSignal=SIGTERM -a -l veronica.log --uid "veronica" run.js
 ```
 
 Note that you must set `--killSignal=SIGTERM` to properly kill off hubot. You can kill like below:
