@@ -3,6 +3,9 @@ A JARVIS for your team - your most powerful bot and loyal butler. Jarvis was ori
 
 The most popular and powerful features for us include *todo, reminder, memes, search, and a machine learning module.* See the [design](#design) and all the [features](#features).
 
+## Community
+
+[![Join the chat at https://gitter.im/kengz/jarvis](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kengz/jarvis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Installation
 Clone this git repo:
