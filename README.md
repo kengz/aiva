@@ -1,4 +1,6 @@
 # JARVIS
+
+[![Join the chat at https://gitter.im/kengz/jarvis](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kengz/jarvis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A JARVIS for your team - your most powerful bot and loyal butler. Jarvis was originally built for **GLOBAL_HACKERS** as our smart, humorous and [sentient](#chat) team assistant.
 
 The most popular and powerful features for us include *todo, reminder, memes, search, and a machine learning module.* See the [design](#design) and all the [features](#features).
