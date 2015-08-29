@@ -21,7 +21,12 @@ process.on('SIGTERM', function() {
 });
 
 // run hubot
-children.push(spawn('./bin/hubot', ['-a', process.env.ADAPTER]));
+var hb = spawn('./bin/hubot', ['-a', process.env.ADAPTER])
+children.push(hb);
+// for debugging, allows console.log to print to terminal
+hb.stdout.on('data', function (data) {
+  console.log(data.toString('utf8'));
+});
 
 // setTimeout(function() { process.exit(0) }, 3000);
 
