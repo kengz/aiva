@@ -1,12 +1,15 @@
 {
   "name": "jarvis-bot",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "kengz",
   "description": "A JARVIS for your team - your most powerful bot and loyal butler.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "./bin/hubot -a slack"
+    "stop": "forever stopall",
+    "test": "./bin/hubot -a slack",
+    "jarvis": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l jarvis.log --uid 'jarvis' app.js",
+    "veronica": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l veronica.log --uid 'veronica' app.js"
   },
   "repository": {
     "type": "git",

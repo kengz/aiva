@@ -3,9 +3,6 @@ A JARVIS for your team - your most powerful bot and loyal butler. Jarvis was ori
 
 The most popular and powerful features for us include *todo, reminder, memes, search, and a machine learning module.* See the [design](#design) and all the [features](#features).
 
-## Community
-
-[![Join the chat at https://gitter.im/kengz/jarvis](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kengz/jarvis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Installation
 Clone this git repo:
@@ -28,11 +25,13 @@ npm install
 
 Then [setup](#setup) and [deploy](#deploy).
 
-*Tl;dr*: If you're using Slack, just fill the `.env-jarvis` with API tokens and run `npm start`.
+*Tl;dr*: If you're using Slack, just set `bin/.env` file, fill the `bin/.env-jarvis` with API tokens and run `npm start`.
 
 #### forever
 
-If you use [`forever`](https://github.com/foreverjs/forever) from the terminal, you can deploy/stop multiple instances (after specifying the right file in `.env`) like below:
+`npm start` runs `app.js`, which uses `forever-monitor`. This is for when you don't have `sudo` to install `forever` on the machine you're deploying on. This has the issue of nested processes not being terminated properly (a `forever` issue.)
+
+Things are nicer if you use [`forever`](https://github.com/foreverjs/forever) from the terminal, you can deploy/stop multiple instances (after specifying the right file in `.env`) like below:
 
 ```
 forever start --killSignal=SIGTERM -a -l jarvis.log --uid "jarvis" run.js
@@ -47,6 +46,32 @@ forever stop jarvis
 # stop all instances
 forever stopall
 ```
+
+##### forever in npm
+I'm a lazy person. So I save the `forever` commands above in the npm scripts. For example in `package.json`:
+
+```
+"scripts": {
+    "start": "node app.js",
+    "stop": "forever stopall",
+    "jarvis": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l jarvis.log --uid 'jarvis' app.js",
+    "veronica": ...
+},
+```
+
+So instead of typing that long command for `forever`, you can
+
+```
+# runs that long forever command
+npm run jarvis
+```
+
+To stop all `forever` processes,
+
+```
+npm stop
+```
+
 
 ## <a name="setup"></a>Setup
 
@@ -281,6 +306,9 @@ There is an HTML view window in `run.js` that runs on `express`. This is so that
 
 
 ## Changelog 
+`Sep 2`
+- Now can save and call `forever` commands from npm
+
 `Aug 25`
 - removed view window to allow for multiple instances to be deployed on the same machine.
 
