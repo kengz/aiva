@@ -8,8 +8,8 @@
     "start": "node app.js",
     "stop": "forever stopall",
     "test": "./bin/hubot -a slack",
-    "jarvis": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l jarvis.log --uid 'jarvis' -m 10 run.js",
-    "veronica": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l veronica.log --uid 'veronica' -m 10 run.js"
+    "qvjarvis": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l qvjarvis.log --uid 'qvjarvis' -m 10 run.js",
+    "qvveronica": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l qvveronica.log --uid 'qvveronica' -m 10 run.js"
   },
   "repository": {
     "type": "git",
