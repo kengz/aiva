@@ -18,7 +18,7 @@ var forever = require('forever-monitor');
 
 // quasi-immortality: restart run.js upon death, for max of 100 times
 var child = new (forever.Monitor)('run.js', {
-    max: 100,
+    max: 10,
     silent: false,
     args: []
 });
