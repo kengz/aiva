@@ -135,6 +135,9 @@ typedCmd =
     ],
     "sentiment": [
       /sa\s*(\d*)\s*(.*)/i
+    ],
+    "tradier": [
+      /td\s+((\w+\,\s*)*\w+)\s*(.*)/i
     ]
 
 
@@ -149,8 +152,8 @@ findName = (robot, alias) ->
 # else try fuzzy username
 # else return undefined
 userId = (robot, userName, msg) ->
-  userName = _.trim userName.replace(/\@/g, '')
   try 
+    userName = _.trim userName.replace(/\@/g, '')
     if userName.toLowerCase() is 'me' or userName is ''
       candidate = msg.message.user.name
     else

@@ -64,12 +64,13 @@ module.exports = (robot) ->
   robot.respond /who is (.*)/i, (msg) ->
     name = msg.match[1].replace('?', '')
     user = userId(robot, name, msg)
-    msg.send name+" is also "+listAliasForUser(robot, user, msg)
+    if user?
+      msg.send name+" is also "+listAliasForUser(robot, user, msg)
 
   robot.respond /who am I/i, (msg) ->
-  	name = msg.message.user.name
-  	user = userId(robot, name, msg)
-  	msg.send name+" is also "+listAliasForUser(robot, user, msg)
+    name = msg.message.user.name
+    user = userId(robot, name, msg)
+    msg.send name+" is also "+listAliasForUser(robot, user, msg)
 
   # clear all aliases for user
   robot.respond /clear alias for (.*)/i, (msg) ->

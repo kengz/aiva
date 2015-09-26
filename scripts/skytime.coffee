@@ -85,7 +85,7 @@ geocodeNewLocation = (robot, user, msg, location, cb) ->
       cb("Ok, updated #{userId(robot, user, msg)}'s location to '#{location}'")
 
 relativeToNoon = (hours) ->
-  if hours - 12 > 0
+  if hours - 12 > -1
     "PM"
   else
     "AM"
