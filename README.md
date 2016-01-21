@@ -1,7 +1,23 @@
 # JARVIS
+
 A JARVIS for your team - your most powerful bot and loyal butler. Jarvis was originally built for **GLOBAL_HACKERS** as our smart, humorous and [sentient](#chat) team assistant.
 
 The most popular and powerful features for us include *todo, reminder, memes, search, and a machine learning module.* See the [design](#design) and all the [features](#features).
+
+
+## Next version
+
+**The next version** *of Jarvis is under development in a separate private repo. To prevent potential copyright issues the name will be changed away from JARVIS too.*
+
+##### New features
+
+1. graph knowledge base for a powerful brain
+1. internal chrono
+1. easier setup and deployment
+1. better help menu
+1. smarter interaction
+1. unit tests
+1. extendable scripts (potentially polyglottic)
 
 
 ## Installation
@@ -155,6 +171,7 @@ We lost count on the number of features. There's currently over 30 modular scrip
 | [Lomath](#lomath) |
 | [Chatbot](#chat) |
 | [Memes and jokes](#meme) |
+
 <!-- | [View window](#view) | -->
 
 
