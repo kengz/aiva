@@ -9,15 +9,16 @@ The most popular and powerful features for us include *todo, reminder, memes, se
 
 **The next version** *of Jarvis is under development in a separate private repo. To prevent potential copyright issues the name will be changed away from JARVIS too.*
 
+**Timeline**: *late-March 2016.*
+
 ##### New features
 
 1. graph knowledge base for a powerful brain
-1. internal chrono
-1. easier setup and deployment
-1. better help menu
-1. smarter interaction
+1. Natural Language Processing
+1. extendable scripts with polyglot control, via SocketIO (nodejs, python, ruby and more)
+1. easier setup, deployment on Ubuntu and MacOS
 1. unit tests
-1. extendable scripts (potentially polyglottic)
+1. better help menu
 
 
 ## Installation
