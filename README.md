@@ -7,18 +7,25 @@ The most popular and powerful features for us include *todo, reminder, memes, se
 
 ## Next version
 
-**The next version** *of Jarvis is under development in a separate private repo. To prevent potential copyright issues the name will be changed away from JARVIS too.*
+*Mark 3 is under private development separately. To prevent copyright infringement it will be named* **peppurr**.
+
+The aim is for **peppurr** to be *general-purpose, cross-platform, cross-language, hackable*. It will be more powerful, and significantly easier for developers to use.
 
 **Timeline**: *late-March 2016.*
 
 ##### New features
 
-1. graph knowledge base for a powerful brain
-1. Natural Language Processing
-1. extendable scripts with polyglot control, via SocketIO (nodejs, python, ruby and more)
-1. easier setup, deployment on Ubuntu and MacOS
-1. unit tests
-1. better help menu
+| Feature | Status |
+|---|---|
+| extendable scripts with multiple-language control, via SocketIO (nodejs, python, ruby, etc.) | *complete* |
+| 3-step-setup, deployment on Ubuntu >14.04, MacOS | *complete* |
+| unit tests | *complete* |
+| Natural Language Processing | *partial* |
+| brain: graph knowledge base with graph search | *partial* |
+| core functions in the old bot | *partial* |
+| machine learning modules | *pending* |
+| smart help menu | *pending* |
+| cross-platform tests: Slack, Telegram, IRC | *pending* |
 
 
 ## Installation
