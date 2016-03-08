@@ -64,6 +64,7 @@ Peppurr ships fully functional, but it's also for developers to customize.
 | `scripts/0_init.js` | Kicks off peppurr setups after the base Hubot is constructed, before other scripts are lodaded. |
 | `test` | Unit tests; uses Mocha |
 | `.env` | Non-bot-specific environment variables |
+| `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them here. |
 | `package.json` | The "scripts" portion contains commands that you can customize |
 
 
@@ -183,6 +184,9 @@ For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -
 
 
 ## Todo
+- enumerate new systems and theorems
+- import datejs with NLP time parser
+- better slack custom message wrapper, able to specify color
 - IBM watson faster for NLP intent map: https://github.com/watson-developer-cloud/conversational-agent-application-starter-kit#about-the-conversational-agent-pattern
 - prevent port conflict while running npm test when a bot is up
 - time: cron, chrono-node, moment(formatter), chronic (rb), Sugar (too heavy), laterjs, matthewmueller's date.js, natty(MIT)
@@ -370,8 +374,3 @@ Then you can go to `http://localhost:8080/` on your local browser.
 ## Contributing
 
 We'd love for you to contribute and make Peppurr even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful module, adding more adapters like Telegram or Whatsapp.
-
-
-## LICENSE
-Closed for now, will open some soon.
-
