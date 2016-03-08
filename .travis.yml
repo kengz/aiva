@@ -53,7 +53,6 @@ env:
 # whitelist
 branches:
   only:
-    - master
     - aiva-v3
 matrix:
   fast_finish: true
