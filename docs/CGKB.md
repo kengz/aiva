@@ -66,11 +66,11 @@ Let it be given graph `g`, initial context `c_0`, partial information `i_p`.
 **enumerate**:
 
 
->1. Initialize `scope` from `c_0, i_p`
+1. Initialize `scope` from `c_0, i_p`
 2. while `scope` is not completely fulfilled, do:
-  2.1 BFS expansion on `c_0` using the unfulfilled scope, `filters` and `i_p`, and
-    2.1.1 if context is expanded, update scope, continue; 
-    2.1.2 else, `inquire` to expand `g` (but not context and scope); then retry on success or break on failure.
+  1. BFS expansion on `c_0` using the unfulfilled scope, `filters` and `i_p`, and
+    1. if context is expanded, update scope, continue; 
+    2. else, `inquire` to expand `g` (but not context and scope); then retry on success or break on failure.
 3. Return the context `c`, along with the fulfilled scope for direct access of `i`.
 
 
