@@ -29,7 +29,15 @@ Recall that TM is equivalent to `{Fn, I}`. CGKB serves as the implementation for
 - plan execution: Extraction of information by traversing plan in reverse causal order from leaves to root, using the supplied `i_p` and contexts. Returns a subgraph for the extraction of `i`
 
 
+## Autoplanning algorithm
+
+This algorithm operates on the abstract level of CGKB to extract a sufficient plan, or to learn a plan from human.
+
+Is this step context-free? shan't be, cuz planning can be contextual too. ahh how does it use contextualize.
+
 ## Contextualize algorithm
+
+This algorithm operates on the concrete level of CGKB 
 
 #### Contextualize:
 

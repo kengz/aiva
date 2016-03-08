@@ -32,3 +32,7 @@ The design outlines of HTMI are as follow:
 4. When the TM halts, the interface passes its output to the human, optionally verbalized.
 5. The map above is surjective, mapping from the class of problems enumerable by humans into the TM class.
 6. Since only `fn ∈ Fn` are mapped into surjectively and computed, the HTMI class is a subset of the TM class. Since it maps from the class of problems enumerable by humans, the HTMI class is at the intersection between the two classes. Therefore HTMI is human-bounded Turing complete.
+
+#### Implication
+
+The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a TM. For practical purposes, we focus on decidable problems.
