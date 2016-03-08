@@ -2,11 +2,38 @@
 bin-debug/
 bin-release/
 node_modules/
-.tmp/
+coverage/
+logs/
+npm-debug.log
+
+# Python
+pyenv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ruby
+*.gem
+Gemfile.lock
+*.rbc
+/rdoc/
+/lib/bundler/man/
+
+# Bot-specific
+.env
 .hubot_history
+bin/.keys*
+!bin/.keys-example
+**/brain.json
+
+# Vagrant travis files
+.vagrant/
+Vagrantfile
+trav.sh
 
 # Other files and folders
 .settings/
+.tmp/
 
 # System files
 .DS_Store

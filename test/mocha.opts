@@ -1,0 +1,7 @@
+--require ./test/common.js
+--reporter spec
+--ui tdd
+--compilers coffee:coffee-script/register
+--recursive
+--colors
+--timeout 100000

@@ -1,0 +1,247 @@
+#!/bin/bash
+
+echo "
+================================================
+
+Running the Peppurr dependencies setup by kengz @ Jan 4 2016
+for bug reports, contact [ kengzwl@gmail.com ]
+This will take just a few minutes.
+
+================================================
+"
+
+echo "
+=> Requesting permission upfront"
+# Ask for the administrator password upfront
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# sudo -v
+# Keep-alive: update existing `sudo` time stamp until this script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+# determine if is Mac OSX, or Linux; then run accordingly
+if [ $(uname) == "Darwin" ];
+# Mac runs below
+then (
+
+echo "
+
+Detected Mac OSX (Darwin), running corresponding setup.
+================================================
+";
+
+# prevent sleep for this script; & runs in background
+caffeinate -d &
+
+# installing brew for macOS or Linux, then the other installation by brew shd work the same for both
+echo "
+=> Ensuring you have brew"
+brew --version || ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+
+# install cask
+echo "
+=> Ensuring you have cask"
+brew cask --version || (brew tap caskroom/cask && brew install caskroom/cask/brew-cask)
+
+
+# install java
+echo "
+=> Ensuring you have JDK 1.8 to run neo4j"
+jinfo=$(brew cask info java)
+jv="$(echo $jinfo | sed 's/java: \([0-9].[0-9]*\).*/\1/')"
+if [ "$jv" != "1.8" ]; then brew cask install java; fi
+
+# write JAVA_HOME path if not exists
+echo $JAVA_HOME || echo "
+# For neo4j to use JVM
+export JAVA_HOME=\$(/usr/libexec/java_home)
+" >> ~/.bash_profile
+
+
+# install python3
+echo "
+=> Ensuring you have python3"
+brew install python3
+pip3 install -U setuptools
+pip3 install -U virtualenvwrapper
+# textblob
+pip3 install -U textblob
+python3 -m textblob.download_corpora
+
+
+# install neo4j for brain
+echo "
+=> Ensuring you have neo4j"
+ninfo=$(brew info neo4j)
+nv="$(echo $ninfo | sed 's/\(.*\)\, dev.*/\1/')"
+if [ "$nv" ]; then echo $nv; else (
+brew install neo4j;
+echo "
+# Neo4j home path
+export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
+source ~/.bash_profile
+
+# need to check this for existence too
+# Install the shell tool for import export
+curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip;
+	); fi
+
+
+# Install Ruby on Rails with rbenv
+echo "
+=> Ensuring you have Ruby on Rails"
+ruby --version || (
+echo "gem: --no-document" >> ~/.gemrc
+brew install rbenv ruby-build
+echo '
+# for rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
+source ~/.bash_profile
+rbenv install --verbose $(rbenv install -l | grep -v - | tail -1)
+rbenv global --verbose $(rbenv install -l | grep -v - | tail -1)
+gem install bundler
+gem install rails
+rbenv rehash
+  )
+
+
+
+# # stanford nlp for nltk
+# if [ ! -d "${HOME}/nltk_data/stanford-ner" ]; then (
+
+# curl -o ~/nltk_data/stanford-ner.zip -Lk http://nlp.stanford.edu/software/stanford-ner-2015-12-09.zip
+# curl -o ~/nltk_data/stanford-postagger-full.zip -Lk http://nlp.stanford.edu/software/stanford-postagger-full-2015-12-09.zip
+# curl -o ~/nltk_data/stanford-parser-full.zip -Lk http://nlp.stanford.edu/software/stanford-parser-full-2015-12-09.zip
+# curl -o ~/nltk_data/stanford-corenlp-full.zip -Lk http://nlp.stanford.edu/software/stanford-corenlp-full-2015-12-09.zip
+# unzip ~/nltk_data/stanford-ner.zip -d ~/nltk_data/stanford-ner && cd ~/nltk_data/stanford-ner/* && mv ./* ../ && rm ~/nltk_data/stanford-ner.zip && cd
+# unzip ~/nltk_data/stanford-postagger-full.zip -d ~/nltk_data/stanford-postagger-full && cd ~/nltk_data/stanford-postagger-full/* && mv ./* ../ && rm ~/nltk_data/stanford-postagger-full.zip && cd
+# unzip ~/nltk_data/stanford-parser-full.zip -d ~/nltk_data/stanford-parser-full && cd ~/nltk_data/stanford-parser-full/* && mv ./* ../ && rm ~/nltk_data/stanford-parser-full.zip && cd
+# unzip ~/nltk_data/stanford-corenlp-full.zip -d ~/nltk_data/stanford-corenlp-full && cd ~/nltk_data/stanford-corenlp-full/* && mv ./* ../ && rm ~/nltk_data/stanford-corenlp-full.zip && cd
+# echo '
+# # Stanford NLP
+# export CLASSPATH=~/nltk_data/stanford-ner/stanford-ner.jar:~/nltk_data/stanford-postagger-full/stanford-postagger.jar:~/nltk_data/stanford-parser-full/stanford-parser.jar:~/nltk_data/stanford-parser-full/stanford-parser-3.6.0-models.jar:~/nltk_data/stanford-corenlp-full/stanford-corenlp-3.6.0.jar:~/nltk_data/stanford-corenlp-full/stanford-corenlp-3.6.0-models.jar
+# export STANFORD_MODELS=~/nltk_data/stanford-ner/classifiers:~/nltk_data/stanford-postagger-full/models:' >> ~/.bash_profile
+# source ~/.bash_profile
+
+# 	);
+# fi
+
+
+);
+# Linux runs below
+else (
+echo "
+
+Detected Linux, running corresponding setup.
+================================================
+";
+
+# install java
+echo "
+=> Ensuring you have JDK 1.7 to run neo4j"
+java -version || sudo apt-get -y install default-jdk
+
+# write JAVA_HOME path if not exists
+if [ "$JAVA_HOME" == "" ]; 
+	then jdkpath=$(readlink -f $(which java) | sed 's/\(.*\)\/bin\/java/\1/'); echo "
+# For neo4j to use JVM
+export JAVA_HOME=$jdkpath" >> ~/.bashrc;
+fi
+
+
+# install python3
+echo "
+=> Ensuring you have python3"
+sudo apt-get -y install python3-pip python-dev
+sudo pip3 install -U setuptools
+sudo pip3 install -U virtualenvwrapper
+# textblob
+sudo pip3 install -U textblob
+python3 -m textblob.download_corpora
+
+
+# install neo4j for brain
+echo "
+=> Ensuring you have neo4j"
+# write neo4j path if not exists
+if [ "$(neo4j status)" == "" ]; 
+	then (
+sudo apt-get -y install neo4j;
+echo "
+# neo4j {start | stop | status}
+alias neo4j='service neo4j-service'
+
+# Neo4j home path
+export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
+source ~/.bashrc
+# Install the shell tool for import export
+curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip;
+); fi
+
+
+# Install Ruby on Rails with rbenv
+echo "
+=> Ensuring you have Ruby on Rails"
+ruby --version || (
+cd
+git clone git://github.com/sstephenson/rbenv.git .rbenv
+echo '
+export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+
+git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+
+git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+source ~/.bashrc
+
+rbenv install --verbose $(rbenv install -l | grep -v - | tail -1)
+rbenv global --verbose $(rbenv install -l | grep -v - | tail -1)
+sudo apt-get -y install ruby-dev make
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+gem install bundler
+gem install rails
+rbenv rehash
+  )
+
+
+# # stanford nlp for nltk
+# if [ ! -d "${HOME}/nltk_data/stanford-ner" ]; then (
+
+# curl -o ~/nltk_data/stanford-ner.zip -Lk http://nlp.stanford.edu/software/stanford-ner-2015-12-09.zip
+# curl -o ~/nltk_data/stanford-postagger-full.zip -Lk http://nlp.stanford.edu/software/stanford-postagger-full-2015-12-09.zip
+# curl -o ~/nltk_data/stanford-parser-full.zip -Lk http://nlp.stanford.edu/software/stanford-parser-full-2015-12-09.zip
+# curl -o ~/nltk_data/stanford-corenlp-full.zip -Lk http://nlp.stanford.edu/software/stanford-corenlp-full-2015-12-09.zip
+# unzip ~/nltk_data/stanford-ner.zip -d ~/nltk_data/stanford-ner && cd ~/nltk_data/stanford-ner/* && mv ./* ../ && rm ~/nltk_data/stanford-ner.zip && cd
+# unzip ~/nltk_data/stanford-postagger-full.zip -d ~/nltk_data/stanford-postagger-full && cd ~/nltk_data/stanford-postagger-full/* && mv ./* ../ && rm ~/nltk_data/stanford-postagger-full.zip && cd
+# unzip ~/nltk_data/stanford-parser-full.zip -d ~/nltk_data/stanford-parser-full && cd ~/nltk_data/stanford-parser-full/* && mv ./* ../ && rm ~/nltk_data/stanford-parser-full.zip && cd
+# unzip ~/nltk_data/stanford-corenlp-full.zip -d ~/nltk_data/stanford-corenlp-full && cd ~/nltk_data/stanford-corenlp-full/* && mv ./* ../ && rm ~/nltk_data/stanford-corenlp-full.zip && cd
+
+# echo '
+# # Stanford NLP
+# export CLASSPATH=~/nltk_data/stanford-ner/stanford-ner.jar:~/nltk_data/stanford-postagger-full/stanford-postagger.jar:~/nltk_data/stanford-parser-full/stanford-parser.jar:~/nltk_data/stanford-parser-full/stanford-parser-3.6.0-models.jar:~/nltk_data/stanford-corenlp-full/stanford-corenlp-3.6.0.jar:~/nltk_data/stanford-corenlp-full/stanford-corenlp-3.6.0-models.jar
+# export STANFORD_MODELS=~/nltk_data/stanford-ner/classifiers:~/nltk_data/stanford-postagger-full/models:' >> ~/.bashrc
+# source ~/.bashrc
+
+# 	);
+# fi
+
+
+);
+fi
+# OS split ends, continue
+
+
+# install npm global packages: forever
+echo "
+=> Ensuring you have forever"
+npm list -g forever || sudo npm i -g forever
+npm list -g istanbul || sudo npm i -g istanbul
+
+# npm list -g --depth=0
+
+echo "
+Dependencies setup complete.
+================================================
+"

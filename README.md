@@ -1,352 +1,377 @@
-# JARVIS
+# Peppurr
 
-A JARVIS for your team - your most powerful bot and loyal butler. Jarvis was originally built for **GLOBAL_HACKERS** as our smart, humorous and [sentient](#chat) team assistant.
+[![Build Status](https://travis-ci.com/kengz/peppurr.svg?token=c5tCQyTMzysDQ4ah1SXs&branch=master)](https://travis-ci.com/kengz/peppurr) [![Dependency Status](https://gemnasium.com/c54d292372b8917a643ee66ac5723bb3.svg)](https://gemnasium.com/kengz/peppurr)
 
-The most popular and powerful features for us include *todo, reminder, memes, search, and a machine learning module.* See the [design](#design) and all the [features](#features).
+General-purpose virtual assistant for developers.
 
-
-## Next version
-
-**The next version** *of Jarvis is under development in a separate private repo. To prevent potential copyright issues the name will be changed away from JARVIS too.*
-
-**Timeline**: *late-March 2016.*
-
-##### New features
-
-1. graph knowledge base for a powerful brain
-1. Natural Language Processing
-1. extendable scripts with polyglot control, via SocketIO (nodejs, python, ruby and more)
-1. easier setup, deployment on Ubuntu and MacOS
-1. unit tests
-1. better help menu
-
-
-## Installation
-Clone this git repo:
-
-```
-git clone <the-url-of-this-repo>
-```
-
-Also available as an [NPM package](https://www.npmjs.com/package/jarvis-bot):
-
-```
-npm install jarvis-bot
-```
-
-Next, install the dependencies:
-
-```
-npm install
-```
-
-Then [setup](#setup) and [deploy](#deploy).
-
-*Tl;dr*: If you're using Slack, just set `bin/.env` file, fill the `bin/.env-jarvis` with API tokens and run `npm start`.
-
-#### forever
-
-`npm start` runs `app.js`, which uses `forever-monitor`. This is for when you don't have `sudo` to install `forever` on the machine you're deploying on. This has the issue of nested processes not being terminated properly (a `forever` issue.)
-
-Things are nicer if you use [`forever`](https://github.com/foreverjs/forever) from the terminal, you can deploy/stop multiple instances (after specifying the right file in `.env`) like below:
-
-```
-forever start --killSignal=SIGTERM -a -l jarvis.log --uid "jarvis" run.js
-forever start --killSignal=SIGTERM -a -l veronica.log --uid "veronica" run.js
-```
-
-Note that you must set `--killSignal=SIGTERM` to properly kill off hubot. You can kill like below:
-
-```
-# stop an instance
-forever stop jarvis
-# stop all instances
-forever stopall
-```
-
-##### forever in npm
-I'm a lazy person. So I save the `forever` commands above in the npm scripts. For example in `package.json`:
-
-```
-"scripts": {
-    "start": "node app.js",
-    "stop": "forever stopall",
-    "jarvis": "forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM -a -l jarvis.log --uid 'jarvis' app.js",
-    "veronica": ...
-},
-```
-
-So instead of typing that long command for `forever`, you can
-
-```
-# runs that long forever command
-npm run jarvis
-```
-
-To stop all `forever` processes,
-
-```
-npm stop
-```
-
-
-## <a name="setup"></a>Setup
-
-
-#### .env
-Jarvis uses many APIs, and some of them need tokens. Set the environment variables for each instance of your bot in `bin/.env-<bot>`. Most of them should be straightforward to obtain, others you can Google how to. Below is a few, explained:
-
-- `HUBOT_SLACK_TOKEN`: You have to add a bot integration under your Slack team setting, and generate a token to use.
-- `HUBOT_REPOPATH`: This is the bot's repo that you're syncing the memory with.
-- `HUBOT_GHTOKEN`: To sync memory (upload to Github), you need to allow access and generate a token from your account.
-- `HUBOT_GOOGLE_API_KEY`: You need a Google developer account, then create a project, choose the APIs to enable, and generate a "browser token" from the Google Developer Console.
-
-**Beware**, don't expose your `.env-<bot>` files to other people. That's common sense.
-
-
-#### admins
-A few bot functions such as memory upload and twitter posts are restricted to admins. Specify their email addresses, comma separated, in `bin/.env-<bot>`. Note that the incoming user object from Slack has the email field, so if you're using a different adapter, you may need to hack around it from `scripts/helper.coffee`.
-
-The reason for using email address is because username can be changed (in Slack) and thus be faked.
-
-
-#### <a name="adapter"></a>adapter
-The default adapter is Slack. To change it, find them [here](https://github.com/github/hubot/blob/master/docs/adapters.md). NPM uninstall `hubot-slack`, install your adapter, and specify it in [`bin/.env`](./bin/.env).
-
-Since the text formatting are meant for Slack, you may need to hack the scripts a bit when you're using a different chat platform, especially with how the admin emails are recognized.
-
-
-## <a name="deploy"></a>Deploy
-If you're using Slack, then deployment is super simple. Simply set your API keys in `bin/.env-<bot>` and specify which bot to deploy in `bin/.env`, then you're ready. See [Setup](#setup).
-
-Deploy anywhere you want: *Heroku, GCloud, AWS, your local Unix machines*. There is no need to setup the bot environment variables yourself because `app.js` handles them for you. As long as `npm install` and `npm start` (which runs `node app.js`) are run, you're good.
-
-Jarvis is quasi-immortal. He will never sleep (uses `cron`), and will resurrect upon death (uses `forever-monitor`).
-
-Test-run locally with 
-
-```
-npm start
-```
-
-Even though Jarvis is platform neutral, we deploy ours to Google Cloud, so the files `.dockerignore, Dockerfile, app.yaml` are needed. Remove and add any deployment config files as you need if you deploy somewhere else.
-
-
-## <a name="design"></a>Design
-We built Jarvis to be the smart assistant for our team. The design is based on `hubot`, and we have made significant improvements to its core but you probably won't notice. So, if you've had experience with `hubot`, you'll know how to extend Jarvis by writing your own scripts.
-
-Jarvis' internal modules are different from the original hubot:
-
-- `hubot-keep-alive` is removed and replaced by the more elegant `cron`
-- external persistent memory in sync with the bot's Github
-- a more helpful help menu with categorization, under `scripts/cmdhelp.coffee`
-- several other internal modules are replaced by better ones
-
-All the modules and hubot scripts are in `node_modules` and `scripts`, following the original hubot design. `lib` contains your non-hubot-interface scripts. In short, organize as you like, but the bot interface scripts shall be in the `scripts` folder.
-
-#### Platform-neutral
-Just like the original hubot, Jarvis is platform-neutral. We deploy our Jarvis on Slack, but you can choose your own platform by simply changing the `adapter` (see [Setup](#adapter)).
-
-The powerful thing is that you can access Jarvis from anywhere! We use Slack, so we can call Jarvis from the Slack apps for mobile, laptop, and web.
-
+| Peppurr is | |
+|:---|---|
+| general-purpose | An app interface, AI assistant, anything! It's way beyond a chatbot. |
+| cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
+| cross-language | Runs scripts among Node.js, Python3, Ruby, etc. |
+| hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
+| powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
 
 ## <a name="features"></a>Features
-We lost count on the number of features. There's currently over 30 modular scripts (some under node_modules). Feel free to remove/add any from your bot as you like. If you got a brilliant idea, suggest to us!
 
-| List of features |
-|:----|
-| [Minimal setup, quick deployment](#minimal) |
-| [Platform and deployment neutral](#platform) |
-| [Quasi-immortality](#immortal) |
-| [Admins](#admin) |
-| [Memory - persistent and synced with Github](#memsync) |
-| [Custom command help](#cmd) |
-| [User aliasing, serialization, recognition](#alias) |
-| [User geolocation, time, weather, maps](#geo) |
-| [Reminder, todo](#todo) |
-| [Google search, image, translate, maps, directions, youtube](#google) |
-| [Hackers News](#hn) |
-| [Twitter search/post](#twitter) |
-| [Machine learning/sentiment analysis](#sa) |
-| [Lomath](#lomath) |
-| [Chatbot](#chat) |
-| [Memes and jokes](#meme) |
 
-<!-- | [View window](#view) | -->
 
+## Installation
 
-#### <a name="minimal"></a>Minimal setup, quick deployment
-You don't have to do much to start using Jarvis. Just get your API keys/tokens for the APIs you wish to use to put in [`.env-jarvis`](./bin/.env-jarvis) under [`bin/`](./bin). If you have several teams to deploy the bots for, you can have multiple `.env-<bot>` files. Before deploying, specify the bot you wish to deploy in `.env`.
+Clone this repo:
 
-This assumes you're using Slack of course. For more advanced tweaks, see [Setup](#setup).
+```shell
+git clone <the_git_url>
+```
 
+Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digital Ocean](https://www.digitalocean.com), and you can use this [setup script](https://github.com/kengz/mac_setup). Otherwise, check [`bin/install`](./bin/install) for system dependencies.
 
 
-#### <a name="platform"></a>Platform and deployment neutral
-Jarvis is designed to be deployed anywhere. All its internal environment variables are specified in `.env-<bot>` file, and it sets them automatically when run. This nicely prevents fragmentation of providing different env files per deployment, like `app.yaml` for Gcloud, and `app.json` for Heroku.
+## Setup, Run
 
-We use Slack, but you can just use pretty much anything else: Whatsapp, Telegram, FB chat, Skype. Just replace the hubot adapter by specifying it in `package.json` and `.env`.
+#### <a name="setup"></a>One-time Setup
+- **install dependencies**: `npm run gi`
+- **setup keys**: update `.env`, `bin/.key-<bot-name>`, replace `peppurr` in `package.json` if you prefer different name
 
-The powerful thing is that you can access Jarvis from anywhere! We use Slack, so we can call Jarvis from the Slack apps for mobile, laptop, and web.
+Check [**Setup Helps**](#setup-helps) for tips.
 
+#### <a name="run"></a>Run
+- **run**: `npm start`; append `--bot=<bot-name>` to run the non-default bots.
+```shell
+# alternative commands
+npm stop # stop all running bots
+npm run debug # outputs log to terminal
+npm run debug --bot=<bot-name> # to dev
+npm run shell # use shell-adapter to dev
+npm test # run unit tests
+```
 
 
-#### <a name="platform"></a>Quasi-immortality
-My team likes to break things, and Jarvis was the obvious target. 
 
-Jarvis is quasi-immortal. He will never sleep (uses `cron`), and will resurrect upon death (uses `forever-monitor`). So, kill him as many times as you wish, he will always come back to live, unless if the server farm gets nuked of course.
+## Dev Guide: Project structure
 
+Peppurr ships fully functional, but it's also for developers to customize.
 
+| Folder/File | Purpose |
+|:---|---|
+| `bin/` | bot keys, binaries, bash setup scripts. |
+| `lib/` | Non-interface modules and scripts, grouped by languages. Contains the core examples for extending the bot. |
+| `lib/import_clients.<ext>` | Import all scripts from their folders and integrate with socketIO for cross-language communications. |
+| `lib/io_client.js, io_server.js` | SocketIO logic for cross-language communications. |
+| `logs` | Logs from bot for debugging and healthcheck |
+| `scripts` | The interface modules of the `lib` modules, for bot to interact with users; in `node.js`. |
+| `scripts/0_init.js` | Kicks off peppurr setups after the base Hubot is constructed, before other scripts are lodaded. |
+| `test` | Unit tests; uses Mocha |
+| `.env` | Non-bot-specific environment variables |
+| `package.json` | The "scripts" portion contains commands that you can customize |
 
-#### <a name="admin"></a>Admins
-There are things that should be accessible only to admins. One example is memory sync (below), where only admins can make Jarvis upload his memory. See `.env-<bot>` to set the admins for each bot.
 
 
+## Dev Guide: Examples
 
-#### <a name="memsync"></a>Memory - persistent and synced with Github
-We constantly improve Jarvis, thus the source code is kept on Github. However, when we redeploy Jarvis (due to death or new iteration), we want him to remember us.
+#### Case 1: standalone js script
 
-Jarvis's `hubot.brain.data` persistent memory is kept under `memory/braindata.json`. You can get creative and make your own modular memory.
+1. Write the module under `lib/js`: [`lib/js/user.js`](./lib/js/user.js)
+2. Write the `js` interface script under `scripts`, import the module to use: [`scripts/whois.js`](./scripts/whois.js)
+3. Write the unit tests for both the module and the interface scripts: [`test/lib/test_user.coffee`](./test/lib/test_user.coffee), [`test/scripts/test_whois.coffee`](./test/scripts/test_whois.coffee)
 
-When deployed, Jarvis can sync its new memory with its Github, so before redeploying, you can just do `git pull` to update the local memory. Then the new Jarvis will remember.
+Refer to [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md) for writing `js` interface scripts.
 
-It's scheduled to auto-upload its brain to Github every midnight, but admin can also manually tell Jarvis to do so. The commands for this module is hidden to prevent tampering, so dig into the source code. See [scripts/memsync.coffee](./scripts/memsync.coffee), where you can set a magic word to call, and if you're an admin, Jarvis will upload his brain.
 
-<img src="./docs/brainupload.png" alt="Admin call" width="80%" style="display:inline-block"/>
-<img src="./docs/jarvisupload.png" alt="Jarvis upload" width="80%" style="display:inline-block"/>
+#### Case 2: standalone <lang> script
 
+You can code in any language, and Socket IO will handle the logic.
 
+1. Write the module under `lib/<lang>`: [`lib/py/hello.py`](./lib/py/hello.py)
+2. Write the `js` interface script: [`scripts/hello_py.js`](./scripts/hello_py.js)
+3. Write the unit tests for both the module and the interface scripts: [`test/scripts/test_hello_py.coffee`](./test/scripts/test_hello_py.coffee)
 
-#### <a name="cmd"></a>Custom command help
-You can organize all your help commands into types. See `typedCmd` in [`scripts/helper.coffee`](./scripts/helper.coffee), where the JSON goes from type to module to the command regex of the module. Currently there are 3 types: `fun, bot, util`, and each has its own modules(named as you like). The array for each module contains its command regexs, which are used for preventing conflict in input-parsing.
+*For the module, you may add any unit testing framework for the language its coded in. This repo does not include unit tests for other languages.*
 
-Below is the `help` in action, going down the level of specificity. Furthermore, `help <term>` displays all the helps that match the `<term>`.
 
-<img src="./docs/cmdhelp.png" alt="Command help" width="80%" style="display:inline-block"/>
+#### Case 3: multi-language scripts
 
+You can code and pass msgs among any languages, and Socket IO will handle the logic. This uses the global client's `global.gPass` to directly send a payload to the server from the interface script.
 
+1. Write the modules under `lib/<lang>`: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
+2. Write the `js` interface script: [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js)
+3. Write the unit tests for both the module and the interface scripts: [`test/scripts/test_hello_py_rb.coffee`](./test/scripts/test_hello_py_rb.coffee)
 
-#### <a name="alias"></a>User aliasing, serialization, recognition
-Jarvis recognizes users by their usernames; you can also add aliases. 
 
-<img src="./docs/aliasing.png" alt="aliasing" width="80%" style="display:inline-block"/>
+#### Case 4: wrapped multi-language scripts
 
-With the recognition, Jarvis can serialize its functions such as weather and reminders to cater to individual users. You can call the functions using aliases too. Furthermore, Jarvis will recognize fuzzy usernames (lexicographically, so be careful).
+You can code and pass msgs among any languages, and Socket IO will handle the logic. This uses the global client's `global.gPass` from within the `lib` module script to yield a simpler interface script.
 
-<img src="./docs/aliascall.png" alt="aliascall" width="80%" style="display:inline-block"/>
+1. Write the modules under `lib/<lang>`: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
+2. Write the `js` interface script: [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js)
+3. Write the unit tests for both the module and the interface scripts: [`test/scripts/test_hello_py_rb.coffee`](./test/scripts/test_hello_py_rb.coffee)
 
 
+#### Sample `msg` and the required JSON keys for different purposes
 
-#### <a name="geo"></a>User geolocation, time, weather, maps
-Our team is global, so it's handy to know where someone is and the time there. User serialization is used here, so simply tell Jarvis where you are, and when you call the functions, Jarvis will use your location.
+>Overall, you need only to ensure your scripts/module functions return the correct JSON `msg`, and we handle the rest for you.
 
-<img src="./docs/timeweathermap.png" alt="timeweathermap" width="80%" style="display:inline-block"/>
+- to call a module's function in `<lang>`: [`scripts/hello_py.js`](./scripts/hello_py.js)
+```js
+{
+  input: 'Hello from user.',
+  to: 'hello.py',
+  intent: 'sayHi'
+}
+```
 
+- to reply the payload to sender: [`lib/py/hello.py`](./lib/py/hello.py)
+```py
+{
+  'output': 'Hello from Python.',
+  'to': msg.get('from'), # the original sender 'client.js'
+  'from': id, # 'hello.py'
+  'hash': msg.get('hash'), # the js Promise hash
+}
+```
 
+- to pass on payload to other module's function: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py)
+```py
+{
+  'input': 'Hello from Python.',
+  'to': 'Hello.rb',
+  'intent': 'sayHi',
+  'from': msg.get('from'), # the original sender 'client.js'
+  'hash': msg.get('hash'), # the js Promise hash
+}
+```
+
+
+
+## Dev Guide: Socket.io logic (handled by us)
+
+#### Server
+There is a socket.io server that extends Hubot's Express.js server: [`lib/io_server.js`](./lib/io_server.js). All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
+
+
+#### Clients
+For each language, there is a socket.io client that imports all modules of its language within `lib`. When server sends a `msg` to it, the client's `handle` will find the module and its function using `msg.to, msg.intent` respectively, then call the function with `msg` as the argument. If it gets a valid reply `msg`, it will pass it on to the server.
 
-#### <a name="todo"></a>Reminder, todo
-Jarvis can remind you of things at certain time, and keep a todo list for you. Of course you can have Jarvis remind your teammates of their tasks.
+>Note due to how a module is called using `msg.to, msg.intent`, you must ensure that the functions are named properly, and `Ruby`'s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. `lib/rb/Hello.rb` for the `Hello` module.
 
-*Reminder is time sensitive, and defaults to 1h if time is not specified:*
-<img src="./docs/remind.png" alt="remind" width="80%" style="display:inline-block"/>
+>To add support for other language, say `Java`, you can add a `lib/client.java` by following patterns in `lib/client.{py, rb}`, and adding the `commands` in `lib/io_client.js`*
+
+
+#### Entry point
+The entry point is always a `js` interface script, but luckily we have made it trivial for non-js developers to write it. A full reference is [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md).
+
+`robot.respond` takes a regex and a callback function, which executes when the regex matches the string the robot receives. `res.send` is the primary method we use to send a string to the user.
+
+Overall, there are 2 ways to connect with `lib` modules:
+
+**global.gPass**: [`scripts/hello_py.js`](./scripts/hello_py.js) This is a global method to pass a `msg`. It generates a `hash` using `lib/hasher.js` with a `Promise`, which is resolved whenever the `js` client receives a valid reply `msg` with same `hash`. This method returns the resolved `Promise` with that `msg` for chaining.
+
+**wrapped global.gPass**: [`scripts/translate.js`](./scripts/translate.js), [`lib/js/nlp.js`](./lib/js/nlp.js) This is similar to above, but the `msg` is properly generated by a `js` lib module, resulting in a much cleaner and safer interface script. The lib module needs to be imported at the top to be used.
+
+
+#### Data flow
+
+The msg goes through socket.io as `js(interface script) -> js(io_server.js) -> <lang>(client.<lang>) -> js(io_server.js) -> ...(can bound among different <lang> modules) -> js(client.js) -> js(interface script)`
+
+For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -> js(lib/io_server.js) -> py(client.py), call py function -> js(io_server.js) -> js(client.js) call Promise.resolve -> js(interface script) send back to user`
+
+
+
+## Le Petite Search Engine
+
+
+
+## Todo
+- IBM watson faster for NLP intent map: https://github.com/watson-developer-cloud/conversational-agent-application-starter-kit#about-the-conversational-agent-pattern
+- prevent port conflict while running npm test when a bot is up
+- time: cron, chrono-node, moment(formatter), chronic (rb), Sugar (too heavy), laterjs, matthewmueller's date.js, natty(MIT)
+- ok here's the plan
+- generic KB creator: bot learns to create label n KB by learning
+- step1: NLP parse into entities, e.g. (actor)-[action]->(subject), with extra entities like time, author and KB basic standard shits.
+- step2: Canonicalization: ML mapper into, e.g. maps `{links, link, refers, refs} => ref` using word2vec n metric
+- setp3: KB creation using shit laid out in sample todo.js
+- creation may seem trivial, but proper creation with the right built in data will help unleash the graph power when querying.
+- then you'll have a generic ML-built KB, don't have to write a builder for each type of knowledge.
+- need natural language parse, sentiment preferably. raise from regex fallback
+- Tensorflow: everything! Local ML, NLP as advanced feature; basic feature has regex as fallbacks
+- chrono and time format conversion method
+- test: what time is it
+- remind: cron and chrono/date
+- store cron in KB for restoration
+- alice id in mocha hubot-test-helper. No workaround except from the lib.
+- linking interface. Linkage is the true power of GKB and must make it trivial to use
+- user preference: weather, last food order etc, extensible
+- design le search engine using the KB standard and helper methods
+- KB contextual search: guess context from search input, e.g. name or email or task, then apply search to labels or properties or conns
+- checkout algolia and elastic for search engine. oohh add machine learning n ranking n shits
+- suspend buffer when err is thrown, offer fixes; 
+- credit card benefit shits
+- test switching out the adapter to Telegram/IRC
+- debugger mode
+- multi-platform tests: centralize brain recognize the same user across different platforms, and you can seamlessly pick up your bot from any platform - this will be the "one bot to rule it all" as you can find it anywhere and it will know this is the same person.
+
+
+## Changelog
+*[This is a Mark III version of Keng's bot.]*
+
+`Jan 2016`
+
+- save logs locally in `logs/`.
+- start brain `neo4j` server on spawn, stop on death.
+- expandable bash script `bin/install` as auto global dependency setup for both MacOSX and Linux.
+- add `mocha` using `chai`, `chai-as-promised`, `sinon` libraries for tests; coverage by `istanbul`.
+- using `hubot-test-helper` for unit tests. Tests should be written in `coffeescript` for brevity.
+- all devs and tests shall be done locally via the `shell` adapter, using `npm run shell`. This sets the `.env` and `bin/.keys-<default_bot>` local env vars, starts the `neo4j` brain server, then launches `bin/hubot`. i.e. It should work the same as `npm start` except for `forever` and `Slack-adapter`. See [Setup](#setup).
+- `npm` script runs all. See [Run](#run).
+- modularize graph KB externally to [kengz/neo4jKB](https://github.com/kengz/neo4jKB)
+- add Travis CI (private)
+- `scripts/0_init.js` is the first loaded script (lexicographically)l used to setup and extend hubot. It emits `'ready'` when the bot is done setting up, and before all other scripts start loading. One can make good use of event emitters for global, cross-script coordination.
+- add user serializer for `defaultRoom` (in `env`), 'general' to reserialize on new user joining.
+- support `NODE_ENV=development` for dev and tests: `shell` sets from `npm run shell`; Mocha sets from `test/common.js`.
+- add `test/0_init_test.js` to do global test setup.
+- basic infrastructure tested: initialization, event emission and handling, messaging
+- unify all env vars safely to under `.env` and `bin/.keys-<bot-name>`, with auto customization for Shell, Mocha, Travis and production.
+- dev must ensure that `scripts/0_init.js` is called first, thus `lib/` scripts cannot be imported at `0_init.js`.
+- for KB creation pattern making use of graph relation, refer to `scripts/todo.js`
+- add `lib/user.js` for user-searching. `scripts/serialize_users.js` will set `global.users = robot.brain.data.users` for global access of users.
+- `bin/install` now installs `neo4j-shell-tools` for db migration. Use `export-graphml -o backup.graphml -t -r` and `import-graphml -i backup.graphml -t` from within `neo4j-shell`. Files will be saved to `${NEO4J_HOME}`.
+- add `Socket.io` plugging into `robot.server` for polyglot communication. Connect to it by e.g. `var socket = require('socket.io-client')('http://localhost:8080')`
+- add `python3` automated setup and packaging processes.
+- multiple language (polyglot) process control: add `socket.io` clients for `nodejs, python3, ruby` in `lib`, with proper import/file examples and structures.
+- in `mocha` tests, there's a `global.room` as an entire emulated hubot for use.
+- add `bin/vagrant_travis` script to emulate a Travis CI VM for CI debugging.
+- standard: `<comment-symbol> !` to note future implementation or fixes
+- add `global.io.{reply, send, say}` for hubot replies from io. Use as `io.send(res)`; see `scripts/translate.js` for example.
+- unify clients: one for each language.
+
+## Dev
+
+A good [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md). Note you still need simple script to interface between the user and your program in `lib/`, written in any language.
+
+
+##### You can send customMessage msg to Slack
+
+```
+robot.adapter.customMessage({
+  channel: res.message.room,
+  text: "Latest changes",
+  attachments: [{
+    "fallback": "Required plain-text summary of the attachment.",
+    "color": "#36a64f",
+    "pretext": "Optional text that appears above the attachment block",
+    "author_name": "Bobby Tables",
+    "author_link": "http://flickr.com/bobby/",
+    "author_icon": "http://flickr.com/icons/bobby.jpg",
+    "title": "Slack API Documentation",
+    "title_link": "https://api.slack.com/",
+    "text": "Optional text that appears within the attachment",
+    "fields": [{
+      "title": "Priority",
+      "value": "High",
+      "short": false
+    }],
+
+    "image_url": "http://my-website.com/path/to/image.jpg",
+    "thumb_url": "http://example.com/path/to/thumb.png"
+  }]
+})
+```
+
+
+##### Reference for `res` object cuz hubot lib is dipshit
+```JSON
+{
+	"message": {
+		"user": {
+			"id": "alice",
+			"room": "Shell",
+			"name": "alice"
+		},
+		"text": "@hubot myid",
+		"done": false,
+		"room": "Shell"
+	},
+	"match": [
+	"@hubot myid"
+	],
+	"envelope": {
+		"room": "Shell",
+		"user": {
+			"id": "alice",
+			"room": "Shell",
+			"name": "alice"
+		},
+		"message": {
+			"user": {
+				"id": "alice",
+				"room": "Shell",
+				"name": "alice"
+			},
+			"text": "@hubot myid",
+			"done": false,
+			"room": "Shell"
+		}
+	}
+}
+```
+
+try to print envelope
+useful shits for robot.
+- listen
+- hear
+- respond
+- enter
+- leave
+- topic
+- error
+- catchAll(the other)
+- send (user, strings...)
+- reply
+- messageRoom
+- on
+- emit
+- shutdown
+
+
+
+
+## Features
+
+
+## Dependencies
+The complete list of dependencies:
+
+
+## <a name="setup-helps"></a>Setup Helps
+
+#### Neo4j
+If it's your first installation of `Neo4j`, change the password:
+```shell
+neo4j start
+# change your password
+curl -H "Content-Type: application/json" -X POST -d '{"password":"YOUR_NEW_PASSWORD"}' -u neo4j:neo4j http://localhost:7474/user/neo4j/password
+# access Neo4j browser GUI
+open http://localhost:7474
+```
+
+#### SSH Browser-forwarding
+
+If you're hosting Neo4j on a remote machine and want to access its browser GUI on your local machine, connect to it via 
+
+```
+ssh -L 8080:localhost:7474 <remote_host>
+```
+
+Then you can go to `http://localhost:8080/` on your local browser.
+
+
+
+## Contributing
+
+We'd love for you to contribute and make Peppurr even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful module, adding more adapters like Telegram or Whatsapp.
+
+
+## LICENSE
+Closed for now, will open some soon.
 
-*Todo list is not time sensitive:*
-<img src="./docs/todo.png" alt="todo" width="80%" style="display:inline-block"/>
-
-
-
-#### <a name="google"></a>Google search, image, translate, maps, directions, youtube
-Jarvis uses many Google APIs (you'll need your own Google developer API keys) to use them.
-<img src="./docs/google.png" alt="google" width="80%" style="display:inline-block"/>
-
-*Jarvis recognizes `me` or user aliases when using locations.*
-<img src="./docs/directions.png" alt="directions" width="80%" style="display:inline-block"/>
-
-
-#### <a name="hn"></a>Hackers News
-No hackers can do without Hackers News, so here it is:
-<img src="./docs/hn.png" alt="hn" width="80%" style="display:inline-block"/>
-
-
-
-#### <a name="twitter"></a>Twitter search/post
-Jarvis can search on Twitter, and post (admin only).
-<img src="./docs/tweet.png" alt="tweet" width="80%" style="display:inline-block"/>
-
-
-#### <a name="sa"></a>Machine learning/sentiment analysis
-This is the first stage of an AI Jarvis, and [`scripts/sentiment.coffee`](./scripts/sentiment.coffee) is its first machine learning module. This pulls search results from Twitter, feeds it to [Indico.io](https://indico.io), and returns the sentiment. This is especially handy for observing the trend of a topic on Twitter, say a stock.
-
-Expect more AI/ML features to come soon, since the author is studying that.
-
-<img src="./docs/sa.png" alt="sa" width="80%" style="display:inline-block"/>
-
-
-#### <a name="lomath"></a>Lomath
-[`Lomath`](http://kengz.github.io/lomath/) is a math library extended from `lodash`. You can evaluate a lomath function from Jarvis as you would code it, which also means you can use `lodash`.
-
-<img src="./docs/lomath.png" alt="lomath" width="80%" style="display:inline-block"/>
-
-
-#### <a name="chat"></a>Chatbot
-To make Jarvis more human-like, we added a chatbot module to it. Whenever you say something that doesn't match a command regex of `typedCmd` in [`scripts/helper.coffee`](./scripts/helper.coffee), it will be redirected to the chat module.
-
-The chat module is serialized for each user, so Jarvis can keep the conversations separate. Here's our best picks:
-
-*Jarvis gone sentient:*
-<img src="./docs/chat1.jpg" alt="chat1" width="80%" style="display:inline-block"/>
-
-*Jarvis gone sentient, confirmed:*
-<img src="./docs/chat2.jpg" alt="chat2" width="80%" style="display:inline-block"/>
-
-
-#### <a name="meme"></a>Memes and jokes
-This is easily the most-used feature. **Warning:** this may cause dramatic swings in productivity, use with caution! Currently includes: *meme generator, coding love, cat, pug, chuck norris, Shia Labeouf, Donald Trump, flirt, etc.*
-<img src="./docs/meme.png" alt="meme" width="80%" style="display:inline-block"/>
-
-
-
-<!-- #### <a name="view"></a>View window
-There is an HTML view window in `run.js` that runs on `express`. This is so that you can set up your own webpage (maybe having your own Jarvis web interface, or to display some usage stats) if you'd like. -->
-
-
-## Roadmap
-- Generic scraper
-- wit.ai parsing, supplement command using single regex
-- Github project monitoring
-- more ML modules
-- IBM Bluemix
-- home-automation via Arduino
-- multi-instances, distributed deployment for backing up
-- personal scheduling
-- Integration with Google Now (waiting for Google to open source it)
-
-
-## Changelog 
-`Sep 2`
-- Now can save and call `forever` commands from npm
-
-`Aug 25`
-- removed view window to allow for multiple instances to be deployed on the same machine.
-
-`Aug 8`
-- √external universal set env
-- √request slack voice api
-- √fix ME regex
-- √change upload command
-- √genlize n export n unify cmdregex
-- √new meme: Shia Labeouf just do it
-- √donald trump
-- √username aliasing
-- √todolist
-- √rate-limiting on pugs/cats
-- √remove heroku app.json
-- √safeguard tokens for open-sourcing
-- √fix regex to catch first
-- √add user? cond to all
-- √serialize chatbot
-- √twitter
-- √indico
-- √isAdmin method
-- √fixed memsync, now reply to user

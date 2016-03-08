@@ -1,0 +1,96 @@
+#!/bin/bash
+
+echo "
+This is set up a Travis ci-minimal-trusty64 using Vagrant.
+"
+
+echo "
+=> Requesting permission upfront"
+# Ask for the administrator password upfront
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# sudo -v
+# Keep-alive: update existing `sudo` time stamp until this script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+# determine if is Mac OSX, or Linux; then run accordingly
+if [ $(uname) == "Darwin" ];
+# Mac runs below
+then (
+echo "
+
+Detected Mac OSX (Darwin), running corresponding setup.
+================================================
+";
+
+# prevent sleep for this script; & runs in background
+caffeinate -d &
+
+echo "
+=> Installing Vagrant from brew cask.
+"
+brew cask install vagrant
+
+  );
+else (
+echo "
+
+Detected Linux, running corresponding setup.
+================================================
+";
+
+echo "
+=> Installing Vagrant from brew cask.
+"
+sudo apt-get -y install virtualbox
+sudo apt-get -y install vagrant
+sudo apt-get -y install virtualbox-dkms
+
+  );
+fi;
+
+
+cd ~/Documents/peppurr
+vagrant init travis-ci/ci-minimal-trusty64
+
+echo "
+Vagrant.configure(2) do |config|
+  config.vm.box = 'travis-ci/ci-minimal-trusty64'
+
+  config.ssh.username = 'travis'
+  config.ssh.password = 'travis'
+
+  config.vm.synced_folder '.', '/vagrant'
+end" > Vagrantfile
+
+echo "
+Compiling .travis.yml into shell script to be run inside Vagrant VM, which is set up next."
+travis compile > trav.sh
+
+vagrant up
+
+echo '
+Vagrant Travis VM is ready. 
+ssh inside run the following: 
+================================================
+
+vagrant ssh
+sudo apt-get update
+sudo apt-get -y install openjdk-7-jdk;
+# write JAVA_HOME path if not exists
+if [ "$JAVA_HOME" == "" ]; 
+  then jdkpath=$(readlink -f $(which java) | sed "s/\(.*\)\/bin\/java/\1/"); echo "
+# For neo4j to use JVM
+export JAVA_HOME=$jdkpath" >> ~/.bashrc;
+fi
+
+source ~/.bashrc
+git clone https://kengz:<token>@github.com/kengz/peppurr.git
+mv 
+mkdir -p build/kengz/peppurr
+mv peppurr/ build/kengz/
+cd build/kengz/peppurr/
+touch trav.sh
+<Copy and paste the trav.sh from earlier after commenting out the git clone, git checkout lines, then run it.>
+sudo bash trav.sh
+'
