@@ -7,7 +7,7 @@ The most popular and powerful features for us include *todo, reminder, memes, se
 
 ## Next version
 
-**The next version** *of Jarvis is under development in a separate private repo. To prevent potential copyright issues the name will be changed away from JARVIS too.*
+**The next version** *of Jarvis is under development. To prevent potential copyright issues the name will be changed away from JARVIS too.* Update: it will be called `AIVA`, and is currently under the branch `aiva-v3`.
 
 **Timeline**: *late-March 2016.*
 
