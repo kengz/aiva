@@ -70,7 +70,7 @@ Let it be given graph `g`, initial context `c_0`, partial information `i_p`.
 2. while `scope` is not completely fulfilled, do:
   1. BFS expansion on `c_0` using the unfulfilled scope, `filters` and `i_p`, and
     1. if context is expanded, update scope, continue; 
-    2. else, `inquire` to expand `g` (but not context and scope); then retry on success or break on failure.
+    2. else, apply `learning` with `inquire` to expand `g` (but not context and scope); then retry on success or break on failure.
 3. Return the context `c`, along with the fulfilled scope for direct access of `i`.
 
 
@@ -94,13 +94,15 @@ Let it be given canonicalized input `<fn, i_p>`, graph `g`, initial context `c_0
 
 >We say `k_c` is `g-bounded complete` *iff* `fn(k_c) = fn(k_g)`.
 
-#### Lemmas
+#### Lemma
 
->1) `k_g` is `g-bounded complete`.
+>`k_g` is `g-bounded complete`.
 
 **Proof**: `fn(k_g) = fn(k_g)` by identity. □
 
->2) `k_c` is `g-bounded complete`.
+#### Theorem
+
+>`k_c` is `g-bounded complete`.
 
 **Proof**: The initial context `c_0` is obtained from `<fn, i_p>`. The `scope` of the `Contextualize` algorithm is initialized with all the necessary information needed for the resulting context and `fn`. 
 
@@ -115,18 +117,6 @@ The context `c` is thus the smallest subgraph in `g` that encodes the complete i
 This algorithm operates on the abstract level of CGKB to extract a sufficient plan, or to learn a plan from human.
 
 Is this step context-free? shan't be, cuz planning can be contextual too. ahh how does it use contextualize.
-
-## Contextualize algorithm
-
-This algorithm operates on the concrete level of CGKB 
-
-#### Contextualize:
-
-**input**: graph, plan, partial information `i_p`
-
-**output**: subgraph for the extraction of `i`
-
-
 
 
 ## CGKB algorithm
