@@ -9,7 +9,7 @@ We present *Human-Turing Machine Interface (HTMI)* that is human-bounded Turing 
 The design outlines of HTMI are as follow:
 
 - approximate human-human interaction
-- implement of Human-Centered Design (HCD): discoverability (no manual), with affordances, signifiers, mapping
+- implement Human-Centered Design (HCD): discoverability (no manual), with affordances, signifiers, mapping
 - constraints and forcing functions (HCD)
 - feedback (HCD)
 - just as we don't see "human errors" in human-human interaction but to simply ask for clarification, the machine shall do the same. It should treat "human error" as approximation, ask for clarification, and try to complete the action (HCD). Call this "error-resilience", and the machine reaction as "inquiries"

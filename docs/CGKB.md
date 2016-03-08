@@ -23,6 +23,7 @@ Recall that TM is equivalent to `{Fn, I}`. CGKB serves as the implementation for
 - norm: preferred defaults to resolve ambiguities.
 - plan: The causal graph of the necessary information in `I` to execute in `Fn`.
 - plan-execution: calling `fn ∈ Fn` on `i ∈ I`, or `fn(i)`.
+- auto-planning: the brain can build up and provide plans as causal graph automatically, such as in the simple case of getting a friend's phone number, or in the more complex case of playing chess. This utilizes all features of the brain enumerated above.
 
 
 ## CGKB algorithm
