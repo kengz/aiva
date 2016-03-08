@@ -1,6 +1,6 @@
 # Human-Turing Machine Interface
 
-We outline a *Human-Turing Machine Interface (HTMI)* that is human-bounded Turing complete.
+We present *Human-Turing Machine Interface (HTMI)* that is human-bounded Turing complete.
 
 ## Design
 
@@ -9,12 +9,12 @@ We outline a *Human-Turing Machine Interface (HTMI)* that is human-bounded Turin
 The design aims of HTMI are as follow:
 
 - approximate human-human interaction
-- implementation of Human-Centered Design (HCD): discoverability (no manual), with affordances, signifiers, mapping
+- implement of Human-Centered Design (HCD): discoverability (no manual), with affordances, signifiers, mapping
 - constraints and forcing functions (HCD)
 - feedback (HCD)
 - no-human-error design (HCD): just as in human-human interaction, the machine shall not throw error on imprecise input; instead it should treat the "human error" as approximation, ask for clarification, and try to complete the action
 - long-short term memory (LSTM) on both human and TM
-- TM must approximate human interaction and human-like brain function, via Contextual Graph Knowledge Base (CGKB)
+- TM must approximate human behavior and human-like brain function, using Contextual Graph Knowledge Base (CGKB)
 
 ## Theorem
 
