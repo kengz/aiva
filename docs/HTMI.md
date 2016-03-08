@@ -12,7 +12,7 @@ The design outlines of HTMI are as follow:
 - implement Human-Centered Design (HCD): discoverability (no manual), with affordances, signifiers, mapping
 - constraints and forcing functions (HCD)
 - feedback (HCD)
-- just as we don't see "human errors" in human-human interaction but to simply ask for clarification, the machine shall do the same. It should treat "human error" as approximation, ask for clarification, and try to complete the action (HCD). Call this "error-resilience", and the machine reaction as "inquiries"
+- just as we don't see "human errors" in human-human interaction but to simply ask for clarification, the machine shall do the same. It should treat "human error" as approximation, ask for clarification, and try to complete the action (HCD). Call this "error-resilience", and the machine reaction as "inquiry"
 - long-short term memory (LSTM) on both human and TM
 - TM must approximate human behavior and human-like brain function, using Contextual Graph Knowledge Base (CGKB)
 
