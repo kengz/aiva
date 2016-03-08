@@ -214,6 +214,8 @@ For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -
 - test switching out the adapter to Telegram/IRC
 - debugger mode
 - multi-platform tests: centralize brain recognize the same user across different platforms, and you can seamlessly pick up your bot from any platform - this will be the "one bot to rule it all" as you can find it anywhere and it will know this is the same person.
+- add back branches:only:master to .travis.yml
+- update package.json name, private, url, license
 
 
 ## Changelog
