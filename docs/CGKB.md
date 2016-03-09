@@ -141,3 +141,43 @@ The graph `g` of CGKB supports TM completeness, and thus without human restricti
 In HTMI, `g` is used by queries from a human, which restrict its effective power. Note `g` is also built upon the TM's interactions with a human via `learning`: and thus `g` of CGKB is **Human-bounded Turing complete** inductively: at every step for context `c ⊂ g`, if CGKB can directly answer to a human, then it is already so; otherwise, it `learns` from the human and extends its `g` to be so, and it can answer the human with its new knowledge.
 
 Finally, for each `fn ∈ Fn` and its corresponding context `c`, the contextual knowledge `k_c` is **g-bounded complete** by the theorem above, which implies `fn(k_c) = fn(k_g)`. So, the context `c` is always sufficient for emulating `fn(k_g)` for the **Human-bounded Turing complete** `g`. Therefore, CGKB is **Human-bounded Turing complete**. □
+
+
+
+## Examples
+
+We provide simple examples of CGKB below. The real possibilities are only limited by **Human-bounded Turing complete**, as proven above. In principle, one can use the brain for any AI tasks, such as playing chess, acting as a generic knowledge base, perform basic cognition, carry out basic functions. Note that in practice, implementation will need to cover more specific details.
+
+#### when `g` has learned the knowledge
+
+Given the graph `g` of CGKB that knows how to call a person,
+
+- Human input: `"Call John."`
+- HTMI interface canonicalize input to: `<fn = call, i_p = "John">`, where `"John"` is tagged as `proper noun` by a NLP POS Tagger.
+- Algorithm `CGKB(g, fn = call, i_p = "John")`:
+  1. Auto-planning: `plan = Contextualize(g, call, "John") = (call)-[requires]->(phone_number)-[requires]->(person)`
+  2. Contextual knowledge extraction: `c = Contextualize(g, plan, "John") = (me)-[knows]->(John)`, where the node John contains his phone number. As stated in the `Contextualize` algorithm, the operation utilizes filters with graph ranking such as emotions, LSTM, time, contraints, or ambiguity resolution, to provide the result context graph `c`.
+  3. Extract knowledge `k_c = Ex(c) = { name: "John", phone: "(234)-567-8900"}`, and execut the function `call("(234)-567-8900")`.
+
+
+#### when `g` doesn't have the knowledge
+
+Given the graph `g` of CGKB that **does not** know how to call a person,
+
+- Human input: `"Call John."`
+- HTMI interface canonicalize input to: `<fn = call, i_p = "John">`, where `"John"` is tagged as `proper noun` by a NLP POS Tagger.
+- Algorithm `CGKB(g, fn = call, i_p = "John")`:
+  1. Auto-planning: `plan = Contextualize(g, call, "John") = (call)-[requires]->(phone_number)`. The TM will call `learning` to inquire missing information from the human, update `g`, and recall the algorithm to yield `(call)-[requires]->(phone_number)-[requires]->(person)`. The rest follows as before.
+  2. Contextual knowledge extraction: Suppose the human doesn't know any "John"; TM will attempt to learn from the human, update CGKB and continue with the task accordingly. This happens for any missing knowledge.
+
+
+#### explain the "thought process"
+
+Another powerful feature of CGKB is that a human can inquire about the TM's thought process, like "explain how do you call a person?". In this case, 
+
+- `fn = explain_thought_process`, 
+- `i_p = "how do you call a person?"`
+- `plan = (explain_thought_process)-[require]-(requirements)...`
+- `c = (call)-[requires]->(phone_number)`
+
+And the TM may return `fn(k_c) = "(call)-[requires]->(phone_number)"` and the response.
