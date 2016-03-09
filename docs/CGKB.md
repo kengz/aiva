@@ -29,7 +29,7 @@ Recall that TM is equivalent to `{Fn, I}`. CGKB serves as the implementation for
 - **plan execution**: Extraction of information by traversing plan in reverse causal order from leaves to root, using the supplied `i_p` and contexts. Returns a subgraph for the extraction of `i`
 
 
-## Formal Design
+## Formal Theory
 
 #### Definitions
 
@@ -55,16 +55,15 @@ Recall that TM is equivalent to `{Fn, I}`. CGKB serves as the implementation for
 3. Base knowledge (graph sink) is the most basic knowledge, and is the source of the derivation path. If the path is cyclic, arbitrarily choose the last-encountered node as the basic knowledge. Base knowledge resolves all knowledge along the derivation path by gradual substitutions.
 
 
-#### Contextualize algorithm
+## Contextualize algorithm
 
-Let it be given graph `g`, initial context `c_0`, partial information `i_p`.
+Let there be given graph `g`, initial context `c_0`, partial information `i_p`.
 
 **input**: `g, c_0, i_p`
 
 **output**: contextual knowledge graph `c`
 
 **enumerate**:
-
 
 1. Initialize `scope` from `c_0, i_p`
 2. while `scope` is not completely fulfilled, do:
@@ -90,7 +89,7 @@ We prove below that this algorithm yields knowledge that is `g-bounded complete`
 
 #### Definition
 
-Let it be given canonicalized input `<fn, i_p>` with TM function `fn`, partial information `i_p`, graph `g`, initial context `c_0`, and let context `c = Contextualize(g, c_0, i_p)`, and its extracted knowledge `k_c = Ex(c)`. Let `k_g = Ex(g)` be the complete knowledge extractable from `g`.
+Let there be given canonicalized input `<fn, i_p>` with TM function `fn`, partial information `i_p`, graph `g`, initial context `c_0`, and let context `c = Contextualize(g, c_0, i_p)`, and its extracted knowledge `k_c = Ex(c)`. Let `k_g = Ex(g)` be the complete knowledge extractable from `g`.
 
 >We say `k_c` is `g-bounded complete` *iff* `fn(k_c) = fn(k_g)`.
 
@@ -114,27 +113,31 @@ The context `c` is thus the smallest subgraph in `g` that encodes the complete i
 
 ## CGKB algorithm
 
-"For searching the graph and executing the plan."
+Let there be given the graph `g` of CGKB, canonicalized input `<fn, i_p>` from human input parsed by the interface of HTMI, where `fn` is a TM function and `i_p` the partial function for executing `fn`.
+
+**input**: `g, fn, i_p`
+
+**output**: TM output utilizing contextual knowledge `fn(i)`
+
+**enumerate**:
+
+1. Auto-planning: set `plan = Contextualize(g, fn, i_p)`.
+2. Contextual knowledge extraction: set `c = Contextualize(g, plan, i_p)`.
+3. Extract knowledge `k_c = Ex(c)` from `c` (and its `scope`), compute and return `fn(k_c) = fn(i)`.
+
+
+`fn` is used as the initial context for extracting a `plan`. The `plan` is used for TM to automatically extract the contextual knowledge needed for computation. This is similar to AI planning, except the plan is already encoded in `g` when the CGKB learns, thus the planning is automatic.
+
+The context `c` and its `scope` are extracted from the `plan` (or CGKB learns from the human otherwise). We then extract the contextual knowledge, `k_c`, containing information `i ⊂ k_c`, for computing and returning `fn(k_c) = fn(i)`.
 
 
 
+**Proof**: To prove that the algorithm is correct, we must show that it is **Human-bounded Turing complete**, as outlined in [HTMI](./HTMI.md). If so, CGKB can be used by HTMI.
 
+Recall again that TM is equivalent to `{Fn, I}`. We know that knowledge `k` or information `i ⊂ k` is encoded in the graph `g` of CGKB. For any `fn ∈ Fn`, we can obtain a sufficient context `c` such that `i ⊂ k_c = Ex(c)` for computation `fn(i)`. We show below.
 
+The graph `g` of CGKB supports TM completeness, and thus without human restrictions, CGKB with TM is TM complete, as spanned by `Fn(I)`. 
 
-## Draft
+In HTMI, `g` is used by queries from a human, which restrict its effective power. Note `g` is also built upon the TM's interactions with a human via `learning`: and thus `g` of CGKB is **human-bounded complete** inductively: at every step for context `c ⊂ g`, if CGKB can directly answer to a human, then it is already so; otherwise, it `learns` from the human and extends its `g` to be so, and it can answer the human with its new knowledge.
 
-#### Definitions
-
-- context, `c`: a contextualized subgraph
-- initial context, `c_0`: the initial input context to the `contextualize` algorithm
-- final context, `c_f`: the final output context from the `contextualize` algorithm
-- `plan`: a special context that enumerates the planning of an A.I.
-- `filter`: fields used to filter context, i.e. constrain the expansion of initial context in the `contexualize` algorithm; thus far they are `{privacy, entity, ranking, time, constraints, graph properties}`
-- `scope`: the lists of fulfilled and unfulfilled information, `i_f, i_u` respectively for the extraction of `i` for `fn(i)`
-
-
-#### Definitions
-
-- context, `c`: a contextualized subgraph
-- `filter`: fields used to filter context, i.e. constrain the expansion of initial context in the `contexualize` algorithm; thus far they are `{privacy, entity, ranking, time, constraints, graph properties}`
-- `scope`: the list used by `contextualize` to keep trace of 
+Finally, for each `fn ∈ Fn` and its corresponding context `c`, the contextual knowledge `k_c` is **g-bounded complete** by the theorem above, which implies `fn(k_c) = fn(k_g)`. So, the context `c` is always sufficient for emulating `fn(k_g)` for the **human-bounded complete** `g`. Therefore, CGKB is **human-bounded complete**. □
