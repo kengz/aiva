@@ -37,7 +37,7 @@ Recall that TM is equivalent to `{Fn, I}`. CGKB serves as the implementation for
 - `g_i`, `h`: placeholder for any subgraph of `g`
 - `Contextualize`: the Contextualize algorithm
 - `c_0`: the initial context, determined from `fn, i_p`
-- `<fn, i_p>`: the canonicalized input, where `fn` is a TM function, and `i_p` the partial information needed for `fn`'s functional arguments.
+- `<fn, i_p>`: the canonicalized input from the interface of HTMI after parsing a human input, where `fn` is a TM function, and `i_p` the partial information needed for `fn`'s execution.
 - `filter`: fields used to filter context, i.e. constrain the expansion of initial context in the `Contexualize` algorithm; thus far they are `{privacy, entity, ranking, time, constraints, graph properties}`
 - `scope`: the lists of fulfilled and unfulfilled information, `scope_f, i_u` respectively for the extraction of `i` for `fn(i)`.
 - `c`: contextual (knowledge) graph, or the contextualized subgraph, i.e. the output `Contextualize(g, c_0, i_p)`; `c ⊂ g`
@@ -79,7 +79,7 @@ We also call the resulting context `c` the contextual knowledge graph, and the e
 We prove below that this algorithm yields knowledge that is `g-bounded complete`; it also proves that the algorithm is correct.
 
 
-## g-bounded Knowledge Completeness Theorem
+## g-bounded Completeness Theorem
 
 #### Facts
 
@@ -90,7 +90,7 @@ We prove below that this algorithm yields knowledge that is `g-bounded complete`
 
 #### Definition
 
-Let it be given canonicalized input `<fn, i_p>`, graph `g`, initial context `c_0`, partial information `i_p`, and let context `c = Contextualize(g, c_0, i_p)`, and its extracted knowledge `k_c = Ex(c)`. Let `k_g = Ex(g)` be the complete knowledge extractable from `g`.
+Let it be given canonicalized input `<fn, i_p>` with TM function `fn`, partial information `i_p`, graph `g`, initial context `c_0`, and let context `c = Contextualize(g, c_0, i_p)`, and its extracted knowledge `k_c = Ex(c)`. Let `k_g = Ex(g)` be the complete knowledge extractable from `g`.
 
 >We say `k_c` is `g-bounded complete` *iff* `fn(k_c) = fn(k_g)`.
 
@@ -112,16 +112,12 @@ The context `c` is thus the smallest subgraph in `g` that encodes the complete i
 
 
 
-## Autoplanning algorithm
-
-This algorithm operates on the abstract level of CGKB to extract a sufficient plan, or to learn a plan from human.
-
-Is this step context-free? shan't be, cuz planning can be contextual too. ahh how does it use contextualize.
-
-
 ## CGKB algorithm
 
-For searching the graph and executing the plan.
+"For searching the graph and executing the plan."
+
+
+
 
 
 
