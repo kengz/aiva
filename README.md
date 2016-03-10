@@ -1,6 +1,4 @@
-# Peppurr
-
-[![Build Status](https://travis-ci.com/kengz/peppurr.svg?token=c5tCQyTMzysDQ4ah1SXs&branch=master)](https://travis-ci.com/kengz/peppurr) [![Dependency Status](https://gemnasium.com/c54d292372b8917a643ee66ac5723bb3.svg)](https://gemnasium.com/kengz/peppurr)
+# Peppurr [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
 General-purpose virtual assistant for developers.
 
