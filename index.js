@@ -6,20 +6,14 @@ var exec = require('child_process').exec;
 // set env if not already set externally
 // .env must exist if setting env vars externally
 try {
-  env(__dirname + '/.env', {
-    overwrite: false
-  });
-  if (process.env.NODE_ENV == 'development') {
-    // set port for dev
-    process.env.PORT = process.env.TEST_PORT
-    console.log('port', process.env.PORT)
-  };
+  env(__dirname + '/.env', { overwrite: false });
+  // reset port for dev
+  if (process.env.NODE_ENV == 'development') { process.env.PORT = process.env.TEST_PORT };
   // then set env keys for the deployed bot
   console.log("Deploying using", process.env.DEPLOY)
   env(__dirname + '/bin/' + process.env.DEPLOY);
 } catch (e) {
   console.log(e)
-  console.log("Process exiting with code 1.")
   process.exit(1)
 }
 

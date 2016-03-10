@@ -11,7 +11,7 @@
     "start": "npm run deploy",
     "stop": "forever stopall",
     "deploy": "if [ $npm_config_bot ]; then bot=$npm_config_bot; echo Bot is SET to: $bot; else bot=peppurr; echo Bot is DEFAULTED to $bot; fi; DEPLOY=.keys-$bot forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a -p ./logs -l $bot.log index.js",
-    "debug": "if [ $npm_config_bot ]; then bot=$npm_config_bot; echo Bot is SET to: $bot; else bot=shadow; echo Bot is DEFAULTED to $bot; fi; DEPLOY=.keys-$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js",
+    "debug": "if [ $npm_config_bot ]; then bot=$npm_config_bot; echo Bot is SET to: $bot; else bot=shadow; echo Bot is DEFAULTED to $bot; fi; NODE_ENV=development DEPLOY=.keys-$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js",
     "pip3": "sudo virtualenv pyenv; source pyenv/bin/activate; sudo pip3 install -r requirements.txt",
     "bundler": "bundle install"
   },
@@ -31,6 +31,7 @@
   "dependencies": {
     "bluebird": "^3.1.1",
     "hubot": "^2.18.0",
+    "hubot-diagnostics": "0.0.1",
     "hubot-slack": "^3.4.2",
     "lomath": "latest",
     "neo4jkb": "latest",
