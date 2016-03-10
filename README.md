@@ -1,8 +1,8 @@
-# Peppurr [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
+# AIVA [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
-General-purpose virtual assistant for developers.
+**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
-| Peppurr is | |
+| AIVA is | |
 |:---|---|
 | general-purpose | An app interface, AI assistant, anything! It's way beyond a chatbot. |
 | cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
@@ -30,7 +30,7 @@ Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digi
 
 #### <a name="setup"></a>One-time Setup
 - **install dependencies**: `npm run gi`
-- **setup keys**: update `.env`, `bin/.key-<bot-name>`, replace `peppurr` in `package.json` if you prefer different name
+- **setup keys**: update `.env`, `bin/.key-<bot-name>`, replace `aiva` in `package.json` if you prefer different name
 
 Check [**Setup Helps**](#setup-helps) for tips.
 
@@ -49,7 +49,7 @@ npm test # run unit tests
 
 ## Dev Guide: Project structure
 
-Peppurr ships fully functional, but it's also for developers to customize.
+AIVA ships fully functional, but it's also for developers to customize.
 
 | Folder/File | Purpose |
 |:---|---|
@@ -59,7 +59,7 @@ Peppurr ships fully functional, but it's also for developers to customize.
 | `lib/io_client.js, io_server.js` | SocketIO logic for cross-language communications. |
 | `logs` | Logs from bot for debugging and healthcheck |
 | `scripts` | The interface modules of the `lib` modules, for bot to interact with users; in `node.js`. |
-| `scripts/0_init.js` | Kicks off peppurr setups after the base Hubot is constructed, before other scripts are lodaded. |
+| `scripts/0_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
 | `test` | Unit tests; uses Mocha |
 | `.env` | Non-bot-specific environment variables |
 | `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them here. |
@@ -373,4 +373,4 @@ Then you can go to `http://localhost:8080/` on your local browser.
 
 ## Contributing
 
-We'd love for you to contribute and make Peppurr even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful module, adding more adapters like Telegram or Whatsapp.
+We'd love for you to contribute and make AIVA even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful module, adding more adapters like Telegram or Whatsapp.
