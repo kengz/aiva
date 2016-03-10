@@ -4,7 +4,7 @@ helper = new Helper('../scripts/translate.js')
 describe 'lib/nlp.js', ->
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
 
   context 'textBlob', ->
     it 'should say textBlob', ->

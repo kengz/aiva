@@ -10,7 +10,7 @@ describe 'lib/hasher.js', ->
   
   before ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
 
   describe 'gen', ->
     # test

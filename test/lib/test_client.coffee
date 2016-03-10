@@ -13,7 +13,7 @@ describe 'lib/client.js', ->
 
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
     # delay to wait for all clients to join
     co =>
       yield delayer(10)

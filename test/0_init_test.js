@@ -12,7 +12,7 @@ before(function() {
     console.log('This is in ' + process.env.NODE_ENV + ' mode.')
 
     // emulate full hubot initialization, set to global.room for use
-    global.room = helper.createRoom({ name: global.defaultRoom });
+    global.room = helper.createRoom({ name: global.DEFAULT_ROOM });
     // set the brain to test/asset.js's
     _.set(this.room.robot, 'brain.data.users', users)
     yield delayer(15)

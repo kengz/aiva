@@ -4,7 +4,7 @@ helper = new Helper('../scripts/ping.js')
 describe 'scripts/ping.js', ->
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
 
 
   # Test
@@ -49,7 +49,7 @@ describe 'scripts/ping.js', ->
       @room.messages.should.eql [ 
         # returns the stringified JSON
         [ 'alice', '@hubot myid' ]
-        [ 'hubot', '{\n  "message": {\n    "user": {\n      "id": "alice",\n      "room": "Shell",\n      "name": "alice"\n    },\n    "text": "@hubot myid",\n    "done": false,\n    "room": "Shell"\n  },\n  "match": [\n    "@hubot myid"\n  ],\n  "envelope": {\n    "room": "Shell",\n    "user": {\n      "id": "alice",\n      "room": "Shell",\n      "name": "alice"\n    },\n    "message": {\n      "user": {\n        "id": "alice",\n        "room": "Shell",\n        "name": "alice"\n      },\n      "text": "@hubot myid",\n      "done": false,\n      "room": "Shell"\n    }\n  }\n}' ] 
+        [ 'hubot', '{\n  "message": {\n    "user": {\n      "id": "alice",\n      "room": "bot-test",\n      "name": "alice"\n    },\n    "text": "@hubot myid",\n    "done": false,\n    "room": "bot-test"\n  },\n  "match": [\n    "@hubot myid"\n  ],\n  "envelope": {\n    "room": "bot-test",\n    "user": {\n      "id": "alice",\n      "room": "bot-test",\n      "name": "alice"\n    },\n    "message": {\n      "user": {\n        "id": "alice",\n        "room": "bot-test",\n        "name": "alice"\n      },\n      "text": "@hubot myid",\n      "done": false,\n      "room": "bot-test"\n    }\n  }\n}' ] 
       ]
 
 

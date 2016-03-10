@@ -4,7 +4,7 @@ helper = new Helper('../scripts/serialize_users.js')
 describe 'scripts/serialize_users.js', ->
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
     @robot = @room.robot
     _.set @robot, 'brain.data.users', users
 
@@ -41,7 +41,7 @@ describe 'scripts/serialize_users.js', ->
 
 
   # Test
-  context 'user.enter() from "defaultRoom"; invoke emit()', ->
+  context 'user.enter() from "DEFAULT_ROOM"; invoke emit()', ->
     beforeEach ->
       co =>
         @spySer = sinon.spy()
@@ -57,11 +57,11 @@ describe 'scripts/serialize_users.js', ->
 
 
   # Test
-  context 'user.enter() from "not_defaultRoom"; no invocation', ->
+  context 'user.enter() from "not_DEFAULT_ROOM"; no invocation', ->
     beforeEach ->
       co =>
         @spySer = sinon.spy()
-        @room.name = 'not_defaultRoom'
+        @room.name = 'not_DEFAULT_ROOM'
         @room.robot.on 'serialize_users', @spySer
         yield @room.user.enter 'alice'
 

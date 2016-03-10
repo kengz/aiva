@@ -6,7 +6,7 @@ describe 'scripts/todo.js', ->
 
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
     @robot = @room.robot
     _.set @robot, 'brain.data.users', users
 

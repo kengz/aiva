@@ -4,7 +4,7 @@ helper = new Helper('../scripts/hello_py.js')
 describe 'scripts/hello_py.js', ->
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
-    @room = helper.createRoom(httpd: false, name: global.defaultRoom)
+    @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
 
   # Test
   context 'user: hello_py', ->

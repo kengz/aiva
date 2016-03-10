@@ -32,19 +32,19 @@ module.exports = function(robot) {
     serialize_users(robot.brain.data.users).then(function(size) {
       console.log("setting global.users from scripts/serialize_users.js")
       var str = 'Serialized ' + size + ' users.'
-      robot.messageRoom(global.defaultRoom, str)
+      robot.messageRoom(global.DEFAULT_ROOM, str)
     })
   })
 
   // manually call serialize_users
   robot.respond(/serialize users/i, function(res) {
-    robot.messageRoom(global.defaultRoom, 'Serializing users...')
+    robot.messageRoom(global.DEFAULT_ROOM, 'Serializing users...')
     robot.emit('serialize_users')
   })
 
   // on a new user entering default room, re-serialize users
   robot.enter(function(res) {
-    if (res.envelope.room == global.defaultRoom) {
+    if (res.envelope.room == global.DEFAULT_ROOM) {
       res.send(`Welcome ${res.envelope.user.name}, I am ${robot.name}. See what I can do by typing \`${robot.name} help\`. Meanwhile let me add you to my KB...`)
       robot.emit('serialize_users')
     };

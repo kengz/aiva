@@ -13,8 +13,7 @@ global.KB = require('neo4jkb')({
 });
 // the default room name
 /* istanbul ignore next */
-global.defaultRoom = (process.env.NODE_ENV == 'production') ? process.env.defaultRoom || 'bot-test' : 'Shell'
-
+global.DEFAULT_ROOM = (process.env.NODE_ENV == 'production') ? process.env.DEFAULT_ROOM || 'bot-dev' : 'bot-test'
 
 // export for bot
 module.exports = function(robot) {
@@ -29,14 +28,15 @@ module.exports = function(robot) {
     require('../lib/io_server')(robot)
     require('../lib/io_client')(robot)
 
-    // first, set emulated data for dev mode
-    /* istanbul ignore else */
-    if (process.env.NODE_ENV == 'development') {
-      require('../test/common')
+    /* istanbul ignore next */
+    if (robot.adapter.constructor.name == 'Shell') {
+      // set for Shell local dev
+      global.DEFAULT_ROOM = 'Shell'
+      require('../test/asset')
       robot.brain.data.users = global.users
     };
     // send a message to connect the adapter and update robot.brain.data.users
-    yield robot.messageRoom(global.defaultRoom, "I'm online.")
+    yield robot.messageRoom(global.DEFAULT_ROOM, "I'm online.")
     yield Promise.delay(500);
     // emit 'ready' event to kick off initialization
     robot.emit('ready')
