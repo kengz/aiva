@@ -4,6 +4,7 @@
 # !Hack for SocketIO py client to work with unicode. Overrides the recv_packet of WebsocketTransport, changing from six.b to six.u when failing
 # !Awaiting module author to fix the issue from source
 from socketIO_client import SocketIO, WebsocketTransport
+import os
 import six
 import socket
 import websocket
@@ -41,7 +42,8 @@ g = globals()
 
 # 1. Register the socket.io client
 ##########################################
-client = SocketIO('localhost', 8080)
+PORT = os.environ.get('PORT', '8080')
+client = SocketIO('localhost', int(PORT))
 # the id of this script for client registration
 id = 'py'
 # first join for serialization

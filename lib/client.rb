@@ -10,7 +10,8 @@ puts 'import rb scripts from client.rb'
 # 1. Register the socket.io client
 ##########################################
 # Ruby scoping doesn't allow local var to be accessed within method, so set global
-$client = SocketIO::Client::Simple.connect 'http://localhost:8080'
+PORT = (ENV['PORT'] || '8080')
+$client = SocketIO::Client::Simple.connect 'http://localhost:'+PORT
 # the id of this script for client registration
 id = 'rb'
 # first join for serialization
