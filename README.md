@@ -1,6 +1,6 @@
 # AIVA [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
-**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
+**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
 | AIVA is | |
 |:---|---|
@@ -9,6 +9,8 @@
 | cross-language | Runs scripts among Node.js, Python3, Ruby, etc. |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
+
+AIVA is based on a theoretical interface [HTMI](./docs/HTMI.md) and a brain [CGKB](./docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
 
 
 ## <a name="features"></a>Features
@@ -182,19 +184,10 @@ For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -
 
 
 ## Todo
-- enumerate new systems and theorems
+- HTMI and CGKB for brain-building and AI interface
 - import datejs with NLP time parser
-- better slack custom message wrapper, able to specify color
 - IBM watson faster for NLP intent map: https://github.com/watson-developer-cloud/conversational-agent-application-starter-kit#about-the-conversational-agent-pattern
-- prevent port conflict while running npm test when a bot is up
 - time: cron, chrono-node, moment(formatter), chronic (rb), Sugar (too heavy), laterjs, matthewmueller's date.js, natty(MIT)
-- ok here's the plan
-- generic KB creator: bot learns to create label n KB by learning
-- step1: NLP parse into entities, e.g. (actor)-[action]->(subject), with extra entities like time, author and KB basic standard shits.
-- step2: Canonicalization: ML mapper into, e.g. maps `{links, link, refers, refs} => ref` using word2vec n metric
-- setp3: KB creation using shit laid out in sample todo.js
-- creation may seem trivial, but proper creation with the right built in data will help unleash the graph power when querying.
-- then you'll have a generic ML-built KB, don't have to write a builder for each type of knowledge.
 - need natural language parse, sentiment preferably. raise from regex fallback
 - Tensorflow: everything! Local ML, NLP as advanced feature; basic feature has regex as fallbacks
 - chrono and time format conversion method
@@ -248,6 +241,7 @@ For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -
 - standard: `<comment-symbol> !` to note future implementation or fixes
 - add `global.io.{reply, send, say}` for hubot replies from io. Use as `io.send(res)`; see `scripts/translate.js` for example.
 - unify clients: one for each language.
+- Different port to simultaneous use of production and dev/testing. Port 8080 for production, port 9090 for development. Set TEST_PORT in .env
 
 ## Dev
 
