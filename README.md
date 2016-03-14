@@ -1,11 +1,22 @@
-# JARVIS
+# AIVA [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
-A JARVIS for your team - your most powerful bot and loyal butler. Jarvis was originally built for **GLOBAL_HACKERS** as our smart, humorous and [sentient](#chat) team assistant.
-
-The most popular and powerful features for us include *todo, reminder, memes, search, and a machine learning module.* See the [design](#design) and all the [features](#features).
+*Previously known as JARVIS.*
 
 
-## Next version
+**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
+
+| AIVA is | |
+|:---|---|
+| general-purpose | An app interface, AI assistant, anything! It's way beyond a chatbot. |
+| cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
+| cross-language | Runs scripts among Node.js, Python3, Ruby, etc. |
+| hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
+| powerful, easy to use | Check out [setup](#setup) and [features](#features) |
+
+AIVA is based on a theoretical interface [HTMI](./docs/HTMI.md) and a brain [CGKB](./docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
+
+
+## Next version (AIVA)
 
 **The next version** *of Jarvis is under development. To prevent potential copyright issues the name will be changed away from JARVIS too.* Update: it will be called `AIVA`, and is currently under the branch `aiva-v3`.
 
@@ -20,6 +31,9 @@ The most popular and powerful features for us include *todo, reminder, memes, se
 1. unit tests
 1. better help menu
 
+
+## Here onward is legacy doc
+---
 
 ## Installation
 Clone this git repo:
