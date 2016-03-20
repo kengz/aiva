@@ -50,13 +50,13 @@ npm test # run unit tests
 
 ## Development Guide
 
-AIVA ships completely usable right out of the box - you can use it as a simple virtual assistant. It's also designed as an interface for developers, so refer to [DEVELOPMENT.md](./DEVELOPMENT.md) for development guide.
+AIVA ships completely usable right out of the box - you can use it as a simple virtual assistant. It's also designed as an interface for developers, so refer to [DEVELOPMENT.md](./docs/DEVELOPMENT.md) for development guide.
 
 
 
 ## Design
 
-Design of AIVA can be found at [DESIGN.md](./DESIGN.md).
+Design of AIVA can be found at [DESIGN.md](./docs/DESIGN.md).
 
 
 
@@ -74,7 +74,7 @@ Design of AIVA can be found at [DESIGN.md](./DESIGN.md).
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md)
+See [CHANGELOG.md](./docs/CHANGELOG.md)
 
 
 
