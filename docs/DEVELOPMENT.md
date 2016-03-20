@@ -43,6 +43,8 @@ AIVA ships fully functional, but it's also for developers to customize.
 
 ## Examples
 
+A good [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md). Note you still need simple script to interface between the user and your program in `lib/`, written in any language.
+
 #### Case 1: standalone js script
 
 1. Write the module under `lib/js`: [`lib/js/user.js`](./lib/js/user.js)
