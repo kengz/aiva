@@ -20,15 +20,15 @@ This outlines the abstract design for AIVA. The A.I. components are:
 
 #### NLP interface
 
-- basic NLP extraction from Textblob: sentiment, POS etc. so people can still use it.
-- parse human input into `intent` and `args`. If `intent` is a registered function, execute it with `args`; else, `intent` is KB-access, direct it to KB.
-- NLP for human input to KB: see how ConceptNet does that during their Turing test
+- basic NLP extraction from Textblob: sentiment, POS etc. so people can still use it. (don't really need textblob if wordnet got this covered)
+- parse human input into `intent` and `args`. If `intent` is a registered function, direct to `Fn` (registered functions) and execute with `args`; else, `intent` is KB-access, direct it to 3 KB types below.
+- tools: [node word2vec](https://github.com/Planeshifter/node-word2vec), [node wordnet](https://github.com/Planeshifter/node-wordnet-magic), for parsing, canonicalization
 
 #### KB
 
 - General knowledge: offload to Google Graph Search API & Google Search
-- General knowledge: offload to `ConceptNet5`. Optionally on can into neo4j http://neo4j.com/blog/conceptnet-neo4j-database/ 
-- Local knowledge: localized, user-specific, extend brain KB with neo4j. HTMI and CGKB for brain-building and AI interface. Regex fallback?
+- General concepts: offload to `ConceptNet5`. Use [node conceptnet](https://github.com/Planeshifter/node-concept-net)
+- Local knowledge: localized, user-specific, extend brain KB with neo4j. Implementation standard can refer to conceptnet. HTMI and CGKB for brain-building and AI interface. Regex fallback?
 
 
 
@@ -41,6 +41,9 @@ This outlines the abstract design for AIVA. The A.I. components are:
 - Tensorflow
 - gensim
 - gloVe
+- [node word2vec](https://github.com/Planeshifter/node-word2vec)
+- [node wordnet](https://github.com/Planeshifter/node-wordnet-magic)
+- [node conceptnet](https://github.com/Planeshifter/node-concept-net)
 
 #### mid level
 
