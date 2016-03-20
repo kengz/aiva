@@ -35,12 +35,14 @@
     "hubot-diagnostics": "0.0.1",
     "hubot-slack": "^3.4.2",
     "lomath": "latest",
+    "natural": "^0.4.0",
     "neo4jkb": "latest",
     "node-env-file": "^0.1.8",
     "reqscraper": "^0.1.2",
     "require-dir": "^0.3.0",
     "socket.io": "^1.4.5",
-    "socket.io-client": "^1.4.5"
+    "socket.io-client": "^1.4.5",
+    "wordnet-db": "^3.1.2"
   },
   "devDependencies": {
     "chai": "^3.4.1",
