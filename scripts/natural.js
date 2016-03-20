@@ -16,3 +16,31 @@ wordnet.lookup('node', function(results) {
         console.log(result.gloss);
     });
 });
+
+
+// Better wordpos
+var WordPOS = require('wordpos'),
+    wordpos = new WordPOS();
+
+wordpos.getAdjectives('The angry bear chased the frightened little squirrel.', function(result){
+    console.log(result);
+});
+// [ 'little', 'angry', 'frightened' ]
+
+wordpos.isAdjective('awesome', function(result){
+    console.log(result);
+});
+// true 'awesome'
+
+wordpos.getNouns('The angry bear chased the frightened little squirrel.', console.log)
+// [ 'bear', 'squirrel', 'little', 'chased' ]
+
+wordpos.getPOS('The angry bear chased the frightened little squirrel.', console.log)
+// output:
+  // {
+  //   nouns: [ 'bear', 'squirrel', 'little', 'chased' ],
+  //   verbs: [ 'bear' ],
+  //   adjectives: [ 'little', 'angry', 'frightened' ],
+  //   adverbs: [ 'little' ],
+  //   rest: [ 'the' ]
+  // }

@@ -66,6 +66,7 @@ Design of AIVA can be found at [DESIGN.md](./docs/DESIGN.md).
 
 
 ## Todo
+- docs on full feature list, so devs know what they can use
 - release the simplest version of AIVA with simpler AI modules (google graph API and conceptnet, imagenet: slack might be able to take picture for bot). Full NLP and KB will take longer to complete.
 - warning if forever restarts
 - store cron in KB for restoration
