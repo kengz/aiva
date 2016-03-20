@@ -53,9 +53,11 @@ npm test # run unit tests
 AIVA ships completely usable right out of the box - you can use it as a simple virtual assistant. It's also designed as an interface for developers, so refer to [DEVELOPMENT.md](./DEVELOPMENT.md) for development guide.
 
 
+
 ## Design
 
 Design of AIVA can be found at [DESIGN.md](./DESIGN.md).
+
 
 
 ## Todo
@@ -70,99 +72,26 @@ Design of AIVA can be found at [DESIGN.md](./DESIGN.md).
 
 
 
+## Changelog
 
+See [CHANGELOG.md](./CHANGELOG.md)
 
-##### You can send customMessage msg to Slack
-
-```
-robot.adapter.customMessage({
-  channel: res.message.room,
-  text: "Latest changes",
-  attachments: [{
-    "fallback": "Required plain-text summary of the attachment.",
-    "color": "#36a64f",
-    "pretext": "Optional text that appears above the attachment block",
-    "author_name": "Bobby Tables",
-    "author_link": "http://flickr.com/bobby/",
-    "author_icon": "http://flickr.com/icons/bobby.jpg",
-    "title": "Slack API Documentation",
-    "title_link": "https://api.slack.com/",
-    "text": "Optional text that appears within the attachment",
-    "fields": [{
-      "title": "Priority",
-      "value": "High",
-      "short": false
-    }],
-
-    "image_url": "http://my-website.com/path/to/image.jpg",
-    "thumb_url": "http://example.com/path/to/thumb.png"
-  }]
-})
-```
-
-
-##### Reference for `res` object cuz hubot lib is dipshit
-```JSON
-{
-	"message": {
-		"user": {
-			"id": "alice",
-			"room": "Shell",
-			"name": "alice"
-		},
-		"text": "@hubot myid",
-		"done": false,
-		"room": "Shell"
-	},
-	"match": [
-	"@hubot myid"
-	],
-	"envelope": {
-		"room": "Shell",
-		"user": {
-			"id": "alice",
-			"room": "Shell",
-			"name": "alice"
-		},
-		"message": {
-			"user": {
-				"id": "alice",
-				"room": "Shell",
-				"name": "alice"
-			},
-			"text": "@hubot myid",
-			"done": false,
-			"room": "Shell"
-		}
-	}
-}
-```
-
-try to print envelope
-useful shits for robot.
-- listen
-- hear
-- respond
-- enter
-- leave
-- topic
-- error
-- catchAll(the other)
-- send (user, strings...)
-- reply
-- messageRoom
-- on
-- emit
-- shutdown
-
-
-
-
-## Features
 
 
 ## Dependencies
-The complete list of dependencies:
+
+All the system dependencies are installed for you by running `npm run gi`, which executes `bin/install`. If you'd like to setup your VM manually, below is the list:
+
+- `node.js >v5.x`
+- `java jdk >7`
+- `neo4j >v2.3.0`
+- `neo4j shell tool`
+- `python3, pip3`
+- `pip3 setuptools`
+- `pip3 virtualenvwrapper`
+- `pip3 textblob`
+- `ruby, bundler, rails`
+
 
 
 ## <a name="setup-helps"></a>Setup Helps
