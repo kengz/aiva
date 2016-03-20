@@ -4,16 +4,13 @@
 
 | AIVA is | |
 |:---|---|
-| general-purpose | An app interface, AI assistant, anything! It's way beyond a chatbot. |
+| general-purpose | An app interface, AI assistant, anything! |
 | cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
-| cross-language | Runs scripts among Node.js, Python3, Ruby, etc. |
+| multi-language | Runs scripts among Node.js, Python3, Ruby, etc. |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
 AIVA is based on a theoretical interface [HTMI](./docs/HTMI.md) and a brain [CGKB](./docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
-
-
-## <a name="features"></a>Features
 
 
 
@@ -26,6 +23,7 @@ git clone <the_git_url>
 ```
 
 Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digital Ocean](https://www.digitalocean.com), and you can use this [setup script](https://github.com/kengz/mac_setup). Otherwise, check [`bin/install`](./bin/install) for system dependencies.
+
 
 
 ## Setup, Run
@@ -46,6 +44,13 @@ npm run debug --bot=<bot-name> # to dev
 npm run shell # use shell-adapter to dev
 npm test # run unit tests
 ```
+
+
+
+## <a name="features"></a>Features
+
+pending.
+
 
 
 ## Development Guide
@@ -78,22 +83,6 @@ See [CHANGELOG.md](./docs/CHANGELOG.md)
 
 
 
-## Dependencies
-
-All the system dependencies are installed for you by running `npm run gi`, which executes `bin/install`. If you'd like to setup your VM manually, below is the list:
-
-- `node.js >v5.x`
-- `java jdk >7`
-- `neo4j >v2.3.0`
-- `neo4j shell tool`
-- `python3, pip3`
-- `pip3 setuptools`
-- `pip3 virtualenvwrapper`
-- `pip3 textblob`
-- `ruby, bundler, rails`
-
-
-
 ## <a name="setup-helps"></a>Setup Helps
 
 #### Neo4j
@@ -115,6 +104,22 @@ ssh -L 8080:localhost:7474 <remote_host>
 ```
 
 Then you can go to `http://localhost:8080/` on your local browser.
+
+
+#### Dependencies
+
+All the system dependencies are installed for you by running `npm run gi`, which executes `bin/install`. If you'd like to setup your VM manually, below is the list:
+
+- `node.js >v5.x`
+- `java jdk >7`
+- `neo4j >v2.3.0`
+- `neo4j shell tool`
+- `python3, pip3`
+- `pip3 setuptools`
+- `pip3 virtualenvwrapper`
+- `pip3 textblob`
+- `ruby, bundler, rails`
+
 
 
 

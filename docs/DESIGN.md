@@ -1,8 +1,10 @@
 # Design of AIVA
 
-This outlines the top level design for AIVA. The A.I. component comes from its NLP (Natural Language Processing) and KB (Knowledge Base), along with other smart things you can plug in to extend AIVA, for example, pattern recognition with deep learning.
+This outlines the abstract design for AIVA. The A.I. components are:
 
-For now, design is still underway, and I do my design-thinking here. There are 3 main compoenents: NLP, KB, System.
+- NLP (Natural Language Processing) interface
+- KB (Knowledge Base) for the brain memory
+- other ML (machine learning) modules we add progressively
 
 
 ## Analysis of NLP and KB tools
@@ -35,7 +37,7 @@ For now, design is still underway, and I do my design-thinking here. There are 3
 ## New System Design (Mar 19 2016)
 
 
-#### NLP for interface
+#### NLP interface
 - basic shit from Textblob: sentiment, POS etc in case people want it.
 - parse input into intent & <args>, and if intent is not a recognized fn, direct to KB
 - intent can be "question" if user is querying KB

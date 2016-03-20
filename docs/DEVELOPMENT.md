@@ -1,8 +1,8 @@
 # Development Guide
 
-AIVA is created as an A.I. interface without hassle for developers. We take care of the crucial backend and system, so *developers can focus on things that matter*.
+AIVA is created as an A.I. general purpose interface for developers; it has an NLP interface and KB brain out of the box. We take care of the crucial backend and system, so *developers can focus on things that matter*.
 
-If you have a new idea, such as a pizza finder, tone analyzer, pattern recognizer, image analysis etc., simply focus on writing that, and use the AIVA NLP interface and KB brain out of the box. You shouldn't have to worry about creating a website, app, or bot interface from scratch just to serve your idea to users.
+You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a frontend website. For example, I can write a credit card benefit finder, then plug it in to AIVA by writing a simple interface script.
 
 
 ## Polyglot environment
