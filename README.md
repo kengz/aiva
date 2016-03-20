@@ -70,7 +70,6 @@ Design of AIVA can be found at [DESIGN.md](./docs/DESIGN.md).
 - warning if forever restarts
 - store cron in KB for restoration
 - user preference: weather, last food order etc, extensible
-- KB contextual search: guess context from search input, e.g. name or email or task, then apply search to labels or properties or conns
 - multi-platform tests: test switching out the adapter to Telegram/IRC, centralize brain recognize the same user across different platforms, and you can seamlessly pick up your bot from any platform - this will be the "one bot to rule it all" as you can find it anywhere and it will know this is the same person.
 - add back branches:only:master to .travis.yml
 - update package.json name, private, url, license
