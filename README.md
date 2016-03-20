@@ -1,4 +1,4 @@
-# AIVA [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
+# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
@@ -70,9 +70,6 @@ Design of AIVA can be found at [DESIGN.md](./DESIGN.md).
 
 
 
-## Dev
-
-A good [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md). Note you still need simple script to interface between the user and your program in `lib/`, written in any language.
 
 
 ##### You can send customMessage msg to Slack
