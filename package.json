@@ -30,6 +30,7 @@
   "homepage": "https://github.com/kengz/peppurr#readme",
   "dependencies": {
     "bluebird": "^3.1.1",
+    "concept-net": "^0.2.1",
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-slack": "^3.4.2",
