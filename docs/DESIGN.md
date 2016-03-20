@@ -27,7 +27,7 @@ This outlines the abstract design for AIVA. The A.I. components are:
 
 #### KB
 
-- General knowledge: offload to Google Graph Search API & Google Search
+- General knowledge: offload to Google Graph Search API & Google Search. See [Google api node client](https://github.com/google/google-api-nodejs-client)
 - General concepts: offload to `ConceptNet5`. Use [node conceptnet](https://github.com/Planeshifter/node-concept-net)
 - Local knowledge: localized, user-specific, extend brain KB with neo4j. Implementation standard can refer to conceptnet. HTMI and CGKB for brain-building and AI interface. Regex fallback?
 
