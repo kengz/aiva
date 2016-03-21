@@ -2,6 +2,7 @@
 
 *Previously known as JARVIS.*
 
+**WARNING**: The old JARVIS (current master branch) will be nuked by next Monday (Mar 28 2016). If you wish to use it, checkout to release tag [v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
