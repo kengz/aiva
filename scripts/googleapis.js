@@ -6,9 +6,14 @@ var auth = process.env.GOOGLE_TOKEN
 // Create a project, then generate an API key (browser key) https://console.developers.google.com/apis/credentials
 // Enable the APIs you wish to use https://console.developers.google.com/apis/enabled
 // (provide the list of APIs needed to be eneabled):
-// - URL shortener
-// - Google Search
+// - Calendar API
+// - Cloud Vision API
+// - CustomSearch API
+// - Drive API
 // - Knowledge Graph Search API 
+// - Prediction API
+// - Translate API
+// - URL shortener
 // - YouTube Data API v3
 
 var urlshortener = google.urlshortener({

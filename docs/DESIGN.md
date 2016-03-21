@@ -23,6 +23,7 @@ This outlines the abstract design for AIVA. The A.I. components are:
 - basic NLP extraction from Textblob: sentiment, POS etc. so people can still use it. (don't really need textblob if wordnet got this covered)
 - parse human input into `intent` and `args`. If `intent` is a registered function, direct to `Fn` (registered functions) and execute with `args`; else, `intent` is KB-access, direct it to 3 KB types below.
 - tools: [node word2vec](https://github.com/Planeshifter/node-word2vec), [node natural with wordnet and more](https://github.com/NaturalNode/natural), [wordpos](https://github.com/moos/wordpos), for parsing, canonicalization, normal NLP stuff.
+- use DNN and centralized input and entities (like wit.ai) to train a consistent list of `intents` and `args`.
 
 
 #### KB

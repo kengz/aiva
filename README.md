@@ -66,12 +66,12 @@ Design of AIVA can be found at [DESIGN.md](./docs/DESIGN.md).
 
 
 ## Todo
-- docs on full feature list, so devs know what they can use
 - release the simplest version of AIVA with simpler AI modules (google graph API and conceptnet, imagenet: slack might be able to take picture for bot). Full NLP and KB will take longer to complete.
 - warning if forever restarts
 - store cron in KB for restoration
 - user preference: weather, last food order etc, extensible
 - multi-platform tests: test switching out the adapter to Telegram/IRC, centralize brain recognize the same user across different platforms, and you can seamlessly pick up your bot from any platform - this will be the "one bot to rule it all" as you can find it anywhere and it will know this is the same person.
+- docs on full feature list, so devs know what they can use
 - add back branches:only:master to .travis.yml
 - update package.json name, private, url, license
 
