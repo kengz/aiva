@@ -1,7 +1,33 @@
 # Changelog and Todo
 
 
-## Todo
+## AI Implementation outline
+
+- Further simplify, remove rubbish
+- Remove Textblob: heavy files, encoding problem
+- Write all google API function templates
+- Google user auth
+- Google brain (KB 1) with knowledge graph n search
+- Google translate wrapper
+- Attach KB source to answers
+- KB fallback: 3,2,1, if local fail, fallback to conceptnet, if still fail, fallback to google the most generic
+- ConceptNet parse into nodes and edges for query
+- ConceptNet getURI prechain to 3 methods
+- ConceptNet KB answer simple or existing sample text or graph language
+- Ultimate RNN train QnA by seq2seq
+- intent args identifier canonicalization by node NLP wordnet
+- RNN train intent args parsing
+- KB 3 canonicalization for node and edge keys
+- KB 3 local memory with auto structure and streamlined interface
+- KB 3 self inquiry and learning mechanism
+- functional hash reinsert function with partial args for inquire if incomplete
+- developers of any lang just do: tell the needed args JSON keys, since it's also needed for hash storage.
+- Pretrained RNN model loadning for NPM (any other pretrained model too)
+- Basic NLP stuff like sentiment n emotion. NodeNatural and Alchemy API wrapper
+- Advance: online general learning
+
+
+## General Todo
 
 - release the simplest version of AIVA with simpler AI modules (google graph API and conceptnet, imagenet: slack might be able to take picture for bot). Full NLP and KB will take longer to complete.
 - warning if forever restarts
