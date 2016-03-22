@@ -30,8 +30,6 @@ install:
   - npm install
   - sudo pip3 install -U setuptools
   - sudo pip3 install -U virtualenvwrapper
-  - sudo pip3 install -U textblob
-  - sudo python3 -m textblob.download_corpora
   - sudo pip3 install -r requirements.txt
   - bundle install
 cache:
