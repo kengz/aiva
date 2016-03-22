@@ -1,7 +1,7 @@
 # Changelog and Todo
 
 
-## AI Implementation outline
+## AI Roadmap Todo
 
 - Further simplify, remove rubbish
 - Remove Textblob: heavy files, encoding problem
