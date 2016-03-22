@@ -8,6 +8,7 @@
     "gi": "bash bin/install; npm i; mkdir -p ./logs; npm run pip3; npm run bundler",
     "shell": "neo4j start; env $(cat .env bin/.keys-devaiva) NODE_ENV=development bin/hubot",
     "test": "istanbul cover ./node_modules/.bin/_mocha",
+    "posttest": "rm -rf .hubot_history brain.json Gemfile.lock",
     "start": "npm run deploy",
     "stop": "forever stopall",
     "deploy": "if [ $npm_config_bot ]; then bot=$npm_config_bot; echo Bot is SET to: $bot; else bot=aiva; echo Bot is DEFAULTED to $bot; fi; DEPLOY=.keys-$bot forever start --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a -p ./logs -l $bot.log index.js",
