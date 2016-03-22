@@ -6,6 +6,7 @@
 - Further simplify, remove rubbish
 - Remove Textblob: heavy files, encoding problem
 - Write all google API function templates
+- plugin indico, alchemy to expose for developers. intructions to sign up for keys too
 - Google user auth
 - Google brain (KB 1) with knowledge graph n search
 - Google translate wrapper
