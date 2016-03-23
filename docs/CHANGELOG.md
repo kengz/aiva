@@ -3,14 +3,12 @@
 
 ## AI Roadmap Todo
 
-- ~Further simplify, remove rubbish
-- ~Remove Textblob: heavy files, encoding problem
-- ~Write all google API function templates
-- (delay to last) Google user auth
-- plugin nlp, indico, alchemy to expose for developers. intructions to sign up for keys too
+- plugin Indico expose for developers. intructions to sign up for keys too
+- plugin Alchemy expose for developers. intructions to sign up for keys too
 - Google brain (KB 1) with knowledge graph n search, wrap
-- Google translate wrapper
+- Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
 - Attach KB source to answers
+- (delay to last) Google user auth
 - need basic NLP for basic brain access: entities/concept, or object-verb-subject
 - KB fallback: 3,2,1, if local fail, fallback to conceptnet, if still fail, fallback to google the most generic
 - ConceptNet parse into nodes and edges for query
@@ -25,7 +23,6 @@
 - functional hash reinsert function with partial args for inquire if incomplete
 - developers of any lang just do: tell the needed args JSON keys, since it's also needed for hash storage.
 - Pretrained RNN model loadning for NPM (any other pretrained model too)
-- Basic NLP stuff like sentiment n emotion. NodeNatural and Alchemy API wrapper
 - Advance: online general learning
 
 
@@ -43,7 +40,7 @@
 
 ## Changelog
 
-`Jan 2016`
+`Jan~March 2016`
 
 - save logs locally in `logs/`.
 - start brain `neo4j` server on spawn, stop on death.
@@ -72,4 +69,6 @@
 - standard: `<comment-symbol> !` to note future implementation or fixes
 - add `global.io.{reply, send, say}` for hubot replies from io. Use as `io.send(res)`; see `scripts/translate.js` for example.
 - unify clients: one for each language.
-- Different port to simultaneous use of production and dev/testing. Port 8080 for production, port 9090 for development. Set TEST_PORT in .env
+- Different port to simultaneous use of production and dev/testing. Port 8080 for production, port 9090 for development. Set TEST_PORT in `.env`
+- Remove `Textblob`, due to heavy files, bad py encoding
+- add `lib/js/nlp.js` to export basic NLP tasks based on Princeton WordNet, NodeNatural, wordpos. With basic examples
