@@ -3,14 +3,15 @@
 
 ## AI Roadmap Todo
 
-- Further simplify, remove rubbish
-- Remove Textblob: heavy files, encoding problem
-- Write all google API function templates
-- plugin indico, alchemy to expose for developers. intructions to sign up for keys too
-- Google user auth
-- Google brain (KB 1) with knowledge graph n search
+- ~Further simplify, remove rubbish
+- ~Remove Textblob: heavy files, encoding problem
+- ~Write all google API function templates
+- (delay to last) Google user auth
+- plugin nlp, indico, alchemy to expose for developers. intructions to sign up for keys too
+- Google brain (KB 1) with knowledge graph n search, wrap
 - Google translate wrapper
 - Attach KB source to answers
+- need basic NLP for basic brain access: entities/concept, or object-verb-subject
 - KB fallback: 3,2,1, if local fail, fallback to conceptnet, if still fail, fallback to google the most generic
 - ConceptNet parse into nodes and edges for query
 - ConceptNet getURI prechain to 3 methods
