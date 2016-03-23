@@ -1,5 +1,6 @@
-HUBOT_SLACK_TOKEN=<meh>
-GOOGLE_API_KEY=<meh>
-GOOGLE_OAUTH_CLIENT_ID=<meh>
-GOOGLE_OAUTH_CLIENT_SECRET=<meh>
+HUBOT_SLACK_TOKEN=<add custom slack bot https://slack.com/signin?redir=%2Fservices%2Fnew%2Fbot>
+GOOGLE_API_KEY=<guide https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
+GOOGLE_OAUTH_CLIENT_ID=<guide https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
+GOOGLE_OAUTH_CLIENT_SECRET=<guide https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
+INDICO_API_KEY=<get from https://indico.io/register>
 ADMINS=<meh>
