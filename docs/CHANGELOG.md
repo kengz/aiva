@@ -3,8 +3,9 @@
 
 ## AI Roadmap Todo
 
-- plugin Indico expose for developers. intructions to sign up for keys too
 - plugin Alchemy expose for developers. intructions to sign up for keys too
+- pluging ibm watson sdk too, includes alchemy
+- plugin Indico expose for developers. intructions to sign up for keys too
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
 - Attach KB source to answers
@@ -14,7 +15,7 @@
 - ConceptNet parse into nodes and edges for query
 - ConceptNet getURI prechain to 3 methods
 - ConceptNet KB answer simple or existing sample text or graph language
-- Ultimate RNN train QnA by seq2seq
+- Ultimate RNN train QnA by seq2seq: https://github.com/farizrahman4u/seq2seq, https://github.com/nicolas-ivanov/tf_seq2seq_chatbot, https://github.com/adamchanson/seq2seq
 - intent args identifier canonicalization by node NLP wordnet
 - RNN train intent args parsing
 - KB 3 canonicalization for node and edge keys
