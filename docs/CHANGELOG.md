@@ -3,7 +3,6 @@
 
 ## AI Roadmap Todo
 
-- perhaps nest all ais under folder `js/ai`, then `js/ai_import` imports all, so u can call via `ai.watson, ai.indico, ...`
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
 - Attach KB source to answers
