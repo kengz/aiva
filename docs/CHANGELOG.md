@@ -25,6 +25,7 @@
 - developers of any lang just do: tell the needed args JSON keys, since it's also needed for hash storage.
 - Pretrained RNN model loadning for NPM (any other pretrained model too)
 - Advance: online general learning
+- ohh hello there https://cloud.google.com/products/machine-learning/, https://cloud.google.com/ml/
 
 
 ## General Todo
