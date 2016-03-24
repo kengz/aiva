@@ -3,8 +3,6 @@
 
 ## AI Roadmap Todo
 
-- plugin Alchemy expose for developers. intructions to sign up for keys too
-- pluging ibm watson sdk too, includes alchemy
 - plugin Indico expose for developers. intructions to sign up for keys too
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
@@ -74,3 +72,5 @@
 - Different port to simultaneous use of production and dev/testing. Port 8080 for production, port 9090 for development. Set TEST_PORT in `.env`
 - Remove `Textblob`, due to heavy files, bad py encoding
 - add `lib/js/nlp.js` to export basic NLP tasks based on Princeton WordNet, NodeNatural, wordpos. With basic examples
+- make it easy to import .env vars with the index.js exported method
+- plugin IBM Watson SDK ready to use (tokens set in .keys-), includes alchemyAPI
