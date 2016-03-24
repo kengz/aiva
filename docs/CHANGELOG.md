@@ -3,7 +3,7 @@
 
 ## AI Roadmap Todo
 
-- plugin Indico expose for developers. intructions to sign up for keys too
+- perhaps nest all ais under folder `js/ai`, then `js/ai_import` imports all, so u can call via `ai.watson, ai.indico, ...`
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
 - Attach KB source to answers
@@ -73,4 +73,5 @@
 - Remove `Textblob`, due to heavy files, bad py encoding
 - add `lib/js/nlp.js` to export basic NLP tasks based on Princeton WordNet, NodeNatural, wordpos. With basic examples
 - make it easy to import .env vars with the index.js exported method
-- plugin IBM Watson SDK ready to use (tokens set in .keys-), includes alchemyAPI
+- add IBM Watson ready to use, includes alchemyAPI. (tokens in .keys-<bot>)
+- add indico.io ready to use. (tokens in .keys-<bot>)
