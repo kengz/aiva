@@ -50,7 +50,7 @@ sudo apt-get -y install virtualbox-dkms
 fi;
 
 
-cd ~/Documents/peppurr
+cd ~/Documents/aiva
 vagrant init travis-ci/ci-minimal-trusty64
 
 echo "
@@ -85,11 +85,11 @@ export JAVA_HOME=$jdkpath" >> ~/.bashrc;
 fi
 
 source ~/.bashrc
-git clone https://kengz:<token>@github.com/kengz/peppurr.git
+git clone https://github.com/kengz/aiva.git
 mv 
-mkdir -p build/kengz/peppurr
-mv peppurr/ build/kengz/
-cd build/kengz/peppurr/
+mkdir -p build/kengz/aiva
+mv aiva/ build/kengz/
+cd build/kengz/aiva/
 touch trav.sh
 <Copy and paste the trav.sh from earlier after commenting out the git clone, git checkout lines, then run it.>
 sudo bash trav.sh
