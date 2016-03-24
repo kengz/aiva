@@ -5,6 +5,15 @@ AIVA is created as an A.I. general purpose interface for developers; it has an N
 You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a frontend website. For example, I can write a credit card benefit finder, then plug it in to AIVA by writing a simple interface script.
 
 
+
+## AI
+
+#### Docs links
+#### Setup
+#### Usage
+#### Tips: what's good for what, pricing, etc.
+
+
 ## Polyglot environment
 
 That being said, this is the guide to plugging in your modules, written in any language, to AIVA. The central piece is `Socket.io`, which exposes a server for generic applications.
