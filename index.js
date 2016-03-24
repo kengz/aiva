@@ -29,7 +29,7 @@ function setEnv(defaultKey) {
 /* istanbul ignore next */
 if (require.main === module) {
   // call setEnv with a default key
-  setEnv('.keys-aiva');
+  setEnv();
   
   // child processes by spawn
   var children = [];
