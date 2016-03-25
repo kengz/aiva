@@ -14,7 +14,7 @@ try {
   if (process.env.TRAVIS) {
     console.log("Using env vars from Travis if exist.")
   } else {
-    console.log("Please provide your .env file.")
+    console.log("No .env and not in Travis, please provide your .env file.")
     process.exit(1)
   }
 }

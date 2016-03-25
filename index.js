@@ -21,6 +21,7 @@ function setEnv(defaultKey) {
     env(__dirname + '/bin/' + process.env.DEPLOY);
   } catch (e) {
     console.log(e)
+    console.log('index.js quitting.')
     process.exit(1)
   }
 }
