@@ -1,8 +1,10 @@
-# AIVA [![Build Status](https://travis-ci.org/kengz/jarvis.svg?branch=aiva-v3)](https://travis-ci.org/kengz/jarvis) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
+# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
 *Previously known as JARVIS.*
 
-**WARNING**: The old JARVIS (current master branch) will be nuked by next Monday (Mar 28 2016). If you wish to use it, checkout to release tag [v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
+**WARNING**: The old JARVIS (current master branch) will be nuked by next Thursday (Mar 31 2016). If you need it, `git checkout` to release tag [v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
+
+**Final rush**: A few people asked me how's the project going? AIVA v3 will be released 1 April 2016. Right now I'm packing in some AI/ML capabilities, building the first iteration of the brain, and streamlining the system for dev usage.
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
