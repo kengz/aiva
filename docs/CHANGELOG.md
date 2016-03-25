@@ -3,8 +3,12 @@
 
 ## AI Roadmap Todo
 
-- Google brain (KB 1) with knowledge graph n search, wrap
+When u put these tools so close together u start to see unpreceedented ways to combine them
+
 - Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
+- skflow how could I forget about that
+- skflow pretrained locally, then save model, use for prediction thru python socket.
+- Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
 - (delay to last) Google user auth
 - need basic NLP for basic brain access: entities/concept, or object-verb-subject
