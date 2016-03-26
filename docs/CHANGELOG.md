@@ -5,8 +5,7 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
-- Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
-- skflow how could I forget about that
+- skflow how could I forget about that. note, SKflow is in TF now.
 - skflow pretrained locally, then save model, use for prediction thru python socket.
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
@@ -31,12 +30,14 @@ When u put these tools so close together u start to see unpreceedented ways to c
 
 ## General Todo
 
+- fix the `/undefined` file keeps getting generated
 - release the simplest version of AIVA with simpler AI modules (google graph API and conceptnet, imagenet: slack might be able to take picture for bot). Full NLP and KB will take longer to complete.
 - warning if forever restarts
 - store cron in KB for restoration
 - user preference: weather, last food order etc, extensible
 - multi-platform tests: test switching out the adapter to Telegram/IRC, centralize brain recognize the same user across different platforms, and you can seamlessly pick up your bot from any platform - this will be the "one bot to rule it all" as you can find it anywhere and it will know this is the same person.
 - docs on full feature list, so devs know what they can use
+- FUCK Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
 - add back branches:only:master to .travis.yml
 - update package.json name, private, url, license
 
