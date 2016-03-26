@@ -5,8 +5,8 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
-- skflow how could I forget about that. note, SKflow is in TF now.
 - skflow pretrained locally, then save model, use for prediction thru python socket.
+- demo of ai working together
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
 - (delay to last) Google user auth
@@ -26,7 +26,7 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - Pretrained RNN model loadning for NPM (any other pretrained model too)
 - Advance: online general learning
 - ohh hello there https://cloud.google.com/products/machine-learning/, https://cloud.google.com/ml/
-
+- old things: help menu; geocoding, time, weather; reminder, todo, google search, chatbot?
 
 ## General Todo
 
@@ -79,3 +79,5 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - make it easy to import .env vars with the index.js exported method
 - add IBM Watson ready to use, includes alchemyAPI. (tokens in .keys-<bot>)
 - add indico.io ready to use. (tokens in .keys-<bot>)
+- add tensorflow and skflow in `bin/install`
+- add skflow example
