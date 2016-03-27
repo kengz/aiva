@@ -11,6 +11,8 @@ pyenv/
 __pycache__/
 *.py[cod]
 *$py.class
+models/
+data/
 
 # Ruby
 *.gem

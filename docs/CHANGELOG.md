@@ -5,6 +5,7 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
+- simple locally trained classifier on csv import, train n score, save model, load model, use
 - skflow pretrained locally, then save model, use for prediction thru python socket.
 - demo of ai working together
 - Google brain (KB 1) with knowledge graph n search, wrap

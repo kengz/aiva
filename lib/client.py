@@ -36,45 +36,52 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 # Hack ends
 ##########################################
 from py import *
+from py.ai import *
 
 print('import py scripts from client.py')
 g = globals()
 
-# 1. Register the socket.io client
-##########################################
-PORT = os.environ.get('PORT', '8080')
-client = SocketIO('localhost', int(PORT))
-# the id of this script for client registration
-id = 'py'
-# first join for serialization
-client.emit('join', id)
-client.on('disconnect', client.disconnect)
+# # 1. Register the socket.io client
+# ##########################################
+# PORT = os.environ.get('PORT', '8080')
+# client = SocketIO('localhost', int(PORT))
+# # the id of this script for client registration
+# id = 'py'
+# # first join for serialization
+# client.emit('join', id)
+# client.on('disconnect', client.disconnect)
 
 
-# 2. Write module methods and register as handlers
-##########################################
-# done in your module scripts
+# # 2. Write module methods and register as handlers
+# ##########################################
+# # done in your module scripts
 
 
-# 3. listener to handle incoming payload.
-##########################################
+# # 3. listener to handle incoming payload.
+# ##########################################
 
-# The handle will call handlers using intent = method name
-def handle(msg):
-  to = msg.get('to') # the target module, e.g. hello
-  intent = msg.get('intent') # the module's function, e.g. sayHi()
-  if to is not None and intent is not None:
-    # call the function, get reply
-    try:
-      reply = getattr(g[to], intent)(msg)
-      # if it should reply, send payload to target <to>
-      if reply.get('to') is not None:
-        client.emit('pass', reply)
-    except:
-      print('py handle fails.')
+# # The handle will call handlers using intent = method name
+# def handle(msg):
+#   to = msg.get('to') # the target module, e.g. hello
+#   intent = msg.get('intent') # the module's function, e.g. sayHi()
+#   if to is not None and intent is not None:
+#     # call the function, get reply
+#     try:
+#       reply = getattr(g[to], intent)(msg)
+#       # if it should reply, send payload to target <to>
+#       if reply.get('to') is not None:
+#         client.emit('pass', reply)
+#     except:
+#       print('py handle fails.')
     
-# add listener
-client.on('take', handle)
+# # add listener
+# client.on('take', handle)
 
-# keep-alive
-client.wait()
+# # keep-alive
+# client.wait()
+
+# print(g)
+# print(g['hello'])
+# print(g['dnn_1_deploy'])
+g['dnn_1_deploy'].accuracy()
+g['dnn_1_deploy'].predict([ 5.1, 3.5, 1.4, 0.2])
