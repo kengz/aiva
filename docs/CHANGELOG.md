@@ -7,6 +7,7 @@ When u put these tools so close together u start to see unpreceedented ways to c
 
 - simple locally trained classifier on csv import, train n score, save model, load model, use
 - skflow pretrained locally, then save model, use for prediction thru python socket.
+- skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
@@ -16,7 +17,7 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - ConceptNet parse into nodes and edges for query
 - ConceptNet getURI prechain to 3 methods
 - ConceptNet KB answer simple or existing sample text or graph language
-- Ultimate RNN train QnA by seq2seq: https://github.com/farizrahman4u/seq2seq, https://github.com/nicolas-ivanov/tf_seq2seq_chatbot, https://github.com/adamchanson/seq2seq
+- Ultimate RNN train QnA by seq2seq: https://github.com/farizrahman4u/seq2seq, https://github.com/nicolas-ivanov/tf_seq2seq_chatbot, https://github.com/adamchanson/seq2seq, skdlow has https://github.com/tensorflow/skflow/blob/master/skflow/models.py#L133
 - intent args identifier canonicalization by node NLP wordnet
 - RNN train intent args parsing
 - KB 3 canonicalization for node and edge keys
