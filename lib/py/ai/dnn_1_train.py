@@ -1,21 +1,34 @@
-from sklearn import datasets, metrics, cross_validation
+# *_train.py is for offline training, shall not be run during deployment
+import numpy as np
+from ai_lib import * # preprocess helpers
+from sklearn import pipeline, cross_validation, metrics
+import pandas
 import skflow
-import os.path
 
 # reliable absolute path when this module is called elsewhere
-model_path = os.path.join(os.path.dirname(__file__), 'models/iris_dnn')
+data_path = preprocess.abspath('data/titanic.csv')
+model_path = preprocess.abspath('models/titanic_dnn')
 
-# Load the dataset.
-iris = datasets.load_iris()
-X_train, X_test, y_train, y_test = cross_validation.train_test_split(iris.data, iris.target,
-    test_size=0.2, random_state=42)
+# load and clean the dataset
+train = pandas.read_csv(data_path)
+
+X, y = train[['Sex', 'Age', 'SibSp', 'Fare']], train['Survived']
+# chain: fillna for 'Sex' with 'NA', the rest with 0
+X = X.fillna({'Sex': 'NA'}).fillna(0)
+
+# Label Encoder to encode string entries into integers
+le_X = preprocess.MultiColumnLabelEncoder(columns = ['Sex'])
+X = le_X.fit_transform(X)
+
+# random-split into train (80%), test data (20%)
+X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Build 3 layer DNN with 10, 20, 10 units respecitvely.
 classifier = skflow.TensorFlowDNNClassifier(
-  hidden_units=[10, 15, 10], 
-  n_classes=3, 
-  steps=800,
-  learning_rate=0.1
+  hidden_units=[10, 20, 10],
+  n_classes=2,
+  steps=500,
+  learning_rate=0.01
 )
 
 # Fit and save model for deployment.
@@ -25,4 +38,4 @@ print('Accuracy: {0:f}'.format(score))
 
 # save the model for use
 classifier.save(model_path)
-print('Model saved to models/iris_dnn')
+print('Model saved to', model_path)
