@@ -24,7 +24,6 @@ X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_
 classifier = skflow.TensorFlowEstimator.restore(model_path)
 print('Model loaded from', model_path)
 
-
 # Methods exports for usage
 
 # Get the accuracy of the current model
@@ -34,16 +33,27 @@ def accuracy():
 
 # Predict X using the loaded model
 def predict(X):
-  npX = np.array(X)
-  # increase depth if not already dim=2
-  npX = (np.expand_dims(npX, axis=0) if npX.ndim == 1 else npX)
+  # ensure ndim=2
+  npX = preprocess.np_to_ndim(X, 2)
   return classifier.predict(npX)
 
-# !TODO: waiting for resolution by skflow team https://github.com/tensorflow/skflow/issues/153
-def train(X, y):
-  # do online training and model update
-  return 'Feature to be implemented, waiting for skflow team'
-
+# Continue training the loaded model with more data
+# then save if want to
+def train(X, y, save=False):
+  # set to True just in case
+  classifier.continue_training = True
+  npX = preprocess.np_to_ndim(X, 2)
+  npy = preprocess.np_to_ndim(y, 1)
+  classifier.fit(npX, npy)
+  print('Updated model accuracy:', accuracy())
+  if save:
+    # save the model for use
+    classifier.save(model_path)
+    print('Updated model saved to', model_path)
+  else:
+    print('Updated model not saved')
+  return classifier
 
 # print(X_test[:1], predict(X_test[:1]))
 # print(accuracy())
+# train(X_test, y_test)

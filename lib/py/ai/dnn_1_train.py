@@ -12,6 +12,7 @@ def train():
   model_path = preprocess.abspath('models/titanic_dnn')
 
   # load and clean the dataset
+  # !use pipeline and features union
   df = pandas.read_csv(data_path)
   X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
   # chain: fillna for 'Sex' with 'NA', the rest with 0
@@ -23,12 +24,13 @@ def train():
   # random-split into train (80%), test data (20%)
   X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2, random_state=42)
 
-  # Build 3 layer DNN with 10, 20, 10 units respecitvely.
+  # Build 3 layer DNN with 10, 20, 10 units respecitvely. Allows to be trained continuously
   classifier = skflow.TensorFlowDNNClassifier(
     hidden_units=[10, 20, 10],
     n_classes=2,
     steps=500,
-    learning_rate=0.01
+    learning_rate=0.01,
+    continue_training=True
   )
 
   # Fit and save model for deployment.
@@ -43,4 +45,4 @@ def train():
 
 
 # Uncomment to train it
-# train()
+train()
