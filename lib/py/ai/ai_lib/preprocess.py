@@ -7,9 +7,11 @@ def abspath(path):
 
 
 # Apply sklearn.preprocessing.LabelEncoder to multiple columns
+# Used to encode string categories into integers, e.g. ['male', 'female'] -> [0, 1]
 class MultiColumnLabelEncoder:
   def __init__(self,columns = None):
     self.columns = columns # array of column names to encode
+    self.le = LabelEncoder()
 
   def fit(self,X,y=None):
     return self # not relevant here
@@ -22,12 +24,26 @@ class MultiColumnLabelEncoder:
     '''
     output = X.copy()
     if self.columns is not None:
-        for col in self.columns:
-            output[col] = LabelEncoder().fit_transform(output[col])
+      for col in self.columns:
+        output[col] = self.le.fit_transform(output[col])
     else:
-        for colname,col in output.iteritems():
-            output[colname] = LabelEncoder().fit_transform(col)
+      for colname,col in output.iteritems():
+        output[colname] = self.le.fit_transform(col)
     return output
 
   def fit_transform(self,X,y=None):
     return self.fit(X,y).transform(X)
+
+  def inverse_transform(self,X):
+    '''
+    Inverse of transform() above, using the self.le LabelEncoder of this class instance.
+    '''
+    output = X.copy()
+    if self.columns is not None:
+      for col in self.columns:
+        output[col] = self.le.inverse_transform(output[col])
+    else:
+      for colname,col in output.iteritems():
+        output[colname] = self.le.inverse_transform(col)
+    return output
+
