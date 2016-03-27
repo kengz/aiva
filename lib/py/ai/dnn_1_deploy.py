@@ -1,30 +1,17 @@
 import numpy as np
-from ai_lib import preprocess
+from ai_lib import *
 from sklearn import cross_validation, metrics
 import pandas
 import skflow
 
 # reliable absolute path when this module is called elsewhere
-data_path = preprocess.abspath('data/titanic.csv')
 model_path = preprocess.abspath('models/titanic_dnn')
 
-# load the dataset
-df = pandas.read_csv(data_path)
-X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
-# chain: fillna for 'Sex' with 'NA', the rest with 0
-X = X.fillna({'Sex': 'NA'}).fillna(0)
-# Label Encoder to encode string entries into integers
-le_X = preprocess.MultiColumnLabelEncoder(columns = ['Sex'])
-X = le_X.fit_transform(X)
-
-# random-split into train (80%), test data (20%)
-X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2, random_state=42)
-
-# model
+# load the saved model
 classifier = skflow.TensorFlowEstimator.restore(model_path)
 print('Model loaded from', model_path)
 
-# Methods exports for usage
+# export methods for usage:
 
 # Get the accuracy of the current model
 def accuracy():
@@ -54,6 +41,24 @@ def train(X, y, save=False):
     print('Updated model not saved')
   return classifier
 
+
+
+# # Example usage
+# # load the dataset to test prediction
+# data_path = preprocess.abspath('data/titanic.csv')
+# df = pandas.read_csv(data_path)
+# X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
+# # chain: fillna for 'Sex' with 'NA', the rest with 0
+# X = X.fillna({'Sex': 'NA'}).fillna(0)
+# # Label Encoder to encode string entries into integers
+# le_X = preprocess.MultiColumnLabelEncoder(columns=['Sex'])
+# X = le_X.fit_transform(X)
+# # random-split into train (80%), test data (20%)
+# X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2, random_state=42)
+
+# # make a prediction
 # print(X_test[:1], predict(X_test[:1]))
+# # current model accuracy, about 0.74
 # print(accuracy())
-# train(X_test, y_test)
+# # cheating: train more on test data, accuracy should increase, about 0.76
+# train(X_test, y_test, save=False)

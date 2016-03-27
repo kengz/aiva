@@ -18,7 +18,7 @@ def train():
   # chain: fillna for 'Sex' with 'NA', the rest with 0
   X = X.fillna({'Sex': 'NA'}).fillna(0)
   # Label Encoder to encode string entries into integers
-  le_X = preprocess.MultiColumnLabelEncoder(columns = ['Sex'])
+  le_X = preprocess.MultiColumnLabelEncoder(columns=['Sex'])
   X = le_X.fit_transform(X)
 
   # random-split into train (80%), test data (20%)
@@ -45,4 +45,4 @@ def train():
 
 
 # Uncomment to train it
-train()
+# train()
