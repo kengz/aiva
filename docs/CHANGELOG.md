@@ -8,6 +8,7 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - simple locally trained classifier on csv import, train n score, save model, load model, use
 - skflow pretrained locally, then save model, use for prediction thru python socket.
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
+- skflow online training: separate script `*_learn.py`, take X, y while deployed to update trained n loaded model
 - demo of ai working together
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
