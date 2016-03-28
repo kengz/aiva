@@ -32,6 +32,10 @@ install:
   - npm install
   - sudo pip3 install -U setuptools
   - sudo pip3 install -U virtualenvwrapper
+  - sudo pip3 install -U https://storage.googleapis.com/tensorflow/mac/tensorflow-0.7.1-cp35-none-any.whl
+  - sudo pip3 install -U scikit-learn
+  - sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
+  - sudo pip3 install -U pandas
   - sudo pip3 install -r requirements.txt
   - bundle install
 cache:

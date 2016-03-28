@@ -5,10 +5,8 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
-- simple locally trained classifier on csv import, train n score, save model, load model, use
-- skflow pretrained locally, then save model, use for prediction thru python socket.
+- socket py interface for dnn
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
-- skflow online training: separate script `*_learn.py`, take X, y while deployed to update trained n loaded model
 - demo of ai working together
 - Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
@@ -83,4 +81,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - add IBM Watson ready to use, includes alchemyAPI. (tokens in .keys-<bot>)
 - add indico.io ready to use. (tokens in .keys-<bot>)
 - add tensorflow and skflow in `bin/install`
-- add skflow example
+- add DNN example: pretrained, saved, loaded example in `py/ai` with `skflow`
