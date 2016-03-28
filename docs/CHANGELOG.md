@@ -5,6 +5,8 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
+- unit test need to wait till socket accepts 3 clients before carrying on
+- node v4 cant find cheerio on travis
 - socket py interface for dnn
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
