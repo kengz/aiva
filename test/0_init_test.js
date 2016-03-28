@@ -15,7 +15,7 @@ before(function() {
     global.room = helper.createRoom({ name: global.DEFAULT_ROOM });
     // set the brain to test/asset.js's
     _.set(this.room.robot, 'brain.data.users', users)
-    yield delayer(15)
+    yield delayer(20)
   })
 })
 
