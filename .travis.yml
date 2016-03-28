@@ -34,6 +34,7 @@ before_install:
   - neo4j-community-2.3.2/bin/neo4j start
   # temp fix for wordpos on node v4.x failing to install wordnet-db first
   - npm i wordnet-db
+  - npm i cheerio
 install:
   - npm install
   - sudo pip3 install -U setuptools
