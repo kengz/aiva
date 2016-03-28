@@ -5,8 +5,6 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
-- unit test need to wait till socket accepts 3 clients before carrying on
-- node v4 cant find cheerio on travis
 - socket py interface for dnn
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
@@ -84,3 +82,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - add indico.io ready to use. (tokens in .keys-<bot>)
 - add tensorflow and skflow in `bin/install`
 - add DNN example: pretrained, saved, loaded example in `py/ai` with `skflow`
+- unit test now waits for all clients to join socketio server before starting tests

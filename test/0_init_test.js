@@ -3,6 +3,25 @@ var _ = require('lomath')
 var spawnSync = require('child_process').spawnSync;
 // emulate full hubot init
 var helper = new Helper('../scripts/')
+var clientCount = 3
+
+// wait for n number of clients to join global.io
+function waitForClients() {
+  var count = clientCount;
+  console.log('waiting for', count, 'clients')
+  return new Promise(function(resolve, reject) {
+    global.io.sockets.on('connection', function(socket) {
+      socket.on('join', function(id) {
+        count--;
+        if (count == 0) {
+          console.log('all', clientCount, 'clients have joined, start tests')
+          console.log('================================================================================')
+          resolve()
+        }
+      })
+    })
+  })
+}
 
 before(function() {
   console.log('Starting Neo4j:')
@@ -13,9 +32,10 @@ before(function() {
 
     // emulate full hubot initialization, set to global.room for use
     global.room = helper.createRoom({ name: global.DEFAULT_ROOM });
+
     // set the brain to test/asset.js's
     _.set(this.room.robot, 'brain.data.users', users)
-    yield delayer(20)
+    yield waitForClients()
   })
 })
 
