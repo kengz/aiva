@@ -33,13 +33,13 @@ def recv_packet_unicode(self):
 # Set the new recv_packet_unicode method
 WebsocketTransport.recv_packet = recv_packet_unicode
 
-# Hack ends
-##########################################
-from py import *
-from py.ai import *
+# # Hack ends
+# ##########################################
+# from py import *
+# from py.ai import *
 
-print('import py scripts from client.py')
-g = globals()
+# print('import py scripts from client.py')
+# g = globals()
 
 # # 1. Register the socket.io client
 # ##########################################
@@ -83,5 +83,5 @@ g = globals()
 # print(g)
 # print(g['hello'])
 # print(g['dnn_1_deploy'])
-g['dnn_1_deploy'].accuracy()
-g['dnn_1_deploy'].predict([ 5.1, 3.5, 1.4, 0.2])
+# g['dnn_1_deploy'].accuracy()
+# g['dnn_1_deploy'].predict([ 5.1, 3.5, 1.4, 0.2])

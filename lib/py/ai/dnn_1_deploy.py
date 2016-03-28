@@ -6,6 +6,7 @@ import skflow
 
 # reliable absolute path when this module is called elsewhere
 model_path = preprocess.abspath('models/titanic_dnn')
+print('model_path', model_path)
 
 # load the saved model
 classifier = skflow.TensorFlowEstimator.restore(model_path)
