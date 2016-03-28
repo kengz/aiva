@@ -36,7 +36,9 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 # Hack ends
 ##########################################
 from py import *
-# from py.ai import *
+# for now don't import ai in travis
+if not os.environ.get('TRAVIS'):
+  from py.ai import *
 
 print('import py scripts from client.py')
 g = globals()
