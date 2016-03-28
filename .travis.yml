@@ -13,6 +13,10 @@ addons:
     packages:
       - g++-4.8
       - openjdk-7-jdk
+      - libatlas-dev
+      - libblas-dev
+      - liblapack-dev
+      - gfortran
       - python3-numpy
       - python3-scipy
 before_install:

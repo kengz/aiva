@@ -141,6 +141,10 @@ sudo apt-get -y install python3-pip python-dev
 sudo pip3 install -U setuptools
 sudo pip3 install -U virtualenvwrapper
 # tensorflow and skflow
+sudo apt-get -y install libatlas-dev
+sudo apt-get -y install libblas-dev
+sudo apt-get -y install liblapack-dev
+sudo apt-get -y install gfortran
 sudo apt-get -y install python3-numpy
 sudo apt-get -y install python3-scipy
 sudo pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
