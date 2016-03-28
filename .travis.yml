@@ -13,6 +13,8 @@ addons:
     packages:
       - g++-4.8
       - openjdk-7-jdk
+      - python3-numpy
+      - python3-scipy
 before_install:
   - sudo apt-get -y install python3-pip python-dev
   - python3 -V
