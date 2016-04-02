@@ -26,14 +26,30 @@ class MultiLabelEncoder:
     self.columns = columns # array of column names to encode
     self.encoders = {}
 
+  def save(self,path):
+    '''
+    Save the LabelEncoder classes, effectively this whole multiencoder to path as npz file.
+    '''
+    class_dict = {}
+    for k, v in self.encoders.items():
+      class_dict[k] = v.classes_
+    return np.savez(path, **class_dict)
+
+  def load(self,path):
+    '''
+    Restore a saved multiencoder from path using npz file, by reconstructing the LabelEncoders with the classes.
+    '''
+    npzfile = np.load(path)
+    self.encoders = {}
+    for k,v in npzfile.items():
+      le = LabelEncoder()
+      le.classes_ = v
+      self.encoders[k] = le
+    self.columns = list(self.encoders.keys())
+    return self.encoders
+
   def fit(self,X,y=None):
     return self # not relevant here
-
-  def save(path):
-    return
-
-  def load(path):
-    return
 
   def transform(self,X):
     output = X.copy()
@@ -48,9 +64,13 @@ class MultiLabelEncoder:
         le = LabelEncoder()
         output[colname] = le.fit_transform(col)
         self.encoders[colname] = le
+      self.columns = list(self.encoders.keys())
     return output
 
   def fit_transform(self,X,y=None):
+    '''
+    The transform method that is compatible with Pipeline.
+    '''
     return self.fit(X,y).transform(X)
 
   def inverse_transform(self,X):
@@ -66,5 +86,6 @@ class MultiLabelEncoder:
       for colname,col in output.iteritems():
         le = self.encoders[colname]
         output[colname] = le.inverse_transform(col)
+      self.columns = list(self.encoders.keys())
     return output
 
