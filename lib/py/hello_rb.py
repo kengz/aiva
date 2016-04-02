@@ -10,10 +10,10 @@ def passToOtherClient(msg):
   # <function body here>
   # the reply JSON payload.
   reply = {
-    'input': 'Hello from Python.',
+    'input': 'Hello from Python from js.',
     'to': 'Hello.rb',
     'intent': 'sayHi',
     'from': msg.get('from'),
-    'hash': msg.get('hash'),
+    'hash': msg.get('hash')
   }
   return reply

@@ -1,20 +1,18 @@
 # Development Guide
 
-AIVA is created as an A.I. general purpose interface for developers; it has an NLP interface and KB brain out of the box. We take care of the crucial backend and system, so *developers can focus on things that matter*.
+AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so *developers can focus on things that matter*.
 
-You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a frontend website. For example, I can write a credit card benefit finder, then plug it in to AIVA by writing a simple interface script.
-
-
-
-## AI
-
-#### Docs links
-#### Setup
-#### Usage
-#### Tips: what's good for what, pricing, etc.
+You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.
 
 
-## Development
+## Polyglot Environment
+
+Unite we stand. Each language has its strengths, for example Python for machine learning, Node.js for web. AIVA allows to let them work together using `Socket.io`. You can write in any language and add its `Socket.io` client if it doesn't already exist.
+
+For now we have `/lib/client.{js, py, rb}`. Feel free to add more through pull request!
+
+
+## Polyglot Development
 
 The interface is `js`, and it's pretty easy to write. In fact, once we finish the RNN NLP feature for auto-parsing user sentences we wouldn't even need to write an interface; at least that's the goal.
 
@@ -23,7 +21,7 @@ Development comes down to:
 - **module**: low level functions, lives in `/lib/<lang>/<module>.<lang>`
 - **interface**: high level user interface to call the module functions, lives in `/scripts/<interface>.js`
 
-It is vital to use the directory structure just stated for SocketIO to automatically handle the polyglot coordination.
+It is vital to use the directory structure just stated for socket.io to automatically handle the polyglot coordination. Since the AIVA is based on hubot, here's a interface reference: [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md).
 
 You write a module in `<lang>`, how do you call it from the interface? There are 3 cases depending on the number of `<lang>` (including `js` for interface) involved.
 
@@ -31,22 +29,26 @@ You write a module in `<lang>`, how do you call it from the interface? There are
 
 `<lang> = js`. If your module is in `js`, just `require` it directly in the interface script.
 
+You can also [load hubot scripts](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) written by others.
+
 #### Case: 2 `<lang>`s
 
 e.g. `<lang> = js, py`. 
 
 1. You write a module [`lib/py/hello.py`](./lib/py/hello.py)
-2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the `msg`
+2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON
 ```js
-// /scripts/hello_py.js
+// scripts/hello_py.js
 {
   input: 'Hello from user.', // input for module function
   to: 'hello.py', // the target module
   intent: 'sayHi' // the module function to call with input
+  // add more as needed
 }
 ```
-3. Ensure the called module function returns a reply JSON:
+3. Ensure the called module function returns a reply JSON to the interface:
 ```python
+# lib/py/hello.py
 reply = {
   'output': foo(msg.get('input')), # output to interface
   'to': msg.get('from'), # is 'client.js' for interface
@@ -58,41 +60,67 @@ reply = {
 The JSON fields above are required for their purposes. `global.gPass` used by the interface will auto-inject and `id` for reply, and a `hash` to resolve the promise for the interface.
 
 
+#### Case: 3 `<lang>`s
 
-### Unit Tests
+e.g. `<lang> = js, py, rb`
 
-*For the module, you may add any unit testing framework for the language its coded in. This repo does not include unit tests for other languages.*
+1. You write modules in `py, rb` [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
+2. Call one (`py` in this example) from the interface [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js) as described earlier.
+3. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON
+```python
+lib/py/hello_rb.py
+reply = {
+  'input': 'Hello from Python from js.', # input for rb module function
+  'to': 'Hello.rb', # the target module
+  'intent': 'sayHi', # the module function to call with input
+  'from': msg.get('from'), # pass on 'client.js'
+  'hash': msg.get('hash'), # pass on callback hash for interface
+}
+```
+4. [`lib/rb/Hello.rb`](./lib/rb/Hello.rb) ensure the final module function returns a reply JSON to the interface. *Note for auto-id, Ruby filename need to be the same as its module name, case-sensitive.*
+```rb
+# lib/rb/Hello.rb
+reply = {
+  'output' => 'Hello from Ruby.', # output to interface
+  'to' => msg['from'], # 'client.js'
+  'from' => @@id, # 'Hello.rb'
+  'hash' => msg['hash'] # callback hash for interface
+}
+```
+
+>Overall, you need only to ensure your scripts/module functions return the correct JSON `msg`, and we handle the rest for you.
+
+With such pattern, you can chain multiple function calls that bounce among different `<lang>`. Example use case: retrieve data from Ruby on Rails app, pass to Java to run algorithms, then to Python for data analysis, then back to Node.js interface.
 
 
+## Unit Tests
+
+This repo includes only unit tests for `js` **modules** and **interface** scripts using `mocha`, and runs with `npm test`. 
+
+For the module of other `<lang>`, you may add any unit testing framework of your choice.
 
 
-## Polyglot environment
+## What to use for what
 
-That being said, this is the guide to plugging in your modules, written in any language, to AIVA. The central piece is `Socket.io`, which exposes a server for generic applications.
+Some of the best/recommended libraries for things:
 
-We recognize that it's necessary to have a polyglot support for the best design, for example NLP is best done in Python. That's why we make AIVA polyglottic.
-
-Once you've written the module, you only need to do 2 things: import it to AIVA under `lib/<lang>/`, and register an **interface** for calling it.
-
-If you're writing in any language other than `node.js`, you need only take care of 1 extra thing: ensure a client of the language exists. For now we have socket.io client for `python` and `ruby`. Feel free to add more through pull request!
-
-Some of the things best done in other languages:
-
-- **NLP**: `TextBlob` (`python`), `StanfordNLP` (`java`)
-- **Deep learning**: `Tensorflow` (`python`), `Torch` (`lua`), `Theano` (`python`), `leaf` (`rust`), `deeplearning4j` (`java`)
-- literally any of the projects written in the language you love
+- **NLP**: StanfordNLP (java), TextBlob(py), Natural(js), Watson, Indico.io, Wordnet
+- **Machine learning**: scikit-learn(py), pandas(py), skflow(py), Google APIs
+- **Deep learning**: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)
+- **Knowledge/concept base**: ConceptNet, Wordnet, Google graph
+- Whatever you do best in your favorite languages
 
 
 ## Project structure
 
-AIVA ships fully functional, but it's also for developers to customize.
+What goes where:
 
 | Folder/File | Purpose |
 |:---|---|
 | `bin/` | bot keys, binaries, bash setup scripts. |
 | `lib/` | Non-interface modules and scripts, grouped by languages. Contains the core examples for extending the bot. |
-| `lib/import_clients.<ext>` | Import all scripts from their folders and integrate with socketIO for cross-language communications. |
-| `lib/io_client.js, io_server.js` | SocketIO logic for cross-language communications. |
+| `lib/import_clients.<ext>` | Import all scripts from their folders and integrate with socket.io for cross-language communications. |
+| `lib/io_client.js, io_server.js` | socket.io logic for cross-language communications. |
 | `logs` | Logs from bot for debugging and healthcheck |
 | `scripts` | The interface modules of the `lib` modules, for bot to interact with users; in `node.js`. |
 | `scripts/0_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
@@ -102,86 +130,45 @@ AIVA ships fully functional, but it's also for developers to customize.
 | `package.json` | The "scripts" portion contains commands that you can customize |
 
 
+## How it works: Socket.io logic and standard
 
-## Examples
-
-A good [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md). Note you still need simple script to interface between the user and your program in `lib/`, written in any language.
-
-#### Case 1: standalone js script
-
-1. Write the module under `lib/js`: [`lib/js/user.js`](./lib/js/user.js)
-2. Write the `js` interface script under `scripts`, import the module to use: [`scripts/whois.js`](./scripts/whois.js)
-3. Write the unit tests for both the module and the interface scripts: [`test/lib/test_user.coffee`](./test/lib/test_user.coffee), [`test/scripts/test_whois.coffee`](./test/scripts/test_whois.coffee)
-
-Refer to [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md) for writing `js` interface scripts.
-
-
-#### Case 2: standalone <lang> script
-
-You can code in any language, and Socket IO will handle the logic.
-
-1. Write the module under `lib/<lang>`: [`lib/py/hello.py`](./lib/py/hello.py)
-2. Write the `js` interface script: [`scripts/hello_py.js`](./scripts/hello_py.js)
-3. Write the unit tests for both the module and the interface scripts: [`test/scripts/test_hello_py.coffee`](./test/scripts/test_hello_py.coffee)
-
-*For the module, you may add any unit testing framework for the language its coded in. This repo does not include unit tests for other languages.*
-
-
-#### Case 3: multi-language scripts
-
-You can code and pass msgs among any languages, and Socket IO will handle the logic. This uses the global client's `global.gPass` to directly send a payload to the server from the interface script.
-
-1. Write the modules under `lib/<lang>`: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
-2. Write the `js` interface script: [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js)
-3. Write the unit tests for both the module and the interface scripts: [`test/scripts/test_hello_py_rb.coffee`](./test/scripts/test_hello_py_rb.coffee)
-
-
-#### Case 4: wrapped multi-language scripts
-
-You can code and pass msgs among any languages, and Socket IO will handle the logic. This uses the global client's `global.gPass` from within the `lib` module script to yield a simpler interface script.
-
-1. Write the modules under `lib/<lang>`: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
-2. Write the `js` interface script: [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js)
-3. Write the unit tests for both the module and the interface scripts: [`test/scripts/test_hello_py_rb.coffee`](./test/scripts/test_hello_py_rb.coffee)
-
-
-#### Sample `msg` and the required JSON keys for different purposes
+#### Sample JSON and the required keys for different purposes.
 
 >Overall, you need only to ensure your scripts/module functions return the correct JSON `msg`, and we handle the rest for you.
 
 - to call a module's function in `<lang>`: [`scripts/hello_py.js`](./scripts/hello_py.js)
 ```js
+// scripts/hello_py.js
 {
-  input: 'Hello from user.',
-  to: 'hello.py',
-  intent: 'sayHi'
+  input: 'Hello from user.', // input for module function
+  to: 'hello.py', // the target module
+  intent: 'sayHi' // the module function to call with input
+  // add more as needed
 }
 ```
 
 - to reply the payload to sender: [`lib/py/hello.py`](./lib/py/hello.py)
-```py
-{
-  'output': 'Hello from Python.',
-  'to': msg.get('from'), # the original sender 'client.js'
+```python
+# lib/py/hello.py
+reply = {
+  'output': foo(msg.get('input')), # output to interface
+  'to': msg.get('from'), # is 'client.js' for interface
   'from': id, # 'hello.py'
-  'hash': msg.get('hash'), # the js Promise hash
+  'hash': msg.get('hash') # callback hash for interface
 }
 ```
 
 - to pass on payload to other module's function: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py)
-```py
-{
-  'input': 'Hello from Python.',
-  'to': 'Hello.rb',
-  'intent': 'sayHi',
-  'from': msg.get('from'), # the original sender 'client.js'
-  'hash': msg.get('hash'), # the js Promise hash
+```python
+lib/py/hello_rb.py
+reply = {
+  'input': 'Hello from Python from js.', # input for rb module function
+  'to': 'Hello.rb', # the target module
+  'intent': 'sayHi', # the module function to call with input
+  'from': msg.get('from'), # pass on 'client.js'
+  'hash': msg.get('hash'), # pass on callback hash for interface
 }
 ```
-
-
-
-## Dev Guide: Socket.io logic (handled by us)
 
 #### Server
 There is a socket.io server that extends Hubot's Express.js server: [`lib/io_server.js`](./lib/io_server.js). All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
@@ -212,4 +199,5 @@ Overall, there are 2 ways to connect with `lib` modules:
 The msg goes through socket.io as `js(interface script) -> js(io_server.js) -> <lang>(client.<lang>) -> js(io_server.js) -> ...(can bound among different <lang> modules) -> js(client.js) -> js(interface script)`
 
 For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -> js(lib/io_server.js) -> py(client.py), call py function -> js(io_server.js) -> js(client.js) call Promise.resolve -> js(interface script) send back to user`
+
 
