@@ -26,8 +26,8 @@ before_install:
   # prune path, tmp fix for python module not found
   - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
   # reinstall bundler to fix it failing to locate gem
+  - rvm use ruby-2.2.3
   - ruby --version
-  - gem install bundler
   - bundle --version
   - ls $TRAVIS_BUILD_DIR
   # install Neo4j locally:
@@ -40,9 +40,9 @@ install:
   - npm install
   - sudo pip3 install -U setuptools
   - sudo pip3 install -U virtualenvwrapper
-  - sudo pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
-  - sudo pip3 install -U scikit-learn
-  - sudo pip3 install -U git+git://github.com/tensorflow/skflow.git
+  - sudo pip3 install -qU https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
+  - sudo pip3 install -qU scikit-learn
+  - sudo pip3 install -qU git+git://github.com/tensorflow/skflow.git
   - sudo pip3 install -U pandas
   - sudo pip3 install -r requirements.txt
   - bundle install
@@ -54,6 +54,8 @@ cache:
     - neo4j-community-2.3.2
     - node_modules
     - pyenv
+    - /usr/lib
+    - /usr/local/bin
 env:
   global:
     - CXX=g++-4.8
