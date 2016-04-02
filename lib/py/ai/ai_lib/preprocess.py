@@ -21,27 +21,33 @@ def np_to_ndim(T, d):
 
 # Apply sklearn.preprocessing.LabelEncoder to multiple columns
 # Used to encode string categories into integers, e.g. ['male', 'female'] -> [0, 1]
-class MultiColumnLabelEncoder:
+class MultiLabelEncoder:
   def __init__(self,columns = None):
     self.columns = columns # array of column names to encode
-    self.le = LabelEncoder()
+    self.encoders = {}
 
   def fit(self,X,y=None):
     return self # not relevant here
 
+  def save(path):
+    return
+
+  def load(path):
+    return
+
   def transform(self,X):
-    '''
-    Transforms columns of X specified in self.columns using
-    LabelEncoder(). If no columns specified, transforms all
-    columns in X.
-    '''
     output = X.copy()
     if self.columns is not None:
-      for col in self.columns:
-        output[col] = self.le.fit_transform(output[col])
+      for colname in self.columns:
+        print(colname)
+        le = LabelEncoder()
+        output[colname] = le.fit_transform(output[colname])
+        self.encoders[colname] = le
     else:
       for colname,col in output.iteritems():
-        output[colname] = self.le.fit_transform(col)
+        le = LabelEncoder()
+        output[colname] = le.fit_transform(col)
+        self.encoders[colname] = le
     return output
 
   def fit_transform(self,X,y=None):
@@ -53,10 +59,12 @@ class MultiColumnLabelEncoder:
     '''
     output = X.copy()
     if self.columns is not None:
-      for col in self.columns:
-        output[col] = self.le.inverse_transform(output[col])
+      for colname in self.columns:
+        le = self.encoders[colname]
+        output[colname] = le.inverse_transform(output[colname])
     else:
       for colname,col in output.iteritems():
-        output[colname] = self.le.inverse_transform(col)
+        le = self.encoders[colname]
+        output[colname] = le.inverse_transform(col)
     return output
 
