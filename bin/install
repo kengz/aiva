@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Fail on the first error
+# Fail on the first error; killable by SIGINT
 set -e
+trap "exit" INT
 
 echo "
 ================================================

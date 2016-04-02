@@ -22,7 +22,7 @@ Clone this repo:
 git clone <the_git_url>
 ```
 
-Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digital Ocean](https://www.digitalocean.com), and you can use this [setup script](https://github.com/kengz/mac_setup). Otherwise, check [`bin/install`](./bin/install) for system dependencies.
+Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digital Ocean](https://www.digitalocean.com), with this automatic [setup script](https://github.com/kengz/mac_setup). Optionally for manual setup, see [Dependencies](#dependencies).
 
 
 
@@ -32,7 +32,7 @@ Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digi
 - **install dependencies**: `npm run gi`
 - **setup keys**: update `.env`, `bin/.key-<bot-name>`, replace `aiva` in `package.json` if you prefer different name
 
-Check [**Setup Helps**](#setup-helps) for tips.
+Check [**Setup tips**](#setup-tips) for tips.
 
 #### <a name="run"></a>Run
 - **run**: `npm start`; append `--bot=<bot-name>` to run the non-default bots.
@@ -71,14 +71,15 @@ For Todos (pending features) and Changelogs see [CHANGELOG.md](./docs/CHANGELOG.
 
 
 
-## <a name="setup-helps"></a>Setup Helps
+## <a name="setup-tips"></a>Setup tips
 
 #### Neo4j
 If it's your first installation of `Neo4j`, change the password:
 ```shell
 neo4j start
 # change your password
-curl -H "Content-Type: application/json" -X POST -d '{"password":"YOUR_NEW_PASSWORD"}' -u neo4j:neo4j http://localhost:7474/user/neo4j/password
+# note the default username:pswd is neo4j:neo4j
+curl -X POST -d "password=YOUR_NEW_PASSWORD" -u neo4j:<OLD_PSWD> http://localhost:7474/user/neo4j/password
 # access Neo4j browser GUI
 open http://localhost:7474
 ```
@@ -94,19 +95,20 @@ ssh -L 8080:localhost:7474 <remote_host>
 Then you can go to `http://localhost:8080/` on your local browser.
 
 
-#### Dependencies
+#### <a name="dependencies"></a>Dependencies
 
-All the system dependencies are installed for you by running `npm run gi`, which executes `bin/install`. If you'd like to setup your VM manually, below is the list:
+All the system dependencies are installed automatically by running `npm run gi`, which executes [`bin/install`](./bin/install). If you'd like to setup your VM manually, see/edit the setup script; below is the list:
 
 - `node.js >v5.x`
-- `java jdk >7`
+- `java jdk >7, export $JAVA_HOME path`
 - `neo4j >v2.3.0`
 - `neo4j shell tool`
 - `python3, pip3`
-- `pip3 setuptools`
-- `pip3 virtualenvwrapper`
-- `pip3 textblob`
-- `ruby, bundler, rails`
+- `setuptools virtualenvwrapper` (`pip3`)
+- `libatlas-dev libblas-dev gfortran` (`Linux apt-get`)
+- `numpy scipy tensorflow scikit-learn skflow pandas matplotlib` (`pip3`)
+- `ruby, bundler`
+- `forever, istanbul` (`npm -g`)
 
 
 
