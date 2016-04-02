@@ -19,9 +19,49 @@ def np_to_ndim(T, d):
     npT = np.expand_dims(npT, axis=0)
   return np_to_ndim(npT, d)
 
-# Apply sklearn.preprocessing.LabelEncoder to multiple columns
-# Used to encode string categories into integers, e.g. ['male', 'female'] -> [0, 1]
+
+# check if a list x contains string
+def has_str(x):
+  for v in x:
+    if isinstance(v, str):
+      return True
+    elif np.isnan([v]):
+      pass
+    else:
+      return False
+
+def str_columns(X):
+  '''
+  find the names of columns of str
+  '''
+  header = list(X)
+  str_headers = []
+  for h in header:
+    is_string_arr = has_str(X[h])
+    if is_string_arr:
+      str_headers.append(h)
+  return str_headers
+
+def MultiFillna(X, str_val='NA', num_val=0):
+  '''
+  Apply panda's fillna too all columns
+  if a list is of string, fill with str_val (default 'NA')
+  if a list is of numbers, fill with num_val (default 0)
+  '''
+  header = list(X)
+  fillna_dict = {}
+  for h in header:
+    is_string_arr = has_str(X[h])
+    if is_string_arr:
+      fillna_dict[h] = str_val
+  return X.fillna(fillna_dict).fillna(num_val)
+
+
 class MultiLabelEncoder:
+  '''
+  Apply sklearn.preprocessing.LabelEncoder to all columns
+  Used to encode string categories into integers, e.g. ['male', 'female'] -> [0, 1]
+  '''
   def __init__(self,columns = None):
     self.columns = columns # array of column names to encode
     self.encoders = {}
@@ -52,10 +92,13 @@ class MultiLabelEncoder:
     return self # not relevant here
 
   def transform(self,X):
+    # automatically aim for str
     output = X.copy()
+    str_headers = str_columns(X)
     if self.columns is not None:
+      # will always transform str columns
+      self.columns = list(set(self.columns) | set(str_headers))
       for colname in self.columns:
-        print(colname)
         le = LabelEncoder()
         output[colname] = le.fit_transform(output[colname])
         self.encoders[colname] = le
@@ -88,4 +131,3 @@ class MultiLabelEncoder:
         output[colname] = le.inverse_transform(col)
       self.columns = list(self.encoders.keys())
     return output
-
