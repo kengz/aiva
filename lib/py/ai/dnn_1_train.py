@@ -1,4 +1,5 @@
 # *_train.py is for offline training, shall not be run during deployment
+import shutil
 import numpy as np
 from ai_lib import preprocess
 from sklearn import cross_validation, metrics
@@ -15,11 +16,12 @@ def train():
   # !use pipeline and features union
   df = pandas.read_csv(data_path)
   X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
-  # chain: fillna for 'Sex' with 'NA', the rest with 0
-  X = X.fillna({'Sex': 'NA'}).fillna(0)
-  # Label Encoder to encode string entries into integers
-  le_X = preprocess.MultiColumnLabelEncoder(columns=['Sex'])
-  X = le_X.fit_transform(X)
+  # chain: fillna for str with 'NA', num with 0
+  X = preprocess.MultiFillna(X)
+  # Label Encoder; will always encode str columns into integers
+  mle = preprocess.MultiLabelEncoder(columns=[])
+  # ok make thus automatic too
+  X = mle.fit_transform(X)
 
   # random-split into train (80%), test data (20%)
   X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2, random_state=42)
@@ -39,8 +41,14 @@ def train():
   print('Accuracy: {0:f}'.format(score))
   # should be arond 0.74
 
-  # save the model for use
+  # Clean checkpoint folder if exists
+  try:
+    shutil.rmtree(model_path)
+  except OSError:
+    pass
+  # save the model and label encoder for use
   classifier.save(model_path)
+  mle.save(model_path)
   print('Model saved to', model_path)
 
 
