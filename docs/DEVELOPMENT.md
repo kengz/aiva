@@ -14,6 +14,58 @@ You can focus on writing your app/module backend. When done, plugging it into AI
 #### Tips: what's good for what, pricing, etc.
 
 
+## Development
+
+The interface is `js`, and it's pretty easy to write. In fact, once we finish the RNN NLP feature for auto-parsing user sentences we wouldn't even need to write an interface; at least that's the goal.
+
+Development comes down to:
+
+- **module**: low level functions, lives in `/lib/<lang>/<module>.<lang>`
+- **interface**: high level user interface to call the module functions, lives in `/scripts/<interface>.js`
+
+It is vital to use the directory structure just stated for SocketIO to automatically handle the polyglot coordination.
+
+You write a module in `<lang>`, how do you call it from the interface? There are 3 cases depending on the number of `<lang>` (including `js` for interface) involved.
+
+#### Case: 1 `<lang>`
+
+`<lang> = js`. If your module is in `js`, just `require` it directly in the interface script.
+
+#### Case: 2 `<lang>`s
+
+e.g. `<lang> = js, py`. 
+
+1. You write a module [`lib/py/hello.py`](./lib/py/hello.py)
+2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the `msg`
+```js
+// /scripts/hello_py.js
+{
+  input: 'Hello from user.', // input for module function
+  to: 'hello.py', // the target module
+  intent: 'sayHi' // the module function to call with input
+}
+```
+3. Ensure the called module function returns a reply JSON:
+```python
+reply = {
+  'output': foo(msg.get('input')), # output to interface
+  'to': msg.get('from'), # is 'client.js' for interface
+  'from': id, # 'hello.py'
+  'hash': msg.get('hash') # callback hash for interface
+}
+```
+
+The JSON fields above are required for their purposes. `global.gPass` used by the interface will auto-inject and `id` for reply, and a `hash` to resolve the promise for the interface.
+
+
+
+### Unit Tests
+
+*For the module, you may add any unit testing framework for the language its coded in. This repo does not include unit tests for other languages.*
+
+
+
+
 ## Polyglot environment
 
 That being said, this is the guide to plugging in your modules, written in any language, to AIVA. The central piece is `Socket.io`, which exposes a server for generic applications.
@@ -48,6 +100,7 @@ AIVA ships fully functional, but it's also for developers to customize.
 | `.env` | Non-bot-specific environment variables |
 | `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them here. |
 | `package.json` | The "scripts" portion contains commands that you can customize |
+
 
 
 ## Examples
