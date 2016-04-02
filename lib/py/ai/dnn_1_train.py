@@ -20,7 +20,6 @@ def train():
   X = preprocess.MultiFillna(X)
   # Label Encoder; will always encode str columns into integers
   mle = preprocess.MultiLabelEncoder(columns=[])
-  # ok make thus automatic too
   X = mle.fit_transform(X)
 
   # random-split into train (80%), test data (20%)
@@ -49,6 +48,7 @@ def train():
   # save the model and label encoder for use
   classifier.save(model_path)
   mle.save(model_path)
+  mle.restore(model_path)
   print('Model saved to', model_path)
 
 

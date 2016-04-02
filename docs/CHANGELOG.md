@@ -5,6 +5,7 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
+- u need to save the labelencoder separately, cuz each gets reset. yup, tested, is broken
 - socket py interface for dnn
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
@@ -16,6 +17,7 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - ConceptNet parse into nodes and edges for query
 - ConceptNet getURI prechain to 3 methods
 - ConceptNet KB answer simple or existing sample text or graph language
+- skflow has rnn https://github.com/tensorflow/skflow/tree/master/examples, seq2seq https://github.com/tensorflow/skflow/blob/5db4eb1bde4fd015f21b950df60ea0061c595563/examples/language_model.py https://github.com/tensorflow/skflow/blob/5db4eb1bde4fd015f21b950df60ea0061c595563/examples/neural_translation.py https://github.com/tensorflow/skflow/blob/9ed1a458ecf7483c2695a076b9776f85014d5a65/examples/neural_translation_word.py
 - Ultimate RNN train QnA by seq2seq: https://github.com/farizrahman4u/seq2seq, https://github.com/nicolas-ivanov/tf_seq2seq_chatbot, https://github.com/adamchanson/seq2seq, skdlow has https://github.com/tensorflow/skflow/blob/master/skflow/models.py#L133
 - intent args identifier canonicalization by node NLP wordnet
 - RNN train intent args parsing

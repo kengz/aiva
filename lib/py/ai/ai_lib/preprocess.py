@@ -63,26 +63,34 @@ class MultiLabelEncoder:
   Used to encode string categories into integers, e.g. ['male', 'female'] -> [0, 1]
   '''
   def __init__(self,columns = None):
+    self.header = None
     self.columns = columns # array of column names to encode
     self.encoders = {}
 
   def save(self,model_path):
     '''
     Save the LabelEncoder classes, effectively this whole multiencoder under model_path as npz file.
+    Save the X header too.
     '''
     path = model_path + '/encoder.npz'
+    h_path = model_path + '/header.npz'
     class_dict = {}
     for k, v in self.encoders.items():
       class_dict[k] = v.classes_
     np.savez(path, **class_dict)
+    np.savez(h_path, header=self.header)
     return self
 
   def restore(self,model_path):
     '''
     Restore a saved multiencoder from path using npz file, by reconstructing the LabelEncoders with the classes.
+    Restore the X header too.
     '''
     path = model_path + '/encoder.npz'
+    h_path = model_path + '/header.npz'
     npzfile = np.load(path)
+    h_npzfile = np.load(h_path)
+    self.header = h_npzfile['header']
     self.encoders = {}
     for k,v in npzfile.items():
       le = LabelEncoder()
@@ -95,8 +103,11 @@ class MultiLabelEncoder:
     return self # not relevant here
 
   def transform(self,X):
-    # automatically aim for str
     output = X.copy()
+    # save the ordered headers if haven't yet
+    if self.header is None:
+      self.header = list(X)
+    # to automatically aim for str
     str_headers = str_columns(X)
     if self.columns is not None:
       # will always transform str columns
