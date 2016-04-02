@@ -54,8 +54,7 @@ cache:
     - neo4j-community-2.3.2
     - node_modules
     - pyenv
-    - /usr/lib
-    - /usr/local/bin
+    - /usr/local/lib/python3.4/dist-packages
 env:
   global:
     - CXX=g++-4.8
