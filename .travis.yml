@@ -13,10 +13,10 @@ addons:
     packages:
       - g++-4.8
       - openjdk-7-jdk
-      - libatlas-dev
-      - libblas-dev
-      - liblapack-dev
-      - gfortran
+      # - libatlas-dev
+      # - libblas-dev
+      # - liblapack-dev
+      # - gfortran
       - python3-numpy
       - python3-scipy
 before_install:
@@ -43,7 +43,7 @@ install:
   - sudo pip3 install -qU https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
   - sudo pip3 install -qU scikit-learn
   - sudo pip3 install -qU git+git://github.com/tensorflow/skflow.git
-  - sudo pip3 install -U pandas
+  - sudo pip3 install -qU pandas
   - sudo pip3 install -r requirements.txt
   - bundle install
 cache:
