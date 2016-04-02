@@ -22,9 +22,13 @@ def accuracy():
 
 # Predict X using the loaded model
 def predict(X):
-  # ensure ndim=2
-  npX = preprocess.np_to_ndim(X, 2)
-  return classifier.predict(npX)
+  # check dim, make X into table
+  npX = np.array(X)
+  if npX.ndim == 1:
+    X = [X]
+  df_X = pandas.DataFrame(X, columns=mle.header)
+  df_X = mle.fit_transform(df_X)
+  return classifier.predict(df_X)
 
 # Continue training the loaded model with more data
 # then save if want to
@@ -45,24 +49,23 @@ def train(X, y, save=False):
 
 
 
-# Save and load labelencoder
-# http://stackoverflow.com/questions/28656736/using-scikits-labelencoder-correctly-across-multiple-programs
 # Example usage
-# load the dataset to test prediction
+# make a prediction
+x = ['male', 22, 1, 7.25]
+print(x, predict(x))
+
+# continue training with more data set to 'improve'
 data_path = preprocess.abspath('data/titanic.csv')
 df = pandas.read_csv(data_path)
 X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
-# chain: fillna for str with 'NA', num with 0
+# chain: fillna for str with 'NA', num with 0, transform
 X = preprocess.MultiFillna(X)
 X = mle.fit_transform(X)
 # random-split into train (80%), test data (20%)
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2, random_state=42)
 
-# make a prediction
-# x = ['male', 22, 1, 7.25]
-# print(x, predict(x))
 print(X_test[:1], predict(X_test[:1]))
 # current model accuracy, about 0.74
 print(accuracy())
 # cheating: train more on test data, accuracy should increase, about 0.76
-# train(X_test, y_test, save=False)
+train(X_test, y_test, save=False)
