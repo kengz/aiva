@@ -66,19 +66,22 @@ class MultiLabelEncoder:
     self.columns = columns # array of column names to encode
     self.encoders = {}
 
-  def save(self,path):
+  def save(self,model_path):
     '''
-    Save the LabelEncoder classes, effectively this whole multiencoder to path as npz file.
+    Save the LabelEncoder classes, effectively this whole multiencoder under model_path as npz file.
     '''
+    path = model_path + '/encoder.npz'
     class_dict = {}
     for k, v in self.encoders.items():
       class_dict[k] = v.classes_
-    return np.savez(path, **class_dict)
+    np.savez(path, **class_dict)
+    return self
 
-  def load(self,path):
+  def restore(self,model_path):
     '''
     Restore a saved multiencoder from path using npz file, by reconstructing the LabelEncoders with the classes.
     '''
+    path = model_path + '/encoder.npz'
     npzfile = np.load(path)
     self.encoders = {}
     for k,v in npzfile.items():
@@ -86,7 +89,7 @@ class MultiLabelEncoder:
       le.classes_ = v
       self.encoders[k] = le
     self.columns = list(self.encoders.keys())
-    return self.encoders
+    return self
 
   def fit(self,X,y=None):
     return self # not relevant here
