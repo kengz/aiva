@@ -6,7 +6,6 @@
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
 - socket py interface for dnn
-- standard for all callable routes
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
 - Google brain (KB 1) with knowledge graph n search, wrap
