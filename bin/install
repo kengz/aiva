@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# Fail on the first error
+set -e
+
 echo "
 ================================================
 
-Running the Peppurr dependencies setup by kengz @ Jan 4 2016
+Running the AIVA dependencies setup by kengz @ April 1 2016
 for bug reports, contact [ kengzwl@gmail.com ]
 This will take just a few minutes.
 
