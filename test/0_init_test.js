@@ -1,9 +1,12 @@
 // First mocha test to run: sets up before all tests
 var _ = require('lomath')
+var fs = require('fs')
 var spawnSync = require('child_process').spawnSync;
 // emulate full hubot init
 var helper = new Helper('../scripts/')
-var clientCount = 3
+var clientCount = _.countBy(fs.readdirSync('lib'), function(filename) {
+  return filename.match(/^client\./)
+})['client.']
 
 // wait for n number of clients to join global.io
 function waitForClients() {
