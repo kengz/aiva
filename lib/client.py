@@ -36,12 +36,12 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 # Hack ends
 ##########################################
 from py import *
-# for now don't import ai in travis
-if not os.environ.get('TRAVIS'):
-  from py.ai import *
-
 print('import py scripts from client.py')
 g = globals()
+
+# print(g)
+# print(g['ai'])
+# print(dir(g['ai']))
 
 # 1. Register the socket.io client
 ##########################################
@@ -81,9 +81,3 @@ client.on('take', handle)
 
 # keep-alive
 client.wait()
-
-# print(g)
-# print(g['hello'])
-# print(g['dnn_1_deploy'])
-# g['dnn_1_deploy'].accuracy()
-# g['dnn_1_deploy'].predict([ 5.1, 3.5, 1.4, 0.2])
