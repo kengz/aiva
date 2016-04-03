@@ -5,7 +5,7 @@ import pandas
 import skflow
 
 # reliable absolute path when this module is called elsewhere
-model_path = preprocess.abspath('models/titanic_dnn')
+model_path = preprocess.abspath('models/dnn_titanic')
 classifier = None
 mle = None
 

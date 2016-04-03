@@ -10,7 +10,7 @@ import skflow
 def train():
   # reliable absolute path when this module is called elsewhere
   data_path = preprocess.abspath('data/titanic.csv')
-  model_path = preprocess.abspath('models/titanic_dnn')
+  model_path = preprocess.abspath('models/dnn_titanic')
 
   # load and clean the dataset
   # !use pipeline and features union
