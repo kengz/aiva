@@ -84,3 +84,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - add tensorflow and skflow in `bin/install`
 - add DNN example: pretrained, saved, loaded example in `py/ai` with `skflow`
 - unit test now waits for all clients to join socketio server before starting tests
+- travis and unit tests shall cover only systems, and not AI, models etc.

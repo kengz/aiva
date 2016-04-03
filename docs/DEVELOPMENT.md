@@ -95,7 +95,7 @@ With such pattern, you can chain multiple function calls that bounce among diffe
 
 ## Unit Tests
 
-This repo includes only unit tests for `js` **modules** and **interface** scripts using `mocha`, and runs with `npm test`. 
+This repo includes only unit tests for `js` **modules** and **interface** scripts using `mocha`, and runs with `npm test`. Note that tests should be for systems, thus the tests for AI models are excluded.
 
 For the module of other `<lang>`, you may add any unit testing framework of your choice.
 
