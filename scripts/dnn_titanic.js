@@ -2,6 +2,7 @@
 // dependencies
 var helper = require('../lib/js/helper')
 
+/* istanbul ignore next */
 module.exports = function(robot) {
   // menu
   robot.respond(/titanic$/i, function(res) {
