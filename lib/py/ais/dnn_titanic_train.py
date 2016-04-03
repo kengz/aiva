@@ -13,7 +13,6 @@ def train():
   model_path = preprocess.abspath('models/dnn_titanic')
 
   # load and clean the dataset
-  # !use pipeline and features union
   df = pandas.read_csv(data_path)
   X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
   # chain: fillna for str with 'NA', num with 0
@@ -37,8 +36,7 @@ def train():
   # Fit and save model for deployment.
   classifier.fit(X_train, y_train)
   score = metrics.accuracy_score(y_test, classifier.predict(X_test))
-  print('Accuracy: {0:f}'.format(score))
-  # should be arond 0.74
+  print('Accuracy: {0:f}'.format(score)) # should be arond 0.74
 
   # Clean checkpoint folder if exists
   try:
@@ -48,9 +46,14 @@ def train():
   # save the model and label encoder for use
   classifier.save(model_path)
   mle.save(model_path)
-  mle.restore(model_path)
   print('Model saved to', model_path)
 
 
 # Uncomment to train it
 # train()
+
+# # save test data for fast loading in deploy
+# data_path = preprocess.abspath('data/titanic.csv')
+# df = pandas.read_csv(data_path)
+# train, test = cross_validation.train_test_split(df, test_size=0.2, random_state=42)
+# test.to_csv('data/titanic_test.csv', index=False)

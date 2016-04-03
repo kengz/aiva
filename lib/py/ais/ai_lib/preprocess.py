@@ -1,6 +1,7 @@
 import os.path
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
+import pandas
 
 # generate the absolute path for /ai folder
 def abspath(path):
@@ -18,6 +19,23 @@ def np_to_ndim(T, d):
   else:
     npT = np.expand_dims(npT, axis=0)
   return np_to_ndim(npT, d)
+
+
+# transform X, y into proper format in usage by deploy
+def deploy_transform(mle, X, y=None):
+  # check dim, make X into table
+  npX = np.array(X)
+  if npX.ndim == 1:
+    X = [X]
+  X = pandas.DataFrame(X, columns=mle.header)
+  X = MultiFillna(X)
+  X = mle.fit_transform(X)
+  if y is None:
+    return X
+  else:
+    # ensure y is a list
+    y = np_to_ndim(y, 1)
+    return X, y
 
 
 # check if a list x contains string
