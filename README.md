@@ -2,9 +2,9 @@
 
 *Previously known as JARVIS.*
 
-**WARNING**: The old JARVIS (current master branch) will be nuked by next Thursday (Mar 31 2016). If you need it, `git checkout` to release tag [v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
+**WARNING**: The old JARVIS (current master branch) will be nuked when v3 is released. If you need it, `git checkout` to release tag [v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
 
-**Final rush**: A few people asked me how's the project going? AIVA v3 will be released 1 April 2016. Right now I'm packing in some AI/ML capabilities, building the first iteration of the brain, and streamlining the system for dev usage.
+**Update**: [AIVA v3](https://github.com/kengz/aiva/tree/aiva-v3) will be released 7 April 2016. I'm still finalizing several ai/ml/nlp capabilities, streamlining the system for dev usage, and preparing docs, so that the released project is actually usable.
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
