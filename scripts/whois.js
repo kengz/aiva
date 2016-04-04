@@ -19,6 +19,6 @@ module.exports = function(robot) {
       .then(KB.transBeautify).then(function(result) {
         res.send(result)
         return res
-      })
+      }).catch(console.log)
   })
 }

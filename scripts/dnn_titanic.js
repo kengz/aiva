@@ -20,7 +20,7 @@ module.exports = function(robot) {
     })
     .then(function(reply) {
       res.send(reply.output)
-    })
+    }).catch(console.log)
   })
 
   // titanic dnn predict
@@ -35,7 +35,7 @@ module.exports = function(robot) {
     })
     .then(function(reply) {
       res.send(reply.output)
-    })
+    }).catch(console.log)
   })
 
   // titanic dnn continue training with new data
@@ -52,7 +52,7 @@ module.exports = function(robot) {
     })
     .then(function(reply) {
       res.send(reply.output)
-    })
+    }).catch(console.log)
   })
 
 }

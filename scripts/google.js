@@ -22,6 +22,6 @@ module.exports = function(robot) {
       // format and send slack attachments
       att = slackAtt.gen(res, results, slackAtt.gkgParser)
       robot.adapter.customMessage(att)
-    })
+    }).catch(console.log)
   })
 }

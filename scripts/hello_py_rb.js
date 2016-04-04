@@ -26,7 +26,7 @@ module.exports = function(robot) {
         // respond to user when client.js resolves the promise
         .then(function(reply) {
           res.send(reply.output)
-        })
+        }).catch(console.log)
     };
   })
 
