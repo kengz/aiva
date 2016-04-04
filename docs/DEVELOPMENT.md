@@ -12,16 +12,16 @@ Unite we stand. Each language has its strengths, for example Python for machine 
 For now we have `/lib/client.{js, py, rb}`. Feel free to add more through pull request!
 
 
-## Polyglot Development
+## <a name="polyglot-dev"></a>Polyglot Development
 
 The interface is `js`, and it's pretty easy to write. In fact, once we finish the RNN NLP feature for auto-parsing user sentences we wouldn't even need to write an interface; at least that's the goal.
 
 Development comes down to:
 
-- **module**: low level functions, lives in `/lib/<lang>/<module>.<lang>`
+- **module**: callable low level functions, lives in `/lib/<lang>/<module>.<lang>`.
 - **interface**: high level user interface to call the module functions, lives in `/scripts/<interface>.js`
 
-It is vital to use the directory structure just stated for socket.io to automatically handle the polyglot coordination. Since the AIVA is based on hubot, here's a interface reference: [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md).
+It is vital to follow the directory structure to expose them to the socket.io; deeper nested modules will not be callable via socket.io.
 
 You write a module in `<lang>`, how do you call it from the interface? There are 3 cases depending on the number of `<lang>` (including `js` for interface) involved.
 
@@ -29,7 +29,7 @@ You write a module in `<lang>`, how do you call it from the interface? There are
 
 `<lang> = js`. If your module is in `js`, just `require` it directly in the interface script.
 
-You can also [load hubot scripts](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) written by others.
+Since the AIVA is based on hubot, here's a interface reference: [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md). You can also [load hubot scripts](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) written by others.
 
 #### Case: 2 `<lang>`s
 
@@ -118,16 +118,15 @@ What goes where:
 | Folder/File | Purpose |
 |:---|---|
 | `bin/` | bot keys, binaries, bash setup scripts. |
-| `lib/` | Non-interface modules and scripts, grouped by languages. Contains the core examples for extending the bot. |
-| `lib/import_clients.<ext>` | Import all scripts from their folders and integrate with socket.io for cross-language communications. |
-| `lib/io_client.js, io_server.js` | socket.io logic for cross-language communications. |
-| `logs` | Logs from bot for debugging and healthcheck |
-| `scripts` | The interface modules of the `lib` modules, for bot to interact with users; in `node.js`. |
+| `lib/<lang>/` | Module scripts, grouped by language, callable via socket.io. See [Polyglot Development](#polyglot-dev). |
+| `lib/import_clients.<ext>` | Import all scripts from `lib/<lang>/` and expose them to socket.io for cross-language communication. |
+| `lib/io_client.js, io_server.js` | socket.io logic for cross-language communication. |
+| `logs` | Logs from bot for debugging and healthcheck. |
+| `scripts` | The `node.js` user interface for the `lib/` modules. |
 | `scripts/0_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
-| `test` | Unit tests; uses Mocha |
-| `.env` | Non-bot-specific environment variables |
-| `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them here. |
-| `package.json` | The "scripts" portion contains commands that you can customize |
+| `test` | Unit tests; uses Mocha. |
+| `.env` | Non-bot-specific environment variables. |
+| `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them in here and `package.json`. | Specifies project dependencies and command shortcuts with npm. |
 
 
 ## How it works: Socket.io logic and standard

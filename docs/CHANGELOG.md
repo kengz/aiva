@@ -5,6 +5,9 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
+- Promisify google
+- promisify all in ai, use org keys, make callback backward compatible
+- rename init scripts to dot files
 - better menu format inspired by lita
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
@@ -32,7 +35,6 @@ When u put these tools so close together u start to see unpreceedented ways to c
 
 ## General Todo
 
-- fix the `/undefined` file keeps getting generated
 - release the simplest version of AIVA with simpler AI modules (google graph API and conceptnet, imagenet: slack might be able to take picture for bot). Full NLP and KB will take longer to complete.
 - warning if forever restarts
 - store cron in KB for restoration
