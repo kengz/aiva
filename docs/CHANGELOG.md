@@ -85,3 +85,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - unit test now waits for all clients to join socketio server before starting tests
 - travis and unit tests shall cover only systems, and not AI, models etc.
 - promisify all ai modules for chaining
+- add google kg search with interface
