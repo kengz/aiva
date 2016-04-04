@@ -20,7 +20,7 @@ try {
 }
 
 // unit test global dependencies
-require('../scripts/0_init.js')
+require('../scripts/_init.js')
 global.Promise.config({ warnings: false });
 // chai assertation library
 global.chai = require('chai')

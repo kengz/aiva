@@ -123,7 +123,7 @@ What goes where:
 | `lib/io_client.js, io_server.js` | socket.io logic for cross-language communication. |
 | `logs` | Logs from bot for debugging and healthcheck. |
 | `scripts` | The `node.js` user interface for the `lib/` modules. |
-| `scripts/0_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
+| `scripts/_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
 | `test` | Unit tests; uses Mocha. |
 | `.env` | Non-bot-specific environment variables. |
 | `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them in here and `package.json`. | Specifies project dependencies and command shortcuts with npm. |
