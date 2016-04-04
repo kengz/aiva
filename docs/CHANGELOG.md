@@ -5,9 +5,6 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
-- Promisify google
-- promisify all in ai, use org keys, make callback backward compatible
-- rename init scripts to dot files
 - better menu format inspired by lita
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
@@ -87,3 +84,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - add DNN example: pretrained, saved, loaded example in `py/ai` with `skflow`
 - unit test now waits for all clients to join socketio server before starting tests
 - travis and unit tests shall cover only systems, and not AI, models etc.
+- promisify all ai modules for chaining
