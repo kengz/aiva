@@ -17,7 +17,7 @@ This will take just a few minutes.
 echo "
 => Requesting permission upfront"
 # Ask for the administrator password upfront
-[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 # sudo -v
 # Keep-alive: update existing `sudo` time stamp until this script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -67,8 +67,11 @@ export JAVA_HOME=\$(/usr/libexec/java_home)
 echo "
 => Ensuring you have python3"
 brew install python3
-pip3 install -U setuptools
-pip3 install -U virtualenvwrapper
+sudo pip3 install -U setuptools
+sudo pip3 install -U virtualenvwrapper
+# textblob
+sudo pip3 install -U textblob
+sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
 sudo pip3 install -U numpy
 sudo pip3 install -U scipy
@@ -115,6 +118,26 @@ rbenv rehash
   )
 
 
+# stanford nlp for nltk
+if [ ! -d "${HOME}/nltk_data/stanford-ner" ]; then (
+
+curl -o ~/nltk_data/stanford-ner.zip -Lk http://nlp.stanford.edu/software/stanford-ner-2015-12-09.zip
+unzip ~/nltk_data/stanford-ner.zip -d ~/nltk_data/stanford-ner && cd ~/nltk_data/stanford-ner/* && mv ./* ../ && rm ~/nltk_data/stanford-ner.zip && cd
+
+[[ ":$CLASSPATH:" != *":~/nltk_data/stanford-ner/stanford-ner.jar:"* ]] && 
+echo '
+# Stanford NLP
+export CLASSPATH=\$CLASSPATH:~/nltk_data/stanford-ner/stanford-ner.jar' >> ~/.bash_profile
+
+[[ ":$STANFORD_MODELS:" != *":~/nltk_data/stanford-ner/classifiers:"* ]] && 
+echo '
+export STANFORD_MODELS=~/nltk_data/stanford-ner/classifiers' >> ~/.bash_profile
+
+source ~/.bash_profile
+  );
+fi
+
+
 
 );
 # Linux runs below
@@ -124,6 +147,11 @@ echo "
 Detected Linux, running corresponding setup.
 ================================================
 ";
+
+echo "
+=> Requesting permission upfront"
+# Ask for the administrator password upfront
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 # install java
 echo "
@@ -144,6 +172,9 @@ echo "
 sudo apt-get -y install python3-pip python-dev
 sudo pip3 install -U setuptools
 sudo pip3 install -U virtualenvwrapper
+# textblob
+sudo pip3 install -U textblob
+sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
 sudo apt-get -y install libatlas-dev
 sudo apt-get -y install libblas-dev
@@ -201,6 +232,26 @@ gem install bundler
 gem install rails
 rbenv rehash
   )
+
+
+# stanford nlp for nltk
+if [ ! -d "${HOME}/nltk_data/stanford-ner" ]; then (
+
+curl -o ~/nltk_data/stanford-ner.zip -Lk http://nlp.stanford.edu/software/stanford-ner-2015-12-09.zip
+unzip ~/nltk_data/stanford-ner.zip -d ~/nltk_data/stanford-ner && cd ~/nltk_data/stanford-ner/* && mv ./* ../ && rm ~/nltk_data/stanford-ner.zip && cd
+
+[[ ":$CLASSPATH:" != *":~/nltk_data/stanford-ner/stanford-ner.jar:"* ]] && 
+echo '
+# Stanford NLP
+export CLASSPATH=\$CLASSPATH:~/nltk_data/stanford-ner/stanford-ner.jar' >> ~/.bashrc
+
+[[ ":$STANFORD_MODELS:" != *":~/nltk_data/stanford-ner/classifiers:"* ]] && 
+echo '
+export STANFORD_MODELS=~/nltk_data/stanford-ner/classifiers' >> ~/.bashrc
+
+source ~/.bashrc
+  );
+fi
 
 
 
