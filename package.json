@@ -32,6 +32,7 @@
   "dependencies": {
     "bluebird": "^3.1.1",
     "concept-net": "^0.3.0",
+    "date.js": "^0.3.1",
     "geocoder": "^0.2.2",
     "google": "^2.0.0",
     "googleapis": "^3.1.0",
