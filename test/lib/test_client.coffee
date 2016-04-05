@@ -23,7 +23,7 @@ describe 'lib/client.js', ->
     context "(cb, msgDirect)", ->
       beforeEach ->
         co =>
-          global.gClientPass(global.io.say(@room, 'hubot'), msgDirect)
+          global.gClientPass(global.say(@room, 'hubot'), msgDirect)
           yield delayer()
       # response
       it 'successfully pass, callback executed on reply.', ->
@@ -35,7 +35,7 @@ describe 'lib/client.js', ->
     context "(cb, msgIndirect)", ->
       beforeEach ->
         co =>
-          global.gClientPass(global.io.say(@room, 'hubot'), msgIndirect)
+          global.gClientPass(global.say(@room, 'hubot'), msgIndirect)
           yield delayer()
       # response
       it 'successfully pass, callback executed on reply.', ->

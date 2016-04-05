@@ -17,7 +17,7 @@ describe 'lib/hasher.js', ->
     context '(id, cb)', ->
       # response
       it 'return hashStr, add cb to hashMap', ->
-        hashStr = hasher.gen(id, global.io.say(@room, 'hubot'))
+        hashStr = hasher.gen(id, global.say(@room, 'hubot'))
         hashStr.should.match(/^test_hasher/)
         msg = 
           hash: hashStr

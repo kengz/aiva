@@ -1,4 +1,3 @@
-
 // dependencies
 var helper = require('../lib/js/helper')
 

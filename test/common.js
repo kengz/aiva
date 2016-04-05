@@ -30,6 +30,11 @@ global.should = chai.should();
 // sinon spy/stub library
 global.sinon = require('sinon');
 global.Helper = require('hubot-test-helper');
+// set the hubot say handlers for unit tests: send reply to room
+global.say = function(room, name, key) {
+  key = key || 'output'
+  return _.flow(_.partial(_.get, _, key), _.bind(room.user.say, room, name))
+}
 // Promise.delay, with adjusted time factors. for use with yield
 global.delayer = function(factor) {
   factor = factor || 1

@@ -120,7 +120,7 @@ What goes where:
 | `bin/` | bot keys, binaries, bash setup scripts. |
 | `lib/<lang>/` | Module scripts, grouped by language, callable via socket.io. See [Polyglot Development](#polyglot-dev). |
 | `lib/import_clients.<ext>` | Import all scripts from `lib/<lang>/` and expose them to socket.io for cross-language communication. |
-| `lib/io_client.js, io_server.js` | socket.io logic for cross-language communication. |
+| `lib/io_start.js` | socket.io server and client logic for cross-language communication. |
 | `logs` | Logs from bot for debugging and healthcheck. |
 | `scripts` | The `node.js` user interface for the `lib/` modules. |
 | `scripts/_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |

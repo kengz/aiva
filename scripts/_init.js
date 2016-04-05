@@ -25,8 +25,7 @@ module.exports = function(robot) {
   ///////////////////
   co(function*() {
     // plugin socket.io for polyglot communication
-    require('../lib/io_server')(robot)
-    require('../lib/io_client')(robot)
+    require('../lib/io_start')(robot)
 
     /* istanbul ignore next */
     if (robot.adapter.constructor.name == 'Shell') {

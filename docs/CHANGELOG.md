@@ -5,6 +5,8 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
+- better way for polyglot dev: when u test things in nodejs and py too. Need to start server easily and fast and run things
+- start first neural net to simple-classify sentence into intents
 - better menu format inspired by lita
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
@@ -75,7 +77,6 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - add `global.io.{reply, send, say}` for hubot replies from io. Use as `io.send(res)`; see `scripts/translate.js` for example.
 - unify clients: one for each language.
 - Different port to simultaneous use of production and dev/testing. Port 8080 for production, port 9090 for development. Set TEST_PORT in `.env`
-- Remove `Textblob`, due to heavy files, bad py encoding
 - add `lib/js/nlp.js` to export basic NLP tasks based on Princeton WordNet, NodeNatural, wordpos. With basic examples
 - make it easy to import .env vars with the index.js exported method
 - add IBM Watson ready to use, includes alchemyAPI. (tokens in .keys-<bot>)
@@ -86,3 +87,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - travis and unit tests shall cover only systems, and not AI, models etc.
 - promisify all ai modules for chaining
 - add google kg search with interface
+- restore py `Textblob`
