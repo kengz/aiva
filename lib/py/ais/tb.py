@@ -4,9 +4,9 @@
 from textblob import TextBlob
 # import time
 
-# from nltk.tag import StanfordNERTagger
-# st = StanfordNERTagger('english.all.3class.distsim.crf.ser.gz')
-# res = st.tag('Rami Eid is studying at Stony Brook University in NY'.split())
+from nltk.tag import StanfordNERTagger
+st = StanfordNERTagger('english.all.3class.distsim.crf.ser.gz')
+res = st.tag('Rami Eid is studying at Stony Brook University in NY'.split())
 
 # res = [('Rami', 'PERSON'), ('Eid', 'PERSON'), ('Stony', 'ORGANIZATION'), ('Brook', 'ORGANIZATION'), ('University', 'ORGANIZATION')]
 
@@ -16,14 +16,14 @@ def join_by_tags(ners):
   joined = []
   words_to_join = []
   prevE = False
-  for i, (w, e) in enumerate(ners):
-    if e is 'O':
-      if e is not prevE:
+  for w, e in ners:
+    if e == 'O':
+      if e != prevE:
         if len(words_to_join) > 0:
           joined.append((' '.join(words_to_join), prevE))
         words_to_join = []
     else:
-      if e is prevE:
+      if e == prevE:
         words_to_join.append(w)
       else:
         if len(words_to_join) > 0:
