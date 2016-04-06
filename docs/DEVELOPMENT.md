@@ -12,6 +12,15 @@ Unite we stand. Each language has its strengths, for example Python for machine 
 For now we have `/lib/client.{js, py, rb}`. Feel free to add more through pull request!
 
 
+**To run socket.io** during development, import and run `lib/io_start` in a js script (e.g. your interface). This will start the server polyglot clients, and initialize all the modules in `/lib/<lang>/`. When done, it returns a promise for chaining. e.g.
+```js
+var ioStart = require('../io_start')
+ioStart().then(function() {
+  // run when io is done initializing and when all clients have joined
+})
+```
+
+
 ## <a name="polyglot-dev"></a>Polyglot Development
 
 The interface is `js`, and it's pretty easy to write. In fact, once we finish the RNN NLP feature for auto-parsing user sentences we wouldn't even need to write an interface; at least that's the goal.

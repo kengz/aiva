@@ -4,27 +4,7 @@ var fs = require('fs')
 var spawnSync = require('child_process').spawnSync;
 // emulate full hubot init
 var helper = new Helper('../scripts/')
-var clientCount = _.countBy(fs.readdirSync('lib'), function(filename) {
-  return filename.match(/^client\./)
-})['client.']
 
-// wait for n number of clients to join global.io
-function waitForClients() {
-  var count = clientCount;
-  console.log('waiting for', count, 'clients')
-  return new Promise(function(resolve, reject) {
-    global.io.sockets.on('connection', function(socket) {
-      socket.on('join', function(id) {
-        count--;
-        if (count == 0) {
-          console.log('all', clientCount, 'clients have joined, start tests')
-          console.log('================================================================================')
-          resolve()
-        }
-      })
-    })
-  })
-}
 
 before(function() {
   console.log('Starting Neo4j:')
@@ -38,7 +18,7 @@ before(function() {
 
     // set the brain to test/asset.js's
     _.set(this.room.robot, 'brain.data.users', users)
-    yield waitForClients()
+    yield global.ioPromise
   })
 })
 
