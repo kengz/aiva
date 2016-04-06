@@ -43,6 +43,7 @@ npm run debug # outputs log to terminal
 npm run debug --bot=<bot-name> # to dev
 npm run shell # use shell-adapter to dev
 npm test # run unit tests
+forever list # see the list of bots running
 ```
 
 
