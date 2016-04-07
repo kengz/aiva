@@ -35,7 +35,6 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 
 # Hack ends
 ##########################################
-from functools import reduce
 from py import *
 print('import py scripts from client.py')
 
@@ -49,8 +48,8 @@ class dotdict(dict):
 # the global object to access all modules (nested) in py/
 lib_py = dotdict(globals())
 
-# Custom function to return the property of module at dotpath
 def getAt(module, dotpath):
+  '''Custom function to return the property of module at dotpath'''
   pathList = dotpath.split('.')
   prop = module
   while len(pathList):
@@ -61,18 +60,29 @@ def getAt(module, dotpath):
       prop = getattr(prop, k)
   return prop
 
-# print(getAt(lib_py, "ai.tb"))
+# print(getAt(lib_py, "ai.tb.NERTag"))
 # print(getAt(lib_py, "hello.sayHi"))
+
+def correctReply(reply, msg):
+  '''correct the reply JSON'''
+  if type(reply) is not dict:
+    reply = { "output": reply }
+  # autofill if not already exist
+  reply["to"] = reply.get("to") or msg.get("from")
+  reply["from"] = reply.get("from") or ioid
+  reply["hash"] = reply.get("hash") or msg.get("hash")
+  return reply
+# correctReply({}, {"from": "your mom"})
 
 
 # 1. Register the socket.io client
 ##########################################
 PORT = os.environ.get('PORT', '8080')
 client = SocketIO('localhost', int(PORT))
-# the id of this script for client registration
-id = 'py'
+# the id of this script for io client registration
+ioid = 'py'
 # first join for serialization
-client.emit('join', id)
+client.emit('join', ioid)
 client.on('disconnect', client.disconnect)
 
 
@@ -92,7 +102,8 @@ def handle(msg):
     # call the function, get reply
     try:
       reply = getAt(getAt(lib_py, to), intent)(msg)
-      # if it should reply, send payload to target <to>
+      # always reply msg (won't loop unless two reply.intent line up)
+      reply = correctReply(reply, msg)
       if reply.get('to') is not None:
         client.emit('pass', reply)
     except:
