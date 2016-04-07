@@ -5,9 +5,8 @@
 
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
-- better way for polyglot dev: when u test things in nodejs and py too. Need to start server easily and fast and run things
+- fix external dep: data/ models/ , npm run gi leaves file at aiva/
 - finish ner, use with KB
-- make io_start return then for chaining
 - start first neural net to simple-classify sentence into intents
 - better menu format inspired by lita
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
@@ -90,4 +89,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - promisify all ai modules for chaining
 - add google kg search with interface
 - restore py `Textblob`
-- make io_start return promise for chaining
+- `io_start` enables modularity on the complete polyglot deve environment with socket.io. Also returns promise for chaining

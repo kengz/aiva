@@ -12,11 +12,21 @@ Unite we stand. Each language has its strengths, for example Python for machine 
 For now we have `/lib/client.{js, py, rb}`. Feel free to add more through pull request!
 
 
-**To run socket.io** during development, import and run `lib/io_start` in a js script (e.g. your interface). This will start the server polyglot clients, and initialize all the modules in `/lib/<lang>/`. When done, it returns a promise for chaining. e.g.
+**To run socket.io** during development, import and run `lib/io_start` in a js script (e.g. your interface). This will start the server polyglot clients, and initialize all the modules in `/lib/<lang>/`. When done, it returns a promise for chaining.
+
+This modularity of socket.io allows for **quick dev**, i.e. run a js script for full polyglot environment while developing a small feature. e.g.
 ```js
 var ioStart = require('../io_start')
 ioStart().then(function() {
   // run when io is done initializing and when all clients have joined
+  global.gPass({
+    input: 'Hello from user.',
+    to: 'hello.py',
+    intent: 'sayHi'
+  })
+  .then(function(reply) {
+    console.log(reply.output)
+  }).catch(console.log)
 })
 ```
 
