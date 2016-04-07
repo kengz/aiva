@@ -37,6 +37,7 @@ def handle(msg)
   intent = msg['intent']
   if to && intent
     begin
+      # !Note that the access isn't flexible as in py and js where dotpath can be use
       reply = Module.const_get(to).method(intent).call(msg)
       if reply['to']
         $client.emit(:pass, reply)
