@@ -35,13 +35,35 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 
 # Hack ends
 ##########################################
+from functools import reduce
 from py import *
 print('import py scripts from client.py')
-g = globals()
 
-# print(g)
-# print(g['ai'])
-# print(dir(g['ai']))
+class dotdict(dict):
+  """dot.notation access to dictionary attributes"""
+  def __getattr__(self, attr):
+      return self.get(attr)
+  __setattr__= dict.__setitem__
+  __delattr__= dict.__delitem__
+
+# the global object to access all modules (nested) in py/
+lib_py = dotdict(globals())
+
+# Custom function to return the property of module at dotpath
+def getAt(module, dotpath):
+  pathList = dotpath.split('.')
+  prop = module
+  while len(pathList):
+    k = pathList.pop(0)
+    try:
+      prop = prop[k]
+    except Exception:
+      prop = getattr(prop, k)
+  return prop
+
+# print(getAt(lib_py, "ai.tb"))
+# print(getAt(lib_py, "hello.sayHi"))
+
 
 # 1. Register the socket.io client
 ##########################################
@@ -69,7 +91,7 @@ def handle(msg):
   if to is not None and intent is not None:
     # call the function, get reply
     try:
-      reply = getattr(g[to], intent)(msg)
+      reply = getAt(getAt(lib_py, to), intent)(msg)
       # if it should reply, send payload to target <to>
       if reply.get('to') is not None:
         client.emit('pass', reply)
