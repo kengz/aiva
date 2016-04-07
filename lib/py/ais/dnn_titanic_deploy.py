@@ -69,8 +69,3 @@ def train(X, y, save=False):
 # # cheating: cont-train on test data, accuracy increases to 0.76
 # train(X_test, y_test, save=False)
 
-
-# Socket handlers
-##########################################
-
-
