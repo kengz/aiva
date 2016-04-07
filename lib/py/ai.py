@@ -1,11 +1,12 @@
-# the id of this script for JSON payload 'from'
 from os.path import basename
 id = basename(__file__) # 'ai.py'
+from ais import * # import all for usage
 
+##########################################
+# Titanic DNN
 import ais.dnn_titanic_deploy as titanic
 # load and initialize the trained model
 titanic.init()
-
 
 # get titanic model accuracy
 def titanic_accuracy(msg):
@@ -42,3 +43,5 @@ def titanic_train(msg):
   'hash': msg.get('hash')
   }
   return reply
+
+##########################################
