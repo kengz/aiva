@@ -1,5 +1,5 @@
 from os.path import basename
-id = basename(__file__) # 'ai.py'
+ioid = basename(__file__) # 'ai.py'
 from ais import * # import all for usage
 
 ##########################################
@@ -14,7 +14,7 @@ def titanic_accuracy(msg):
   reply = {
   'output': 'Current DNN model accuracy: ' + str(score),
   'to': msg.get('from'),
-  'from': id,
+  'from': ioid,
   'hash': msg.get('hash')
   }
   return reply
@@ -26,7 +26,7 @@ def titanic_predict(msg):
   reply = {
   'output': 'Prediction: Survived = ' + str(y),
   'to': msg.get('from'),
-  'from': id,
+  'from': ioid,
   'hash': msg.get('hash')
   }
   return reply
@@ -39,7 +39,7 @@ def titanic_train(msg):
   reply = {
   'output': 'Post-training new score is ' + str(new_score) + '. Model not saved.',
   'to': msg.get('from'),
-  'from': id,
+  'from': ioid,
   'hash': msg.get('hash')
   }
   return reply

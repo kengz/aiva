@@ -3,14 +3,14 @@
 module Hello
   class << self
   # the id of this script for JSON payload 'from'
-  @@id = File.basename(__FILE__)
+  @@ioid = File.basename(__FILE__)
 
     # module method definition
     def sayHi(msg)
       reply = {
         'output' => 'Hello from Ruby.',
         'to' => msg['from'],
-        'from' => @@id,
+        'from' => @@ioid,
         'hash' => msg['hash']
       }
       return reply

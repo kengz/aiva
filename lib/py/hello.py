@@ -1,6 +1,6 @@
-# the id of this script for JSON payload 'from'
+# the ioid of this script for JSON payload 'from'
 from os.path import basename
-id = basename(__file__) # 'hello.py'
+ioid = basename(__file__) # 'hello.py'
 
 # Write the module functions with the proper reply
 ##########################################
@@ -15,7 +15,7 @@ def sayHi(msg):
   reply = {
     'output': foo(msg.get('input')),
     'to': msg.get('from'),
-    'from': id,
+    'from': ioid,
     'hash': msg.get('hash')
   }
   # the py client will send this to target <to>

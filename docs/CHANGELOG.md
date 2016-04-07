@@ -6,12 +6,10 @@
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
 - fix external dep: data/ models/ , npm run gi leaves file at aiva/
-- finish ner, use with KB
 - start first neural net to simple-classify sentence into intents
 - better menu format inspired by lita
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
 - demo of ai working together
-- Google brain (KB 1) with knowledge graph n search, wrap
 - Attach KB source to answers
 - (delay to last) Google user auth
 - need basic NLP for basic brain access: entities/concept, or object-verb-subject
@@ -90,3 +88,4 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - add google kg search with interface
 - restore py `Textblob`
 - `io_start` enables modularity on the complete polyglot deve environment with socket.io. Also returns promise for chaining
+- add google knowledge graph search

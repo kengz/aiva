@@ -1,6 +1,6 @@
-# the id of this script for JSON payload 'from'
+# the ioid of this script for JSON payload 'from'
 from os.path import basename
-id = basename(__file__) # 'hello_rb.py'
+ioid = basename(__file__) # 'hello_rb.py'
 
 # Write the module functions with the proper reply
 ##########################################
