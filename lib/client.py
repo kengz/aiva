@@ -4,6 +4,7 @@
 # !Hack for SocketIO py client to work with unicode. Overrides the recv_packet of WebsocketTransport, changing from six.b to six.u when failing
 # !Awaiting module author to fix the issue from source
 from socketIO_client import SocketIO, WebsocketTransport
+import sys
 import os
 import six
 import socket
@@ -99,15 +100,19 @@ def handle(msg):
   to = msg.get('to') # the target module, e.g. hello
   intent = msg.get('intent') # the module's function, e.g. sayHi()
   if to is not None and intent is not None:
-    # call the function, get reply
+    # try JSON or JSON.input as input
     try:
       reply = getAt(getAt(lib_py, to), intent)(msg)
-      # always reply msg (won't loop unless two reply.intent line up)
+    except AttributeError as e:
+      reply = getAt(getAt(lib_py, to), intent)(msg["input"])
+    else:
+      e = sys.exc_info()[0]
+      print('py handle fails.', e)
+    finally:
+      # try JSON or made-JSON output
       reply = correctReply(reply, msg)
       if reply.get('to') is not None:
         client.emit('pass', reply)
-    except:
-      print('py handle fails.')
     
 # add listener
 client.on('take', handle)
