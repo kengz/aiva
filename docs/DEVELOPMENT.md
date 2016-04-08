@@ -55,7 +55,7 @@ Since the AIVA is based on hubot, here's a interface reference: [hubot scripting
 e.g. `<lang> = js, py`. 
 
 1. You write a module [`lib/py/hello.py`](./lib/py/hello.py)
-2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON
+2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON `msg`
 ```js
 // scripts/hello_py.js
 {
@@ -85,7 +85,7 @@ e.g. `<lang> = js, py, rb`
 
 1. You write modules in `py, rb` [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
 2. Call one (`py` in this example) from the interface [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js) as described earlier.
-3. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON
+3. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON `msg`
 ```python
 lib/py/hello_rb.py
 reply = {
@@ -96,7 +96,7 @@ reply = {
   'hash': msg.get('hash'), # pass on callback hash for interface
 }
 ```
-4. [`lib/rb/Hello.rb`](./lib/rb/Hello.rb) ensure the final module function returns a reply JSON to the interface. *Note for auto-id, Ruby filename need to be the same as its module name, case-sensitive.*
+4. [`lib/rb/Hello.rb`](./lib/rb/Hello.rb) ensure the final module function returns a reply JSON `msg` to the interface. *Note for auto-id, Ruby filename need to be the same as its module name, case-sensitive.*
 ```rb
 # lib/rb/Hello.rb
 reply = {
@@ -110,6 +110,17 @@ reply = {
 >Overall, you need only to ensure your scripts/module functions return the correct JSON `msg`, and we handle the rest for you.
 
 With such pattern, you can chain multiple function calls that bounce among different `<lang>`. Example use case: retrieve data from Ruby on Rails app, pass to Java to run algorithms, then to Python for data analysis, then back to Node.js interface.
+
+
+#### "Ma look! No hand(ler)s!"
+
+"Do I really have to add a handler to reply a JSON `msg` for **every** function I call?". That's really cumbersome. 
+
+To streamline polyglot development further we've made the `client.<lang>`'s automatically try to compile a proper reply JSON `msg`, using the original `msg` it receives for invoking a function.
+
+What this means is you can call a **module** by its name, and its **function** by specifying the dotpath (if it's nested), then providing a valid `input` format (single argument for now). 
+
+On receiving a `msg`, the `client.<lang>` tries to call the function by passing `msg`. If that throws an exception, it retries by passing `msg.input`. After the function executes and returns the result, `client.<lang>`'s handler will check if the reply is a valid JSON, and if not, will make it into one via `correctJSON(reply, msg)` by extracting the information needed from the received `msg`.
 
 
 ## Unit Tests
