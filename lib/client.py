@@ -104,8 +104,8 @@ def handle(msg):
     try:
       reply = getAt(getAt(lib_py, to), intent)(msg)
     except AttributeError as e:
-      reply = getAt(getAt(lib_py, to), intent)(msg["input"])
-    else:
+      reply = getAt(getAt(lib_py, to), intent)(msg.get("input"))
+    except:
       e = sys.exc_info()[0]
       print('py handle fails.', e)
     finally:
