@@ -6,7 +6,6 @@
 When u put these tools so close together u start to see unpreceedented ways to combine them
 
 - mute ruby from travis
-- autofix io_start clash, check global io object
 - fix external dep: data/ models/ , npm run gi leaves file at aiva/
 - start first neural net to simple-classify sentence into intents
 - better menu format inspired by lita

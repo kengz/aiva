@@ -122,6 +122,8 @@ What this means is you can call a **module** by its name, and its **function** b
 
 On receiving a `msg`, the `client.<lang>` tries to call the function by passing `msg`. If that throws an exception, it retries by passing `msg.input`. After the function executes and returns the result, `client.<lang>`'s handler will check if the reply is a valid JSON, and if not, will make it into one via `correctJSON(reply, msg)` by extracting the information needed from the received `msg`.
 
+Lastly, after the `js` `global.gPass` sends out a `msg`, the final reply directed at it should contain an `output` field, as good dev pattern and reliability in resolving its promise.
+
 
 ## Unit Tests
 
