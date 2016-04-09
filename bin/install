@@ -69,6 +69,9 @@ echo "
 brew install python3
 sudo pip3 install -U setuptools
 sudo pip3 install -U virtualenvwrapper
+# spacy the better NLP, MIT-licensed
+sudo pip3 install -U spacy
+sudo python3 -m spacy.en.download
 # textblob
 sudo pip3 install -U textblob
 sudo python3 -m textblob.download_corpora
@@ -172,6 +175,9 @@ echo "
 sudo apt-get -y install python3-pip python-dev
 sudo pip3 install -U setuptools
 sudo pip3 install -U virtualenvwrapper
+# spacy the better NLP, MIT-licensed
+sudo pip3 install -U spacy
+sudo python3 -m spacy.en.download
 # textblob
 sudo pip3 install -U textblob
 sudo python3 -m textblob.download_corpora
