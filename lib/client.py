@@ -109,7 +109,6 @@ def handle(msg):
       reply = getAt(getAt(lib_py, to), intent)(msg)
     except:
       try:
-        print("enter attr error")
         reply = getAt(getAt(lib_py, to), intent)(msg.get("input"))
       except:
         e = sys.exc_info()[0]
