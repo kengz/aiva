@@ -16,7 +16,8 @@ $client = SocketIO::Client::Simple.connect 'http://localhost:'+PORT
 ioid = 'rb'
 # first join for serialization
 $client.on :connect do
-  $client.emit "join", ioid
+  p "emitting join, with", ioid
+  $client.emit :join, ioid
 end
 $client.on :disconnect do
   $client.disconnect()
@@ -40,7 +41,7 @@ def handle(msg)
       # !Note that the access isn't flexible as in py and js where dotpath can be use
       reply = Module.const_get(to).method(intent).call(msg)
       if reply['to']
-        $client.emit("pass", reply)
+        $client.emit(:pass, reply)
       end
     rescue
       puts 'rb handle fails'
@@ -48,7 +49,7 @@ def handle(msg)
   end
 end
 
-$client.on "take" do |msg|
+$client.on :take do |msg|
   handle(msg)
 end
 
