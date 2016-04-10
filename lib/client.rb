@@ -55,4 +55,5 @@ end
 
 # keep-alive
 loop do
+  sleep 0.3
 end
