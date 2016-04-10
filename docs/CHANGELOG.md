@@ -8,7 +8,7 @@ When u put these tools so close together u start to see unpreceedented ways to c
 - slightly better NLP: sentence-aware POS (try stanford via TB), OpenIE http://nlp.stanford.edu/software/openie.html to contruct knowledge graph
 - spacy is now MIT https://spacy.io/docs https://github.com/spacy-io/spaCy. Ok fuck let's do spacy
 - unit etst io_start?
-- mute ruby from travis
+- mute ruby from travis. yup mute ruby in travis, but keep script for usage, only no test
 - fix external dep: data/ models/ , npm run gi leaves file at aiva/
 - start first neural net to simple-classify sentence into intents
 - better menu format inspired by lita
