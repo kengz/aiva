@@ -61,6 +61,9 @@ def getAt(module, dotpath):
       prop = getattr(prop, k)
   return prop
 
+# print(lib_py)
+# print(getAt(lib_py, "ai.nlp"))
+# print(dir(getAt(lib_py, "ai.nlp")))
 # print(getAt(lib_py, "ai.tb.NERTag"))
 # print(getAt(lib_py, "hello.sayHi"))
 
@@ -99,15 +102,18 @@ client.on('disconnect', client.disconnect)
 def handle(msg):
   to = msg.get('to') # the target module, e.g. hello
   intent = msg.get('intent') # the module's function, e.g. sayHi()
+  reply = None
   if to is not None and intent is not None:
     # try JSON or JSON.input as input
     try:
       reply = getAt(getAt(lib_py, to), intent)(msg)
-    except AttributeError as e:
-      reply = getAt(getAt(lib_py, to), intent)(msg.get("input"))
     except:
-      e = sys.exc_info()[0]
-      print('py handle fails.', e)
+      try:
+        print("enter attr error")
+        reply = getAt(getAt(lib_py, to), intent)(msg.get("input"))
+      except:
+        e = sys.exc_info()[0]
+        print('py handle fails.', e)
     finally:
       # try JSON or made-JSON output
       reply = correctReply(reply, msg)
