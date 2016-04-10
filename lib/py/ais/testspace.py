@@ -1,7 +1,7 @@
 # import spacy.en; print(spacy.__file__)
 # import spacy.en
-from spacy.en import English
-nlp = English()
+# from spacy.en import English
+# nlp = English()
 # doc = nlp("This is a sentence. Here's another...")
 # import spacy
 
