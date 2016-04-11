@@ -124,8 +124,8 @@ def _calculate_tk(source):
 # Wrap up for py.ai.nlp to use
 t = Translator()
 
-def translate(source, from_lang="auto", to="en"):
-  return t.translate(source, from_lang=from_lang, to_lang=to)
+def translate(source, to="en"):
+  return t.translate(source, from_lang="auto", to_lang=to)
 
 def detect_language(source):
   return t.detect(source)
