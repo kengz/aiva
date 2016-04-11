@@ -62,10 +62,8 @@ def getAt(module, dotpath):
   return prop
 
 # print(lib_py)
-# print(getAt(lib_py, "ai.nlp"))
-# print(dir(getAt(lib_py, "ai.nlp")))
-# print(getAt(lib_py, "ai.tb.NERTag"))
 # print(getAt(lib_py, "hello.sayHi"))
+# print(getAt(lib_py, "ai.nlp"))
 
 def correctReply(reply, msg):
   '''correct the reply JSON'''

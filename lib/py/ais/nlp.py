@@ -82,3 +82,10 @@ def parsedoc(input):
 # https://github.com/spacy-io/sense2vec/
 # tuts https://spacy.io/docs#tutorials
 # custom NER and intent arg parsing eg https://github.com/spacy-io/spaCy/issues/217
+
+
+# import google translate
+from ai_lib.translate import *
+
+# print(translate('hola amigos'))
+# print(detect_language('hola amigos'))
