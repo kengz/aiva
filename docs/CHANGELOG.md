@@ -4,30 +4,26 @@
 ## AI Roadmap Todo
 
 
-- generate a list of callable functions from socket.io, otherwise it's all hidden
 - advance dependency parsing from spaCy or OpenIE http://nlp.stanford.edu/software/openie.html
-- unit etst io_start?
-- fix external dep: data/ models/ , npm run gi leaves file at aiva/
-- start first neural net to simple-classify sentence into intents
+- generate a list of callable functions from socket.io, otherwise it's all hidden
 - better menu format inspired by lita
+- unit test io_start?
+- fix external dep: data/ models/ none to load when first installed. use npm to distribute models
+- start first neural net to simple-classify sentence into intents
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
-- demo of ai working together
 - Attach KB source to answers
 - (delay to last) Google user auth
-- need basic NLP for basic brain access: entities/concept, or object-verb-subject
 - KB fallback: 3,2,1, if local fail, fallback to conceptnet, if still fail, fallback to google the most generic
 - ConceptNet parse into nodes and edges for query
 - ConceptNet getURI prechain to 3 methods
 - ConceptNet KB answer simple or existing sample text or graph language
 - skflow has rnn https://github.com/tensorflow/skflow/tree/master/examples, seq2seq https://github.com/tensorflow/skflow/blob/5db4eb1bde4fd015f21b950df60ea0061c595563/examples/language_model.py https://github.com/tensorflow/skflow/blob/5db4eb1bde4fd015f21b950df60ea0061c595563/examples/neural_translation.py https://github.com/tensorflow/skflow/blob/9ed1a458ecf7483c2695a076b9776f85014d5a65/examples/neural_translation_word.py
 - Ultimate RNN train QnA by seq2seq: https://github.com/farizrahman4u/seq2seq, https://github.com/nicolas-ivanov/tf_seq2seq_chatbot, https://github.com/adamchanson/seq2seq, skdlow has https://github.com/tensorflow/skflow/blob/master/skflow/models.py#L133
-- intent args identifier canonicalization by node NLP wordnet
 - RNN train intent args parsing
 - KB 3 canonicalization for node and edge keys
 - KB 3 local memory with auto structure and streamlined interface
 - KB 3 self inquiry and learning mechanism
 - functional hash reinsert function with partial args for inquire if incomplete
-- developers of any lang just do: tell the needed args JSON keys, since it's also needed for hash storage.
 - Pretrained RNN model loadning for NPM (any other pretrained model too)
 - Advance: online general learning
 - ohh hello there https://cloud.google.com/products/machine-learning/, https://cloud.google.com/ml/
@@ -41,7 +37,6 @@
 - user preference: weather, last food order etc, extensible
 - multi-platform tests: test switching out the adapter to Telegram/IRC, centralize brain recognize the same user across different platforms, and you can seamlessly pick up your bot from any platform - this will be the "one bot to rule it all" as you can find it anywhere and it will know this is the same person.
 - docs on full feature list, so devs know what they can use
-- FUCK Google translate wrapper https://github.com/sloria/TextBlob/blob/73679395d528dbed85cd230a9a5683ce4fb758f7/textblob/translate.py
 - add back branches:only:master to .travis.yml
 - update package.json name, private, url, license
 
@@ -92,4 +87,5 @@
 - `io_start` enables modularity on the complete polyglot deve environment with socket.io. Also returns promise for chaining
 - add google knowledge graph search
 - `client.<lang>` flexibly invokes function with dotpath, try with passing `msg` or retry with `msg.input`, then on returned result checks and compiles reply into a JSON with `correctJSON(reply, msg)`
-- replace textblob with spaCy - MIT, very advanced and performant. Nest under `py.ai.nlp`.Add translate too.
+- replace textblob with spaCy - MIT, very advanced and performant. Nest under `py.ai.nlp`. Add translate too.
+- finish `gen_nlp.js` as the general nlp to use for parsing all user inputs, for all purposes.
