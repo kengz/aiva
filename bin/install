@@ -72,9 +72,6 @@ sudo pip3 install -U virtualenvwrapper
 # spacy the better NLP, MIT-licensed
 sudo pip3 install -U spacy
 sudo python3 -m spacy.en.download
-# textblob
-sudo pip3 install -U textblob
-sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
 sudo pip3 install -U numpy
 sudo pip3 install -U scipy
@@ -121,26 +118,6 @@ rbenv rehash
   )
 
 
-# stanford nlp for nltk
-if [ ! -d "${HOME}/nltk_data/stanford-ner" ]; then (
-
-curl -o ~/nltk_data/stanford-ner.zip -Lk http://nlp.stanford.edu/software/stanford-ner-2015-12-09.zip
-unzip ~/nltk_data/stanford-ner.zip -d ~/nltk_data/stanford-ner && cd ~/nltk_data/stanford-ner/* && mv ./* ../ && rm ~/nltk_data/stanford-ner.zip && cd
-
-[[ ":$CLASSPATH:" != *":~/nltk_data/stanford-ner/stanford-ner.jar:"* ]] && 
-echo '
-# Stanford NLP
-export CLASSPATH=\$CLASSPATH:~/nltk_data/stanford-ner/stanford-ner.jar' >> ~/.bash_profile
-
-[[ ":$STANFORD_MODELS:" != *":~/nltk_data/stanford-ner/classifiers:"* ]] && 
-echo '
-export STANFORD_MODELS=~/nltk_data/stanford-ner/classifiers' >> ~/.bash_profile
-
-source ~/.bash_profile
-  );
-fi
-
-
 
 );
 # Linux runs below
@@ -178,9 +155,6 @@ sudo pip3 install -U virtualenvwrapper
 # spacy the better NLP, MIT-licensed
 sudo pip3 install -U spacy
 sudo python3 -m spacy.en.download
-# textblob
-sudo pip3 install -U textblob
-sudo python3 -m textblob.download_corpora
 # tensorflow and skflow
 sudo apt-get -y install libatlas-dev
 sudo apt-get -y install libblas-dev
@@ -238,26 +212,6 @@ gem install bundler
 gem install rails
 rbenv rehash
   )
-
-
-# stanford nlp for nltk
-if [ ! -d "${HOME}/nltk_data/stanford-ner" ]; then (
-
-curl -o ~/nltk_data/stanford-ner.zip -Lk http://nlp.stanford.edu/software/stanford-ner-2015-12-09.zip
-unzip ~/nltk_data/stanford-ner.zip -d ~/nltk_data/stanford-ner && cd ~/nltk_data/stanford-ner/* && mv ./* ../ && rm ~/nltk_data/stanford-ner.zip && cd
-
-[[ ":$CLASSPATH:" != *":~/nltk_data/stanford-ner/stanford-ner.jar:"* ]] && 
-echo '
-# Stanford NLP
-export CLASSPATH=\$CLASSPATH:~/nltk_data/stanford-ner/stanford-ner.jar' >> ~/.bashrc
-
-[[ ":$STANFORD_MODELS:" != *":~/nltk_data/stanford-ner/classifiers:"* ]] && 
-echo '
-export STANFORD_MODELS=~/nltk_data/stanford-ner/classifiers' >> ~/.bashrc
-
-source ~/.bashrc
-  );
-fi
 
 
 
