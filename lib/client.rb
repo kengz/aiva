@@ -17,7 +17,6 @@ ioid = 'rb'
 # first join for serialization
 $client.on :connect do
   $client.emit :join, ioid
-  p "emitted join with", ioid
 end
 $client.on :disconnect do
   $client.disconnect()
