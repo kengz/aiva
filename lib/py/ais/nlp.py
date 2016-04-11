@@ -40,10 +40,10 @@ def parse(sentence):
     "lower": [token.lower_ for token in doc],
     # "shape": [token.shape_ for token in doc],
 
-    "NER": list(zip([span.text for span in doc.ents], [span.label_ for span in doc.ents])),
-    "noun_phrase": [span.text for span in doc.noun_chunks],
-    "pos_coarse": [token.pos_ for token in doc],
-    "pos_fine": [token.tag_ for token in doc]
+    "NER": list(zip([token.text for token in doc.ents], [token.label_ for token in doc.ents])),
+    "noun_phrase": [token.text for token in doc.noun_chunks],
+    "pos_coarse": list(zip([token.text for token in doc], [token.pos_ for token in doc])),
+    "pos_fine": list(zip([token.text for token in doc], [token.tag_ for token in doc])),
   }
   return reply
 
