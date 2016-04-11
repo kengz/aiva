@@ -4,6 +4,7 @@
 ## AI Roadmap Todo
 
 
+- generate a list of callable functions from socket.io, otherwise it's all hidden
 - advance dependency parsing from spaCy or OpenIE http://nlp.stanford.edu/software/openie.html
 - unit etst io_start?
 - fix external dep: data/ models/ , npm run gi leaves file at aiva/
