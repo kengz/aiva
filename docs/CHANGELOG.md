@@ -3,7 +3,7 @@
 
 ## AI Roadmap Todo
 
-
+- unit test gen_nlp, but spare travis from it? spacy is 500mb https://github.com/spacy-io/spaCy/blob/master/.travis.yml
 - advance dependency parsing from spaCy or OpenIE http://nlp.stanford.edu/software/openie.html
 - generate a list of callable functions from socket.io, otherwise it's all hidden
 - better menu format inspired by lita
