@@ -1,9 +1,12 @@
 # from spacy.en import English
 # nlp = English()
 
-def parse(input):
-  # ok call the func by sentences
-  doc = nlp(input)
+# make into sentences
+def parse(sentence):
+  """
+  parse an input sentence with spaCy and return the basic nlp properties.
+  """
+  doc = nlp(sentence)
   reply = {
     "text": doc.text,
     "len": len(doc),
@@ -11,7 +14,7 @@ def parse(input):
     "tokens": [token.text for token in doc],
     "lemmas": [token.lemma_ for token in doc],
     "lower": [token.lower_ for token in doc],
-    "shape": [token.shape_ for token in doc],
+    # "shape": [token.shape_ for token in doc],
 
     "NER": list(zip([span.text for span in doc.ents], [span.label_ for span in doc.ents])),
     "noun_phrase": [span.text for span in doc.noun_chunks],
@@ -20,10 +23,13 @@ def parse(input):
   }
   return reply
 
-    # "sentences": [sent.text for sent in doc.sents],
-    # "sents_tokens": [[token.text for token in sent] for sent in doc.sents],
+# res = parse("Mr. Best flew to New York on Saturday morning at 9am.")
+
+# "sentences": [sent.text for sent in doc.sents],
+# "sents_tokens": [[token.text for token in sent] for sent in doc.sents],
 
 # more shits:
+# also filter to prepare for tree
 # syntactic parse tree https://spacy.io/docs#span-navigativing-parse
 # word2vec, numpy array
 # similarity https://spacy.io/docs#examples-word-vectors https://spacy.io/docs#span-similarity
@@ -50,10 +56,10 @@ def parse(input):
 # Basic useful extraction
 
 # class Doc
-# Note that the doc already chunks shit up properly instead blind single tokenization
 # properties: text, vector, vector_norm, ents, noun_chunks, sents
 # method: similarity
 # NER specs https://spacy.io/docs#annotation-ner
+# doc tokenization will preserve meaningful units together
 
 # class Token
 # token.doc -> parent sequence
