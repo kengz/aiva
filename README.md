@@ -2,10 +2,6 @@
 
 *Previously known as JARVIS.*
 
-**WARNING**: The old JARVIS (current master branch) will be nuked when v3 is released. If you need it, `git checkout` to release tag [v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
-
-**Update**: [AIVA v3](https://github.com/kengz/aiva/tree/aiva-v3) will be released 7 April 2016. I'm still finalizing several ai/ml/nlp capabilities, streamlining the system for dev usage, and preparing docs, so that the released project is actually usable.
-
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
 | AIVA is | |
@@ -21,18 +17,37 @@ AIVA is based on a theoretical interface [HTMI](./docs/HTMI.md) and a brain [CGK
 
 ## Next version (AIVA)
 
-**The next version** *of Jarvis is under development. To prevent potential copyright issues the name will be changed away from JARVIS too.* Update: it will be called `AIVA`, and is currently under the branch `aiva-v3`.
+**WARNING**: The old JARVIS (current master branch) will be nuked when v3 is released. If you need it, `git checkout` to [release tag v2.0](https://github.com/kengz/aiva/releases/tag/v2.0) or download it.
 
-**Timeline**: *late-March 2016.*
+**Update**: [AIVA v3 (currently under the branch `aiva-v3`)](https://github.com/kengz/aiva/tree/aiva-v3) release is postponed to late April. I'd like to work on it more and add better AI/NLP capabilities, mature tools, more streamlined polyglot dev environment, and good docs.
 
-##### New features
 
-1. graph knowledge base for a powerful brain
-1. Natural Language Processing
-1. extendable scripts with polyglot control, via SocketIO (nodejs, python, ruby and more)
-1. easier setup, deployment on Ubuntu and MacOS
-1. unit tests
-1. better help menu
+##### Implemented features
+
+- auto-setup and deployment on Ubuntu and MacOS so you can get right into dev
+- streamlined polyglot dev environment using `socket.io`: `node.js`, `python`, `ruby`, and very likely `java` and `c++`
+- unit tests
+- advanced NLP powered by [spaCy](https://spacy.io/)
+- Locally trained and deployed DNN with [Tensorflow](https://www.tensorflow.org/) and [skflow](https://github.com/tensorflow/skflow)
+- Brain: Graph Knowledge Bases of general knowledge, powered by Google Knowledge Graph
+- Google API
+- IBM Watson
+- Indico ML
+
+
+[AIVA-v3 is now runnable](https://github.com/kengz/aiva/tree/aiva-v3), I have a live version up for basic uses. If you wanna try it out, just clone this repo and checkout the branch `aiva-v3`.
+
+
+##### Pending features
+
+1. better graph knowledge base to remember user-specific knowledge
+1. mid-level graph knowledge base with ConceptNet
+1. auto-planning using the CGKB and HTMI (see AIVA-v3 branch)
+1. auto command parsing and execution, with auto-dialog engine: detect user intent (function), start a dialog with auto-planning to query needed arguments (parameters), then execute and return the results.
+1. seq2seq RNN and classifiers to auto detect functions and arguments, so developers do not have to write a regex parser/handler for every function, to painstakingly get the right user inputs in a strict format
+1. seq2seq RNN-trained chat engine for casual chat with users, and for the dialog engine
+1. restore old basic functionalities: reminder, todo, time, geocoding, weather, help menu
+
 
 
 ## Here onward is legacy doc
