@@ -1,59 +1,8 @@
-# from spacy.en import English
-# nlp = English()
+# NLP with spaCy https://spacy.io
+from spacy.en import English
+nlp = English()
 
-# make into sentences
-def parse(sentence):
-  """
-  parse an input sentence with spaCy and return the basic nlp properties.
-  """
-  doc = nlp(sentence)
-  reply = {
-    "text": doc.text,
-    "len": len(doc),
-
-    "tokens": [token.text for token in doc],
-    "lemmas": [token.lemma_ for token in doc],
-    "lower": [token.lower_ for token in doc],
-    # "shape": [token.shape_ for token in doc],
-
-    "NER": list(zip([span.text for span in doc.ents], [span.label_ for span in doc.ents])),
-    "noun_phrase": [span.text for span in doc.noun_chunks],
-    "pos_coarse": [token.pos_ for token in doc],
-    "pos_fine": [token.tag_ for token in doc]
-  }
-  return reply
-
-# res = parse("Mr. Best flew to New York on Saturday morning at 9am.")
-
-# "sentences": [sent.text for sent in doc.sents],
-# "sents_tokens": [[token.text for token in sent] for sent in doc.sents],
-
-# more shits:
-# also filter to prepare for tree
-# syntactic parse tree https://spacy.io/docs#span-navigativing-parse
-# word2vec, numpy array
-# similarity https://spacy.io/docs#examples-word-vectors https://spacy.io/docs#span-similarity
-
-# Syntactic dependencies
-# s1 = list(doc.sents)[0]
-# r = s1.root
-# c = r.children
-# tree https://spacy.io/docs#span-navigativing-parse
-# list(r.rights) get children of next level
-# list(r.lefts)
-# 
-# see displacy it's a combo of multiple parser and grouping
-# https://spacy.io/demos/displacy
-# https://github.com/spacy-io/spaCy/issues/244
-# hmm it's a progressive filter:
-# NER -> np -> pos
-# 
-# https://github.com/spacy-io/sense2vec/
-# tuts https://spacy.io/docs#tutorials
-# custom NER and intent arg parsing eg https://github.com/spacy-io/spaCy/issues/217
-
-
-# Basic useful extraction
+# Useful properties, summary of the docs from https://spacy.io
 
 # class Doc
 # properties: text, vector, vector_norm, ents, noun_chunks, sents
@@ -76,3 +25,60 @@ def parse(sentence):
 # methods: similarity
 # syntactic parse: use root, lefts, rights, subtree https://spacy.io/docs#span-navigativing-parse
 
+
+def parse(sentence):
+  """
+  Main method: parse an input sentence and return the nlp properties.
+  """
+  doc = nlp(sentence)
+  reply = {
+    "text": doc.text,
+    "len": len(doc),
+
+    "tokens": [token.text for token in doc],
+    "lemmas": [token.lemma_ for token in doc],
+    "lower": [token.lower_ for token in doc],
+    # "shape": [token.shape_ for token in doc],
+
+    "NER": list(zip([span.text for span in doc.ents], [span.label_ for span in doc.ents])),
+    "noun_phrase": [span.text for span in doc.noun_chunks],
+    "pos_coarse": [token.pos_ for token in doc],
+    "pos_fine": [token.tag_ for token in doc]
+  }
+  return reply
+
+# res = parse("Mr. Best flew to New York on Saturday morning at 9am.")
+
+def parsedoc(input):
+  """
+  parse for multi-sentences; split and apply parse in a list.
+  """
+  doc = nlp(input, tag=False, entity=False)
+  return [parse(sent.text) for sent in doc.sents]
+
+# res = parsedoc("Mr. Best flew to New York on Saturday morning at 9am. Also his wife was flying with him too.")
+
+
+# !more to implement:
+# also filter to prepare for tree
+# syntactic parse tree https://spacy.io/docs#span-navigativing-parse
+# word2vec, numpy array
+# similarity https://spacy.io/docs#examples-word-vectors https://spacy.io/docs#span-similarity
+
+# Syntactic dependencies
+# s1 = list(doc.sents)[0]
+# r = s1.root
+# c = r.children
+# tree https://spacy.io/docs#span-navigativing-parse
+# list(r.rights) get children of next level
+# list(r.lefts)
+# 
+# see displacy it's a combo of multiple parser and grouping
+# https://spacy.io/demos/displacy
+# https://github.com/spacy-io/spaCy/issues/244
+# hmm it's a progressive filter:
+# NER -> np -> pos
+# 
+# https://github.com/spacy-io/sense2vec/
+# tuts https://spacy.io/docs#tutorials
+# custom NER and intent arg parsing eg https://github.com/spacy-io/spaCy/issues/217
