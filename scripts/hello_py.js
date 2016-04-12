@@ -6,7 +6,7 @@ module.exports = function(robot) {
 
   // menu
   robot.respond(/hello_py$/i, function(res) {
-    res.send('`hello_py {py}`')
+    res.send('`hello_py [py]`')
   })
 
   // call the hello.py methods

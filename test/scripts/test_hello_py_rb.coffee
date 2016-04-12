@@ -14,10 +14,10 @@ describe 'scripts/hello_py_rb.js', ->
         yield delayer()
 
     # response
-    it 'hubot: `hello_py_rb {rb}`', ->
+    it 'hubot: `hello_py_rb [rb]`', ->
       @room.messages.should.eql [
         ['alice', '@hubot hello_py_rb']
-        ['hubot', '`hello_py_rb {rb}`']
+        ['hubot', '`hello_py_rb [rb]`']
       ]
 
   # Test
