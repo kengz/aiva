@@ -3,11 +3,9 @@
 
 ## AI Roadmap Todo
 
-- unit test gen_nlp, but spare travis from it? spacy is 500mb https://github.com/spacy-io/spaCy/blob/master/.travis.yml
 - advance dependency parsing from spaCy or OpenIE http://nlp.stanford.edu/software/openie.html
 - generate a list of callable functions from socket.io, otherwise it's all hidden
 - better menu format inspired by lita
-- unit test io_start?
 - fix external dep: data/ models/ none to load when first installed. use npm to distribute models
 - start first neural net to simple-classify sentence into intents
 - skflow gridsearch hyperparam with spark https://databricks.com/blog/2016/02/08/auto-scaling-scikit-learn-with-spark.html
@@ -88,4 +86,4 @@
 - add google knowledge graph search
 - `client.<lang>` flexibly invokes function with dotpath, try with passing `msg` or retry with `msg.input`, then on returned result checks and compiles reply into a JSON with `correctJSON(reply, msg)`
 - replace textblob with spaCy - MIT, very advanced and performant. Nest under `py.ai.nlp`. Add translate too.
-- finish `gen_nlp.js` as the general nlp to use for parsing all user inputs, for all purposes.
+- finish `gen_nlp.js` as the general nlp to use for parsing all user inputs, for all purposes. parses core NLP properties, and time.
