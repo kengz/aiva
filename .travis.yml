@@ -39,7 +39,7 @@ install:
   - npm install
   - sudo pip3 install -U setuptools
   - sudo pip3 install -U virtualenvwrapper
-  - sudo pip3 install -U spacy
+  - sudo pip3 install -qU spacy
   - sudo python3 -m spacy.en.download
   # - sudo pip3 install -qU https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
   # - sudo pip3 install -qU scikit-learn
