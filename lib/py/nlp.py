@@ -85,7 +85,7 @@ def parsedoc(input):
 
 
 # import google translate
-from ai_lib.translate import *
+from ais.ai_lib.translate import *
 
 # print(translate('hola amigos'))
 # print(detect_language('hola amigos'))
