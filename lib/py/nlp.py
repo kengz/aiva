@@ -73,6 +73,80 @@ def parsedoc(input):
 # list(r.rights) get children of next level
 # list(r.lefts)
 # 
+# [{
+#   "<root>": {
+#     "lefts": [
+#     {}, {}, ...],
+#     "rights": []
+#   }
+# }]
+
+# e.g.:
+# [{
+#   "flew": {
+#     "lefts": [
+#       { "Best": {} }
+#     ],
+#     "rights": [
+#       { "to": {} },
+#       { "on": {} },
+#       { "at": {} },
+#       { ".": {} },
+
+#     ]
+#   }
+# }]
+
+def gen_tree(root):
+  subtree = {
+    root.text: {
+      "edge_from_parent": <ccomp, nobj etc.>
+      "lefts": [],
+      "rights": []
+    }
+  }
+  lefts = list(root.lefts)
+  rights = list(root.rights)
+  for l in lefts:
+    subtree[root.text]["lefts"].append(gen_tree(l))
+  for r in rights:
+    subtree[root.text]["rights"].append(gen_tree(r))
+  return subtree
+
+
+# def tag_filter(doc):
+#   ents = doc.ents
+#   index = 0
+#   res = []
+#   for e in ents:
+#     while index < e.start:
+#       # skip the tokens that are in NER tags
+#       res.append( (doc[index].text, doc[index].pos_) )
+#       index = index + 1
+#     res.append( (e.text, e.label_) )
+#     index = e.end # reset by skipping
+#   # keep iterating till len(doc)
+#   while index < len(doc):
+#     res.append( (doc[index].text, doc[index].pos_) )
+#     index = index + 1
+#   return res
+
+
+# modifies the doc in place by merging ents into single tokens
+def tag_filter(doc):
+  for ent in doc.ents:
+    ent.merge(ent.root.tag_, ent.text, ent.label_)
+  return [(token.text, token.ent_type_ or token.pos_) for token in doc]
+
+
+s = "displaCy uses CSS AND JavaScript to show you how computers understand language."
+# [('displaCy', 'PRODUCT'), ('uses', 'VERB'), ('CSS', 'PRODUCT'), ('AND', 'CONJ'), ('JavaScript', 'PRODUCT'), ('to', 'PART'), ('show', 'VERB'), ('you', 'NOUN'), ('how', 'ADV'), ('computers', 'NOUN'), ('understand', 'VERB'), ('language', 'NOUN'), ('.', 'PUNCT')]
+
+s = "find me flights from New York to London next month"
+# [('find', 'VERB'), ('me', 'NOUN'), ('flights', 'NOUN'), ('from', 'ADP'), ('New York', 'GPE'), ('to', 'ADP'), ('London', 'GPE'), ('next month', 'DATE')]
+
+
+# 
 # see displacy it's a combo of multiple parser and grouping
 # https://spacy.io/demos/displacy
 # https://github.com/spacy-io/spaCy/issues/244
