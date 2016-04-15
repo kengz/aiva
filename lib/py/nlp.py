@@ -97,24 +97,8 @@ def parsedoc(input):
 #   }
 # }]
 
-def gen_tree(root):
-  subtree = {
-    root.text: {
-      "edge_from_parent": <ccomp, nobj etc.>
-      "lefts": [],
-      "rights": []
-    }
-  }
-  lefts = list(root.lefts)
-  rights = list(root.rights)
-  for l in lefts:
-    subtree[root.text]["lefts"].append(gen_tree(l))
-  for r in rights:
-    subtree[root.text]["rights"].append(gen_tree(r))
-  return subtree
 
-
-# def tag_filter(doc):
+# def NER_POS_tag(doc):
 #   ents = doc.ents
 #   index = 0
 #   res = []
@@ -131,13 +115,68 @@ def gen_tree(root):
 #     index = index + 1
 #   return res
 
-
-# modifies the doc in place by merging ents into single tokens
-def tag_filter(doc):
+def merge_ents(doc):
+  '''Helper: merge adjacent entities into single tokens; modifies the doc.'''
   for ent in doc.ents:
     ent.merge(ent.root.tag_, ent.text, ent.label_)
+  return doc
+
+def NER_POS_tag(doc):
+  '''tag the doc first by NER (merged as tokens) then POS. Can be seen as the flat version of NER_POS_tree'''
+  merge_ents(doc) # merge the entities into single tokens first
   return [(token.text, token.ent_type_ or token.pos_) for token in doc]
 
+
+def _NER_POS_lr_subtree(root):
+  '''Helper: generate a NER_POS subtree with left/right for a root token. The doc must have merge_ents(doc) ran on it.'''
+  subtree = {
+    root.text: {
+      "edge": root.dep_,
+      "tag": root.ent_type_ or root.pos_,
+      "lefts": [],
+      "rights": []
+    }
+  }
+  for l in root.lefts:
+    subtree[root.text]["lefts"].append(_NER_POS_subtree(l))
+  for r in root.rights:
+    subtree[root.text]["rights"].append(_NER_POS_subtree(r))
+  return subtree
+
+def _NER_POS_subtree(root):
+  '''Helper: generate a NER_POS subtree without left/right for a root token. The doc must have merge_ents(doc) ran on it.'''
+  subtree = {
+    root.text: {
+      "edge": root.dep_,
+      "tag": root.ent_type_ or root.pos_,
+      "children": []
+    }
+  }
+  for c in root.children:
+    subtree[root.text]["children"].append(_NER_POS_subtree(c))
+  return subtree
+
+
+def _NER_POS_lr_tree(sent):
+  '''Helper: generate the NER_POS tree (with left/right) for a sentence'''
+  return _NER_POS_lr_subtree(sent.root)
+  
+def _NER_POS_tree(sent):
+  '''Helper: generate the NER_POS tree for a sentence'''
+  return _NER_POS_subtree(sent.root)
+
+def NER_POS_lr_tree(doc):
+  '''generate the NER_POS tree (with left/right) for all sentences in a doc'''
+  merge_ents(doc) # merge the entities into single tokens first
+  return [_NER_POS_lr_tree(sent) for sent in doc.sents]
+
+def NER_POS_tree(doc):
+  '''generate the NER_POS tree for all sentences in a doc'''
+  merge_ents(doc) # merge the entities into single tokens first
+  return [_NER_POS_tree(sent) for sent in doc.sents]
+
+
+# token.dep_, token.head
 
 s = "displaCy uses CSS AND JavaScript to show you how computers understand language."
 # [('displaCy', 'PRODUCT'), ('uses', 'VERB'), ('CSS', 'PRODUCT'), ('AND', 'CONJ'), ('JavaScript', 'PRODUCT'), ('to', 'PART'), ('show', 'VERB'), ('you', 'NOUN'), ('how', 'ADV'), ('computers', 'NOUN'), ('understand', 'VERB'), ('language', 'NOUN'), ('.', 'PUNCT')]
