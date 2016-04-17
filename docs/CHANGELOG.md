@@ -3,7 +3,8 @@
 
 ## AI Roadmap Todo
 
-- advance dependency parsing from spaCy or OpenIE http://nlp.stanford.edu/software/openie.html
+- generalize customMessage parser. unify @customMessage on adapters? then a centralized generator to parse into format according to current adapter.
+- platforms unification is simply by spawning one instance for each adapter, while all sharing the same brain and capability. Specification by having a resolving "send attachment" buttons for Slack attachments, fb template, Telegram buttons etc. Whereas all states (memories) shall be user-serialized and preserved in the central brain. This is then like "one brain, many bodies(interfaces)". Def doable. This will need a brain interface to CRUD memories.
 - generate a list of callable functions from socket.io, otherwise it's all hidden
 - better menu format inspired by lita
 - fix external dep: data/ models/ none to load when first installed. use npm to distribute models
@@ -87,3 +88,4 @@
 - `client.<lang>` flexibly invokes function with dotpath, try with passing `msg` or retry with `msg.input`, then on returned result checks and compiles reply into a JSON with `correctJSON(reply, msg)`
 - replace textblob with spaCy - MIT, very advanced and performant. Nest under `py.ai.nlp`. Add translate too.
 - finish `gen_nlp.js` as the general nlp to use for parsing all user inputs, for all purposes. parses core NLP properties, and time.
+- add NER_POS tag and tree for `gen_nlp` from python nlp
