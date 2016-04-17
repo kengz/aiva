@@ -24,7 +24,7 @@ describe 'scripts/translate.js', ->
     beforeEach ->
       co =>
         yield @room.user.say 'alice', '@hubot translate 我是机器人'
-        yield delayer(3)
+        yield delayer(10)
 
     # response
     it 'hubot: I Robot', ->
