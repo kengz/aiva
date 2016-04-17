@@ -69,3 +69,5 @@ branches:
     - aiva-v3
 matrix:
   fast_finish: true
+after_script:
+  "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
