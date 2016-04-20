@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,6 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,235 +109,501 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://github.com/kengz/aiva'>AIVA Github</a></li>
+            <li><a href='https://github.com/kengz/aiva-doc'>AIVA documentation Github</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        <h1 id="aiva">AIVA <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3" /></a> <a href="https://gemnasium.com/kengz/jarvis"><img alt="Dependency Status" src="https://gemnasium.com/kengz/jarvis.svg" /></a></h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p><strong>AIVA</strong> (A.I. Virtual Assistant): General-purpose virtual assistant for developers. </p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<table><thead>
+<tr>
+<th style="text-align: left">AIVA is</th>
+<th></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">general-purpose</td>
+<td>An app interface, AI assistant, anything!</td>
+</tr>
+<tr>
+<td style="text-align: left">cross-platform</td>
+<td>Slack, Telegram, Facebook, IRC, Twilio, or any <a href="https://github.com/github/hubot/blob/master/docs/adapters.md">hubot adapters</a></td>
+</tr>
+<tr>
+<td style="text-align: left">multi-language</td>
+<td>Run and pass data among Node.js, Python3, Ruby, etc.</td>
+</tr>
+<tr>
+<td style="text-align: left">hackable</td>
+<td>It extends <a href="https://github.com/github/hubot">Hubot</a>. Add your own modules!</td>
+</tr>
+<tr>
+<td style="text-align: left">powerful, easy to use</td>
+<td>Check out <a href="#setup">setup</a> and <a href="#features">features</a></td>
+</tr>
+</tbody></table>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>AIVA is based on a theoretical interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md">CGKB</a> that is <em>human-bounded Turing complete</em>. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.</p>
 
-<h1 id="authentication">Authentication</h1>
+<h2 id="installation">Installation</h2>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<p>Clone this repo:</p>
+<pre class="highlight shell"><code>git clone https://github.com/kengz/aiva.git
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<p>Use <strong>Ubuntu &gt;14.04</strong> or <strong>MacOSX</strong>; For the fastest VM setup, I recommend <a href="https://www.digitalocean.com">Digital Ocean</a>, with this automatic <a href="https://github.com/kengz/mac_setup">setup script</a>. Optionally for manual setup, see <a href="#dependencies">Dependencies</a>.</p>
+
+<h2 id="setup-run"><a name="setup"></a>Setup, Run</h2>
+
+<h3 id="one-time-setup"><a name="one-time-setup"></a>One-time Setup</h3>
+
+<ul>
+<li><strong>install dependencies</strong>: </li>
+</ul>
+<pre class="highlight shell"><code>npm run gi
 </code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<ul>
+<li><strong>setup keys</strong>: update <code class="prettyprint">.env</code>, <code class="prettyprint">bin/.key-aiva</code> (production), <code class="prettyprint">bin/.key-aivadev</code> (development).</li>
+</ul>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p>Check <a href="#setup-tips"><strong>Setup tips</strong></a> for more help.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+If you prefer a different bot name, replace &ldquo;aiva&rdquo; from the <code>bin/.keys-</code> and in <code>package.json</code>.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+<h3 id="run"><a name="run"></a>Run</h3>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<ul>
+<li><strong>run</strong>: <code class="prettyprint">npm start</code>; append <code class="prettyprint">--bot=&lt;bot-name&gt;</code> to run the non-default bots.</li>
+</ul>
+<pre class="highlight shell"><code><span class="c"># alternative commands</span>
+forever list <span class="c"># see the list of bots running</span>
+npm stop <span class="c"># stop all bots</span>
+npm run debug <span class="c"># run aivadev, log to terminal</span>
+npm run debug --bot<span class="o">=</span>aiva <span class="c"># debug aiva</span>
+npm run shell <span class="c"># fast dev, run aivadev with shell-adapter</span>
+npm <span class="nb">test</span> <span class="c"># run unit tests</span>
+</code></pre>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The default hubot adapter is Slack. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+          <h1 id="features"><a name="features"></a>Features</h1>
+
+          <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
+
+<p>AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
+
+<p>You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.</p>
+
+<h2 id="polyglot-environment">Polyglot Environment</h2>
+
+<p><strong>Unite we stand</strong>. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in <code class="prettyprint">Socket.io</code> client logic, AIVA allows you to write in multiple coordinating languages.</p>
+
+<p>For now we have <code class="prettyprint">/lib/client.{js, py, rb}</code>. Feel free to add <code class="prettyprint">Socket.io</code> client for more languages through pull request!</p>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start</code>.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
+node lib/io_start
+</code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<aside class="warning">
+This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it before starting the bot.
+</aside>
 
-<h3 id="http-request">HTTP Request</h3>
+<blockquote>
+<p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: quickly testing the translate function in <code class="prettyprint">python</code>.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// js: interface scripts</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"hola amigos"</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'ai.py'</span><span class="p">,</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'nlp.translate'</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="c1">// hello friends</span>
+</code></pre>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h2 id="polyglot-development"><a name="polyglot-dev"></a>Polyglot Development</h2>
+
+<p>The quickest way to get into dev is to look at the examples in <code class="prettyprint">lib/&lt;lang&gt;/</code> and <code class="prettyprint">scripts/</code>.</p>
+
+<p>The interface is <code class="prettyprint">js</code>, and it&rsquo;s pretty easy to write. the module can be written in any language if it has a Socket.io client.</p>
+
+<p>Development comes down to:</p>
+
+<ul>
+<li><strong>module</strong>: callable low level functions, lives in <code class="prettyprint">/lib/&lt;lang&gt;/&lt;module&gt;.&lt;lang&gt;</code>.</li>
+<li><strong>interface</strong>: high level user interface to call the module functions, lives in <code class="prettyprint">/scripts/&lt;interface&gt;.js</code></li>
+</ul>
+
+<aside class="notice">
+It is vital to follow the <a href="#project-dir">directory structure</a> to expose them to socket.io as it calls from <code>lib/&lt;lang&gt;/*</code> but not deeper. You can import nested modules from there and call it with dot-path. More on this later.
+</aside>
+
+<p>You write a module in <code class="prettyprint">&lt;lang&gt;</code>, how do you call it from the interface? There are 3 cases depending on the number of <code class="prettyprint">&lt;lang&gt;</code> (including <code class="prettyprint">js</code> for interface) involved.</p>
+
+<h3 id="case-1-lt-lang-gt">Case: 1 <code class="prettyprint">&lt;lang&gt;</code></h3>
+
+<p><code class="prettyprint">&lt;lang&gt; = js</code>. If your module is in <code class="prettyprint">js</code>, just <code class="prettyprint">require</code> it directly in the interface script.</p>
+
+<aside class="notice">
+Since the AIVA is based on hubot, you can refer to <a href="https://github.com/github/hubot/blob/master/docs/scripting.md">hubot scripting guide</a>. You can also <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading">load hubot scripts</a> written by others.
+</aside>
+
+<h3 id="case-2-lt-lang-gt-s">Case: 2 <code class="prettyprint">&lt;lang&gt;</code>s</h3>
+
+<p>e.g. <code class="prettyprint">&lt;lang&gt; = js, py</code>. </p>
+
+<p>1. You write a module <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a></p>
+
+<p>2. Call it from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> using the exposed <code class="prettyprint">global.gPass</code> function, with the JSON <code class="prettyprint">msg</code></p>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_py.js</span>
+<span class="nx">msg</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'Hello from user.'</span><span class="p">,</span> <span class="c1">// input for module function</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'hello.py'</span><span class="p">,</span> <span class="c1">// the target module</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'sayHi'</span> <span class="c1">// the module function to call with input</span>
+  <span class="c1">// add more as needed</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>3. Ensure the called module function returns a reply JSON to the interface:</p>
+<pre class="highlight python"><code><span class="c"># py: lib/py/hello.py</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'output'</span><span class="p">:</span> <span class="n">foo</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'input'</span><span class="p">)),</span> <span class="c"># output to interface</span>
+  <span class="s">'to'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'from'</span><span class="p">),</span> <span class="c"># is 'client.js' for interface</span>
+  <span class="s">'from'</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="c"># 'hello.py'</span>
+  <span class="s">'hash'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'hash'</span><span class="p">)</span> <span class="c"># callback hash for interface</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The JSON fields above are required for their purposes. <code class="prettyprint">global.gPass</code> used by the interface will auto-inject and <code class="prettyprint">id</code> for reply, and a <code class="prettyprint">hash</code> to resolve the promise for the interface.</p>
+
+<h3 id="case-3-lt-lang-gt-s">Case: 3 <code class="prettyprint">&lt;lang&gt;</code>s</h3>
+
+<p>e.g. <code class="prettyprint">&lt;lang&gt; = js, py, rb</code></p>
+
+<p>1. You write modules in <code class="prettyprint">py, rb</code> <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a></p>
+
+<p>2. Call one (<code class="prettyprint">py</code> in this example) from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py_rb.js" target="_blank"><code>scripts/hello_py_rb.js</code></a> as described earlier.</p>
+
+<p>3. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a> passes it further to the <code class="prettyprint">rb</code> module, by returning the JSON <code class="prettyprint">msg</code></p>
+<pre class="highlight python"><code><span class="c"># py: lib/py/hello_rb.py</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'input'</span><span class="p">:</span> <span class="s">'Hello from Python from js.'</span><span class="p">,</span> <span class="c"># input for rb module function</span>
+  <span class="s">'to'</span><span class="p">:</span> <span class="s">'Hello.rb'</span><span class="p">,</span> <span class="c"># the target module</span>
+  <span class="s">'intent'</span><span class="p">:</span> <span class="s">'sayHi'</span><span class="p">,</span> <span class="c"># the module function to call with input</span>
+  <span class="s">'from'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'from'</span><span class="p">),</span> <span class="c"># pass on 'client.js'</span>
+  <span class="s">'hash'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'hash'</span><span class="p">),</span> <span class="c"># pass on callback hash for interface</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>4. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a> ensure the final module function returns a reply JSON <code class="prettyprint">msg</code> to the interface. </p>
+
+<aside class="warning">
+For auto-id, Ruby filename need to be the same as its module name, case-sensitive.
+</aside>
+<pre class="highlight ruby"><code><span class="c1"># rb: lib/rb/Hello.rb</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'output'</span> <span class="o">=&gt;</span> <span class="s1">'Hello from Ruby.'</span><span class="p">,</span> <span class="c1"># output to interface</span>
+  <span class="s1">'to'</span> <span class="o">=&gt;</span> <span class="n">msg</span><span class="p">[</span><span class="s1">'from'</span><span class="p">],</span> <span class="c1"># 'client.js'</span>
+  <span class="s1">'from'</span> <span class="o">=&gt;</span> <span class="vc">@@id</span><span class="p">,</span> <span class="c1"># 'Hello.rb'</span>
+  <span class="s1">'hash'</span> <span class="o">=&gt;</span> <span class="n">msg</span><span class="p">[</span><span class="s1">'hash'</span><span class="p">]</span> <span class="c1"># callback hash for interface</span>
+<span class="p">}</span>
+</code></pre>
+
+<aside class="notice">
+Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic. See the <a href="#msg-json"><code>msg</code> JSON keys</a>.
+</aside>
+
+<p>With such pattern, you can chain multiple function calls that bounce among different <code class="prettyprint">&lt;lang&gt;</code>. Example use case: retrieve data from Ruby on Rails app, pass to Java to run algorithms, then to Python for data analysis, then back to Node.js interface.</p>
+
+<h3 id="quot-ma-look-no-hand-ler-s-quot">&ldquo;Ma look! No hand(ler)s!&rdquo;</h3>
+
+<p>&ldquo;Do I really have to add a handler to reply a JSON <code class="prettyprint">msg</code> for <strong>every</strong> function I call?&rdquo;. That&rsquo;s really cumbersome. </p>
+
+<p>To streamline polyglot development further we&rsquo;ve made the <code class="prettyprint">client.&lt;lang&gt;</code>&rsquo;s automatically try to compile a proper reply JSON <code class="prettyprint">msg</code>, using the original <code class="prettyprint">msg</code> it receives for invoking a function.</p>
+
+<p>What this means is you can call a <strong>module</strong> (<code class="prettyprint">to</code>) by its name, and its <strong>function</strong> (<code class="prettyprint">intent</code>) by specifying the dotpath (if it&rsquo;s nested), then providing a valid <code class="prettyprint">input</code> format (single argument for now).</p>
+
+<p>On receiving a <code class="prettyprint">msg</code>, the <code class="prettyprint">client.&lt;lang&gt;</code> tries to call the function by passing <code class="prettyprint">msg</code>. If that throws an exception, it retries by passing <code class="prettyprint">msg.input</code>. After the function executes and returns the result, <code class="prettyprint">client.&lt;lang&gt;</code>&rsquo;s handler will check if the reply is a valid JSON, and if not, will make it into one via <code class="prettyprint">correctJSON(reply, msg)</code> by extracting the information needed from the received <code class="prettyprint">msg</code>.</p>
+
+<p>Lastly, after the <code class="prettyprint">js</code> <code class="prettyprint">global.gPass</code> sends out a <code class="prettyprint">msg</code>, the final reply directed at it should contain an <code class="prettyprint">output</code> field, as good dev pattern and reliability in promise-resolution. When <code class="prettyprint">global.gPass(msg)</code> gets its reply and its promise resolved, you will see <code class="prettyprint">hasher.handle invoking cb</code> in stdout.</p>
+
+<aside class="notice">
+In fact, once we finish the NLP auto-parsing feature for user sentences, we wouldn&rsquo;t even need to write an interface; Still working on it.
+</aside>
+
+<h2 id="unit-tests">Unit Tests</h2>
+
+<p>This repo includes only unit tests for <code class="prettyprint">js</code> <strong>modules</strong> and <strong>interface</strong> scripts using <code class="prettyprint">mocha</code>, and runs with <code class="prettyprint">npm test</code>. Note that tests should be for systems, thus the tests for AI models are excluded.</p>
+
+<p>For the module of other <code class="prettyprint">&lt;lang&gt;</code>, you may add any unit testing framework of your choice.</p>
+
+<h2 id="how-it-works-socket-io-logic-and-standard">How it works: Socket.io logic and standard</h2>
+
+<h3 id="msg-json-keys-for-different-purposes"><a name="msg-json"></a><code class="prettyprint">msg</code> JSON keys for different purposes.</h3>
+
+<ul>
+<li>to call a module&rsquo;s function in <code class="prettyprint">&lt;lang&gt;</code>: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a></li>
+</ul>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_py.js</span>
+<span class="nx">msg</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'Hello from user.'</span><span class="p">,</span> <span class="c1">// input for module function</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'hello.py'</span><span class="p">,</span> <span class="c1">// the target module</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'sayHi'</span> <span class="c1">// the module function to call with input</span>
+  <span class="c1">// add more as needed</span>
+<span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>to reply the payload to sender: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a></li>
+</ul>
+<pre class="highlight python"><code><span class="c"># py: lib/py/hello.py</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'output'</span><span class="p">:</span> <span class="n">foo</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'input'</span><span class="p">)),</span> <span class="c"># output to interface</span>
+  <span class="s">'to'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'from'</span><span class="p">),</span> <span class="c"># is 'client.js' for interface</span>
+  <span class="s">'from'</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="c"># 'hello.py'</span>
+  <span class="s">'hash'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'hash'</span><span class="p">)</span> <span class="c"># callback hash for interface</span>
+<span class="p">}</span>
+</code></pre>
+
+<ul>
+<li>to pass on payload to other module&rsquo;s function: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a></li>
+</ul>
+<pre class="highlight python"><code><span class="c"># py: lib/py/hello_rb.py</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'input'</span><span class="p">:</span> <span class="s">'Hello from Python from js.'</span><span class="p">,</span> <span class="c"># input for rb module function</span>
+  <span class="s">'to'</span><span class="p">:</span> <span class="s">'Hello.rb'</span><span class="p">,</span> <span class="c"># the target module</span>
+  <span class="s">'intent'</span><span class="p">:</span> <span class="s">'sayHi'</span><span class="p">,</span> <span class="c"># the module function to call with input</span>
+  <span class="s">'from'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'from'</span><span class="p">),</span> <span class="c"># pass on 'client.js'</span>
+  <span class="s">'hash'</span><span class="p">:</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'hash'</span><span class="p">),</span> <span class="c"># pass on callback hash for interface</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="msg-json-keys"><code class="prettyprint">msg</code> JSON keys</h3>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th style="text-align: left">key</th>
+<th>details</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td style="text-align: left">input</td>
+<td>input to the target module function.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td style="text-align: left">to</td>
+<td>filename of the target module in <code class="prettyprint">lib/&lt;lang&gt;</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left">intent</td>
+<td>function of the target module to call. Call nested function with dot-path, e.g. <code class="prettyprint">nlp.translate</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left">output</td>
+<td>output from the target function to reply with.</td>
+</tr>
+<tr>
+<td style="text-align: left">from</td>
+<td>ID of the script sending the <code class="prettyprint">msg</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left">hash</td>
+<td>auto-generated callback-promise hash from <code class="prettyprint">client.js</code> to callback interface.</td>
 </tr>
 </tbody></table>
+
+<p>Of course, add additional keys to the JSON as needed by your function.</p>
+
+<aside class="notice">
+Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic.
+</aside>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Socket.io can send deeply nested JSON with standard data type.
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id="server">Server</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>There is a socket.io server that extends Hubot&rsquo;s Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All <code class="prettyprint">msg</code>s go through it. For example, let <code class="prettyprint">msg.to = &#39;hello.py&#39;, msg.intent = &#39;sayHi&#39;</code>. The server splits this into <code class="prettyprint">module = &#39;hello&#39;, lang = &#39;py&#39;</code>, modifies <code class="prettyprint">msg.to = module</code>, then sends the <code class="prettyprint">msg</code> to the client of <code class="prettyprint">lang</code>.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<blockquote>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start</code>.</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
+node lib/io_start
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+
+<aside class="warning">
+This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it before starting the bot.
+</aside>
+
+<h3 id="clients">Clients</h3>
+
+<p>For each language, there is a socket.io client that imports all modules of its language within <code class="prettyprint">lib</code>. When server sends a <code class="prettyprint">msg</code> to it, the client&rsquo;s <code class="prettyprint">handle</code> will find the module and its function using <code class="prettyprint">msg.to, msg.intent</code> respectively, then call the function with <code class="prettyprint">msg</code> as the argument. If it gets a valid reply <code class="prettyprint">msg</code>, it will pass it on to the server.</p>
+
+<blockquote>
+<p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: quickly testing the translate function in <code class="prettyprint">python</code>.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// js: interface scripts</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
+
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"hola amigos"</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'ai.py'</span><span class="p">,</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'nlp.translate'</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="c1">// hello friends</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Note due to how a module is called using <code class="prettyprint">msg.to, msg.intent</code>, you must ensure that the functions are named properly, and <code class="prettyprint">Ruby</code>&rsquo;s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. <code class="prettyprint">lib/rb/Hello.rb</code> for the <code class="prettyprint">Hello</code> module.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<aside class="notice">
+To add support for other language, say Java, you can add a <code>lib/client.java</code> by following patterns in <code>lib/client.{py, rb}</code>, and starting them in <code>lib/io_client.js</code>. Please create a pull request if you do so :)
+</aside>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id="entry-point">Entry point</h3>
 
-<h3 id="http-request">HTTP Request</h3>
+<p>The entry point is always a <code class="prettyprint">js</code> interface script, but luckily we have made it trivial for non-js developers to write it. A full reference is <a href="https://github.com/github/hubot/blob/master/docs/scripting.md">hubot scripting guide</a>.</p>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">robot.respond</code> takes a regex and a callback function, which executes when the regex matches the string the robot receives. <code class="prettyprint">res.send</code> is the primary method we use to send a string to the user.</p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<p>Overall, there are 2 ways to connect with <code class="prettyprint">lib</code> modules:</p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<p><strong>global.gPass</strong>: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> This is a global method to pass a <code class="prettyprint">msg</code>. It generates a <code class="prettyprint">hash</code> using <code class="prettyprint">lib/hasher.js</code> with a <code class="prettyprint">Promise</code>, which is resolved whenever the <code class="prettyprint">js</code> client receives a valid reply <code class="prettyprint">msg</code> with same <code class="prettyprint">hash</code>. This method returns the resolved <code class="prettyprint">Promise</code> with that <code class="prettyprint">msg</code> for chaining.</p>
 
-          <h1 id="errors">Errors</h1>
+<p><strong>wrapped global.gPass</strong>: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/nlp.js" target="_blank"><code>lib/js/nlp.js</code></a> This is similar to above, but the <code class="prettyprint">msg</code> is properly generated by a <code class="prettyprint">js</code> lib module, resulting in a much cleaner and safer interface script. The lib module needs to be imported at the top to be used.</p>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<h3 id="data-flow">Data flow</h3>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The msg goes through socket.io as <code class="prettyprint">js(interface script) -&gt; js(io_server.js) -&gt; &lt;lang&gt;(client.&lt;lang&gt;) -&gt; js(io_server.js) -&gt; ...(can bound among different &lt;lang&gt; modules) -&gt; js(client.js) -&gt; js(interface script)</code></p>
+
+<p>For the <code class="prettyprint">hello_py.js</code> example, the path is <code class="prettyprint">js(scripts/hello_py.js) user input -&gt; js(lib/io_server.js) -&gt; py(client.py), call py function -&gt; js(io_server.js) -&gt; js(client.js) call Promise.resolve -&gt; js(interface script) send back to user</code></p>
+
+<h2 id="project-directory-structure"><a name="project-dir"></a>Project directory structure</h2>
+
+<p>What goes where:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th style="text-align: left">Folder/File</th>
+<th>Purpose</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td style="text-align: left">bin/</td>
+<td>bot keys, binaries, bash setup scripts.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td style="text-align: left">lib/&lt;lang&gt;/</td>
+<td>Module scripts, grouped by language, callable via socket.io. See <a href="#polyglot-dev">Polyglot Development</a>.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td style="text-align: left">lib/client.&lt;lang&gt;</td>
+<td>Import all scripts from <code class="prettyprint">lib/&lt;lang&gt;/</code> and expose them to socket.io for cross-language communication.</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td style="text-align: left">lib/io_start.js</td>
+<td>socket.io server and client logic for cross-language communication.</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td style="text-align: left">logs</td>
+<td>Logs from bot for debugging and healthcheck.</td>
 </tr>
 <tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td style="text-align: left">scripts</td>
+<td>The <code class="prettyprint">node.js</code> user interface for the <code class="prettyprint">lib/</code> modules.</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td style="text-align: left">scripts/_init.js</td>
+<td>Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded.</td>
 </tr>
 <tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td style="text-align: left">test</td>
+<td>Unit tests; uses Mocha.</td>
 </tr>
 <tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td style="text-align: left">.env</td>
+<td>Non-bot-specific environment variables.</td>
 </tr>
 <tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td style="text-align: left">external-scripts.json</td>
+<td>You can <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading">load Hubot npm modules</a> by specifying them in here and <code class="prettyprint">package.json</code>.</td>
 </tr>
 </tbody></table>
+
+<h2 id="what-to-use-for-what">What to use for what</h2>
+
+<p>Some of the best/recommended libraries for things:</p>
+
+<ul>
+<li><strong>NLP</strong>: SpaCy(python), TextBlob(py), Natural(js), StanfordNLP(java), Watson, Indico.io, Wordnet</li>
+<li><strong>Machine learning</strong>: scikit-learn(py), pandas(py), skflow(py), Google APIs</li>
+<li><strong>Deep learning</strong>: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)</li>
+<li><strong>Knowledge/concept base</strong>: ConceptNet, Wordnet, Google graph</li>
+<li>Whatever you do best in your favorite languages</li>
+</ul>
+
+          <h1 id="modules"><a name="modules"></a>Modules</h1>
+
+          <h1 id="setup-tips"><a name="setup-tips"></a>Setup tips</h1>
+
+<h2 id="neo4j">Neo4j</h2>
+
+<p>If it&rsquo;s your first installation of <code class="prettyprint">Neo4j</code>, change the password:</p>
+<pre class="highlight shell"><code>neo4j start
+<span class="c"># change your password</span>
+<span class="c"># note the default username:pswd is neo4j:neo4j</span>
+curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&lt;OLD_PSWD&gt; http://localhost:7474/user/neo4j/password
+<span class="c"># access Neo4j browser GUI</span>
+open http://localhost:7474
+</code></pre>
+
+<h2 id="ssh-browser-forwarding">SSH Browser-forwarding</h2>
+
+<p>If you&rsquo;re hosting Neo4j on a remote machine and want to access its browser GUI on your local machine, connect to it via </p>
+<pre class="highlight shell"><code>ssh -L 8080:localhost:7474 &lt;remote_host&gt;
+</code></pre>
+
+<p>Then you can go to <code class="prettyprint">http://localhost:8080/</code> on your local browser.</p>
+
+<h2 id="dependencies"><a name="dependencies"></a>Dependencies</h2>
+
+<p>All the system dependencies are installed automatically by running <code class="prettyprint">npm run gi</code>, which executes <a href="./bin/install"><code class="prettyprint">bin/install</code></a>. If you&rsquo;d like to setup your VM manually, see/edit the setup script; below is the list:</p>
+
+<ul>
+<li><code class="prettyprint">node.js &gt;v5.x</code></li>
+<li><code class="prettyprint">java jdk &gt;7, export $JAVA_HOME path</code></li>
+<li><code class="prettyprint">neo4j &gt;v2.3.0</code></li>
+<li><code class="prettyprint">neo4j shell tool</code></li>
+<li><code class="prettyprint">python3, pip3</code></li>
+<li><code class="prettyprint">setuptools virtualenvwrapper</code> (<code class="prettyprint">pip3</code>)</li>
+<li><code class="prettyprint">libatlas-dev libblas-dev gfortran</code> (<code class="prettyprint">Linux apt-get</code>)</li>
+<li><code class="prettyprint">numpy scipy tensorflow scikit-learn skflow pandas matplotlib</code> (<code class="prettyprint">pip3</code>)</li>
+<li><code class="prettyprint">ruby, bundler</code></li>
+<li><code class="prettyprint">forever, istanbul</code> (<code class="prettyprint">npm -g</code>)</li>
+</ul>
+
+          <h1 id="adapters"><a name="adapters"></a>Adapters</h1>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
