@@ -83,7 +83,7 @@ e.g. `<lang> = js, py, rb`
 2. Call one (`py` in this example) from the interface [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js) as described earlier.
 3. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON `msg`
 ```python
-lib/py/hello_rb.py
+# lib/py/hello_rb.py
 reply = {
   'input': 'Hello from Python from js.', # input for rb module function
   'to': 'Hello.rb', # the target module
