@@ -139,6 +139,10 @@
 <td>Run and pass data among Node.js, Python3, Ruby, etc.</td>
 </tr>
 <tr>
+<td style="text-align: left">built-in AI tools</td>
+<td>Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs</td>
+</tr>
+<tr>
 <td style="text-align: left">hackable</td>
 <td>It extends <a href="https://github.com/github/hubot">Hubot</a>. Add your own modules!</td>
 </tr>
@@ -194,15 +198,13 @@ npm <span class="nb">test</span> <span class="c"># run unit tests</span>
 
 <p>The default hubot adapter is Slack. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
 
-          <h1 id="features"><a name="features"></a>Features</h1>
-
           <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
 
 <p>AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
 
 <p>You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.</p>
 
-<h2 id="polyglot-environment">Polyglot Environment</h2>
+<h2 id="polyglot-environment"><a name="polyglot"></a>Polyglot Environment</h2>
 
 <p><strong>Unite we stand</strong>. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in <code class="prettyprint">Socket.io</code> client logic, AIVA allows you to write in multiple coordinating languages.</p>
 
@@ -450,7 +452,7 @@ node lib/io_start
 This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it before starting the bot.
 </aside>
 
-<h3 id="clients">Clients</h3>
+<h3 id="clients"><a name="clients"></a>Clients</h3>
 
 <p>For each language, there is a socket.io client that imports all modules of its language within <code class="prettyprint">lib</code>. When server sends a <code class="prettyprint">msg</code> to it, the client&rsquo;s <code class="prettyprint">handle</code> will find the module and its function using <code class="prettyprint">msg.to, msg.intent</code> respectively, then call the function with <code class="prettyprint">msg</code> as the argument. If it gets a valid reply <code class="prettyprint">msg</code>, it will pass it on to the server.</p>
 
@@ -472,6 +474,8 @@ This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it be
 <blockquote>
 <p>Note due to how a module is called using <code class="prettyprint">msg.to, msg.intent</code>, you must ensure that the functions are named properly, and <code class="prettyprint">Ruby</code>&rsquo;s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. <code class="prettyprint">lib/rb/Hello.rb</code> for the <code class="prettyprint">Hello</code> module.</p>
 </blockquote>
+
+<p>We now support <code class="prettyprint">node.js, python, ruby</code>.</p>
 
 <aside class="notice">
 To add support for other language, say Java, you can add a <code>lib/client.java</code> by following patterns in <code>lib/client.{py, rb}</code>, and starting them in <code>lib/io_client.js</code>. Please create a pull request if you do so :)
@@ -558,6 +562,132 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 <li><strong>Knowledge/concept base</strong>: ConceptNet, Wordnet, Google graph</li>
 <li>Whatever you do best in your favorite languages</li>
 </ul>
+
+          <h1 id="features"><a name="features"></a>Features</h1>
+
+<p>This gives a top level overview of the features. See <a href="#modules">Modules</a> to find usable functions for developers.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Feature</th>
+<th>Implemented?</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><a href="#setup2">fast setup</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#cross-platform">cross-platform</a></td>
+<td>implementing</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#multi-language">multi-language</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#builtin-ai">built-in AI tools</a></td>
+<td>yes</td>
+</tr>
+</tbody></table>
+
+<h2 id="fast-setup"><a name="setup2"></a>fast setup</h2>
+
+<p><a href="#setup">3 steps</a> to get a bot installed and running. It once took me just 15 seconds to deploy a bot for an unexpected demo. </p>
+
+<p><em>P/S &ldquo;fast&rdquo; implies the least number of steps; dependency installation can be heavy and long.</em></p>
+
+<h2 id="cross-platform"><a name="cross-platform"></a>cross-platform</h2>
+
+<p>The Facebook bot paradigm is &ldquo;why use multiple apps when you can access them from one bot?&rdquo;. I dare to ask &ldquo;why talk to the bot from one platform instead of everywhere?&rdquo;</p>
+
+<p>This inspires the <em>omnipresence</em> feature: a bot that recognizes who you are, and can continue conversation in any supported platforms. We talk to our friends everywhere, and they don&rsquo;t forget us when we switch apps. Bots should do the same too.</p>
+
+<p>In short: <em>one brain, multiple interfaces</em>. AIVA&rsquo;s hubot base allows for generality, and she can tap into multiple platforms by using different <a href="#adapters">adapters</a>. Unlike the original hubot though, she can exist simultaneously on multiple platforms by having several interface instances plugged into the respective adapters, and all share the same brain, which serves as the central memory.</p>
+
+<p>For the list of supported adapters see <a href="#adapters">adapters</a>.</p>
+
+<h2 id="multi-language"><a name="multi-language"></a>multi-language</h2>
+
+<p><strong>Unite we stand</strong>. When different languages work together, we can access a much larger set of development tools. Also, we wish that a developer can use the AIVA regardless of his/her favorite programming language. </p>
+
+<p>For more, see <a href="#polyglot">Polyglot environment</a> and <a href="#clients">Socket.io clients</a> for how it&rsquo;s done. We now support <code class="prettyprint">node.js, python, ruby</code>.</p>
+
+<h2 id="built-in-ai-tools"><a name="builtin-ai"></a>built-in AI tools</h2>
+
+<p>AIVA comes with a well-rounded set of AI/machine learning tools. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. </p>
+
+<p><code class="prettyprint">lib/&lt;lang&gt;/ais/</code> contains the specific implementations of the AI modules/models, and <code class="prettyprint">lib/&lt;lang&gt;/ai.&lt;lang&gt;</code> is the high-level script that imports the functions from <code class="prettyprint">lib/&lt;lang&gt;/ais/</code> for usage.</p>
+
+<p>Thanks to the multi-language feature, we can easily access the machine learning universe of Python. For example, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a> contains a sample Tensorflow training script <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_train.py" target="_blank"><code>dnn_titanic_train.py</code></a>, and a script to deploy that DNN for usage <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank"><code>dnn_titanic_deploy.py</code></a>. It is interfaced through <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank"><code>scripts/dnn_titanic.js</code></a> that allows you to use run predictions.</p>
+
+<p>The list of AI modules and their respective language:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">AI/ML</th>
+<th>type</th>
+<th>lang</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><a href="https://www.tensorflow.org">Tensorflow</a></td>
+<td>Neural Nets</td>
+<td>Python</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="http://scikit-learn.org/stable/">skflow (scikit-learn)</a></td>
+<td>Generic ML algorithms</td>
+<td>Python</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://spacy.io">spaCy</a></td>
+<td>NLP</td>
+<td>Python</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://indico.io">Indico.io</a></td>
+<td>text+image analysis</td>
+<td>(REST API) Node.js client</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="http://www.ibm.com/cloud-computing/bluemix/watson/">IBM Watson</a></td>
+<td>cognitive computing</td>
+<td>Node.js client</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://console.developers.google.com/apis">Google API</a></td>
+<td>multiple</td>
+<td>Node.js client</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/Planeshifter/node-concept-net">ConceptNet</a></td>
+<td>semantic network</td>
+<td>(REST API) Node.js interface</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/NaturalNode/natural">NodeNatural</a></td>
+<td>NLP</td>
+<td>Node.js</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/moos/wordpos">wordpos</a></td>
+<td>WordNet POS</td>
+<td>Node.js</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/matthewmueller/date">date.js</a></td>
+<td>time-parsing</td>
+<td>Node.js</td>
+</tr>
+</tbody></table>
+
+<p>These tools are put close together in a <a href="#polyglot">polyglot environment</a>, so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses <code class="prettyprint">date.js</code> and <code class="prettyprint">spaCy</code>.</p>
+
+<p>For more in-depth details, see <a href="#modules">modules</a>. Also if find a great ML tool we should include, submit a Pull Request!</p>
+
+<p>add code example of gen_nlp in action, 
+and pictures of DNN used</p>
 
           <h1 id="modules"><a name="modules"></a>Modules</h1>
 
