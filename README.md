@@ -224,7 +224,7 @@ The powerful thing is that you can access Jarvis from anywhere! We use Slack, so
 
 
 
-#### <a name="platform"></a>Quasi-immortality
+#### <a name="immortal"></a>Quasi-immortality
 My team likes to break things, and Jarvis was the obvious target. 
 
 Jarvis is quasi-immortal. He will never sleep (uses `cron`), and will resurrect upon death (uses `forever-monitor`). So, kill him as many times as you wish, he will always come back to live, unless if the server farm gets nuked of course.
