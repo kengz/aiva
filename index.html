@@ -118,6 +118,10 @@
       <div class="content">
         <h1 id="aiva">AIVA <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3" /></a> <a href="https://gemnasium.com/kengz/jarvis"><img alt="Dependency Status" src="https://gemnasium.com/kengz/jarvis.svg" /></a></h1>
 
+<aside class="warning">
+This documentation is still being completed.
+</aside>
+
 <p><strong>AIVA</strong> (A.I. Virtual Assistant): General-purpose virtual assistant for developers. </p>
 
 <table><thead>
@@ -214,7 +218,7 @@ npm <span class="nb">test</span> <span class="c"># run unit tests</span>
 <p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start</code>.</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
-node lib/io_start
+node lib/io_start.js
 </code></pre>
 
 <aside class="warning">
@@ -445,7 +449,7 @@ Socket.io can send deeply nested JSON with standard data type.
 <p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start</code>.</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
-node lib/io_start
+node lib/io_start.js
 </code></pre>
 
 <aside class="warning">
@@ -495,9 +499,28 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <h3 id="data-flow">Data flow</h3>
 
-<p>The msg goes through socket.io as <code class="prettyprint">js(interface script) -&gt; js(io_server.js) -&gt; &lt;lang&gt;(client.&lt;lang&gt;) -&gt; js(io_server.js) -&gt; ...(can bound among different &lt;lang&gt; modules) -&gt; js(client.js) -&gt; js(interface script)</code></p>
+<p>The msg goes through socket.io as </p>
 
-<p>For the <code class="prettyprint">hello_py.js</code> example, the path is <code class="prettyprint">js(scripts/hello_py.js) user input -&gt; js(lib/io_server.js) -&gt; py(client.py), call py function -&gt; js(io_server.js) -&gt; js(client.js) call Promise.resolve -&gt; js(interface script) send back to user</code></p>
+<ul>
+<li><code class="prettyprint">js(interface script)</code></li>
+<li><code class="prettyprint">-&gt; js(io_server.js)</code></li>
+<li><code class="prettyprint">-&gt; &lt;lang&gt;(client.&lt;lang&gt;)</code></li>
+<li><code class="prettyprint">-&gt; js(io_server.js)</code></li>
+<li><code class="prettyprint">-&gt; ...(can bound among different &lt;lang&gt; modules)</code></li>
+<li><code class="prettyprint">-&gt; js(client.js)</code></li>
+<li><code class="prettyprint">-&gt; js(interface script)</code></li>
+</ul>
+
+<p>For the <code class="prettyprint">hello_py.js</code> example, the path is </p>
+
+<ul>
+<li><code class="prettyprint">js(scripts/hello_py.js) user input</code></li>
+<li><code class="prettyprint">-&gt; js(lib/io_server.js)</code></li>
+<li><code class="prettyprint">-&gt; py(client.py), call py function</code></li>
+<li><code class="prettyprint">-&gt; js(io_server.js)</code></li>
+<li><code class="prettyprint">-&gt; js(client.js) call Promise.resolve</code></li>
+<li><code class="prettyprint">-&gt; js(interface script) send back to user</code></li>
+</ul>
 
 <h2 id="project-directory-structure"><a name="project-dir"></a>Project directory structure</h2>
 
@@ -582,6 +605,10 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 <td>implementing</td>
 </tr>
 <tr>
+<td style="text-align: left"><a href="#graph-brain">graph brain</a></td>
+<td>improving</td>
+</tr>
+<tr>
 <td style="text-align: left"><a href="#multi-language">multi-language</a></td>
 <td>yes</td>
 </tr>
@@ -601,11 +628,25 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <p>The Facebook bot paradigm is &ldquo;why use multiple apps when you can access them from one bot?&rdquo;. I dare to ask &ldquo;why talk to the bot from one platform instead of everywhere?&rdquo;</p>
 
+<h3 id="omnipresence">Omnipresence</h3>
+
 <p>This inspires the <em>omnipresence</em> feature: a bot that recognizes who you are, and can continue conversation in any supported platforms. We talk to our friends everywhere, and they don&rsquo;t forget us when we switch apps. Bots should do the same too.</p>
 
 <p>In short: <em>one brain, multiple interfaces</em>. AIVA&rsquo;s hubot base allows for generality, and she can tap into multiple platforms by using different <a href="#adapters">adapters</a>. Unlike the original hubot though, she can exist simultaneously on multiple platforms by having several interface instances plugged into the respective adapters, and all share the same brain, which serves as the central memory.</p>
 
 <p>For the list of supported adapters see <a href="#adapters">adapters</a>.</p>
+
+<h2 id="graph-brain"><a name="graph-brain"></a>graph brain</h2>
+
+<p>Graph is a very generic and natural way of encoding information, especially for information that doesn&rsquo;t always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.)</p>
+
+<p>Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier.</p>
+
+<p>AIVA uses <a href="https://github.com/kengz/neo4jKB"><code class="prettyprint">neo4jKB</code></a> as the brain - a knowledge base implemented graph with <a href="http://neo4j.com"><code class="prettyprint">neo4j</code></a>. Specifically, <code class="prettyprint">neo4jKB</code> imposes a <a href="https://github.com/kengz/neo4jKB#kb-standard-basic">KB standard</a> on the graph for proper usage as a knowledge base.</p>
+
+<aside class="notice">
+Neo4jKB is a completed project. Currently it is used for user-recognition and user todo list. AIVA doesn&rsquo;t fully utilize Neo4jKB yet as the AI tools are under development. When done, AIVA will be able to automatically form and extract knowledge from the graph brain.
+</aside>
 
 <h2 id="multi-language"><a name="multi-language"></a>multi-language</h2>
 
@@ -686,12 +727,261 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <p>For more in-depth details, see <a href="#modules">modules</a>. Also if find a great ML tool we should include, submit a Pull Request!</p>
 
-<p>add code example of gen_nlp in action, 
-and pictures of DNN used</p>
-
           <h1 id="modules"><a name="modules"></a>Modules</h1>
 
+<table><thead>
+<tr>
+<th style="text-align: left">Module</th>
+<th>Implemented?</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><a href="#gen_nlp">general NLP</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#tensorflow">tensorflow</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#indico">Indico.io</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#kbase">Knowledge base</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#google-api">google APIs</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#custom-msg">general customMsg</a></td>
+<td>pending</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#neo4jKB-brain">neo4jKB brain</a></td>
+<td>pending</td>
+</tr>
+</tbody></table>
+
+<p>misc list of all functions and modules in all lang that come in the box. Need programmatic way to generate such a list, ohh maybe during client start?</p>
+
+<h2 id="general-nlp"><a name="gen_nlp"></a>general NLP</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">genNLP</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/gen_nlp'</span><span class="p">)</span>
+
+<span class="nx">s</span> <span class="o">=</span> <span class="s1">'find me flights from New York to London at 9pm tomorrow.'</span>
+<span class="nx">genNLP</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>We provide a fast NLP module in <code class="prettyprint">lib/js/gen_nlp</code> for generic usage. It serves as a convenient method to get all the vital NLP parsed results. This is especially useful in the <code class="prettyprint">js</code> <strong>interface</strong> scripts for <em>parsing user inputs, normalizing texts, and extracting information</em>.</p>
+
+<blockquote>
+<p>This will yield the result pulled from spaCy in Python, and Date.js in Node.js.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">result</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"len"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+  <span class="s2">"pos_fine"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VB"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"PRP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"NNS"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"New"</span><span class="p">,</span> <span class="s2">"NNP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"York"</span><span class="p">,</span> <span class="s2">"NNP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"NNP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"at"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"9"</span><span class="p">,</span> <span class="s2">"CD"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"NN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"NN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"."</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">"NER"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"9pm"</span><span class="p">,</span> <span class="s2">"TIME"</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">"lemmas"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"me"</span><span class="p">,</span> <span class="s2">"flight"</span><span class="p">,</span> <span class="s2">"from"</span><span class="p">,</span> <span class="s2">"new"</span><span class="p">,</span> <span class="s2">"york"</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="s2">"london"</span><span class="p">,</span> <span class="s2">"at"</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">,</span> <span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">],</span>
+  <span class="s2">"tokens"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"me"</span><span class="p">,</span> <span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"from"</span><span class="p">,</span> <span class="s2">"New"</span><span class="p">,</span> <span class="s2">"York"</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="s2">"London"</span><span class="p">,</span> <span class="s2">"at"</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">,</span> <span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">],</span>
+  <span class="s2">"pos_coarse"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VERB"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"New"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"York"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"at"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"9"</span><span class="p">,</span> <span class="s2">"NUM"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"PUNCT"</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">"NER_POS_tag"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VERB"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"at"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"9pm"</span><span class="p">,</span> <span class="s2">"TIME"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"PUNCT"</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">"NER_POS_tree"</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="s2">"find"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"flights"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="s2">"me"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"nsubj"</span><span class="p">,</span>
+              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"NOUN"</span>
+            <span class="p">}</span>
+          <span class="p">},</span> <span class="p">{</span>
+            <span class="s2">"from"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">"New York"</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"pobj"</span><span class="p">,</span>
+                  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"GPE"</span>
+                <span class="p">}</span>
+              <span class="p">}],</span>
+              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"prep"</span><span class="p">,</span>
+              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"ADP"</span>
+            <span class="p">}</span>
+          <span class="p">},</span> <span class="p">{</span>
+            <span class="s2">"to"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">"London"</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"pobj"</span><span class="p">,</span>
+                  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"GPE"</span>
+                <span class="p">}</span>
+              <span class="p">}],</span>
+              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"prep"</span><span class="p">,</span>
+              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"ADP"</span>
+            <span class="p">}</span>
+          <span class="p">},</span> <span class="p">{</span>
+            <span class="s2">"at"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s2">"9pm"</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"pobj"</span><span class="p">,</span>
+                  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"TIME"</span>
+                <span class="p">}</span>
+              <span class="p">}],</span>
+              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"prep"</span><span class="p">,</span>
+              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"ADP"</span>
+            <span class="p">}</span>
+          <span class="p">},</span> <span class="p">{</span>
+            <span class="s2">"tomorrow"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"npadvmod"</span><span class="p">,</span>
+              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"NOUN"</span>
+            <span class="p">}</span>
+          <span class="p">}],</span>
+          <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"ccomp"</span><span class="p">,</span>
+          <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"NOUN"</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="s2">"."</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"punct"</span><span class="p">,</span>
+          <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"PUNCT"</span>
+        <span class="p">}</span>
+      <span class="p">}],</span>
+      <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"ROOT"</span><span class="p">,</span>
+      <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"VERB"</span>
+    <span class="p">}</span>
+  <span class="p">}],</span>
+  <span class="s2">"noun_phrases"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"London"</span><span class="p">,</span> <span class="s2">"9pm"</span><span class="p">],</span>
+  <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"find me flights from New York to London at 9 pm tomorrow ."</span><span class="p">,</span>
+  <span class="s2">"time"</span><span class="p">:</span> <span class="s2">"2016-04-24T01:00:00.042Z"</span>
+<span class="p">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: left">NLP property</th>
+<th>Details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">text</td>
+<td>The original input text.</td>
+</tr>
+<tr>
+<td style="text-align: left">len</td>
+<td>Length: number of tokens in text.</td>
+</tr>
+<tr>
+<td style="text-align: left">tokens</td>
+<td>Text broken into array of tokens.</td>
+</tr>
+<tr>
+<td style="text-align: left">lemmas</td>
+<td>The <a href="https://en.wikipedia.org/wiki/Lemmatisation">base form</a> of each token.</td>
+</tr>
+<tr>
+<td style="text-align: left">NER</td>
+<td><a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Named Entity Recognition</a></td>
+</tr>
+<tr>
+<td style="text-align: left">noun_phrases</td>
+<td>grouping of meaningful nouns</td>
+</tr>
+<tr>
+<td style="text-align: left">pos_coarse</td>
+<td><a href="https://spacy.io/docs#token-postags">Coarse</a> Part-of-speech tagging.</td>
+</tr>
+<tr>
+<td style="text-align: left">pos_fine</td>
+<td><a href="https://spacy.io/docs#token-postags">Finer</a> Part-of-speech tagging.</td>
+</tr>
+<tr>
+<td style="text-align: left">NER_POS_tree</td>
+<td>The syntactic and dependency parse tree of text, seen in <a href="https://spacy.io/demos/displacy">DisplaCy</a></td>
+</tr>
+<tr>
+<td style="text-align: left">NER_POS_tag</td>
+<td>The flatten array of NER_POS_tree, without the dependencies.</td>
+</tr>
+<tr>
+<td style="text-align: left">time</td>
+<td>Parsed time if any, as ISO time string.</td>
+</tr>
+</tbody></table>
+
+<p>Example app that uses this.</p>
+
           <h1 id="setup-tips"><a name="setup-tips"></a>Setup tips</h1>
+
+<h2 id="setup-script">Setup script</h2>
+
+<p><code class="prettyprint">npm run gi</code> runs the following in sequence:</p>
+
+<ul>
+<li>the shell setup script in <a href="https://github.com/kengz/aiva/tree/aiva-v3/bin/install" target="_blank"><code>bin/install</code></a></li>
+<li><code class="prettyprint">npm install</code></li>
+<li><code class="prettyprint">pip3 install -r requirements.txt</code></li>
+<li><code class="prettyprint">bundle install</code></li>
+</ul>
+
+<p>It&rsquo;s save to run the multiple times; they&rsquo;ll just update. The shell install script is necessary because &hellip; just look at how many things get installed there.</p>
+
+<h2 id="custom-deployment">Custom deployment</h2>
+
+<p>All bot deployment commands are wrapped with <code class="prettyprint">npm</code> inside <code class="prettyprint">package.json</code>. For more novice users, you can customize the <code class="prettyprint">scripts</code> in <code class="prettyprint">package.json</code>. For example, changing &ldquo;aiva&rdquo; and &ldquo;aivadev&rdquo; to your bot name of choice.</p>
+
+<h2 id="monitoring">Monitoring</h2>
+
+<p>AIVA uses <a href="https://github.com/foreverjs/forever"><code class="prettyprint">forever</code></a> to keep-alive (with 10 max restarts). <code class="prettyprint">npm start</code> runs the process in the background, with it stdout logs written to <code class="prettyprint">/logs</code>. <code class="prettyprint">npm run debug</code> runs the same thing except it logs stdout to the terminal.</p>
 
 <h2 id="neo4j">Neo4j</h2>
 
@@ -714,7 +1004,7 @@ open http://localhost:7474
 
 <h2 id="dependencies"><a name="dependencies"></a>Dependencies</h2>
 
-<p>All the system dependencies are installed automatically by running <code class="prettyprint">npm run gi</code>, which executes <a href="./bin/install"><code class="prettyprint">bin/install</code></a>. If you&rsquo;d like to setup your VM manually, see/edit the setup script; below is the list:</p>
+<p>All the system dependencies are installed automatically by running <code class="prettyprint">npm run gi</code>, which executes <a href="https://github.com/kengz/aiva/tree/aiva-v3/bin/install" target="_blank"><code>bin/install</code></a>. If you&rsquo;d like to setup your VM manually, see/edit the setup script; below is the (non-exhaustive) list:</p>
 
 <ul>
 <li><code class="prettyprint">node.js &gt;v5.x</code></li>
