@@ -121,6 +121,9 @@ echo "
 export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
 source ~/.bash_profile
 
+# change the default neo4j password
+curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
+
 # need to check this for existence too
 # Install the shell tool for import export
 curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip;
@@ -210,6 +213,10 @@ alias neo4j='service neo4j-service'
 # Neo4j home path
 export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
 source ~/.bashrc
+
+# change the default neo4j password
+curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
+
 # Install the shell tool for import export
 curl -LOk http://dist.neo4j.org/jexp/shell/neo4j-shell-tools_2.2.zip && unzip neo4j-shell-tools_2.2.zip -d ${NEO4J_HOME}lib && rm neo4j-shell-tools_2.2.zip;
 ); fi
