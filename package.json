@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "gi": "bash bin/install; npm i; mkdir -p ./logs; npm run pip3; npm run bundler",
+    "gi": "bash bin/install && npm i && mkdir -p ./logs && npm run pip3 && npm run bundler",
     "shell": "neo4j start; env $(cat .env bin/.keys-devaiva) NODE_ENV=development bin/hubot",
     "test": "istanbul cover ./node_modules/.bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json Gemfile.lock",
@@ -40,6 +40,7 @@
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-slack": "^3.4.2",
+    "hubot-telegram": "^0.1.0",
     "indico.io": "^0.8.0",
     "lomath": "latest",
     "natural": "^0.4.0",

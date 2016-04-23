@@ -14,8 +14,24 @@ This will take just a few minutes.
 ================================================
 "
 
-echo "
-=> Requesting permission upfront"
+# copy keys file if not already exist
+AIVA_DIR=`pwd`
+BIN_DIR="$AIVA_DIR/bin"
+
+keys_file_count=$(find $BIN_DIR -name ".keys-*" | wc -l)
+example_file_count=$(find $BIN_DIR -name ".keys-example" | wc -l)
+if [[ $keys_file_count -eq 1 && $keys_file_count -eq 1 ]]; then (
+  cp $BIN_DIR/.keys-example $BIN_DIR/.keys-aiva
+  cp $BIN_DIR/.keys-example $BIN_DIR/.keys-aivadev
+  echo "Created bin/.keys-aiva, bin/.keys-aivadev"
+  );
+  else (
+  echo "Not creating bin/.keys-aiva, bin/.keys-aivadev since keys already exist"
+  )
+fi
+
+# echo "
+# => Requesting permission upfront"
 # Ask for the administrator password upfront
 # [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 # sudo -v
