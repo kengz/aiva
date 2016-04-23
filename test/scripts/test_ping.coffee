@@ -8,23 +8,6 @@ describe 'scripts/ping.js', ->
 
 
   # Test
-  context 'user: ping', ->
-    beforeEach ->
-      co =>
-        yield @room.user.say 'alice', '@hubot ping'
-        yield @room.user.say 'bob', '@hubot ping'
-
-    # response
-    it 'hubot: PONG', ->
-      @room.messages.should.eql [
-        ['alice', '@hubot ping']
-        ['hubot', 'PONG']
-        ['bob',   '@hubot ping']
-        ['hubot', 'PONG']
-      ]
-
-
-  # Test
   context 'user: whoareyou', ->
     beforeEach ->
       co =>

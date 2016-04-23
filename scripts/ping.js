@@ -6,11 +6,6 @@ var fs = require('fs')
 // quick test scripts
 module.exports = function(robot) {
 
-  // ping to test connection
-  robot.respond(/ping/i, function(res) {
-    res.send('PONG')
-  })
-
   // ensure bot name
   robot.respond(/who\s*are\s*you/i, function(res) {
     res.send(robot.name)
