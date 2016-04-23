@@ -48,7 +48,7 @@ if (require.main === module) {
   // start and kill neo4j brain server
   exec('neo4j start');
   // run hubot
-  var hb = spawn('./bin/hubot', ['-a', process.env.ADAPTER, '--name', process.env.DEPLOY], {  stdio: 'inherit' })
+  var hb = spawn('./bin/hubot', ['-a', process.env.ADAPTER, '--name', process.env.DEPLOY.split("-").pop()], { stdio: 'inherit' })
   children.push(hb);
   
   
