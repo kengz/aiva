@@ -122,6 +122,7 @@ export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE 
 source ~/.bash_profile
 
 # change the default neo4j password
+neo4j start
 curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
 
 # need to check this for existence too
@@ -215,6 +216,7 @@ export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE 
 source ~/.bashrc
 
 # change the default neo4j password
+neo4j start
 curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
 
 # Install the shell tool for import export
