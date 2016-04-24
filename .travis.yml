@@ -60,7 +60,6 @@ env:
   global:
     - CXX=g++-4.8
     - NODE_ENV=development
-    - TEST_PORT=9090
     - secure: "XkHFwemxrQc7ZveE8xZ0DXtU3wGjNp/m/kwG2YPa7reLOooL95qSsGp3nL2L9asnvvUAECLm6D1MlepaGvN8acyXwlqv7SOD4EUptpCVzrKAL6fO/Fz2FuMQVFew26ikgG/RtpxEDUFc8N588jyG7r7koE6bAaYy/gDDbEGEFNIoJe3tJW6k4cE28qSrZ9R61oPpbphNTLusL4kEyfVyPF5PDBhT8j3CJndbqfsrU+jiSKxNEGIkm/GJitCykkJQcNVnOvsaPdSOrRMOXEtDhAUGAz76zWf87O8B5c88S7rFELyioXmWBmjMGp8H2NIkiRhh0ZJWppE91+IITEM9aF8Qkge+6bQvLjoil3t7g/HIYA/wjvhsus1ltIuk58YnhgLcn948zR+zv6zJiqd3G8KUKgAnq2yfAvMvIX4uau6PnKdhF/31Cl84K2QWlHigs5dtncSRL2fjYRLjnBDltTrEPH1KxzqZ40Ts14vIsmjVl0gzx4+e4L53bf8n8ULEZOAp1cbuq2db7DpWzDd16v/RAb+DLrwFKkIZq5EZdaoOV9vZAMRq53AZqtg+SIdq2Har4VIyiBK3s6vk7mjtrsCBtcXWJsqdvSAXVUoE5dBnFuTrhtijD0c9fbqx4gtLTEG3tHlmVIYr509IgW6k4VOa3UGdYTWpkVIfLjhXPBE="
     - NEO4J_ADDR=localhost:7474
 # whitelist
