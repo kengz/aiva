@@ -261,6 +261,7 @@ echo "
 => Ensuring you have forever"
 npm list -g forever || sudo npm i -g forever
 npm list -g istanbul || sudo npm i -g istanbul
+npm list -g ngrok || sudo npm i -g ngrok
 
 # npm list -g --depth=0
 
