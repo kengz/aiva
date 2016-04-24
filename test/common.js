@@ -21,6 +21,7 @@ try {
 
 // unit test global dependencies
 require('../scripts/_init.js')
+global.DEFAULT_ROOM = "bot-test" // set for test
 global.Promise.config({ warnings: false });
 // chai assertation library
 global.chai = require('chai')

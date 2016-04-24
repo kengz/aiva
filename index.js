@@ -2,6 +2,8 @@
 var env = require('node-env-file');
 var spawn = require('child_process').spawn;
 var exec = require('child_process').exec;
+var _ = require('lomath');
+var portfinder = require('portfinder');
 
 // export the setEnv for convenient usage in dev
 module.exports = setEnv;
@@ -15,7 +17,7 @@ function setEnv(defaultKey) {
   try {
     env(__dirname + '/.env', { overwrite: false });
     // reset port for dev
-    if (process.env.NODE_ENV == 'development') { process.env.PORT = process.env.TEST_PORT };
+    if (process.env.NODE_ENV == 'development') { process.env.PORT = 1000 + parseInt(process.env.PORT) };
     // then set env keys for the deployed bot
     console.log("Deploying using", process.env.DEPLOY)
     env(__dirname + '/bin/' + process.env.DEPLOY);
@@ -47,12 +49,27 @@ if (require.main === module) {
   
   // start and kill neo4j brain server
   exec('neo4j start');
-  // run hubot
-  var hb = spawn('./bin/hubot', ['-a', process.env.ADAPTER, '--name', process.env.DEPLOY.split("-").pop()], { stdio: 'inherit' })
-  children.push(hb);
-  
-  
-  
+
+  // set baseport to start scanning
+  portfinder.basePort = parseInt(process.env.PORT)
+
+  var botname = process.env.DEPLOY.split("-").pop()
+  // detect all adapters, spawn a hubot for each
+  var adapters = process.env.ADAPTERS.split(/\s*,\s*/g)
+  _.each(adapters, function(adapter){
+    portfinder.getPort(function(e, port) {
+      // copy env for child (separate PORT)
+      var envCopy = _.clone(process.env)
+      envCopy['PORT'] = port
+      // spawn hubot with the copied env for childprocess
+      var hb = spawn('./bin/hubot', ['-a', adapter, '--name', botname], { stdio: 'inherit', env: envCopy })
+      children.push(hb);
+      console.log("Deployed", botname, "with", adapter, "at port", port)
+      // update basePort for next search
+      portfinder.basePort += 1
+    })
+  })
+
   var cleanExit = function() { process.exit() };
   process.on('SIGINT', cleanExit); // catch ctrl-c
   process.on('SIGTERM', cleanExit); // catch kill
