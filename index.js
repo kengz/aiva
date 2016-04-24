@@ -43,7 +43,7 @@ if (require.main === module) {
       child.kill();
     });
     // kill the neo4j brain server too
-    exec('neo4j stop')
+    // exec('neo4j stop')
     console.log("Shutting down")
   });
   
