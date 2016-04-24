@@ -11,17 +11,15 @@ describe 'scripts/serialize_users.js', ->
 
   # Test
   context 'robot.on(serialize_users)', ->
+    beforeEach ->
+      co =>
+        @spyFirstSer = sinon.spy()
+        @room.robot.on 'serialize_users', @spyFirstSer
+        @robot.emit 'serialize_users'
     # response
     it 'serialize_users()', ->
-      co =>
-        @robot.emit 'serialize_users'
-        # allow time for message to get through and handled
-        yield delayer()
-        # emit the 'serialize' event
-        @room.messages.should.eql [
-          ['hubot', 'Serialized 3 users.']
-        ]
- 
+      sinon.assert.calledOnce @spyFirstSer
+
 
   # Test
   context 'user: serialize_users; invoke emit()', ->
@@ -34,10 +32,6 @@ describe 'scripts/serialize_users.js', ->
     it 'robot.emit(serialize_users); hubot: Serializing users...', ->
       sinon.assert.calledOnce @spySer
       # and event emitted
-      @room.messages.should.eql [
-        ['alice', '@hubot serialize users']
-        ['hubot', 'Serializing users...']
-      ]
 
 
   # Test

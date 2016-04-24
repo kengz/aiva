@@ -8,7 +8,6 @@ global.Promise = require('bluebird')
 // the knowledge base
 global.KB = require('neo4jkb')({
   NEO4J_AUTH: process.env.NEO4J_AUTH,
-  NEO4J_HOST: process.env.NEO4J_HOST,
   NEO4J_PORT: process.env.NEO4J_PORT
 });
 // the default room name
@@ -35,7 +34,7 @@ module.exports = function(robot) {
       robot.brain.data.users = global.users
     };
     // send a message to connect the adapter and update robot.brain.data.users
-    yield robot.messageRoom(global.DEFAULT_ROOM, "I'm online.")
+    // yield robot.messageRoom(global.DEFAULT_ROOM, "I'm online.")
     yield Promise.delay(500);
     // emit 'ready' event to kick off initialization
     robot.emit('ready')
