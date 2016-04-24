@@ -5,19 +5,33 @@ var exec = require('child_process').exec;
 var _ = require('lomath');
 var portfinder = require('portfinder');
 
+// some adapters need specific ports to work with
+var adapterPorts = {
+  'production': {
+    'telegram': 8443,
+    'fb': 8080
+  },
+  'development': {
+    'telegram': 8443,
+    'fb': 80
+  }
+}
+
 // export the setEnv for convenient usage in dev
 module.exports = setEnv;
+
+// get the specific port for the adapter
+function getSpecificPort(adapter) {
+  return _.get(adapterPorts, [process.env.NODE_ENV, adapter])
+}
 
 // set env if not already set externally
 // .env must exist if setting env vars externally
 function setEnv(defaultKey) {
   // optionally set defaultKey
   process.env.DEPLOY = process.env.DEPLOY || defaultKey;
-
   try {
     env(__dirname + '/.env', { overwrite: false });
-    // reset port for dev
-    if (process.env.NODE_ENV == 'development') { process.env.PORT = 1000 + parseInt(process.env.PORT) };
     // then set env keys for the deployed bot
     console.log("Deploying using", process.env.DEPLOY)
     env(__dirname + '/bin/' + process.env.DEPLOY);
@@ -42,16 +56,11 @@ if (require.main === module) {
     children.forEach(function(child) {
       child.kill();
     });
-    // kill the neo4j brain server too
-    // exec('neo4j stop')
     console.log("Shutting down")
   });
   
   // start and kill neo4j brain server
   exec('neo4j start');
-
-  // set baseport to start scanning
-  portfinder.basePort = parseInt(process.env.PORT)
 
   var botname = process.env.DEPLOY.split("-").pop()
   // detect all adapters, spawn a hubot for each
@@ -60,11 +69,13 @@ if (require.main === module) {
     portfinder.getPort(function(e, port) {
       // copy env for child (separate PORT)
       var envCopy = _.clone(process.env)
-      envCopy['PORT'] = port
+      envCopy['PORT'] = getSpecificPort(adapter) || port
+
       // spawn hubot with the copied env for childprocess
       var hb = spawn('./bin/hubot', ['-a', adapter, '--name', botname], { stdio: 'inherit', env: envCopy })
       children.push(hb);
-      console.log("Deploy", botname, "with", adapter, "at port", port)
+      console.log("Deploy", botname, "with", adapter, "at port", envCopy['PORT'])
+      
       // update basePort for next search
       portfinder.basePort += 1
     })

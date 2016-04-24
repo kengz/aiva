@@ -8,7 +8,8 @@ try {
   env(__dirname + '/../.env', { overwrite: false });
   // set the port to test
   process.env.NODE_ENV = 'development'
-  process.env.PORT = 1000 + parseInt(process.env.PORT)
+  process.env.PORT = 9090
+  console.log("Test is using PORT:", process.env.PORT)
 } catch (e) {
   console.log(e)
   if (process.env.TRAVIS) {
