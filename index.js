@@ -64,7 +64,7 @@ if (require.main === module) {
       // spawn hubot with the copied env for childprocess
       var hb = spawn('./bin/hubot', ['-a', adapter, '--name', botname], { stdio: 'inherit', env: envCopy })
       children.push(hb);
-      console.log("Deployed", botname, "with", adapter, "at port", port)
+      console.log("Deploy", botname, "with", adapter, "at port", port)
       // update basePort for next search
       portfinder.basePort += 1
     })
