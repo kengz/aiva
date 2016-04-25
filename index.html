@@ -205,11 +205,18 @@ npm run debug <span class="c"># runs aivadev</span>
 
 <p>This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
 
+<blockquote>
+<p>AIVA saying hi, translating, running deep neural net; on Slack, Telegram:
+<img alt="AIVA on Slack, Telegram" src="./images/npm_start.png" /></p>
+</blockquote>
+
           <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
 
-<p>AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
+<p>AIVA is created as an A.I. general purpose interface for developers. You can implement any features, use it simultaneously on the major platforms, and code in multiple languages. This solves the problem that many bots out there are are too specific, often bounded to one chat platform, and can only be developed in one language.</p>
 
-<p>You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.</p>
+<p>It has a NLP parser and KB brain out of the box. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
+
+<p>Since it is a generic interface, you can focus on writing your app/module. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails to serve it.</p>
 
 <h3 id="production-and-development">Production and Development</h3>
 
@@ -234,7 +241,7 @@ npm <span class="nb">test</span> <span class="c"># run unit tests</span>
 <p>For now we have <code class="prettyprint">/lib/client.{js, py, rb}</code>. Feel free to add <code class="prettyprint">Socket.io</code> client for more languages through pull request!</p>
 
 <blockquote>
-<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start</code>.</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code>.</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
 node lib/io_start.js
@@ -245,9 +252,9 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 </aside>
 
 <blockquote>
-<p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: quickly testing the translate function in <code class="prettyprint">python</code>.</p>
+<p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in <code class="prettyprint">python</code>. Uncomment and run it.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="c1">// js: interface scripts</span>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/translate.js</span>
 <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
 
@@ -261,9 +268,7 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 
 <h2 id="polyglot-development"><a name="polyglot-dev"></a>Polyglot Development</h2>
 
-<p>The quickest way to get into dev is to look at the examples in <code class="prettyprint">lib/&lt;lang&gt;/</code> and <code class="prettyprint">scripts/</code>.</p>
-
-<p>The interface is <code class="prettyprint">js</code>, and it&rsquo;s pretty easy to write. the module can be written in any language if it has a Socket.io client.</p>
+<p>The quickest way to get into dev is to look at the examples in <code class="prettyprint">lib/&lt;lang&gt;/</code> and <code class="prettyprint">scripts/</code>, which we will go over now.</p>
 
 <p>Development comes down to:</p>
 
@@ -271,6 +276,8 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 <li><strong>module</strong>: callable low level functions, lives in <code class="prettyprint">/lib/&lt;lang&gt;/&lt;module&gt;.&lt;lang&gt;</code>.</li>
 <li><strong>interface</strong>: high level user interface to call the module functions, lives in <code class="prettyprint">/scripts/&lt;interface&gt;.js</code></li>
 </ul>
+
+<p>The module can be written in any language if it has a Socket.io client. The interface is in <code class="prettyprint">js</code>, and that&rsquo;s pretty easy to write.</p>
 
 <aside class="notice">
 It is vital to follow the <a href="#project-dir">directory structure</a> to expose them to socket.io as it calls from <code>lib/&lt;lang&gt;/*</code> but not deeper. You can import nested modules from there and call it with dot-path. More on this later.
@@ -314,6 +321,11 @@ Since the AIVA is based on hubot, you can refer to <a href="https://github.com/g
 
 <p>The JSON fields above are required for their purposes. <code class="prettyprint">global.gPass</code> used by the interface will auto-inject and <code class="prettyprint">id</code> for reply, and a <code class="prettyprint">hash</code> to resolve the promise for the interface.</p>
 
+<blockquote>
+<p>The hello_py feature calls Python; on Telegram:
+<img alt="hello_py on Telegram" src="./images/hello_py.png" /></p>
+</blockquote>
+
 <h3 id="case-3-lt-lang-gt-s">Case: 3 <code class="prettyprint">&lt;lang&gt;</code>s</h3>
 
 <p>e.g. <code class="prettyprint">&lt;lang&gt; = js, py, rb</code></p>
@@ -347,11 +359,18 @@ For auto-id, Ruby filename need to be the same as its module name, case-sensitiv
 <span class="p">}</span>
 </code></pre>
 
-<aside class="notice">
-Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic. See the <a href="#msg-json"><code>msg</code> JSON keys</a>.
-</aside>
+<blockquote>
+<p>The hello_py_rb feature calls Python then Ruby; on Slack:
+<img alt="hello_py_rb on Slack" src="./images/hello_py_rb.png" /></p>
+</blockquote>
+
+<h3 id="dev-pattern">Dev pattern</h3>
 
 <p>With such pattern, you can chain multiple function calls that bounce among different <code class="prettyprint">&lt;lang&gt;</code>. Example use case: retrieve data from Ruby on Rails app, pass to Java to run algorithms, then to Python for data analysis, then back to Node.js interface.</p>
+
+<aside class="success">
+The generic advice: ensure that your functions return the correct JSON <code>msg</code>, and we handle the inter-language dataflow logic. See the <a href="#msg-json"><code>msg</code> JSON keys</a>.
+</aside>
 
 <h3 id="quot-ma-look-no-hand-ler-s-quot">&ldquo;Ma look! No hand(ler)s!&rdquo;</h3>
 
@@ -361,15 +380,54 @@ Overall, ensure that your functions return the correct JSON `msg`, and we handle
 
 <p>What this means is you can call a <strong>module</strong> (<code class="prettyprint">to</code>) by its name, and its <strong>function</strong> (<code class="prettyprint">intent</code>) by specifying the dotpath (if it&rsquo;s nested), then providing a valid <code class="prettyprint">input</code> format (single argument for now).</p>
 
+<p>In fact, <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a></p>
+
+<blockquote>
+<p>To test-run it, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code>.</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
+node lib/io_start.js
+</code></pre>
+
+<blockquote>
+<p>Uncomment the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> and run it.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/translate.js</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
+
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"hola amigos"</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'ai.py'</span><span class="p">,</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'nlp.translate'</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="c1">// hello friends</span>
+</code></pre>
+
+<blockquote>
+<p>This calls <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a> that imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>, which returns the translated string instead of a reply JSON. The client will auto-compile a proper reply JSON msg for you.</p>
+</blockquote>
+<pre class="highlight python"><code><span class="c"># py: lib/py/ais/ai_lib/translate.py</span>
+<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="s">"en"</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">from_lang</span><span class="o">=</span><span class="s">"auto"</span><span class="p">,</span> <span class="n">to_lang</span><span class="o">=</span><span class="n">to</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>The translate feature calls Python that returns string that is auto-compiled into JSON msg by client.py; on Slack:
+<img alt="translate on Slack" src="./images/translate.png" /></p>
+</blockquote>
+
 <p>On receiving a <code class="prettyprint">msg</code>, the <code class="prettyprint">client.&lt;lang&gt;</code> tries to call the function by passing <code class="prettyprint">msg</code>. If that throws an exception, it retries by passing <code class="prettyprint">msg.input</code>. After the function executes and returns the result, <code class="prettyprint">client.&lt;lang&gt;</code>&rsquo;s handler will check if the reply is a valid JSON, and if not, will make it into one via <code class="prettyprint">correctJSON(reply, msg)</code> by extracting the information needed from the received <code class="prettyprint">msg</code>.</p>
 
 <p>Lastly, after the <code class="prettyprint">js</code> <code class="prettyprint">global.gPass</code> sends out a <code class="prettyprint">msg</code>, the final reply directed at it should contain an <code class="prettyprint">output</code> field, as good dev pattern and reliability in promise-resolution. When <code class="prettyprint">global.gPass(msg)</code> gets its reply and its promise resolved, you will see <code class="prettyprint">hasher.handle invoking cb</code> in stdout.</p>
 
 <aside class="notice">
-In fact, once we finish the NLP auto-parsing feature for user sentences, we wouldn&rsquo;t even need to write an interface; Still working on it.
+In fact, once we finish the NLP auto-parsing feature for user sentences, we wouldn&rsquo;t even need to write an interface; This is still under work.
 </aside>
 
 <h2 id="unit-tests">Unit Tests</h2>
+
+<p><a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3" /></a></p>
 
 <p>This repo includes only unit tests for <code class="prettyprint">js</code> <strong>modules</strong> and <strong>interface</strong> scripts using <code class="prettyprint">mocha</code>, and runs with <code class="prettyprint">npm test</code>. Note that tests should be for systems, thus the tests for AI models are excluded.</p>
 
@@ -465,7 +523,7 @@ Socket.io can send deeply nested JSON with standard data type.
 <p>There is a socket.io server that extends Hubot&rsquo;s Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All <code class="prettyprint">msg</code>s go through it. For example, let <code class="prettyprint">msg.to = &#39;hello.py&#39;, msg.intent = &#39;sayHi&#39;</code>. The server splits this into <code class="prettyprint">module = &#39;hello&#39;, lang = &#39;py&#39;</code>, modifies <code class="prettyprint">msg.to = module</code>, then sends the <code class="prettyprint">msg</code> to the client of <code class="prettyprint">lang</code>.</p>
 
 <blockquote>
-<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start</code>.</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code>.</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
 node lib/io_start.js
@@ -480,9 +538,9 @@ This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it be
 <p>For each language, there is a socket.io client that imports all modules of its language within <code class="prettyprint">lib</code>. When server sends a <code class="prettyprint">msg</code> to it, the client&rsquo;s <code class="prettyprint">handle</code> will find the module and its function using <code class="prettyprint">msg.to, msg.intent</code> respectively, then call the function with <code class="prettyprint">msg</code> as the argument. If it gets a valid reply <code class="prettyprint">msg</code>, it will pass it on to the server.</p>
 
 <blockquote>
-<p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: quickly testing the translate function in <code class="prettyprint">python</code>.</p>
+<p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in <code class="prettyprint">python</code>. Uncomment and run it.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="c1">// js: interface scripts</span>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/translate.js</span>
 <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
 
@@ -1049,6 +1107,14 @@ open http://localhost:7474
 </ul>
 
           <h1 id="adapters"><a name="adapters"></a>Adapters</h1>
+
+          <h1 id="changelog"><a name="changelog"></a>Changelog</h1>
+
+<p><a href="https://github.com/kengz/aiva/blob/aiva-v3/docs/CHANGELOG.md">Refer to the changelog on Github.</a></p>
+
+          <h1 id="contributing"><a name="contributing"></a>Contributing</h1>
+
+<p>We&rsquo;d love for you to contribute and make AIVA even better for all developers. We&rsquo;re mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful generic module, adding more adapters like Whatsapp or Twilio.</p>
 
       </div>
       <div class="dark-box">
