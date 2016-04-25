@@ -3,7 +3,6 @@
 
 // Bot will call this function with the robot argument
 module.exports = function(robot) {
-
   // menu
   robot.respond(/hello_py_rb$/i, function(res) {
     res.send('`hello_py_rb [rb]`')

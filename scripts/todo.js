@@ -6,7 +6,6 @@ var todo = require('../lib/js/todo')
 
 // export for bot
 module.exports = function(robot) {
-
   // menu
   robot.respond(/todo\s*$/i, function(res) {
     res.send('`todo {add, get, rm}`')

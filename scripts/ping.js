@@ -5,7 +5,6 @@ var fs = require('fs')
 
 // quick test scripts
 module.exports = function(robot) {
-
   // ensure bot name
   robot.respond(/who\s*are\s*you/i, function(res) {
     res.send(robot.name)

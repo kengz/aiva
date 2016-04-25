@@ -2,9 +2,20 @@
 // Module for translation
 var _ = require('lomath')
 
-// export for bot
-module.exports = function(robot) {
+// Development process, testing after starting server with "node lib/io_start.js"
+var client = require('../lib/client.js')
+global.gPass = client.gPass
 
+global.gPass({
+  input: "hola amigos",
+  to: 'ai.py',
+  intent: 'nlp.translate'
+}).then(console.log)
+// hello friends
+
+
+// deploy feature: export for bot
+module.exports = function(robot) {
   // menu
   robot.respond(/translate\s*$/i, function(res) {
     res.send('`translate <text>`')

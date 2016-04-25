@@ -6,7 +6,6 @@ var slackAtt = require('../lib/js/slack_att')
 // export for bot
 /* istanbul ignore next */
 module.exports = function(robot) {
-
   // menu
   robot.respond(/google$/i, function(res) {
     res.send('`google <query>`')

@@ -5,7 +5,6 @@ var user = require('../lib/js/user')
 
 // export for bot
 module.exports = function(robot) {
-
   // menu
   robot.respond(/who\s*is\s*$/i, function(res) {
     res.send('`whois <name/alias/ID>`')
