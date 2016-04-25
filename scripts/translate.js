@@ -2,16 +2,16 @@
 // Module for translation
 var _ = require('lomath')
 
-// Development process, testing after starting server with "node lib/io_start.js"
-var client = require('../lib/client.js')
-global.gPass = client.gPass
+// // Development process, testing after starting server with "node lib/io_start.js"
+// var client = require('../lib/client.js')
+// global.gPass = client.gPass
 
-global.gPass({
-  input: "hola amigos",
-  to: 'ai.py',
-  intent: 'nlp.translate'
-}).then(console.log)
-// hello friends
+// global.gPass({
+//   input: "hola amigos",
+//   to: 'ai.py',
+//   intent: 'nlp.translate'
+// }).then(console.log)
+// // hello friends
 
 
 // deploy feature: export for bot
