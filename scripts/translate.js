@@ -1,5 +1,5 @@
-// dependencies
 // Module for translation
+// dependencies
 var _ = require('lomath')
 
 // // Development process, testing after starting server with "node lib/io_start.js"
