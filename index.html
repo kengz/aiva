@@ -116,18 +116,20 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="aiva">AIVA <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3" /></a> <a href="https://gemnasium.com/kengz/jarvis"><img alt="Dependency Status" src="https://gemnasium.com/kengz/jarvis.svg" /></a></h1>
+        <h1 id="aiva">AIVA <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3" /></a> <a href="https://gemnasium.com/kengz/jarvis"><img alt="Dependency Status" src="https://gemnasium.com/kengz/jarvis.svg" /></a> <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></h1>
 
 <aside class="warning">
 This documentation is still being completed.
 </aside>
 
-<p><strong>AIVA</strong> (A.I. Virtual Assistant): General-purpose virtual assistant for developers. </p>
+<p><strong>AIVA</strong> (A.I. Virtual Assistant): General-purpose virtual assistant for developers.</p>
+
+<p>It is a <strong>bot-generalization</strong>: you can implement any features, use it simultaneously on the major platforms, and code in multiple languages.</p>
 
 <table><thead>
 <tr>
 <th style="text-align: left">AIVA is</th>
-<th></th>
+<th>Details</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -136,14 +138,14 @@ This documentation is still being completed.
 </tr>
 <tr>
 <td style="text-align: left">cross-platform</td>
-<td>Slack, Telegram, Facebook, IRC, Twilio, or any <a href="https://github.com/github/hubot/blob/master/docs/adapters.md">hubot adapters</a></td>
+<td>Deploy simultaneously on <strong>Slack, Telegram, Facebook</strong>, or any <a href="https://github.com/github/hubot/blob/master/docs/adapters.md">hubot adapters</a></td>
 </tr>
 <tr>
 <td style="text-align: left">multi-language</td>
-<td>Run and pass data among Node.js, Python3, Ruby, etc.</td>
+<td>Code in and coordinate among <code class="prettyprint">Node.js</code>, <code class="prettyprint">Python</code>, <code class="prettyprint">Ruby</code>, etc.</td>
 </tr>
 <tr>
-<td style="text-align: left">built-in AI tools</td>
+<td style="text-align: left">built-in with AI tools</td>
 <td>Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs</td>
 </tr>
 <tr>
@@ -156,12 +158,18 @@ This documentation is still being completed.
 </tr>
 </tbody></table>
 
-<p>AIVA is based on a theoretical interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md">CGKB</a> that is <em>human-bounded Turing complete</em>. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.</p>
+<blockquote>
+<p>To see what it means, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.</p>
+</blockquote>
 
 <h2 id="installation">Installation</h2>
 
-<p>Clone this repo:</p>
-<pre class="highlight shell"><code>git clone https://github.com/kengz/aiva.git
+<p>1. Fork this repo so you can pull the new releases later:</p>
+
+<p>&nbsp; &nbsp; <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></p>
+
+<p>2. Clone <strong>your forked repository</strong>:</p>
+<pre class="highlight shell"><code>git clone https://github.com/YOURUSERNAME/aiva.git
 </code></pre>
 
 <p>Use <strong>Ubuntu &gt;14.04</strong> or <strong>MacOSX</strong>; For the fastest VM setup, I recommend <a href="https://www.digitalocean.com">Digital Ocean</a>, with this automatic <a href="https://github.com/kengz/mac_setup">setup script</a>. Optionally for manual setup, see <a href="#dependencies">Dependencies</a>.</p>
@@ -189,8 +197,27 @@ If you prefer a different bot name, replace &ldquo;aiva&rdquo; from the <code>bi
 <h3 id="run"><a name="run"></a>Run</h3>
 
 <ul>
-<li><strong>run</strong>: <code class="prettyprint">npm start</code>; append <code class="prettyprint">--bot=&lt;bot-name&gt;</code> to run the non-default bots.</li>
+<li><strong>run</strong>: </li>
 </ul>
+<pre class="highlight shell"><code>npm start <span class="c"># runs aiva</span>
+npm run debug <span class="c"># runs aivadev</span>
+</code></pre>
+
+<p>This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
+
+          <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
+
+<p>AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
+
+<p>You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.</p>
+
+<h3 id="production-and-development">Production and Development</h3>
+
+<p>Per common practice, we distinguish between production and development version, using <code class="prettyprint">NODE_ENV</code> environment variables. So we generate two sets of keys for two bots:</p>
+
+<aside class="success">
+Use &ldquo;aiva&rdquo; for production, &ldquo;aivadev&rdquo; for development. They can coexist without system conflicts.
+</aside>
 <pre class="highlight shell"><code><span class="c"># alternative commands</span>
 forever list <span class="c"># see the list of bots running</span>
 npm stop <span class="c"># stop all bots</span>
@@ -199,14 +226,6 @@ npm run debug --bot<span class="o">=</span>aiva <span class="c"># debug aiva</sp
 npm run shell <span class="c"># fast dev, run aivadev with shell-adapter</span>
 npm <span class="nb">test</span> <span class="c"># run unit tests</span>
 </code></pre>
-
-<p>The default hubot adapter is Slack. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
-
-          <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
-
-<p>AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
-
-<p>You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.</p>
 
 <h2 id="polyglot-environment"><a name="polyglot"></a>Polyglot Environment</h2>
 
@@ -222,7 +241,7 @@ node lib/io_start.js
 </code></pre>
 
 <aside class="warning">
-This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it before starting the bot.
+This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run it before starting the bot.
 </aside>
 
 <blockquote>
@@ -616,6 +635,10 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 <td style="text-align: left"><a href="#builtin-ai">built-in AI tools</a></td>
 <td>yes</td>
 </tr>
+<tr>
+<td style="text-align: left"><a href="#theoretical">theoretical power</a></td>
+<td>yes</td>
+</tr>
 </tbody></table>
 
 <h2 id="fast-setup"><a name="setup2"></a>fast setup</h2>
@@ -640,7 +663,7 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <p>Graph is a very generic and natural way of encoding information, especially for information that doesn&rsquo;t always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.)</p>
 
-<p>Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier.</p>
+<p>Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice, and it&rsquo;s data units can be schema-free. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier, schema-free allows knowledge creation on-the-fly.</p>
 
 <p>AIVA uses <a href="https://github.com/kengz/neo4jKB"><code class="prettyprint">neo4jKB</code></a> as the brain - a knowledge base implemented graph with <a href="http://neo4j.com"><code class="prettyprint">neo4j</code></a>. Specifically, <code class="prettyprint">neo4jKB</code> imposes a <a href="https://github.com/kengz/neo4jKB#kb-standard-basic">KB standard</a> on the graph for proper usage as a knowledge base.</p>
 
@@ -726,6 +749,12 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <p>These tools are put close together in a <a href="#polyglot">polyglot environment</a>, so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses <code class="prettyprint">date.js</code> and <code class="prettyprint">spaCy</code>.</p>
 
 <p>For more in-depth details, see <a href="#modules">modules</a>. Also if find a great ML tool we should include, submit a Pull Request!</p>
+
+<h2 id="theoretical-power"><a name="theoretical"></a>theoretical power</h2>
+
+<p>AIVA is based on a theoretical interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md">CGKB</a> that is <em>human-bounded Turing complete</em>. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.</p>
+
+<p>Why is this important? Because for far too many times people have tried to solve problems that are unsolvable. Many of the bots out there are actually very restrictive. To allow developers to solve problems with full power, and with easy, we have built a general-purpose tool and made it theoretically complete, so you can focus on solving your problem.</p>
 
           <h1 id="modules"><a name="modules"></a>Modules</h1>
 
@@ -973,7 +1002,7 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <li><code class="prettyprint">bundle install</code></li>
 </ul>
 
-<p>It&rsquo;s save to run the multiple times; they&rsquo;ll just update. The shell install script is necessary because &hellip; just look at how many things get installed there.</p>
+<p>It&rsquo;s save to run multiple times; they&rsquo;ll just update. The shell install script is necessary because &hellip; just look at how many things get installed there.</p>
 
 <h2 id="custom-deployment">Custom deployment</h2>
 
@@ -985,10 +1014,10 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 
 <h2 id="neo4j">Neo4j</h2>
 
-<p>If it&rsquo;s your first installation of <code class="prettyprint">Neo4j</code>, change the password:</p>
+<p>If it&rsquo;s your first installation of <code class="prettyprint">Neo4j</code>, the <code class="prettyprint">bin/install</code> script will reset the default <code class="prettyprint">username:pswd</code> from <code class="prettyprint">neo4j:neo4j</code> to <code class="prettyprint">neo4j:0000</code>, as required for direct usage. This is also consistent with the default <code class="prettyprint">NEO4J_AUTH</code> in <code class="prettyprint">.env</code>. If you wish to reset to your own password, use below:</p>
 <pre class="highlight shell"><code>neo4j start
 <span class="c"># change your password</span>
-<span class="c"># note the default username:pswd is neo4j:neo4j</span>
+<span class="c"># note the default username:pswd is neo4j:0000</span>
 curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&lt;OLD_PSWD&gt; http://localhost:7474/user/neo4j/password
 <span class="c"># access Neo4j browser GUI</span>
 open http://localhost:7474
