@@ -719,7 +719,9 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <h2 id="graph-brain"><a name="graph-brain"></a>graph brain</h2>
 
-<p>Graph is a very generic and natural way of encoding information, especially for information that doesn&rsquo;t always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.)</p>
+<p>The brain of AIVA is a graph database; it is the central memory that coordinates with different adapters, allowing it to be consistent across the platforms; for example, it can remember who you are or your todo list, even as you switch apps.</p>
+
+<p>Graph is a very generic and natural way of encoding information, especially for information that doesn&rsquo;t always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.) due to the adhoc and connected nature of generic knowledge. Thus, we think it&rsquo;s the natural choice for AIVA.</p>
 
 <p>Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice, and it&rsquo;s data units can be schema-free. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier, schema-free allows knowledge creation on-the-fly.</p>
 
@@ -737,7 +739,7 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 
 <h2 id="built-in-ai-tools"><a name="builtin-ai"></a>built-in AI tools</h2>
 
-<p>AIVA comes with a well-rounded set of AI/machine learning tools. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. </p>
+<p>AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. </p>
 
 <p><code class="prettyprint">lib/&lt;lang&gt;/ais/</code> contains the specific implementations of the AI modules/models, and <code class="prettyprint">lib/&lt;lang&gt;/ai.&lt;lang&gt;</code> is the high-level script that imports the functions from <code class="prettyprint">lib/&lt;lang&gt;/ais/</code> for usage.</p>
 
@@ -814,7 +816,7 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 
 <p>Why is this important? Because for far too many times people have tried to solve problems that are unsolvable. Many of the bots out there are actually very restrictive. To allow developers to solve problems with full power, and with easy, we have built a general-purpose tool and made it theoretically complete, so you can focus on solving your problem.</p>
 
-          <h1 id="modules"><a name="modules"></a>Modules</h1>
+          <h1 id="ai-modules"><a name="modules"></a>AI Modules</h1>
 
 <table><thead>
 <tr>
@@ -827,7 +829,7 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <td>yes</td>
 </tr>
 <tr>
-<td style="text-align: left"><a href="#tensorflow">tensorflow</a></td>
+<td style="text-align: left"><a href="#tensorflow">TensorFlow</a></td>
 <td>yes</td>
 </tr>
 <tr>
@@ -855,20 +857,32 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <p>misc list of all functions and modules in all lang that come in the box. Need programmatic way to generate such a list, ohh maybe during client start?</p>
 
 <h2 id="general-nlp"><a name="gen_nlp"></a>general NLP</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">genNLP</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/gen_nlp'</span><span class="p">)</span>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_nlp.js</span>
+<span class="kd">var</span> <span class="nx">genNLP</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/gen_nlp'</span><span class="p">)</span>
 
-<span class="nx">s</span> <span class="o">=</span> <span class="s1">'find me flights from New York to London at 9pm tomorrow.'</span>
-<span class="nx">genNLP</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">res</span><span class="p">))</span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/client.js'</span><span class="p">)</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
+
+<span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="s1">'find me flights from New York to London at 9pm tomorrow.'</span>
+
+<span class="nx">genNLP</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">reply</span><span class="p">))</span>
 <span class="p">})</span>
 </code></pre>
 
-<p>We provide a fast NLP module in <code class="prettyprint">lib/js/gen_nlp</code> for generic usage. It serves as a convenient method to get all the vital NLP parsed results. This is especially useful in the <code class="prettyprint">js</code> <strong>interface</strong> scripts for <em>parsing user inputs, normalizing texts, and extracting information</em>.</p>
+<p>NLP is core to a human-machine interactions. We provide one of the fastest and most advanced NLP module in <code class="prettyprint">lib/js/gen_nlp</code> for generic usage. It serves as a convenient method to get all the vital NLP results. This is especially useful in the <code class="prettyprint">js</code> <strong>interface</strong> scripts for <em>parsing user inputs, normalizing texts, and extracting information</em>.</p>
+
+<p>A large part of it is powered by <a href="https://spacy.io">spaCy</a>, which is <em>&ldquo;the fastest syntactic parser in the world and that its accuracy is within 1% of the best available&rdquo;</em>. The time parser uses <a href="https://github.com/matthewmueller/date">date</a>. Together, <code class="prettyprint">gen_nlp</code> extracts a rich and accurate set of results for connecting natural language input to your modules.</p>
+
+<p>Next we show an example of how a flight finder can benefit from it. For instance, it can get the <code class="prettyprint">NER</code> or <code class="prettyprint">noun_phrases</code> for the locations, time, person; the <code class="prettyprint">time</code> for a normalized form of ISO time string; <code class="prettyprint">NER_POS_TREE</code> to understand the dependencies, e.g. what&rsquo;s the origin and target destinations.</p>
 
 <blockquote>
-<p>This will yield the result pulled from spaCy in Python, and Date.js in Node.js.</p>
+<p>The example in <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_nlp.js#L5" target="_blank"><code>scripts/hello_nlp.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="nx">result</span> <span class="o">=</span> <span class="p">{</span>
+<pre class="highlight javascript"><code><span class="c1">// the result from genNLP.parse(input)</span>
+
+<span class="nx">result</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"len"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
   <span class="s2">"pos_fine"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VB"</span><span class="p">],</span>
@@ -993,10 +1007,12 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <span class="p">}</span>
 </code></pre>
 
+<p>The extracted NLP properties are listed below. For more details, refer to the links.</p>
+
 <table><thead>
 <tr>
 <th style="text-align: left">NLP property</th>
-<th>Details</th>
+<th>Reference</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -1005,23 +1021,23 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 </tr>
 <tr>
 <td style="text-align: left">len</td>
-<td>Length: number of tokens in text.</td>
+<td>Length: <a href="https://spacy.io/docs#doc-sequenceapi">number of tokens in text</a>.</td>
 </tr>
 <tr>
 <td style="text-align: left">tokens</td>
-<td>Text broken into array of tokens.</td>
+<td>Text broken into <a href="https://spacy.io/docs#annotation-tokenization">array of tokens</a>.</td>
 </tr>
 <tr>
 <td style="text-align: left">lemmas</td>
-<td>The <a href="https://en.wikipedia.org/wiki/Lemmatisation">base form</a> of each token.</td>
+<td>The <a href="https://spacy.io/docs#annotation-lemmatization">base form</a> of each token.</td>
 </tr>
 <tr>
 <td style="text-align: left">NER</td>
-<td><a href="https://en.wikipedia.org/wiki/Named-entity_recognition">Named Entity Recognition</a></td>
+<td><a href="https://spacy.io/docs#annotation-ner">Named Entity Recognition</a></td>
 </tr>
 <tr>
 <td style="text-align: left">noun_phrases</td>
-<td>grouping of meaningful nouns</td>
+<td><a href="https://spacy.io/docs#doc-spans-nounchunks">grouping of meaningful nouns</a></td>
 </tr>
 <tr>
 <td style="text-align: left">pos_coarse</td>
@@ -1033,7 +1049,7 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 </tr>
 <tr>
 <td style="text-align: left">NER_POS_tree</td>
-<td>The syntactic and dependency parse tree of text, seen in <a href="https://spacy.io/demos/displacy">DisplaCy</a></td>
+<td>The <a href="https://spacy.io/docs#doc-spans-nounchunks">syntactic and dependency parse tree</a> of text, seen in <a href="https://spacy.io/demos/displacy">DisplaCy</a></td>
 </tr>
 <tr>
 <td style="text-align: left">NER_POS_tag</td>
@@ -1041,11 +1057,74 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 </tr>
 <tr>
 <td style="text-align: left">time</td>
-<td>Parsed time if any, as ISO time string.</td>
+<td><a href="https://github.com/matthewmueller/date">Parsed time</a> if any, as ISO time string.</td>
 </tr>
 </tbody></table>
 
-<p>Example app that uses this.</p>
+<h2 id="tensorflow"><a name="tensorflow"></a>TensorFlow</h2>
+
+<p><a href="https://www.tensorflow.org">TensorFlow</a> is used mainly to build neural networks. There is a lot of comprehensive tutorials for it, so instead we will introduce you to the fastest TensorFlow interface: <a href="https://github.com/tensorflow/skflow">SkFlow</a>.</p>
+
+<p>SkFlow makes it very easy to use TensorFlow, and insanely fast to build a model. It comes with many useful wrapped methods and models. Check out this <a href="http://terrytangyuan.github.io/2016/03/14/scikit-flow-intro/">demo post written by the team</a>, their <a href="https://github.com/tensorflow/skflow#tutorial">tutorials</a>, and <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/skflow">examples</a>.</p>
+
+<p>We show how you can deploy a neural net with AIVA, with a sample Deep Neural Network trained on the Titanic data.</p>
+
+<p>The TensorFlow (and other) AI models shall be grouped under <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a>. The top level <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> script will import from this folder for usage via Socket.io.</p>
+
+<blockquote>
+<p>The Titanic DNN model can be trained using TensorFlow under <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/py/ais/dnn_titanic_train.py#L53" target="_blank"><code>lib/py/ais/dnn_titanic_train.py</code></a> after you uncomment and run it. It draws data from the sibling folder <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/data/" target="_blank"><code>lib/py/ais/data/</code></a>, and the model is saved to <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a>. </p>
+
+<p>For deployment, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> imports and exposes the methods in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a>. They can then be used to do predictions from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a>.</p>
+
+<p>TensorFlow Titanic DNN on Slack:
+<img alt="Titanic DNN on Slack" src="./images/titanic_dnn.png" /></p>
+</blockquote>
+
+<p>This demonstrates another AI component of AIVA; not only AI can power the bot, the bot can serve as an interface to specific AIs too. Feel free to explore the examples in AIVA and the resources given earlier. Doing AI is much easier today!</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">file/folder</th>
+<th>details</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_train.py" target="_blank">lib/py/ais/dnn_titanic_train.py</a></td>
+<td>Train and save the Titanic DNN model.</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/data/" target="_blank">lib/py/ais/data/</a></td>
+<td>Folder for training and test data.</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a></td>
+<td>Folder for the saved model for deployment. Will be created when new model is trained.</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/" target="_blank">lib/py/ais/ai_lib/</a></td>
+<td>Library with helpers for the AI folder.</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a></td>
+<td>Deploy the DNN titatnic model.</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a></td>
+<td>Interface script for the deployed model.</td>
+</tr>
+</tbody></table>
+
+<p>Yes, <em>you did just train a Deep Neural Net and deploy it on Slack for usage</em>. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole world of possibilities. And that&rsquo;s not it; remember, there is an entire package of nearly every type of machine learning tools, all included in AIVA. Next, we will go over them quickly next, and leave you to explore them more deeply.</p>
+
+<h2 id="indico-io"><a name="indico"></a>Indico.io</h2>
+
+<p><a href="https://indico.io">Indico.io</a> is <strong>the go-to machine learning API</strong> for developers. It focuses on the most applicable and useful ML tools for <a href="https://indico.io/product">text and image analysis</a>. This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.</p>
+
+<p>With Indico.io, everything is done via its REST API or their <a href="https://github.com/IndicoDataSolutions">wrapper clients</a> - no model/training is needed. AIVA includes the <a href="https://github.com/IndicoDataSolutions/IndicoIo-node">Node.js Indico.io wrapper</a>, nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.</p>
+
+<p>In fact, Indico is currently <a href="https://indico.io/news/121515_indico_SentimentHQ_Release">state of the art</a> in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.</p>
+
+<p><strong>Add example use cases for all AI module: group under scripts/hello_ai.js</strong></p>
 
           <h1 id="setup-tips"><a name="setup-tips"></a>Setup tips</h1>
 
