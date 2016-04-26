@@ -1,6 +1,6 @@
-helper = new Helper('../scripts/hello_nlp.js')
+helper = new Helper('../scripts/hello_ai.js')
 
-describe 'scripts/hello_nlp.js', ->
+describe 'scripts/hello_ai.js', ->
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
     @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)

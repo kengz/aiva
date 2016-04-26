@@ -1,5 +1,6 @@
 // dependencies
 var genNLP = require('../lib/js/gen_nlp')
+var ai = require('../lib/js/ai')
 
 // // Development process, testing after starting server with "node lib/io_start.js"
 // var client = require('../lib/client.js')
