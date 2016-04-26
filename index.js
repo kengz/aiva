@@ -38,7 +38,7 @@ module.exports = setEnv;
 // .env must exist if setting env vars externally
 function setEnv(defaultKey) {
   // optionally set defaultKey
-  process.env.DEPLOY = process.env.DEPLOY || defaultKey;
+  process.env.DEPLOY = process.env.DEPLOY || defaultKey || '.keys-aivadev';
   try {
     env(__dirname + '/.env', { overwrite: false });
     // then set env keys for the deployed bot

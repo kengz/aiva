@@ -1,10 +1,10 @@
 // dependencies
+// Development process, testing after starting server with "npm run server"
+var client = require('../lib/client.js')
+global.gPass = client.gPass
+
 var genNLP = require('../lib/js/gen_nlp')
 var ai = require('../lib/js/ai')
-
-// // Development process, testing after starting server with "node lib/io_start.js"
-// var client = require('../lib/client.js')
-// global.gPass = client.gPass
 
 // var input = 'find me flights from New York to London at 9pm tomorrow.'
 // genNLP.parse(input)
@@ -12,6 +12,8 @@ var ai = require('../lib/js/ai')
 //   console.log(JSON.stringify(reply))
 // })
 // // parsed NLP results
+
+console.log(ai)
 
 // deploy feature: export for bot
 module.exports = function(robot) {

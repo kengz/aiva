@@ -2,7 +2,7 @@
 // dependencies
 var _ = require('lomath')
 
-// // Development process, testing after starting server with "node lib/io_start.js"
+// // Development process, testing after starting server with "npm run server"
 // var client = require('../lib/client.js')
 // global.gPass = client.gPass
 
