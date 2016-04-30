@@ -90,6 +90,7 @@ function setWebhook(cEnv) {
       addr: cEnv['PORT'], // port or network address 
     })
     .then(function(url) {
+      console.log(cEnv['ADAPTER'], "webhook url is", url)
       cEnv[webhookKey] = url
       return cEnv
     })
@@ -132,6 +133,8 @@ if (require.main === module) {
   
   // start and kill neo4j brain server
   exec('neo4j start');
+  console.log("Access neo4j at http://localhost:7474")
+  console.log("Access ngrok at http://localhost:4040")
 
   // detect all adapters, spawn a hubot for each
   var adapters = process.env.ADAPTERS.split(/\s*,\s*/g)
