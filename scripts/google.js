@@ -13,7 +13,7 @@ module.exports = function(robot) {
 
   // menu
   robot.respond(/googlekb$/i, function(res) {
-    res.send('`google kb <query>`')
+    res.send('`googlekb <query>`')
   })
 
   // find out details about users matching the search keyword
