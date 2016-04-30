@@ -9,81 +9,167 @@
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
-.highlight, .highlight .w {
-  color: #f8f8f2;
-  background-color: #272822;
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
 }
-.highlight .err {
-  color: #151515;
-  background-color: #ac4142;
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
 }
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #505050;
+  color: #6c8b9f;
+  font-style: italic;
 }
 .highlight .cp {
-  color: #f4bf75;
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
 }
-.highlight .nt {
-  color: #f4bf75;
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
 }
-.highlight .o, .highlight .ow {
-  color: #d0d0d0;
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
 }
-.highlight .p, .highlight .pi {
-  color: #d0d0d0;
-}
-.highlight .gi {
-  color: #90a959;
-}
-.highlight .gd {
-  color: #ac4142;
-}
-.highlight .gh {
-  color: #6a9fb5;
-  background-color: #151515;
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
   font-weight: bold;
 }
-.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #aa759f;
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
 }
 .highlight .kc {
-  color: #d28445;
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
 }
 .highlight .kt {
-  color: #d28445;
-}
-.highlight .kd {
-  color: #d28445;
-}
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #90a959;
-}
-.highlight .sr {
-  color: #75b5aa;
-}
-.highlight .si {
-  color: #8f5536;
-}
-.highlight .se {
-  color: #8f5536;
-}
-.highlight .nn {
-  color: #f4bf75;
-}
-.highlight .nc {
-  color: #f4bf75;
+  color: #b2fd6d;
+  font-weight: bold;
 }
 .highlight .no {
-  color: #f4bf75;
+  color: #b2fd6d;
+  font-weight: bold;
 }
-.highlight .na {
-  color: #6a9fb5;
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
 }
 .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #90a959;
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
 }
 .highlight .ss {
-  color: #90a959;
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
 }
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -146,7 +232,7 @@ This documentation is still being completed.
 </tr>
 <tr>
 <td style="text-align: left">built-in with AI tools</td>
-<td>Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs</td>
+<td>Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs</td>
 </tr>
 <tr>
 <td style="text-align: left">hackable</td>
@@ -159,8 +245,16 @@ This documentation is still being completed.
 </tbody></table>
 
 <blockquote>
-<p>To see what it means, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.</p>
+<p>To see what they mean, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.</p>
 </blockquote>
+
+<p>We see people spending a lot of time building bots instead of focusing on what they want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities.</p>
+
+<p>Why restrict when you can have all of it? Why build multiple bots when you can have one that plugs into all platforms and runs all languages?</p>
+
+<p>AIVA exists to help with that - we do the heavy-lifting and build a ready-to-use bot; it is general purpose, multi-language, cross-platform, with robust design and tests, to suite your needs. </p>
+
+<p>AIVA gives you powerful bot tools, saves you the time to build from scratch, and allows you to focus on what you want to do. Morever, you can <strong>build once, run everywhere</strong> with AIVA&rsquo;s multi-adapter <a href="#adapters">(Slack, Telegram, Fb)</a>.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -179,7 +273,7 @@ This documentation is still being completed.
 <h3 id="one-time-setup"><a name="one-time-setup"></a>One-time Setup</h3>
 
 <ul>
-<li><strong>install dependencies</strong>: </li>
+<li><strong>install dependencies</strong>: (first installation may take ~20 mins, mainly due to the AI modules)</li>
 </ul>
 <pre class="highlight shell"><code>npm run gi
 </code></pre>
@@ -187,8 +281,6 @@ This documentation is still being completed.
 <ul>
 <li><strong>setup keys</strong>: update <code class="prettyprint">.env</code>, <code class="prettyprint">bin/.key-aiva</code> (production), <code class="prettyprint">bin/.key-aivadev</code> (development).</li>
 </ul>
-
-<p>Check <a href="#setup-tips"><strong>Setup tips</strong></a> for more help.</p>
 
 <aside class="notice">
 If you prefer a different bot name, replace &ldquo;aiva&rdquo; from the <code>bin/.keys-</code> and in <code>package.json</code>.
@@ -209,6 +301,8 @@ npm run debug <span class="c"># runs aivadev</span>
 <p>AIVA saying hi, translating, running deep neural net; on Slack, Telegram:
 <img alt="AIVA on Slack, Telegram" src="./images/npm_start.png" /></p>
 </blockquote>
+
+<p>Check <a href="#setup-tips"><strong>Setup tips</strong></a> for help.</p>
 
           <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
 
@@ -241,10 +335,10 @@ npm <span class="nb">test</span> <span class="c"># run unit tests</span>
 <p>For now we have <code class="prettyprint">/lib/client.{js, py, rb}</code>. Feel free to add <code class="prettyprint">Socket.io</code> client for more languages through pull request!</p>
 
 <blockquote>
-<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code>.</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code> with:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
-node lib/io_start.js
+npm run server
 </code></pre>
 
 <aside class="warning">
@@ -265,6 +359,10 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="c1">// hello friends</span>
 </code></pre>
+
+<aside class="success">
+For development like above, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+</aside>
 
 <h2 id="polyglot-development"><a name="polyglot-dev"></a>Polyglot Development</h2>
 
@@ -383,10 +481,10 @@ The generic advice: ensure that your functions return the correct JSON <code>msg
 <p>In fact, <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a></p>
 
 <blockquote>
-<p>To test-run it, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code>.</p>
+<p>To test-run it, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code> with:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
-node lib/io_start.js
+npm run server
 </code></pre>
 
 <blockquote>
@@ -523,10 +621,10 @@ Socket.io can send deeply nested JSON with standard data type.
 <p>There is a socket.io server that extends Hubot&rsquo;s Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All <code class="prettyprint">msg</code>s go through it. For example, let <code class="prettyprint">msg.to = &#39;hello.py&#39;, msg.intent = &#39;sayHi&#39;</code>. The server splits this into <code class="prettyprint">module = &#39;hello&#39;, lang = &#39;py&#39;</code>, modifies <code class="prettyprint">msg.to = module</code>, then sends the <code class="prettyprint">msg</code> to the client of <code class="prettyprint">lang</code>.</p>
 
 <blockquote>
-<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code>.</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code> with:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
-node lib/io_start.js
+npm run server
 </code></pre>
 
 <aside class="warning">
@@ -551,6 +649,10 @@ This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it be
 <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="c1">// hello friends</span>
 </code></pre>
+
+<aside class="success">
+For development like above, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+</aside>
 
 <blockquote>
 <p>Note due to how a module is called using <code class="prettyprint">msg.to, msg.intent</code>, you must ensure that the functions are named properly, and <code class="prettyprint">Ruby</code>&rsquo;s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. <code class="prettyprint">lib/rb/Hello.rb</code> for the <code class="prettyprint">Hello</code> module.</p>
@@ -651,18 +753,6 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 </tr>
 </tbody></table>
 
-<h2 id="what-to-use-for-what">What to use for what</h2>
-
-<p>Some of the best/recommended libraries for things:</p>
-
-<ul>
-<li><strong>NLP</strong>: SpaCy(python), TextBlob(py), Natural(js), StanfordNLP(java), Watson, Indico.io, Wordnet</li>
-<li><strong>Machine learning</strong>: scikit-learn(py), pandas(py), skflow(py), Google APIs</li>
-<li><strong>Deep learning</strong>: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)</li>
-<li><strong>Knowledge/concept base</strong>: ConceptNet, Wordnet, Google graph</li>
-<li>Whatever you do best in your favorite languages</li>
-</ul>
-
           <h1 id="features"><a name="features"></a>Features</h1>
 
 <p>This gives a top level overview of the features. See <a href="#modules">Modules</a> to find usable functions for developers.</p>
@@ -760,8 +850,13 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <td>Python</td>
 </tr>
 <tr>
-<td style="text-align: left"><a href="http://scikit-learn.org/stable/">skflow (scikit-learn)</a></td>
+<td style="text-align: left"><a href="http://scikit-learn.org/stable/">scikit-learn</a></td>
 <td>Generic ML algorithms</td>
+<td>Python</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="https://github.com/tensorflow/skflow">SkFlow</a></td>
+<td>Tensorflow + Scikit-learn</td>
 <td>Python</td>
 </tr>
 <tr>
@@ -818,6 +913,8 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 
           <h1 id="ai-modules"><a name="modules"></a>AI Modules</h1>
 
+<p>AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. You can use the as needed, directly from within AIVA without extra installations. This section gives a quick overview of their uses, and some useful helper modules.</p>
+
 <table><thead>
 <tr>
 <th style="text-align: left">Module</th>
@@ -833,6 +930,10 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <td>yes</td>
 </tr>
 <tr>
+<td style="text-align: left"><a href="#skflow">SkFlow</a></td>
+<td>yes</td>
+</tr>
+<tr>
 <td style="text-align: left"><a href="#indico">Indico.io</a></td>
 <td>yes</td>
 </tr>
@@ -841,23 +942,29 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <td>yes</td>
 </tr>
 <tr>
-<td style="text-align: left"><a href="#google-api">google APIs</a></td>
+<td style="text-align: left"><a href="#neo4jKB-brain">neo4jKB brain</a></td>
+<td>minimal</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#google-api">Google APIs</a></td>
 <td>yes</td>
 </tr>
 <tr>
-<td style="text-align: left"><a href="#custom-msg">general customMsg</a></td>
-<td>pending</td>
+<td style="text-align: left"><a href="#watson">IBM Watson</a></td>
+<td>yes</td>
 </tr>
 <tr>
-<td style="text-align: left"><a href="#neo4jKB-brain">neo4jKB brain</a></td>
+<td style="text-align: left"><a href="#custom-msg">robot.adapter.customMessage</a></td>
 <td>pending</td>
 </tr>
 </tbody></table>
 
-<p>misc list of all functions and modules in all lang that come in the box. Need programmatic way to generate such a list, ohh maybe during client start?</p>
+<aside class="notice">
+To see all the available AI modules and methods, print the <code>ai</code> objects from <code>lib/js/ai.js</code> and <code>lib/py/ai.py</code>.
+</aside>
 
 <h2 id="general-nlp"><a name="gen_nlp"></a>general NLP</h2>
-<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_nlp.js</span>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_ai.js</span>
 <span class="kd">var</span> <span class="nx">genNLP</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/gen_nlp'</span><span class="p">)</span>
 
 <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/client.js'</span><span class="p">)</span>
@@ -878,7 +985,7 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <p>Next we show an example of how a flight finder can benefit from it. For instance, it can get the <code class="prettyprint">NER</code> or <code class="prettyprint">noun_phrases</code> for the locations, time, person; the <code class="prettyprint">time</code> for a normalized form of ISO time string; <code class="prettyprint">NER_POS_TREE</code> to understand the dependencies, e.g. what&rsquo;s the origin and target destinations.</p>
 
 <blockquote>
-<p>The example in <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_nlp.js#L5" target="_blank"><code>scripts/hello_nlp.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.</p>
+<p>The example in <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js#L5" target="_blank"><code>scripts/hello_ai.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="c1">// the result from genNLP.parse(input)</span>
 
@@ -1114,17 +1221,166 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 </tr>
 </tbody></table>
 
-<p>Yes, <em>you did just train a Deep Neural Net and deploy it on Slack for usage</em>. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole world of possibilities. And that&rsquo;s not it; remember, there is an entire package of nearly every type of machine learning tools, all included in AIVA. Next, we will go over them quickly next, and leave you to explore them more deeply.</p>
+<p>Yes, <em>you did just train a Deep Neural Network and deploy it on Slack for use</em>. The mythical creative of deep learning - now at your fingertips - is going to help you unleash a whole new world of possibilities. And that’s not all; remember, there is an entire package of every major type of machine learning tools, all included in AIVA. Next, we will go over them quickly, and leave you to explore them more deeply.</p>
+
+<p>See <a href="https://github.com/tensorflow/skflow">SkFlow</a> for their tutorials and documentation.</p>
+
+<h2 id="skflow-modules"><a name="skflow"></a>SkFlow Modules</h2>
+
+<p>SkFlow is under TensorFlow. Besides, SkFlow also comes with:</p>
+
+<ul>
+<li><a href="http://scikit-learn.org"><strong>scikit-learn</strong></a></li>
+<li><a href="http://pandas.pydata.org"><strong>pandas</strong></a> </li>
+</ul>
+
+<p>both of which are very popular Python machine learning libraries for techniques that complement the neural nets. SkFlow is designed to be used with all three of them: TensorFlow, scikit and pandas.</p>
 
 <h2 id="indico-io"><a name="indico"></a>Indico.io</h2>
 
 <p><a href="https://indico.io">Indico.io</a> is <strong>the go-to machine learning API</strong> for developers. It focuses on the most applicable and useful ML tools for <a href="https://indico.io/product">text and image analysis</a>. This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.</p>
 
-<p>With Indico.io, everything is done via its REST API or their <a href="https://github.com/IndicoDataSolutions">wrapper clients</a> - no model/training is needed. AIVA includes the <a href="https://github.com/IndicoDataSolutions/IndicoIo-node">Node.js Indico.io wrapper</a>, nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.</p>
+<blockquote>
+<p>The indico wrapper is grouped under the <code class="prettyprint">ai</code> module. Remember to save your API key into the <code class="prettyprint">.keys-</code> before using. A simple example can be found at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js#L18" target="_blank"><code>scripts/hello_ai.js</code></a>.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_ai.js</span>
+<span class="kd">var</span> <span class="nx">ai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/ai'</span><span class="p">)</span>
+<span class="nx">ai</span><span class="p">.</span><span class="nx">indico</span><span class="p">.</span><span class="nx">sentiment</span><span class="p">([</span><span class="s1">'indico is so easy to use!'</span><span class="p">,</span> <span class="s1">'Still really easy, yiss'</span><span class="p">])</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="c1">// [ 0.9782025594088044, 0.9895808115135271 ]</span>
+</code></pre>
+
+<blockquote>
+<p>We also add an interface script <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js" target="_blank"><code>below that</code></a>, and demo it on Telegram. Of course the real application is likely backend oriented, such as gauging the quality of your customer service by analyzing their sentiment in chat.</p>
+
+<p>Indico on Telegram:
+<img alt="Indico on Telegram" src="./images/indico.png" /></p>
+</blockquote>
+
+<p>With Indico.io, everything is done via its REST API or their <a href="https://indico.io/docs">wrapper clients</a> - no model/training is needed. AIVA includes the <a href="https://github.com/IndicoDataSolutions/IndicoIo-node">Node.js Indico.io wrapper</a>, nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.</p>
 
 <p>In fact, Indico is currently <a href="https://indico.io/news/121515_indico_SentimentHQ_Release">state of the art</a> in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.</p>
 
-<p><strong>Add example use cases for all AI module: group under scripts/hello_ai.js</strong></p>
+<p><a href="https://indico.io/docs">Read their docs</a>, <a href="https://indico.io/product">see what they offer</a>, and get <a href="https://indico.io/plans">your API key here</a>. You can get 10k free calls per month, which is sufficient for personal/small team usage.</p>
+
+<h2 id="knowledge-base"><a name="kbase"></a>Knowledge base</h2>
+
+<p>Sometimes we need a bot to have general knowledge, such as what a phone is, as well as local knowledge, such as user preferences. This can aid with its functions, and allow for <strong>autoplanning</strong>.</p>
+
+<p>Autoplanning is vital for a bot to be able to function on its own without being explicitly told about every small detail of a task. Take the example input &ldquo;call my wife&rdquo;. It&rsquo;s true that we can hard-code the logic to find who &ldquo;wife&rdquo; is for a given person, get &ldquo;wife&rdquo;&rsquo;s number, and execute the dial function with it as the argument. What about plenty of other tasks? We can&rsquo;t possibly hand-code each one.</p>
+
+<p>Here&rsquo;s a slightly different approach: for every function we allow the bot to do, we only define the function and its needed arguments. For calling a number it&rsquo;d be <code class="prettyprint">function = dial, args = [number]</code>. With a knowledge base and autoplanning, the input &ldquo;call my wife&rdquo; will be parsed into <code class="prettyprint">function = dial</code>, <code class="prettyprint">args = [number]</code>. Since it&rsquo;s only given a <code class="prettyprint">person</code>, it can use the knowledge base to trace the connection <code class="prettyprint">person -[has]-&gt; number</code>, and proceed to retrieve the needed information from memory. The bot can use its own knowledge to plan and execute the function autonomously.</p>
+
+<p>This is a pretty advanced feature that&rsquo;s still being implemented for AIVA. It is based on the theoretical proofs and outlines for a generic interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md">CGKB</a>.</p>
+
+<p>AIVA comes with 3 knowledge bases, from generic to local: </p>
+
+<ul>
+<li><a href="https://developers.google.com/knowledge-graph/">Google Knowledge Graph Search</a></li>
+<li><a href="https://github.com/Planeshifter/node-concept-net">MIT ConceptNet</a></li>
+<li>the local <a href="#graph-brain">neo4jKB brain</a>.</li>
+</ul>
+
+<blockquote>
+<p>For now you can use Google Knowledge Graph directly to query knowledge. Note this is distinct from normal Google search:
+<img alt="Google Knowledge Graph on Slack" src="./images/googlekg.png" /></p>
+</blockquote>
+
+<h2 id="neo4jkb-brain"><a name="#neo4jKB-brain"></a>Neo4jKB brain</h2>
+
+<p>We discussed the <a href="#graph-brain">graph brain</a> above, known as <a href="https://github.com/kengz/neo4jKB"><code class="prettyprint">neo4jKB</code></a>, implemented in neo4j. It has a defined <a href="https://github.com/kengz/neo4jKB#kb-standard-basic">KB standard</a> on the graph for proper usage as a knowledge base.</p>
+
+<p>This serves as the local knowledge and the central memory system. It is the reason AIVA can behave as one consistent entity across different chat platforms. All of the memory-dependent tasks shall be read from and write to the brain.</p>
+
+<p>AIVA uses the brain for user serialization, standardized in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/user.js" target="_blank"><code>lib/js/user.js</code></a> and called automatically on start from <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/serialize_users.js" target="_blank"><code>scripts/serialize_users.js</code></a>. It will match up the multiple identities of a same user from different platforms. You can see all the serialized user nodes on neo4j&rsquo;s browser interface at <code class="prettyprint">http://localhost:7474/</code> if you are running locally, or use <a href="#ssh-browser-forwarding">SSH forwarding described here</a>.</p>
+
+<blockquote>
+<p>The serialized users in AIVA&rsquo;s neo4jKB graph brain:
+<img alt="Users in brain" src="./images/serialized_users.png" /></p>
+</blockquote>
+
+<p>The todo list feature is another relevant example. The todo items are connected to their owner. The module logic for neo4jKB is defined in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/todo.js" target="_blank"><code>lib/js/todo.js</code></a>.</p>
+
+<blockquote>
+<p>The todos belonging to a user as connected unit of information, in AIVA&rsquo;s neo4jKB graph brain:
+<img alt="User todos" src="./images/user_todo.png" /></p>
+</blockquote>
+
+<p>These two examples show briefly how to use neo4jKB for AIVA&rsquo;s modules, to help you get started. On our roadmap, we plan to complete the auto-parsing NLP module that automatically canonicalize knowledge from user input, so you don&rsquo;t have to write the define the knowledge yourself. This is closely related to the <strong>autoplanning</strong> of the <a href="#kbase">knowledge base feature</a>, and is part of <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md">CGKB</a>.</p>
+
+<p>See <a href="https://github.com/kengz/neo4jKB">neo4jKB</a> for documentation.</p>
+
+<h2 id="google-apis"><a name="#google-api"></a>Google APIs</h2>
+
+<p>Google APIs are grouped under the <code class="prettyprint">ai</code> module because many of them are actually AI or powered by AI. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/google.js" target="_blank"><code>lib/js/ais/google.js</code></a> imports the <a href="https://github.com/google/google-api-nodejs-client">Google APIs Node.js client</a>. Not all of the APIs are initialized, you&rsquo;d have to activate each one as you wish to use on <a href="https://console.developers.google.com">Google API Manager</a> and in <code class="prettyprint">lib/js/ais/google.js</code>.</p>
+
+<aside class="notice">
+You must &ldquo;enable APIs&rdquo; from Google API Manager for your Google API key to use them.
+</aside>
+
+<p>We have seen Knowledge Graph Search earlier; Google Search actually uses a <a href="https://www.npmjs.com/package/google">npm module google</a> powered by a scraper, so it is free without quota. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/google.js" target="_blank"><code>scripts/google.js</code></a>. Google Translate and language detection are also based on a scraper, in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a> and is free without quota as well. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>.</p>
+
+<p>See <a href="https://github.com/google/google-api-nodejs-client">google API Nodejs client</a> for their documentation.</p>
+
+<h2 id="ibm-watson"><a name="watson"></a>IBM Watson</h2>
+
+<p>IBM Watson is a collection of cognitive computing tools. AIVA&rsquo;s <code class="prettyprint">ai</code> module includes the IBM Watson Node.js client at <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a>.</p>
+
+<p>To use Watson, you need to register at <a href="http://www.ibm.com/cloud-computing/bluemix/watson/">IBM Watson Bluemix</a>, activate the API you want, and get the individual credentials <code class="prettyprint">&lt;username&gt;:&lt;password&gt;</code>. Note that the credentials are distinct for each API you activate.</p>
+
+<p>Then, add the credentials in <code class="prettyprint">bin/.keys-aiva</code> and <code class="prettyprint">bin/.keys-aivadev</code> with the format <code class="prettyprint">WATSON_&lt;API-NAME&gt;_CRED=&lt;username&gt;:&lt;password&gt;</code>, for example <code class="prettyprint">WATSON_PERSONALITY_INSIGHTS_CRED=&lt;username&gt;:&lt;password&gt;</code> for Personality Insights. The <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a> module will automatically read the environment variable and activate the function for your usage.</p>
+
+<p>See the <a href="https://github.com/watson-developer-cloud/node-sdk">Watson node sdk</a> for their documentation.</p>
+
+<h2 id="robot-adapter-custommessage"><a name="custom-msg"></a>robot.adapter.customMessage</h2>
+
+<p>Sending plain texts to different adapters is straightforward. However, sometimes we wish to take advantage of the available custom formatting of a platform, such as Slack attachment or Facebook rich messages.</p>
+
+<p>These special messages can be sent via <code class="prettyprint">robot.adapter.customMessage(attachments)</code> - a method that most adapters implement (Slack, Telegram, Facebook adapters have it). All we need to do is to format the attachments properly by detecting the current adapter using <code class="prettyprint">robot.adapterName</code>, then format the attachments to the right format with <code class="prettyprint">customFormat</code>.</p>
+
+<p>For more, see <a href="#adapters">adapters</a>.</p>
+
+          <h1 id="adapters"><a name="adapters"></a>Adapters</h1>
+
+<p>AIVA can simultaneously connect to multiple chat platforms and still behave as one entity, due to its central <a href="#neo4jKB-brain">graph brain</a>. This allows you to <strong>build once, run everywhere</strong>.</p>
+
+<p>It utilizes <a href="https://github.com/github/hubot/blob/master/docs/adapters.md">hubot&rsquo;s adapters</a>. So, feel free to add any as you wish. AIVA comes with Slack, Telegram, Fb adapters, installed with <code class="prettyprint">npm run gi</code>, and auto-run with AIVA.</p>
+
+<p>For each adapter, we encourage you to create two tokens, for <strong>production</strong> and <strong>development</strong> respectively. All bot tokens go into <a href="https://github.com/kengz/aiva/blob/aiva-v3/bin/.keys-example" target="_blank"><code>bin/.keys-aiva or bin/.keys-aiva</code></a> created automatically during <code class="prettyprint">npm run gi</code>. If you do not wish to use an adapter, simple remove its token.</p>
+
+<p>The webhooks for adapters are auto-set in <a href="#ngrok"><code class="prettyprint">ngrok</code></a> in <code class="prettyprint">index.js</code>; you don&rsquo;t even need to provide a webhook url.</p>
+
+<p>As mentioned, we can use the custom message formatting of a platform, such as Slack attachment or Facebook rich messages. You can check the adapter by <code class="prettyprint">robot.adapterName</code> to format message accordingly, then send it using the method <code class="prettyprint">robot.adapter.customMessage</code> for any adapter. More below.</p>
+
+<aside class="notice">
+CustomMessage will be generalized soon, and we will provide better in-code examples.
+</aside>
+
+<h2 id="slack">Slack</h2>
+
+<p><a href="https://github.com/slackhq/hubot-slack">hubot-slack</a> comes with AIVA. It uses Slack&rsquo;s RTC API. Create your bot and get the token <a href="https://my.slack.com/services/new/bot">here</a>, to set <a href="https://github.com/kengz/aiva/blob/aiva-v3/bin/.keys-example#L2" target="_blank"><code>HUBOT_SLACK_TOKEN</code></a>.</p>
+
+<p>To use customMessage, see the <a href="https://github.com/slackhq/hubot-slack/issues/170#issuecomment-113315455">example (pending update)</a>, invoked when <code class="prettyprint">robot.adapterName == &#39;slack&#39;</code>. Refer to the <a href="https://api.slack.com/docs/attachments">Slack attachments</a> for formatting.</p>
+
+<h2 id="telegram">Telegram</h2>
+
+<p><a href="https://github.com/lukefx/hubot-telegram">hubot-telegram</a> comes with AIVA. Create your bot and get the token <a href="https://core.telegram.org/bots#3-how-do-i-create-a-bot">here</a>, to set <a href="https://github.com/kengz/aiva/blob/aiva-v3/bin/.keys-example#L3" target="_blank"><code>TELEGRAM_TOKEN</code></a>.</p>
+
+<aside class="notice">
+Don&rsquo;t provide your webhook url; it is set up automatically in <a href="https://github.com/kengz/aiva/blob/aiva-v3/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>.
+</aside>
+
+<p>To use customMessage, see the <a href="https://github.com/lukefx/hubot-telegram#telegram-specific-functionality-ie-stickers-images">example</a>, invoked when <code class="prettyprint">robot.adapterName == &#39;telegram&#39;</code>. Refer to <a href="https://core.telegram.org/bots/api">Telegram bot API</a> for formatting.</p>
+
+<h2 id="facebook">Facebook</h2>
+
+<p><a href="https://github.com/chen-ye/hubot-fb">hubot-fb</a> comes with AIVA. Create your bot by creating a Fb App and Page, as detailed <a href="https://developers.facebook.com/docs/messenger-platform/quickstart">here</a>, and get the <a href="https://developers.facebook.com/docs/messenger-platform/quickstart">Page Access Token in Step 3 here</a> to set <a href="https://github.com/kengz/aiva/blob/aiva-v3/bin/.keys-example#L4" target="_blank"><code>FB_PAGE_TOKEN</code></a>; set <a href="https://github.com/kengz/aiva/blob/aiva-v3/bin/.keys-example#L4" target="_blank"><code>FB_VERIFY_TOKEN</code></a> to any phrase you like.</p>
+
+<aside class="notice">
+Don&rsquo;t provide your webhook url; it is set up automatically in <a href="https://github.com/kengz/aiva/blob/aiva-v3/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>.
+</aside>
+
+<p>To use customMessage, see <a href="https://github.com/chen-ye/hubot-fb#sending-rich-messages-templates-images">the examples</a>, invoked when <code class="prettyprint">robot.adapterName == &#39;fb&#39;</code>. Refer to the <a href="https://developers.facebook.com/docs/messenger-platform/send-api-reference">Send API</a> for formatting.</p>
 
           <h1 id="setup-tips"><a name="setup-tips"></a>Setup tips</h1>
 
@@ -1149,6 +1405,10 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 
 <p>AIVA uses <a href="https://github.com/foreverjs/forever"><code class="prettyprint">forever</code></a> to keep-alive (with 10 max restarts). <code class="prettyprint">npm start</code> runs the process in the background, with it stdout logs written to <code class="prettyprint">/logs</code>. <code class="prettyprint">npm run debug</code> runs the same thing except it logs stdout to the terminal.</p>
 
+<h2 id="ngrok"><a name="ngrok"></a>ngrok</h2>
+
+<p>Webhook is automatically enable by an internal ngrok setup. Access the ngrok interface at <a href="http://localhost:4040"><code class="prettyprint">http://localhost:4040</code></a>.</p>
+
 <h2 id="neo4j">Neo4j</h2>
 
 <p>If it&rsquo;s your first installation of <code class="prettyprint">Neo4j</code>, the <code class="prettyprint">bin/install</code> script will reset the default <code class="prettyprint">username:pswd</code> from <code class="prettyprint">neo4j:neo4j</code> to <code class="prettyprint">neo4j:0000</code>, as required for direct usage. This is also consistent with the default <code class="prettyprint">NEO4J_AUTH</code> in <code class="prettyprint">.env</code>. If you wish to reset to your own password, use below:</p>
@@ -1156,9 +1416,9 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <span class="c"># change your password</span>
 <span class="c"># note the default username:pswd is neo4j:0000</span>
 curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&lt;OLD_PSWD&gt; http://localhost:7474/user/neo4j/password
-<span class="c"># access Neo4j browser GUI</span>
-open http://localhost:7474
 </code></pre>
+
+<p>Access the Neo4j browser GUI at <a href="http://localhost:7474"><code class="prettyprint">http://localhost:7474</code></a></p>
 
 <h2 id="ssh-browser-forwarding">SSH Browser-forwarding</h2>
 
@@ -1184,8 +1444,6 @@ open http://localhost:7474
 <li><code class="prettyprint">ruby, bundler</code></li>
 <li><code class="prettyprint">forever, istanbul</code> (<code class="prettyprint">npm -g</code>)</li>
 </ul>
-
-          <h1 id="adapters"><a name="adapters"></a>Adapters</h1>
 
           <h1 id="changelog"><a name="changelog"></a>Changelog</h1>
 
