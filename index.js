@@ -9,8 +9,6 @@ Promise.promisifyAll(portfinder)
 var ngrok = require('requireg')('ngrok');
 Promise.promisifyAll(ngrok);
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
 // child processes for spawn
 var children = [];
 
@@ -41,8 +39,9 @@ function setEnv(defaultKey) {
   process.env.DEPLOY = process.env.DEPLOY || defaultKey || '.keys-aivadev';
   try {
     env(__dirname + '/.env', { overwrite: false });
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development'
     // then set env keys for the deployed bot
-    console.log("Deploying using", process.env.DEPLOY)
+    console.log("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
     env(__dirname + '/bin/' + process.env.DEPLOY);
     process.env.BOTNAME = process.env.DEPLOY.split("-").pop()
   } catch (e) {
