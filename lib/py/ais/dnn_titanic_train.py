@@ -4,7 +4,7 @@ import numpy as np
 from ai_lib import preprocess
 from sklearn import cross_validation, metrics
 import pandas
-import skflow
+import tensorflow.contrib.learn as skflow
 
 # method wrap for safety, so training doesn't run when imported by accident
 def train():

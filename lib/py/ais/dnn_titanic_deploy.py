@@ -2,7 +2,7 @@ import numpy as np
 from ai_lib import *
 from sklearn import cross_validation, metrics
 import pandas
-import skflow
+import tensorflow.contrib.learn as skflow
 
 # reliable absolute path when this module is called elsewhere
 model_path = preprocess.abspath('models/dnn_titanic')
