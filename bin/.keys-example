@@ -1,5 +1,8 @@
 ADMINS=<meh>
-HUBOT_SLACK_TOKEN=<add custom slack bot https://slack.com/signin?redir=%2Fservices%2Fnew%2Fbot>
+HUBOT_SLACK_TOKEN=<add custom slack bot https://my.slack.com/services/new/bot>
+TELEGRAM_TOKEN=<get from bot father https://core.telegram.org/bots#3-how-do-i-create-a-bot>
+FB_PAGE_TOKEN=<step 3 in https://developers.facebook.com/docs/messenger-platform/quickstart>
+FB_VERIFY_TOKEN=<your phrase of choice>
 GOOGLE_API_KEY=<https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
 GOOGLE_OAUTH_CLIENT_ID=<https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
 GOOGLE_OAUTH_CLIENT_SECRET=<https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
