@@ -424,6 +424,11 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 <td>Python</td>
 </tr>
 <tr>
+<td style="text-align: left"><a href="https://github.com/wit-ai/node-wit">Wit.ai</a></td>
+<td>NLP for developers</td>
+<td>Node.js client</td>
+</tr>
+<tr>
 <td style="text-align: left"><a href="https://indico.io">Indico.io</a></td>
 <td>text+image analysis</td>
 <td>(REST API) Node.js client</td>
@@ -482,6 +487,10 @@ Neo4jKB is a completed project. Currently it is used for user-recognition and us
 </thead><tbody>
 <tr>
 <td style="text-align: left"><a href="#gen_nlp">general NLP</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#witai">Wit.ai</a></td>
 <td>yes</td>
 </tr>
 <tr>
@@ -722,6 +731,21 @@ To see all the available AI modules and methods, print the <code>ai</code> objec
 <td><a href="https://github.com/matthewmueller/date">Parsed time</a> if any, as ISO time string.</td>
 </tr>
 </tbody></table>
+
+<h2 id="wit-ai"><a name="witai"></a>Wit.ai</h2>
+
+<p><a href="https://wit.ai/">Wit.ai</a> is pretty sick, with a bot engine powered by AI. They are now part of Facebook, if you don&rsquo;t already know, and it&rsquo;s free to use.</p>
+
+<p>AIVA is fully compatible with Wit.ai, and we use its <a href="https://github.com/wit-ai/node-wit">Node.js client</a>. Bear in mind that you need to manually train it for each human input you wish to parse, or you can find some existing trained models. Their own guide is pretty comprehensive, so we won&rsquo;t discuss much here.</p>
+<pre class="highlight shell"><code><span class="c"># install to use wit.ai</span>
+npm i --save node-wit
+</code></pre>
+
+<blockquote>
+<p>Then add the token to bin/.keys-aiva and bin/.keys-aivadev; it will be set automatically.</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="nv">WIT_TOKEN</span><span class="o">=</span>&lt;your_wit_token&gt;
+</code></pre>
 
 <h2 id="tensorflow"><a name="tensorflow"></a>TensorFlow</h2>
 
@@ -1494,6 +1518,8 @@ curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&l
           <h1 id="roadmap-amp-changelog"><a name="changelog"></a>Roadmap &amp; Changelog</h1>
 
 <p><a href="https://github.com/kengz/aiva/blob/master/docs/CHANGELOG.md" target="_blank"><code>See the Roadmap and Changelog on Github.</code></a></p>
+
+<p>The current phase focuses on <strong>system</strong> design. The next phases will deal with more integrated NLP, usage of the graph brain, and built in functions of a virtual assistant.</p>
 
           <h1 id="contributing"><a name="contributing"></a>Contributing</h1>
 
