@@ -1,0 +1,72 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "5"
+  - "4"
+virtualenv:
+  system_site_packages: true
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+      - openjdk-7-jdk
+      # - libatlas-dev
+      # - libblas-dev
+      # - liblapack-dev
+      # - gfortran
+      # - python3-numpy
+      # - python3-scipy
+before_install:
+  - sudo apt-get -y install python3-pip python-dev
+  - python3 -V
+  - pip3 -V
+  # prune path, tmp fix for python module not found
+  - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+  # reinstall bundler to fix it failing to locate gem
+  - ruby --version
+  - bundle --version
+  - ls $TRAVIS_BUILD_DIR
+  # install Neo4j locally:
+  - if [ ! -f neo4j-community-2.3.2 ]; then (wget dist.neo4j.org/neo4j-community-2.3.2-unix.tar.gz && tar -xzf neo4j-community-2.3.2-unix.tar.gz && sed -i.bak s/dbms.security.auth_enabled=true/dbms.security.auth_enabled=false/g neo4j-community-2.3.2/conf/neo4j-server.properties); fi
+  - neo4j-community-2.3.2/bin/neo4j start
+  # temp fix for wordpos on node v4.x failing to install wordnet-db first
+  - npm i wordnet-db
+  - npm i cheerio
+install:
+  - npm install
+  - sudo pip3 install -U setuptools
+  - sudo pip3 install -U virtualenvwrapper
+  - sudo pip3 install -qU spacy
+  - sudo python3 -m spacy.en.download
+  # - sudo pip3 install -qU https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp34-none-linux_x86_64.whl
+  # - sudo pip3 install -qU scikit-learn
+  # - sudo pip3 install -qU git+git://github.com/tensorflow/skflow.git
+  # - sudo pip3 install -qU pandas
+  - sudo pip3 install -r requirements.txt
+  - bundle install
+cache:
+  apt: true
+  pip: true
+  bundler: true
+  directories:
+    - neo4j-community-2.3.2
+    - node_modules
+    - pyenv
+    - /usr/local/lib/python3.4/dist-packages
+env:
+  global:
+    - CXX=g++-4.8
+    - NODE_ENV=development
+    - secure: "XkHFwemxrQc7ZveE8xZ0DXtU3wGjNp/m/kwG2YPa7reLOooL95qSsGp3nL2L9asnvvUAECLm6D1MlepaGvN8acyXwlqv7SOD4EUptpCVzrKAL6fO/Fz2FuMQVFew26ikgG/RtpxEDUFc8N588jyG7r7koE6bAaYy/gDDbEGEFNIoJe3tJW6k4cE28qSrZ9R61oPpbphNTLusL4kEyfVyPF5PDBhT8j3CJndbqfsrU+jiSKxNEGIkm/GJitCykkJQcNVnOvsaPdSOrRMOXEtDhAUGAz76zWf87O8B5c88S7rFELyioXmWBmjMGp8H2NIkiRhh0ZJWppE91+IITEM9aF8Qkge+6bQvLjoil3t7g/HIYA/wjvhsus1ltIuk58YnhgLcn948zR+zv6zJiqd3G8KUKgAnq2yfAvMvIX4uau6PnKdhF/31Cl84K2QWlHigs5dtncSRL2fjYRLjnBDltTrEPH1KxzqZ40Ts14vIsmjVl0gzx4+e4L53bf8n8ULEZOAp1cbuq2db7DpWzDd16v/RAb+DLrwFKkIZq5EZdaoOV9vZAMRq53AZqtg+SIdq2Har4VIyiBK3s6vk7mjtrsCBtcXWJsqdvSAXVUoE5dBnFuTrhtijD0c9fbqx4gtLTEG3tHlmVIYr509IgW6k4VOa3UGdYTWpkVIfLjhXPBE="
+    - NEO4J_ADDR=localhost:7474
+# whitelist
+branches:
+  only:
+    - aiva-v3
+matrix:
+  fast_finish: true
+after_script:
+  "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"

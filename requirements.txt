@@ -1,0 +1,1 @@
+socketIO-client>=0.5.0

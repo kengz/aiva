@@ -1,0 +1,14 @@
+ADMINS=<meh>
+HUBOT_SLACK_TOKEN=<add custom slack bot https://my.slack.com/services/new/bot>
+TELEGRAM_TOKEN=<get from bot father https://core.telegram.org/bots#3-how-do-i-create-a-bot>
+FB_PAGE_ID=<see aiva doc on adapters>
+FB_APP_ID=<see aiva doc on adapters>
+FB_APP_SECRET=<see aiva doc on adapters>
+FB_PAGE_TOKEN=<see aiva doc on adapters>
+FB_WEBHOOK=<optional: set a persistent webhook url if you have one on ngrok, since FB takes 10 mins to update it>
+GOOGLE_API_KEY=<https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
+GOOGLE_OAUTH_CLIENT_ID=<https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
+GOOGLE_OAUTH_CLIENT_SECRET=<https://wp-analytify.com/get-client-id-client-secret-developer-api-key-google-developers-console-application/>
+INDICO_API_KEY=<https://indico.io/register>
+WATSON_ALCHEMY_API_KEY=<https://github.com/watson-developer-cloud/node-sdk#getting-the-service-credentials>
+WATSON_PERSONALITY_INSIGHTS_CRED=<username>:<password>
