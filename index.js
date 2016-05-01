@@ -89,7 +89,7 @@ function setWebhook(cEnv) {
     // set ngrok subdomain if <ADAPTER>_WEBHOOK given as ngrok domain
     var subdomain = undefined
     if (cEnv[webhookKey] && cEnv[webhookKey].match(/\/\/(\w+)\.ngrok/)) {
-      cEnv[webhookKey].match(/\/\/(\w+)\.ngrok/)[1]
+      subdomain = cEnv[webhookKey].match(/\/\/(\w+)\.ngrok/)[1]
     }
     var ngrokOpts = _.pickBy({
       proto: 'http', // http|tcp|tls 
