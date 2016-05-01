@@ -1,16 +1,9 @@
-# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
+# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
 It is a **bot-generalization**: you can implement any features, use with major AI tools, deploy across platforms, and code in multiple languages.
 
-| AIVA is | |
-|:---|---|
-| general-purpose | An app interface, AI assistant, anything! It's way beyond a chatbot. |
-| cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
-| cross-language | Runs scripts among Node.js, Python3, Ruby, etc. |
-| hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
-| powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
 | AIVA is | Details |
 |:---|---|
