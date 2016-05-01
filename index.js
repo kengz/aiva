@@ -14,20 +14,20 @@ var children = [];
 
 // some adapters need specific ports to work with
 var adapterPorts = {
-  'production': {
-    'telegram': 8443,
-    'fb': 8047
+  production: {
+    telegram: 8443,
+    fb: 8047
   },
-  'development': {
-    'telegram': 8443,
-    'fb': 8049
+  development: {
+    telegram: 8443,
+    fb: 8049
   }
 }
 
 // process.env.<key> to set webhook for adapter
-var adapterWebhookKey = {
-  'telegram': 'TELEGRAM_WEBHOOK',
-  'fb': 'FB_WEBHOOK'
+var adapterWebh2ookKey = {
+  telegram: 'TELEGRAM_WEBHOOK',
+  fb: 'FB_WEBHOOK'
 }
 
 // export the setEnv for convenient usage in dev
