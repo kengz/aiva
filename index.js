@@ -41,6 +41,7 @@ function setEnv(defaultKey) {
   try {
     env(__dirname + '/.env', { overwrite: false });
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+    process.env.FB_AUTOHEAR = 1
     // then set env keys for the deployed bot
     console.log("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
     env(__dirname + '/bin/' + process.env.DEPLOY);
