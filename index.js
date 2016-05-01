@@ -86,8 +86,11 @@ function setPort(cEnv) {
 function setWebhook(cEnv) {
   var webhookKey = _.get(adapterWebhookKey, cEnv['ADAPTER'])
   if (webhookKey) {
-    // set ngrok subdomain if <ADAPTER>_WEBHOOK given
-    var subdomain = cEnv[webhookKey] ? cEnv[webhookKey].match(/\/\/(\w+)\.ngrok/)[1] : undefined
+    // set ngrok subdomain if <ADAPTER>_WEBHOOK given as ngrok domain
+    var subdomain = undefined
+    if (cEnv[webhookKey] && cEnv[webhookKey].match(/\/\/(\w+)\.ngrok/)) {
+      cEnv[webhookKey].match(/\/\/(\w+)\.ngrok/)[1]
+    }
     var ngrokOpts = _.pickBy({
       proto: 'http', // http|tcp|tls 
       addr: cEnv['PORT'], // port or network address 
