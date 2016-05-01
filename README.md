@@ -1,9 +1,8 @@
 # AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
-
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
-It is a **bot-generalization**: you can implement any features, use it simultaneously on the major platforms, and code in multiple languages.
+It is a **bot-generalization**: you can implement any features, use with major AI tools, deploy across platforms, and code in multiple languages.
 
 
 | AIVA is | Details |
@@ -11,12 +10,19 @@ It is a **bot-generalization**: you can implement any features, use it simultane
 | general-purpose | An app interface, AI assistant, anything! |
 | cross-platform | Deploy simultaneously on **Slack, Telegram, Facebook**, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
 | multi-language | Code in and coordinate among `Node.js`, `Python`, `Ruby`, etc. |
-| built-in with AI tools | Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs |
+| built-in with AI tools | Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
->To see what it means, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.
+>To see what they mean, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.
 
+We see people spending a lot of time building bots instead of focusing on what they want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities.
+
+Why restrict when you can have all of it? Why build multiple bots when you can have one that plugs into all platforms and runs all languages?
+
+AIVA exists to help with that - we do the heavy-lifting and build a ready-to-use bot; it is general purpose, multi-language, cross-platform, with robust design and tests, to suite your needs. 
+
+AIVA gives you powerful bot tools, saves you the time to build from scratch, and allows you to focus on what you want to do. Morever, you can **build once, run everywhere** with AIVA's multi-adapter [(Slack, Telegram, Fb)](#adapters).
 
 ## Documentation
 
@@ -43,15 +49,13 @@ Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digi
 ## <a name="setup"></a>Setup, Run
 
 ### <a name="one-time-setup"></a>One-time Setup
-- **install dependencies**: 
+- **install dependencies**: (first installation may take ~20 mins, mainly due to the AI modules)
 
 ```shell
 npm run gi
 ```
 
 - **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
-
-Check [**Setup tips**](#setup-tips) for more help.
 
 <aside class="notice">
 If you prefer a different bot name, replace "aiva" from the <code>bin/.keys-</code> and in <code>package.json</code>.
@@ -66,9 +70,9 @@ npm start # runs aiva
 npm run debug # runs aivadev
 ```
 
-This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](#adapters) for connecting to different chat platforms.
+This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook.
 
 
 ## Contributing
 
-We'd love for you to contribute and make AIVA even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful generic module, adding more adapters like Whatsapp or Twilio.
+We'd love for you to contribute and make AIVA even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful generic module, adding more adapters like Skype or Twilio.
