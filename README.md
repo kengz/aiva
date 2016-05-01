@@ -1,4 +1,4 @@
-# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
+# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva)
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
@@ -26,7 +26,7 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 
 ## Documentation
 
-All the docs are on [kengz.me/aiva-doc](http://kengz.me/aiva-doc/#aiva). This README serves as a quick reference for setup.
+All the docs are on [kengz.me/aiva](http://kengz.me/aiva/). This README serves as a quick reference for setup.
 
 
 
