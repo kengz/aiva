@@ -33,6 +33,8 @@ module.exports = function(robot) {
     /* istanbul ignore next */
     if (robot.adapterName == 'telegram') {
       return
+    } else if (robot.adapterName == 'fb') {
+      return
     }
     serialize_users(robot.brain.data.users).then(function(size) {
       console.log("setting global.users from scripts/serialize_users.js")

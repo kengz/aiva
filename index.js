@@ -16,17 +16,18 @@ var children = [];
 var adapterPorts = {
   'production': {
     'telegram': 8443,
-    'fb': 8080
+    'fb': 8047
   },
   'development': {
     'telegram': 8443,
-    'fb': 80
+    'fb': 8049
   }
 }
 
 // process.env.<key> to set webhook for adapter
 var adapterWebhookKey = {
-  'telegram': 'TELEGRAM_WEBHOOK'
+  'telegram': 'TELEGRAM_WEBHOOK',
+  'fb': 'FB_WEBHOOK'
 }
 
 // export the setEnv for convenient usage in dev
@@ -84,17 +85,18 @@ function setPort(cEnv) {
 // Spawn a ngrok automatically to handle the webhook
 function setWebhook(cEnv) {
   var webhookKey = _.get(adapterWebhookKey, cEnv['ADAPTER'])
-  if (webhookKey) {
+  if (webhookKey && !cEnv[webhookKey]) {
     return ngrok.connectAsync({
       proto: 'http', // http|tcp|tls 
       addr: cEnv['PORT'], // port or network address 
     })
     .then(function(url) {
-      console.log(cEnv['ADAPTER'], "webhook url is", url)
       cEnv[webhookKey] = url
+      console.log(cEnv['ADAPTER'], "webhook url is", url, "at PORT:", cEnv['PORT'])
       return cEnv
     })
   } else {
+    console.log(cEnv['ADAPTER'], "webhook url is", cEnv[webhookKey], "at PORT:", cEnv['PORT'])
     return cEnv
   }
 }
@@ -104,7 +106,7 @@ function spawnProcess(cEnv) {
   // spawn hubot with the copied env for childprocess
   var hb = spawn('./bin/hubot', ['-a', cEnv['ADAPTER'], '--name', process.env.BOTNAME], { stdio: 'inherit', env: cEnv })
   children.push(hb);
-  console.log("Deploy", process.env.BOTNAME, "with", cEnv['ADAPTER'], "at port", cEnv['PORT'])
+  console.log("Deploy", process.env.BOTNAME, "with", cEnv['ADAPTER'])
   return cEnv
 }
 
