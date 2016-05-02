@@ -366,6 +366,10 @@ npm run debug <span class="c"># runs aivadev</span>
 
 <p>See <a href="#adapters">adapters</a> for more.</p>
 
+<aside class="notice">
+Implementation is complete for Slack, Telegram, but partial for Facebook adapter since it&rsquo;s quite new. We are working with the adapter&rsquo;s author to complete this very soon - will be done in the next release soon.
+</aside>
+
 <h2 id="graph-brain"><a name="graph-brain"></a>graph brain</h2>
 
 <p>The brain of AIVA is a graph database; it is the central memory that coordinates with different adapters, allowing it to be consistent across the platforms; for example, it can remember who you are or your todo list, even as you switch apps.</p>
@@ -378,6 +382,10 @@ npm run debug <span class="c"># runs aivadev</span>
 
 <aside class="notice">
 Neo4jKB is a completed project. Currently it is used for user-recognition and user todo list. AIVA doesn&rsquo;t fully utilize Neo4jKB yet as the AI tools are under development. When done, AIVA will be able to automatically form and extract knowledge from the graph brain.
+</aside>
+
+<aside class="notice">
+User serialization that depends on the brain is complete for Slack, but partial for Telegram, Facebook. They will be done in the next release soon.
 </aside>
 
 <h2 id="multi-language"><a name="multi-language"></a>multi-language</h2>
