@@ -105,6 +105,10 @@ function setWebhook(cEnv) {
       console.log("[", cEnv['ADAPTER'], "webhook url: ", url, "at PORT:", cEnv['PORT'], "]")
       return cEnv
     })
+    .catch(function(err) {
+      console.log(err)
+      console.log("You may have specified a wrong pair of ngrok subdomain and NGROK_AUTH, or trying to use more than 1 custom subdomain at once.")
+    })
   } else {
     return cEnv
   }
