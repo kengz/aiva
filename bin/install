@@ -115,6 +115,7 @@ ninfo=$(brew info neo4j)
 nv="$(echo $ninfo | sed 's/\(.*\)\, dev.*/\1/')"
 if [ "$nv" ]; then echo $nv; else (
 brew install neo4j;
+source ~/.bash_profile
 echo "
 # Neo4j home path
 export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
@@ -205,10 +206,8 @@ echo "
 if [ "$(neo4j status)" == "" ]; 
 	then (
 sudo apt-get -y install neo4j;
+source ~/.bashrc
 echo "
-# neo4j {start | stop | status}
-alias neo4j='service neo4j-service'
-
 # Neo4j home path
 export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
 source ~/.bashrc
