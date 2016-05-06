@@ -1,4 +1,5 @@
 # *_train.py is for offline training, shall not be run during deployment
+import os
 import shutil
 import numpy as np
 from ai_lib import preprocess
@@ -48,6 +49,11 @@ def train():
   mle.save(model_path)
   print('Model saved to', model_path)
 
+
+# auto train first time if models/ does not exist
+if not os.path.exists(os.path.normpath(os.path.join(os.path.dirname(__file__), 'models'))):
+  print("Training dnn_titanic")
+  train()
 
 # Uncomment to train it
 # train()
