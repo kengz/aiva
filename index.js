@@ -27,7 +27,7 @@ var adapterPorts = {
 // process.env.<key> to set webhook for adapter
 var adapterWebhookKey = {
   telegram: 'TELEGRAM_WEBHOOK',
-  fb: 'FB_WEBHOOK'
+  fb: 'FB_WEBHOOK_BASE'
 }
 
 // export the setEnv for convenient usage in dev
@@ -41,7 +41,10 @@ function setEnv(defaultKey) {
   try {
     env(__dirname + '/.env', { overwrite: false });
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+    // override default FB adapter env
     process.env.FB_AUTOHEAR = 1
+    process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
+    process.env.FB_ROUTE_URL = '/fb'
     // then set env keys for the deployed bot
     console.log("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
     env(__dirname + '/bin/' + process.env.DEPLOY);

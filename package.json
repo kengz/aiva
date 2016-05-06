@@ -40,7 +40,7 @@
     "googleapis": "^5.2.1",
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
-    "hubot-fb": "^2.0.2",
+    "hubot-fb": "^3.0.0",
     "hubot-slack": "^3.4.2",
     "hubot-telegram": "^0.1.0",
     "indico.io": "^0.9.3",
