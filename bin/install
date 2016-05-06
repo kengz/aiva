@@ -49,6 +49,13 @@ fi
 # Keep-alive: update existing `sudo` time stamp until this script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+# install npm global packages: forever, istanbul, ngrok
+echo "
+=> Ensuring you have forever, ngrok"
+sudo npm i -g forever
+sudo npm i -g ngrok
+sudo npm i -g istanbul
+# npm list -g --depth=0
 
 # determine if is Mac OSX, or Linux; then run accordingly
 if [ $(uname) == "Darwin" ];
@@ -251,16 +258,6 @@ rbenv rehash
 );
 fi
 # OS split ends, continue
-
-
-# install npm global packages: forever
-echo "
-=> Ensuring you have forever"
-sudo npm i -g forever
-sudo npm i -g istanbul
-sudo npm i -g ngrok
-
-# npm list -g --depth=0
 
 echo "
 Dependencies setup complete.
