@@ -52,9 +52,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # install npm global packages: forever, istanbul, ngrok
 echo "
 => Ensuring you have forever, ngrok"
-sudo npm i -g forever
-sudo npm i -g ngrok
-sudo npm i -g istanbul
+npm list -g forever || sudo npm i -g forever
+npm list -g ngrok || sudo npm i -g ngrok
+npm list -g istanbul || sudo npm i -g istanbul
 # npm list -g --depth=0
 
 # determine if is Mac OSX, or Linux; then run accordingly
