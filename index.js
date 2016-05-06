@@ -41,14 +41,14 @@ function setEnv(defaultKey) {
   try {
     env(__dirname + '/.env', { overwrite: false });
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-    // override default FB adapter env
-    process.env.FB_AUTOHEAR = 1
-    process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
-    process.env.FB_ROUTE_URL = '/fb'
     // then set env keys for the deployed bot
     console.log("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
     env(__dirname + '/bin/' + process.env.DEPLOY);
     process.env.BOTNAME = process.env.DEPLOY.split("-").pop()
+    // override default FB adapter env
+    process.env.FB_AUTOHEAR = 'true'
+    process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
+    process.env.FB_ROUTE_URL = '/fb'
   } catch (e) {
     console.log(e)
     console.log('index.js quitting.')
