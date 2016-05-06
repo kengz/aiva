@@ -117,7 +117,7 @@ if [ "$nv" ]; then echo $nv; else (
 brew install neo4j;
 echo "
 # Neo4j home path
-export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
+export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bash_profile
 source ~/.bash_profile
 
 # change the default neo4j password
@@ -210,7 +210,7 @@ echo "
 alias neo4j='service neo4j-service'
 
 # Neo4j home path
-export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Kernel StoreDirectory' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
+export NEO4J_HOME=$(neo4j-shell -c 'dbinfo -g Configuration dbms.directories.data' | grep -oE '\/.*lib.*?\/')" >> ~/.bashrc
 source ~/.bashrc
 
 # change the default neo4j password
