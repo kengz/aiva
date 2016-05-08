@@ -73,6 +73,11 @@ npm run debug # runs aivadev
 This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook.
 
 
+## Deprecation
+
+AIVA was known as Jarvis in version 2. It is now deprecated, but if you need to reference stuff from Jarvis, do `git checkout tags/v2.0` or checkout [the releases](https://github.com/kengz/aiva/releases).
+
+
 ## Contributing
 
 We'd love for you to contribute and make AIVA even better for all developers. We're mainly interested in something generic and foundational, e.g. adding client for a new language, improving the NLP, adding a useful generic module, adding more adapters like Skype or Twilio.
