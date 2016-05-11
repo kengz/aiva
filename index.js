@@ -65,6 +65,7 @@ function getSpecificPort(adapter) {
 function copyEnv(adapter) {
   var cEnv = _.clone(process.env)
   cEnv['ADAPTER'] = adapter
+  cEnv['BOTNAME'] = cEnv[_.toUpper(adapter)+'_BOTNAME'] || cEnv['BOTNAME']
   return Promise.resolve(cEnv)
 }
 
@@ -120,9 +121,9 @@ function setWebhook(cEnv) {
 // at last, when all cEnv is setup, spawn a hubot in child.process using cEnv
 function spawnProcess(cEnv) {
   // spawn hubot with the copied env for childprocess
-  var hb = spawn('./bin/hubot', ['-a', cEnv['ADAPTER'], '--name', process.env.BOTNAME], { stdio: 'inherit', env: cEnv })
+  var hb = spawn('./bin/hubot', ['-a', cEnv['ADAPTER'], '--name', cEnv['BOTNAME']], { stdio: 'inherit', env: cEnv })
   children.push(hb);
-  console.log("Deploy", process.env.BOTNAME, "with", cEnv['ADAPTER'])
+  console.log("Deploy", cEnv['BOTNAME'], "with", cEnv['ADAPTER'])
   return cEnv
 }
 
