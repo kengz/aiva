@@ -155,6 +155,9 @@ if (require.main === module) {
   console.log("Access neo4j at http://localhost:7474")
   console.log("Access ngrok at http://localhost:4040")
 
+  // start socket.io for polyglot communication
+  require('./lib/io_start')()
+
   // detect all adapters, spawn a hubot for each
   var adapters = process.env.ADAPTERS.split(/\s*,\s*/g)
   _.each(adapters, function(adapter){

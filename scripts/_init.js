@@ -20,8 +20,8 @@ module.exports = function(robot) {
   // wake up, init //
   ///////////////////
   co(function*() {
-    // plugin socket.io for polyglot communication
-    require('../lib/io_start')(robot)
+    // connect socket.io client to socket.io server for polyglot communication
+    require('../lib/client')
 
     /* istanbul ignore next */
     if (robot.adapter.constructor.name == 'Shell') {

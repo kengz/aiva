@@ -79,8 +79,8 @@ def correctReply(reply, msg):
 
 # 1. Register the socket.io client
 ##########################################
-PORT = os.environ.get('PORT', '8080')
-client = SocketIO('localhost', int(PORT))
+IOPORT = os.environ.get('IOPORT', '6767')
+client = SocketIO('localhost', int(IOPORT))
 # the id of this script for io client registration
 ioid = 'py'
 # first join for serialization
