@@ -1443,6 +1443,12 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <p>All bot deployment commands are wrapped with <code class="prettyprint">npm</code> inside <code class="prettyprint">package.json</code>. For more novice users, you can customize the <code class="prettyprint">scripts</code> in <code class="prettyprint">package.json</code>. For example, changing &ldquo;aiva&rdquo; and &ldquo;aivadev&rdquo; to your bot name of choice.</p>
 
+<h2 id="different-botname">Different Botname</h2>
+
+<p>Sometimes you just can&rsquo;t use the bot name across platforms - maybe it&rsquo;s already taken, or they require a &ldquo;bot&rdquo; word be added to it. </p>
+
+<p>For all adapters, <code class="prettyprint">process.env.BOTNAME</code> defaults to the name after &ldquo;-&rdquo; in <code class="prettyprint">.keys-&lt;botname&gt;</code>. You can change this by providing in there an env variable <code class="prettyprint">&lt;ADAPTER&gt;_BOTNAME</code>, e.g. <code class="prettyprint">TELEGRAM_BOTNAME=AIVAthebot</code>.</p>
+
 <h2 id="monitoring">Monitoring</h2>
 
 <p>AIVA uses <a href="https://github.com/foreverjs/forever"><code class="prettyprint">forever</code></a> to keep-alive (with 10 max restarts). <code class="prettyprint">npm start</code> runs the process in the background, with it stdout logs written to <code class="prettyprint">/logs</code>. <code class="prettyprint">npm run debug</code> runs the same thing except it logs stdout to the terminal.</p>
