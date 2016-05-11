@@ -38,7 +38,7 @@
     "express": "^4.13.4",
     "geocoder": "^0.2.2",
     "google": "^2.0.0",
-    "googleapis": "^5.2.1",
+    "googleapis": "latest",
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-fb": "^3.0.0",
