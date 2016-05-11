@@ -2,6 +2,7 @@
 var _ = require('lomath')
 var fs = require('fs')
 var spawnSync = require('child_process').spawnSync;
+delete process.env['ADAPTERS']
 // start socket.io for polyglot communication
 process.env.IOPORT = 7676
 require('../lib/io_start')()
