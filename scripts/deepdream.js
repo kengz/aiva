@@ -1,37 +1,20 @@
-// var imgur = require('imgur')
+const _ = require('lodash')
+const Promise = require('bluebird')
+const Download = require('download');
+const path = require('path')
+const pathExists = require('path-exists');
+const untildify = require('untildify');
 
 var client = require('../lib/client.js')
 
-// imgur.setClientId(process.env.IMGUR_ID);
+const deepdreamPath = untildify(path.normalize(process.env.CLOUDDREAM_PATH + '/deepdream'))
+if (!pathExists.sync(deepdreamPath)) throw new Error('CLOUDDREAM_PATH is not a valid dir')
+const deepdreamInPath = deepdreamPath + '/inputs'
+const deepdreamOutPath = deepdreamPath + '/outputs'
 
-// console.log(imgur.getClientId())
-
-// var path = require('path')
-// // A single image 
-// // imgur.uploadFile('../lib/assets/doge.jpg')
-// // .then(function (json) {
-// //   console.log(json.data.link);
-// // })
-// // .catch(function (err) {
-// //   console.error(err.message);
-// // });
-
-// // var dogePic = 'wiSk6R8';
-// // imgur.getInfo(dogePic)
-// // .then(function(json) {
-// //   console.log(json);
-// // })
-// // .catch(function (err) {
-// //   console.error(err.message);
-// // });
-
-// var dogeLink = 'http://i.imgur.com/wiSk6R8.jpg'
-
-var _ = require('lodash')
-var Promise = require('bluebird')
-var Download = require('download');
 
 var message = {
+  message_id: 216,
   photo: 
   [ { file_id: 'AgADAQADlKoxG4bPLgUEjh8GSkYg_EWe0i8ABL3IL5XU4MGjLF4BAAEC',
   file_size: 1080,
@@ -48,6 +31,7 @@ var message = {
   height: 480 } ]
 }
 
+// get image url from telegram res.message for download
 function image_url_telegram(message) {
   if (_.has(message, 'photo')) {
     var file_path = _.get(message, 'photo[0]file_path')
@@ -56,6 +40,7 @@ function image_url_telegram(message) {
 }
 console.log(image_url_telegram(message))
 
+// download a File from url to destination, prepend filename with hash
 function downloadFile(url, dest, hash) {
   return new Promise(function(resolve, reject) {
     new Download({mode: '755'})
@@ -69,27 +54,49 @@ function downloadFile(url, dest, hash) {
   })
 }
 
-// just make dest = deepdream/inputs
-// make sure it exists of course
-// then poll outputs/ for filename, if exists resolve promise with its path, upload image to user
+function deepdreamOutFilepath(name_path) {
+  var inFilepath = name_path.pop()
+  return inFilepath.replace('deepdream/inputs/', 'deepdream/outputs/')
+}
+
+function poll(outFilepath) {
+  Promise.delay(10*1000)
+  .then()
+  // use pathExists on outFilepath
+}
+
+// steps:
+// 0. ask user to wait for about 20s
+// 1. get url from res.message
+// 2. download from url to deepdream/inputs
+// 2.1 get filepath name -> subs `/inputs/` to `/outputs/` for output file name.
+// 3. wait 10s, then per 1s, for 20 times max, poll the output filename, resolve promise with the filepath
+// 4. on resolution, send photo
+
 var dogeLink = image_url_telegram(message)
 downloadFile(dogeLink, '../lib/assets', message.message_id)
-.then(console.log)
+.then(deepdreamOutFilepath) // array
+.then(console.log) // array
 .then(function(res) {
   // console.log(process.env.TELEGRAM_TOKEN)
 })
 
-// const pathExists = require('path-exists');
-// const untildify = require('untildify');
+function compose(message) {
+  var image_url = image_url_telegram(message)
+  downloadFile(dogeLink, deepdreamInPath, message.message_id)
+  .then(deepdreamOutFilepath)
+}
 
-// pathExists(untildify('~/Desktop/doge.jpg')).then(exists => {
-//   console.log(exists);
-//   //=> true 
+// e.g. code for Telegram
+// robot.emit('telegram:invoke', 'sendPhoto', { chat_id: res.message.room, photo: fs.createReadStream(__dirname + '/image.png') }, function (error, response) {
+//   console.log(error);
+//   console.log(response);
 // });
+
 
 // deep dream need stronger acid
 // ok so once started, deepdream is automatic
-// thus need to just poll the output directory for matching filename
+// thus need to just poll the output directory for matching filename: timeout for 10s then once per sec
 // prepend filename of image with message.message_id
 // 
 
@@ -105,3 +112,30 @@ downloadFile(dogeLink, '../lib/assets', message.message_id)
 // // }).then(console.log)
 
 // // hello friends
+
+
+// var imgur = require('imgur')
+
+// imgur.setClientId(process.env.IMGUR_ID);
+
+// console.log(imgur.getClientId())
+
+// A single image 
+// imgur.uploadFile('../lib/assets/doge.jpg')
+// .then(function (json) {
+//   console.log(json.data.link);
+// })
+// .catch(function (err) {
+//   console.error(err.message);
+// });
+
+// var dogePic = 'wiSk6R8';
+// imgur.getInfo(dogePic)
+// .then(function(json) {
+//   console.log(json);
+// })
+// .catch(function (err) {
+//   console.error(err.message);
+// });
+
+// var dogeLink = 'http://i.imgur.com/wiSk6R8.jpg'
