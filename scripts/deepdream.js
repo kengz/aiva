@@ -56,10 +56,11 @@ function image_url_telegram(message) {
 }
 console.log(image_url_telegram(message))
 
-function downloadFile(url, dest) {
+function downloadFile(url, dest, hash) {
   return new Promise(function(resolve, reject) {
     new Download({mode: '755'})
     .get(url, dest)
+    .rename(hash+'_'+url.split('/').pop())
     .run(function(err, files) {
       if (err) { reject(err) };
       var name_path = _.get(files, '[0]history')
@@ -71,21 +72,22 @@ function downloadFile(url, dest) {
 // just make dest = deepdream/inputs
 // make sure it exists of course
 // then poll outputs/ for filename, if exists resolve promise with its path, upload image to user
-// var dogeLink = image_url_telegram(message)
-// downloadFile(dogeLink, '../lib/assets')
-// .then(console.log)
-// .then(function(res) {
-//   // console.log(process.env.TELEGRAM_TOKEN)
-// })
+var dogeLink = image_url_telegram(message)
+downloadFile(dogeLink, '../lib/assets', message.message_id)
+.then(console.log)
+.then(function(res) {
+  // console.log(process.env.TELEGRAM_TOKEN)
+})
 
-const pathExists = require('path-exists');
-const untildify = require('untildify');
+// const pathExists = require('path-exists');
+// const untildify = require('untildify');
 
-pathExists(untildify('~/Desktop/doge.jpg')).then(exists => {
-  console.log(exists);
-  //=> true 
-});
+// pathExists(untildify('~/Desktop/doge.jpg')).then(exists => {
+//   console.log(exists);
+//   //=> true 
+// });
 
+// deep dream need stronger acid
 // ok so once started, deepdream is automatic
 // thus need to just poll the output directory for matching filename
 // prepend filename of image with message.message_id
