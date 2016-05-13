@@ -11,6 +11,7 @@ module.exports = function(robot) {
     if (robot.adapterName != 'telegram') { return };
     if (_.has(res.message, 'photo')) {
       console.log("receiving photo")
+      res.reply('running DeepDream. This may take up to 5 minutes :)')
       runDeepdream(res.message)
       .then(function(outFilepath) {
         console.log('made it out', outFilepath)
