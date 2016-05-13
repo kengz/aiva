@@ -5,19 +5,6 @@ var fs = require('fs')
 
 // quick test scripts
 module.exports = function(robot) {
-  robot.catchAll(/.+/, function(res) {
-    console.log('doing catchall')
-    // console.log(res)
-    console.log(res.message)
-  })
-
-  robot.respond(/getfile/i, function(res) {
-    robot.emit('telegram:invoke', 'getFile', {file_id: 'AgADAQADlKoxG4bPLgUEjh8GSkYg_EWe0i8ABBF5HveFrLVjK14BAAEC'}, function(err, resp) {
-      console.log(err)
-      console.log(resp)
-    })
-    // console.log(res)
-  })
   // ensure bot name
   robot.respond(/who\s*are\s*you/i, function(res) {
     res.send(robot.name)
