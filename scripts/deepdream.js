@@ -1,3 +1,7 @@
+// Module for Google Deepdream: currently only for Telegram
+// Note: https://github.com/VISIONAI/clouddream must be started, and .env must specify its path
+
+// dependencies
 const _ = require('lodash')
 const Promise = require('bluebird')
 const Download = require('download')
@@ -5,49 +9,42 @@ const path = require('path')
 const pathExists = require('path-exists')
 const untildify = require('untildify')
 const co = require('co')
+const TelegramBot = require('telegrambot')
 
+// dev client. comment out during deploy
 var client = require('../lib/client.js')
 
 const deepdreamPath = untildify(path.normalize(process.env.CLOUDDREAM_PATH + '/deepdream'))
-if (!pathExists.sync(deepdreamPath)) throw new Error('CLOUDDREAM_PATH is not a valid dir')
-  const deepdreamInPath = deepdreamPath + '/inputs'
+if (!pathExists.sync(deepdreamPath)) {
+  throw new Error('CLOUDDREAM_PATH is not a valid dir')
+};
+const deepdreamInPath = deepdreamPath + '/inputs'
 const deepdreamOutPath = deepdreamPath + '/outputs'
 
-
-var message = {
-  message_id: 216,
-  photo: 
-  [ { file_id: 'AgADAQADlKoxG4bPLgUEjh8GSkYg_EWe0i8ABL3IL5XU4MGjLF4BAAEC',
-  file_size: 1080,
-  file_path: 'photo/file_0.jpg',
-  width: 90,
-  height: 54 },
-  { file_id: 'AgADAQADlKoxG4bPLgUEjh8GSkYg_EWe0i8ABFyV54EytlKaLV4BAAEC',
-  file_size: 18819,
-  width: 320,
-  height: 192 },
-  { file_id: 'AgADAQADlKoxG4bPLgUEjh8GSkYg_EWe0i8ABBF5HveFrLVjK14BAAEC',
-  file_size: 52347,
-  width: 800,
-  height: 480 } ]
-}
+var telegramAPI = new TelegramBot(process.env.TELEGRAM_TOKEN);
+var telegramAPIURL = 'https://api.telegram.org/file/bot' + process.env.TELEGRAM_TOKEN
+var telegramGetFile = Promise.promisify(telegramAPI.getFile).bind(telegramAPI)
 
 // get image url from telegram res.message for download
 function image_url_telegram(message) {
+  console.log('get telegram image url')
   if (_.has(message, 'photo')) {
-    var file_path = _.get(message, 'photo[0]file_path')
-    return file_path ? 'https://api.telegram.org/file/bot'+process.env.TELEGRAM_TOKEN+'/'+file_path : undefined
-  };
+    return telegramGetFile(_.last(message.photo))
+    .then(function(obj) {
+      return telegramAPIURL + '/' + obj['file_path']
+    })
+  } else {
+    Promise.reject('no photo')
+  }
 }
-// console.log(image_url_telegram(message))
 
 // download a File from url to destination, prepend filename with hash
 function downloadFile(url, dest, hash) {
-  console.log('downloadFile')
+  console.log('downloadFile', url)
   return new Promise(function(resolve, reject) {
-    new Download({mode: '755'})
+    new Download({ mode: '755' })
     .get(url, dest)
-    .rename(hash+'_'+url.split('/').pop())
+    .rename(hash + '_' + url.split('/').pop())
     .run(function(err, files) {
       if (err) { reject(err) };
       var name_path = _.get(files, '[0]history')
@@ -56,35 +53,30 @@ function downloadFile(url, dest, hash) {
   })
 }
 
+// get output filepath from name_path array
 function deepdreamOutFilepath(name_path) {
   var inFilepath = name_path.pop()
   return inFilepath.replace('deepdream/inputs/', 'deepdream/outputs/')
 }
 
 // wait 10s, then per 2s, for 10 times max, poll the output filename, resolve promise with the filepath
-function checkFile(outFilepath) {
-  // console.log('checkFile')
+function getOutFilepath(outFilepath) {
+  var maxTimes = 20
   return co(function*() {
-    yield Promise.delay(10*1000)
-    for (var i = 0; i < 10; i++) {
+    yield Promise.delay(10 * 1000)
+    for (var i = 0; i < maxTimes; i++) {
       console.log('checking file, trial', i)
-      yield Promise.delay(2000)
+      yield Promise.delay(3000)
       if (pathExists.sync(outFilepath)) {
         return yield Promise.resolve(outFilepath)
-      } else if (i == 10-1) {
-        yield Promise.reject(new Error('Timeout: deepdream no output in '+deepdreamOutPath))
+      } else if (i == maxTimes - 1) {
+        return yield Promise.reject(new Error('Timeout: deepdream no output in ' + deepdreamOutPath))
       }
     }
   })
 }
 
-// checkFile('a path it is')
-// .then(console.log)
-// .catch(console.log)
-
-// waitUntil checkCondition, ->
-//   # This callback will run when `checkCondition` returns a true-ish value
-
+// Run Deepdream from a res.message (non-Text).
 // steps:
 // 0. ask user to wait for about 20s
 // 1. get url from res.message
@@ -92,24 +84,42 @@ function checkFile(outFilepath) {
 // 2.1 get filepath name -> subs `/inputs/` to `/outputs/` for output file name.
 // 3. wait 10s, then per 1s, for 20 times max, poll the output filename, resolve promise with the filepath
 // 4. on resolution, send photo
-
-var dogeLink = image_url_telegram(message)
-// downloadFile(dogeLink, '../lib/assets', message.message_id)
-// .then(deepdreamOutFilepath) // array
-// .then(console.log) // array
-// .then(function(res) {
-//   // console.log(process.env.TELEGRAM_TOKEN)
-// })
-
-function compose(message) {
-  var image_url = image_url_telegram(message)
-  return downloadFile(image_url, deepdreamInPath, message.message_id)
+function runDeepdream(message) {
+  return image_url_telegram(message)
+  .then(function(image_url) {
+    return downloadFile(image_url, deepdreamInPath, message.message_id)
+  })
   .then(deepdreamOutFilepath)
-  .then(checkFile)
+  .then(getOutFilepath)
 }
 
-compose(message)
-.catch(console.log)
+
+var message = {
+  message_id: 218,
+  date: 1463113023,
+  photo: [{
+    file_id: 'AgADAQADlaoxG4bPLgXolpic9cMnmMTD5y8ABAuo6D5bHy4FXY0AAgI',
+    file_size: 944,
+    width: 90,
+    height: 54
+  }, {
+    file_id: 'AgADAQADlaoxG4bPLgXolpic9cMnmMTD5y8ABOj_iUXnMizGXo0AAgI',
+    file_size: 15905,
+    width: 320,
+    height: 192
+  }, {
+    file_id: 'AgADAQADlaoxG4bPLgXolpic9cMnmMTD5y8ABIjFEnRozsadXI0AAgI',
+    file_size: 48173,
+    width: 800,
+    height: 480
+  }]
+}
+
+// runDeepdream(message)
+// .then(function(res) {
+//   console.log('success', res)
+// })
+// .catch(console.log)
 
 // e.g. code for Telegram
 // robot.emit('telegram:invoke', 'sendPhoto', { chat_id: res.message.room, photo: fs.createReadStream(__dirname + '/image.png') }, function (error, response) {
