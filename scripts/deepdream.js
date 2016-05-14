@@ -1,6 +1,6 @@
 // dependencies
 // Interface for Google Deepdream
-var _ = require('lodash')
+var _ = require('lomath')
 var fs = require('fs')
 var runDeepdream = require('../lib/deepdream')
 
