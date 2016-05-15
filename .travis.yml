@@ -4,7 +4,6 @@ language: node_js
 node_js:
   - "6"
   - "5"
-  - "4"
 virtualenv:
   system_site_packages: true
 addons:
@@ -52,7 +51,6 @@ cache:
   directories:
     - neo4j-community-2.3.2
     - node_modules
-    - pyenv
     - /usr/local/lib/python3.4/dist-packages
 env:
   global:
