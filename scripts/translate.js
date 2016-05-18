@@ -22,16 +22,17 @@ module.exports = function(robot) {
   })
 
   // translate
+  /* istanbul ignore next */
   robot.respond(/translate\s*(.+)/i, function(res) {
     var str = res.match[1];
     global.gPass({
-        input: str,
-        to: 'nlp.py',
-        intent: 'translate'
-      })
-      .then(function(reply) {
-        res.send(reply.output)
-      })
+      input: str,
+      to: 'nlp.py',
+      intent: 'translate'
+    })
+    .then(function(reply) {
+      res.send(reply.output)
+    })
   })
 
 }

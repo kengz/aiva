@@ -7,6 +7,7 @@ var runDeepdream = require('../lib/deepdream')
 var request = require('request')
 
 // quick test scripts
+/* istanbul ignore next */
 module.exports = function(robot) {
   robot.on("fb_richMsg", function(envelope) {
     robot.logger.info("got fb richMsg", envelope.attachments[0])
