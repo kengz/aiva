@@ -50,8 +50,3 @@ RUN echo $(ruby -v)
 RUN gem update --system
 RUN gem install bundler rails
 RUN rbenv rehash
-
-
-# uhh somehow rmb to reset neo4j password
-EXPOSE 7474
-RUN curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
