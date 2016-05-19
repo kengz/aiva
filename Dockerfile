@@ -7,14 +7,23 @@ MAINTAINER Wah Loon Keng <kengzwl@gmail.com>
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # General dependencies
-RUN apt-get update && apt-get install -y git curl
-RUN apt-get install -y git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev libatlas-dev libzmq3-dev libboost-all-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler libopenblas-dev libblas-dev liblapack-dev gfortran
+RUN apt-get update && apt-get install -y git curl wget python-software-properties software-properties-common
+RUN add-apt-repository -y ppa:openjdk-r/ppa
+RUN wget -O - https://debian.neo4j.org/neotechnology.gpg.key | apt-key add -;
+RUN sh -c 'echo "deb http://debian.neo4j.org/repo stable/" > /etc/apt/sources.list.d/neo4j.list'
+
+RUN apt-get update
+RUN apt-get install -y git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev libatlas-dev libzmq3-dev libboost-all-dev libgflags-dev libgoogle-glog-dev liblmdb-dev protobuf-compiler libopenblas-dev libblas-dev liblapack-dev gfortran openjdk-8-jdk neo4j
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+
 
 # Nodejs
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 # gulp for streaming build, forever for keep-alive
 RUN npm i -g gulp forever ngrok istanbul
+
 
 # Python
 RUN apt-get install -y python python3-dev python3-pip python3-numpy python3-scipy python3-matplotlib
@@ -25,6 +34,7 @@ RUN python3 -m spacy.en.download
 # ML & TensorFlow
 RUN pip3 install -U scikit-learn pandas
 RUN pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp34-cp34m-linux_x86_64.whl
+
 
 # Ruby on Rails
 RUN git clone git://github.com/sstephenson/rbenv.git /root/.rbenv
@@ -40,3 +50,8 @@ RUN echo $(ruby -v)
 RUN gem update --system
 RUN gem install bundler rails
 RUN rbenv rehash
+
+
+# uhh somehow rmb to reset neo4j password
+EXPOSE 7474
+RUN curl -X POST -d "password=0000" -u neo4j:neo4j http://localhost:7474/user/neo4j/password
