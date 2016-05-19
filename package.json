@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "gi": "bash bin/install; npm i; mkdir -p ./logs; npm run pip3; npm run bundler",
+    "gi": "npm i; mkdir -p ./logs; npm run pip3; npm run bundler",
     "shell": "neo4j start; env $(cat .env bin/.keys-aivadev) NODE_ENV=development bin/hubot",
     "test": "istanbul cover ./node_modules/.bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json Gemfile.lock",
