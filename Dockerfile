@@ -1,5 +1,8 @@
 # build: docker build -t kengz/aiva .
-# run: docker run -t -i --rm --name aiva-setup kengz/aiva /bin/bash
+# run: docker run -it -P --rm --name aiva-build kengz/aiva /bin/bash
+# post-build: docker commit -m "base ubuntu 14.04 node python ruby java neo4j" -a "kengz" <id while a container persists> kengz/aiva:v0
+# check: docker images
+# push: docker push kengz/aiva
 
 FROM ubuntu:14.04
 MAINTAINER Wah Loon Keng <kengzwl@gmail.com>
@@ -34,6 +37,7 @@ RUN python3 -m spacy.en.download
 # ML & TensorFlow
 RUN pip3 install -U scikit-learn pandas
 RUN pip3 install -U https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp34-cp34m-linux_x86_64.whl
+RUN pip3 install -U socketIO-client
 
 
 # Ruby on Rails
@@ -48,5 +52,9 @@ RUN echo "gem: --no-ri --no-rdoc" > /.gemrc
 RUN echo $(rbenv global)
 RUN echo $(ruby -v)
 RUN gem update --system
-RUN gem install bundler rails
+RUN gem install bundler rails socket.io-client-simple
 RUN rbenv rehash
+
+
+# neo4j pswd reset
+# EXPOSE 4040 7474
