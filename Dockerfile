@@ -56,5 +56,11 @@ RUN gem install bundler rails socket.io-client-simple
 RUN rbenv rehash
 
 
+# Define working directory.
+WORKDIR /opt/aiva
+
+# Define mountable directories
+VOLUME [/opt/data, /data]
+
 # neo4j pswd reset
 # EXPOSE 4040 7474
