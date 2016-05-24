@@ -56,11 +56,28 @@ RUN gem install bundler rails socket.io-client-simple
 RUN rbenv rehash
 
 
+# Install Nginx
+RUN apt-get install -y nano dialog net-tools
+RUN apt-get install -y nginx    
+
+# Remove the default Nginx configuration file
+RUN rm -v /etc/nginx/nginx.conf
+# Copy a configuration file from the current directory
+ADD nginx.conf /etc/nginx/
+# Append "daemon off;" to the beginning of the configuration
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+
+
 # Define working directory.
 WORKDIR /opt/aiva
 
 # Define mountable directories
-VOLUME [/opt/data, /data]
+VOLUME ["/opt/data", "/data"]
 
-# neo4j pswd reset
-# EXPOSE 4040 7474
+EXPOSE 80 7474 4040
+
+# Set the default command to execute
+# when creating a new container
+CMD npm start && service nginx start
+
+# build: docker build -t kengz/aiva .
