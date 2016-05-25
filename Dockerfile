@@ -62,7 +62,43 @@ RUN apt-get install -y nginx
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
-ADD nginx.conf /etc/nginx/
+# ADD nginx.conf /etc/nginx/
+RUN echo $'\n\
+# daemon off;\n\
+worker_processes 4;\n\
+events { worker_connections 1024; }\n\
+\n\
+http {\n\
+    sendfile on;\n\
+\n\
+    gzip              on;\n\
+    gzip_http_version 1.0;\n\
+    gzip_proxied      any;\n\
+    gzip_min_length   500;\n\
+    gzip_disable      "MSIE [1-6]\.";\n\
+    gzip_types        text/plain text/xml text/css\n\
+                      text/comma-separated-values\n\
+                      text/javascript\n\
+                      application/x-javascript\n\
+                      application/atom+xml;\n\
+    server {\n\
+        listen 4041;\n\
+        server_name localhost;\n\
+        location / {\n\
+            proxy_bind $host:4041;\n\
+            proxy_pass http://127.0.0.1:4040;\n\
+        }\n\
+    }\n\
+    server {\n\
+        listen 7475;\n\
+        server_name localhost;\n\
+        location / {\n\
+            proxy_bind $host:7475;\n\
+            proxy_pass http://127.0.0.1:7474;\n\
+        }\n\
+    }\n\
+}\n'\
+> /etc/nginx/nginx.conf
 
 
 # Define working directory.
@@ -75,7 +111,8 @@ EXPOSE 80 4040 4041 7474 7475
 
 # Set the default command to execute
 # when creating a new container
-CMD npm start && service nginx start
+CMD service nginx start && npm start
 
 # build: docker build -t kengz/aiva .
 # see log in /var/log/nginx/
+# process quits. solve with http://stackoverflow.com/questions/25775266/how-to-keep-docker-container-running-after-starting-services
