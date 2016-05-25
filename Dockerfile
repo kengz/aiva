@@ -71,7 +71,7 @@ WORKDIR /opt/aiva
 # Define mountable directories
 VOLUME ["/data"]
 
-EXPOSE 80 4041 7475
+EXPOSE 80 4040 4041 7474 7475
 
 # Set the default command to execute
 # when creating a new container
