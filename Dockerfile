@@ -57,8 +57,7 @@ RUN rbenv rehash
 
 
 # Install Nginx
-RUN apt-get install -y nano dialog net-tools
-RUN apt-get install -y nginx
+RUN apt-get install -y nano dialog net-tools nginx supervisor
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
@@ -103,8 +102,6 @@ http {\n\
 
 
 # Setup supervisor to manage processes
-RUN apt-get install -y supervisor
-
 RUN echo $'\
 [supervisord]\n\
 nodaemon=true\n\
@@ -136,4 +133,4 @@ CMD /usr/bin/supervisord
 
 # build: docker build -t kengz/aiva .
 # see log in /var/log/nginx/
-# process quits. solve with http://stackoverflow.com/questions/25775266/how-to-keep-docker-container-running-after-starting-services
+# ok still cant run npm start. need change forever at foreground
