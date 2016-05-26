@@ -58,13 +58,13 @@ RUN rbenv rehash
 
 # Install Nginx
 RUN apt-get install -y nano dialog net-tools
-RUN apt-get install -y nginx    
+RUN apt-get install -y nginx
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
 # ADD nginx.conf /etc/nginx/
-RUN echo $'\n\
-# daemon off;\n\
+RUN echo $'\
+daemon off;\n\
 worker_processes 4;\n\
 events { worker_connections 1024; }\n\
 \n\
@@ -101,6 +101,27 @@ http {\n\
 > /etc/nginx/nginx.conf
 
 
+
+# Setup supervisor to manage processes
+RUN apt-get install -y supervisor
+
+RUN echo $'\
+[supervisord]\n\
+nodaemon=true\n\
+\n\
+[program:run_nginx]\n\
+command=nginx\n\
+autostart=true\n\
+autorestart=true\n\
+\n\
+[program:run_aiva]\n\
+command=/bin/bash -c "cd /opt/aiva && npm run debug"\n\
+autostart=true\n\
+autorestart=true\n\
+\n'\
+> /etc/supervisor/conf.d/supervisord.conf
+
+
 # Define working directory.
 WORKDIR /opt/aiva
 
@@ -111,7 +132,7 @@ EXPOSE 80 4040 4041 7474 7475
 
 # Set the default command to execute
 # when creating a new container
-CMD service nginx start && npm start
+CMD /usr/bin/supervisord
 
 # build: docker build -t kengz/aiva .
 # see log in /var/log/nginx/
