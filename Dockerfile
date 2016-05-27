@@ -56,69 +56,15 @@ RUN gem install bundler rails socket.io-client-simple
 RUN rbenv rehash
 
 
-# Install Nginx
+# Install Nginx and supervisor
 RUN apt-get install -y nano dialog net-tools nginx supervisor
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
-# ADD nginx.conf /etc/nginx/
-RUN echo $'\
-daemon off;\n\
-worker_processes 4;\n\
-events { worker_connections 1024; }\n\
-\n\
-http {\n\
-    sendfile on;\n\
-\n\
-    gzip              on;\n\
-    gzip_http_version 1.0;\n\
-    gzip_proxied      any;\n\
-    gzip_min_length   500;\n\
-    gzip_disable      "MSIE [1-6]\.";\n\
-    gzip_types        text/plain text/xml text/css\n\
-                      text/comma-separated-values\n\
-                      text/javascript\n\
-                      application/x-javascript\n\
-                      application/atom+xml;\n\
-    server {\n\
-        listen 4041;\n\
-        server_name localhost;\n\
-        location / {\n\
-            proxy_bind $host:4041;\n\
-            proxy_pass http://localhost:4040;\n\
-        }\n\
-    }\n\
-    server {\n\
-        listen 7475;\n\
-        server_name localhost;\n\
-        location / {\n\
-            proxy_bind $host:7475;\n\
-            proxy_pass http://localhost:7474;\n\
-            proxy_redirect http://localhost:7475([/.+]+) http://localhost:7474$1;\n\
-        }\n\
-    }\n\
-}\n'\
-> /etc/nginx/nginx.conf
+ADD bin/nginx.conf /etc/nginx/
 
-
-
-# Setup supervisor to manage processes
-RUN echo $'\
-[supervisord]\n\
-nodaemon=true\n\
-\n\
-[program:run_nginx]\n\
-command=nginx\n\
-autostart=true\n\
-autorestart=true\n\
-\n\
-[program:run_aiva]\n\
-command=/bin/bash -c "cd /opt/aiva && npm run debug"\n\
-autostart=true\n\
-autorestart=true\n\
-\n'\
-> /etc/supervisor/conf.d/supervisord.conf
-
+# Add a supervisor configuration file
+ADD bin/supervisord.conf /etc/supervisor/conf.d/
 
 # Define working directory.
 WORKDIR /opt/aiva
@@ -127,6 +73,11 @@ WORKDIR /opt/aiva
 VOLUME ["/data"]
 
 EXPOSE 80 4040 4041 7474 7475
+
+COPY bin/docker-entrypoint.sh /docker-entrypoint.sh
+# RUN chmod +x /docker-entrypoint.sh
+
+# ENTRYPOINT ["/docker-enterpoint.sh"]
 
 # Set the default command to execute
 # when creating a new container
@@ -137,3 +88,4 @@ CMD /usr/bin/supervisord
 # ok still cant run npm start. need change forever at foreground
 # auto login neo4j
 # log all shit
+# change supervisord to run npm start

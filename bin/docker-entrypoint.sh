@@ -1,6 +1,9 @@
 #!/bin/sh
+
+# set from .env
 eval "$(cat .env | sed 's/^/export /')"
 
+# set your password the first time from the default neo4j:neo4j, or just pass
 if [ "${NEO4J_AUTH:-}" == "none" ]; then
     echo "dbms.security.auth_enabled=false" >> /etc/neo4j/neo4j.conf
 elif [[ "${NEO4J_AUTH:-}" == neo4j:* ]]; then
