@@ -4,7 +4,7 @@ bin-release/
 node_modules/
 coverage/
 logs/
-npm-debug.log
+npm-debug.log*
 
 # Python
 pyenv/

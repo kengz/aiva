@@ -85,7 +85,7 @@ http {\n\
         server_name localhost;\n\
         location / {\n\
             proxy_bind $host:4041;\n\
-            proxy_pass http://127.0.0.1:4040;\n\
+            proxy_pass http://localhost:4040;\n\
         }\n\
     }\n\
     server {\n\
@@ -93,7 +93,8 @@ http {\n\
         server_name localhost;\n\
         location / {\n\
             proxy_bind $host:7475;\n\
-            proxy_pass http://127.0.0.1:7474;\n\
+            proxy_pass http://localhost:7474;\n\
+            proxy_redirect http://localhost:7475([/.+]+) http://localhost:7474$1;\n\
         }\n\
     }\n\
 }\n'\
@@ -134,3 +135,5 @@ CMD /usr/bin/supervisord
 # build: docker build -t kengz/aiva .
 # see log in /var/log/nginx/
 # ok still cant run npm start. need change forever at foreground
+# auto login neo4j
+# log all shit
