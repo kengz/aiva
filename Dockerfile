@@ -56,8 +56,9 @@ RUN gem install bundler rails socket.io-client-simple
 RUN rbenv rehash
 
 
-# Install Nginx and supervisor
+# Install Nginx, supervisor, monitoring tools
 RUN apt-get install -y nano dialog net-tools nginx supervisor
+RUN pip3 install -U glances
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
