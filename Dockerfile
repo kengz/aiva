@@ -75,9 +75,8 @@ VOLUME ["/data"]
 EXPOSE 80 4040 4041 7474 7475
 
 COPY bin/docker-entrypoint.sh /docker-entrypoint.sh
-# RUN chmod +x /docker-entrypoint.sh
 
-# ENTRYPOINT ["/docker-enterpoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Set the default command to execute
 # when creating a new container
@@ -89,3 +88,4 @@ CMD /usr/bin/supervisord
 # auto login neo4j
 # log all shit
 # change supervisord to run npm start
+# debugging: might wanna shut down your docker-machine first
