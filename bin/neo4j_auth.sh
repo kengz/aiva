@@ -4,7 +4,7 @@
 eval "$(cat /opt/aiva/.env | sed 's/^/export /')"
 
 # start subshell in background
-(
+# (
 # set your password the first time from the default neo4j:neo4j, or just pass
 if [ "${NEO4J_AUTH:-}" == "none" ]; then
     echo "dbms.security.auth_enabled=false" >> /etc/neo4j/neo4j.conf
@@ -46,7 +46,7 @@ elif [ -n "${NEO4J_AUTH:-}" ]; then
     echo "Invalid value for NEO4J_AUTH: '${NEO4J_AUTH}'"
     exit 1
 fi
-) &
+# ) &
 # background subshell ends
 
-$SHELL
+# $SHELL

@@ -66,26 +66,20 @@ ADD bin/nginx.conf /etc/nginx/
 # Add a supervisor configuration file
 ADD bin/supervisord.conf /etc/supervisor/conf.d/
 
+ADD bin/neo4j_auth.sh /etc/neo4j_auth.sh
+
 # Define working directory.
 WORKDIR /opt/aiva
 
 # Define mountable directories
-VOLUME ["/data"]
+VOLUME ["/data", "/var/log"]
 
 EXPOSE 80 4040 4041 7474 7475
 
-COPY bin/docker-entrypoint.sh /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
-# Set the default command to execute
-# when creating a new container
+# default command on creating a new container
 CMD /usr/bin/supervisord
 
 # build: docker build -t kengz/aiva .
-# see log in /var/log/nginx/
+# entering containing need to persist
 # ok still cant run npm start. need change forever at foreground
-# auto login neo4j
-# log all shit
 # change supervisord to run npm start
-# debugging: might wanna shut down your docker-machine first
