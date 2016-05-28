@@ -3,6 +3,8 @@
 # set from .env
 eval "$(cat /opt/aiva/.env | sed 's/^/export /')"
 
+# start subshell in background
+(
 # set your password the first time from the default neo4j:neo4j, or just pass
 if [ "${NEO4J_AUTH:-}" == "none" ]; then
     echo "dbms.security.auth_enabled=false" >> /etc/neo4j/neo4j.conf
@@ -11,7 +13,7 @@ elif [[ "${NEO4J_AUTH:-}" == neo4j:* ]]; then
     echo "Using NEO4J_AUTH: '$NEO4J_AUTH' and $password"
     neo4j start
 
-    echo "Attempting to verify/set your NEO4J_AUTH..."
+    echo "Attempting to verify/set your NEO4J_AUTH in the background ..."
     end="$((SECONDS+30))"
     while true; do
         http_code="$(curl --silent --write-out %{http_code} --user "neo4j:${password}" --output /dev/null http://localhost:7474/db/data/ || true)"
@@ -44,5 +46,7 @@ elif [ -n "${NEO4J_AUTH:-}" ]; then
     echo "Invalid value for NEO4J_AUTH: '${NEO4J_AUTH}'"
     exit 1
 fi
+) &
+# background subshell ends
 
 $SHELL
