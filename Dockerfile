@@ -10,7 +10,7 @@ MAINTAINER Wah Loon Keng <kengzwl@gmail.com>
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # General dependencies
-RUN apt-get update && apt-get install -y git curl wget python-software-properties software-properties-common
+RUN apt-get update && apt-get install -y git nano curl wget  python-software-properties software-properties-common
 RUN add-apt-repository -y ppa:openjdk-r/ppa
 RUN wget -O - https://debian.neo4j.org/neotechnology.gpg.key | apt-key add -;
 RUN sh -c 'echo "deb http://debian.neo4j.org/repo stable/" > /etc/apt/sources.list.d/neo4j.list'
@@ -31,6 +31,7 @@ RUN npm i -g gulp forever ngrok istanbul
 # Python
 RUN apt-get install -y python python3-dev python3-pip python3-numpy python3-scipy python3-matplotlib
 RUN pip3 install -U pip setuptools virtualenvwrapper
+RUN pip3 install -U glances
 # spacy for NLP
 RUN pip3 install -U spacy
 RUN python3 -m spacy.en.download
@@ -57,8 +58,7 @@ RUN rbenv rehash
 
 
 # Install Nginx, supervisor, monitoring tools
-RUN apt-get install -y nano dialog net-tools nginx supervisor
-RUN pip3 install -U glances
+RUN apt-get install -y nginx supervisor dialog net-tools
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
