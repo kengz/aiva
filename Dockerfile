@@ -80,6 +80,3 @@ EXPOSE 80 4040 4041 7474 7475
 CMD /usr/bin/supervisord
 
 # build: docker build -t kengz/aiva .
-# entering containing need to persist
-# ok still cant run npm start. need change forever at foreground
-# change supervisord to run npm start
