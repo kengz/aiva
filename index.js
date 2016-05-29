@@ -12,30 +12,28 @@ Promise.promisifyAll(ngrok);
 // child processes for spawn
 var children = [];
 
-var modulePorts = {
+// list of all ports used, including for adapters
+var portList = {
   production: {
-    IOPORT: 6363
-  },
-  development: {
-    IOPORT: 6365
-  }
-}
-// make 2 levels of set env
-// also print all ports
-
-// some adapters need specific ports to work with
-var adapterPorts = {
-  production: {
+    neo4j: 7474,
+    ngrok: 4040,
+    socketIO: 6363,
     slack: 8343,
     telegram: 8443,
     fb: 8543
   },
   development: {
+    neo4j: 7474,
+    ngrok: 4040,
+    socketIO: 6365,
     slack: 8345,
     telegram: 8443,
     fb: 8545
   }
 }
+// look at logger
+// also print all ports
+
 
 // process.env.<key> to set webhook for adapter
 var adapterWebhookKey = {
@@ -73,7 +71,7 @@ function overrideDefaultEnv() {
 
 // get the specific port for the adapter
 function getSpecificPort(adapter) {
-  return _.get(adapterPorts, [process.env.NODE_ENV, adapter])
+  return _.get(portList, [process.env.NODE_ENV, adapter])
 }
 
 // Return Promise with cEnv, a copy of process.env, for chaining
@@ -84,7 +82,7 @@ function copyEnv(adapter) {
   return Promise.resolve(cEnv)
 }
 
-// set the PORT of cEnv if it's specified in adapterPorts, or use the next open port
+// set the PORT of cEnv if it's specified in portList, or use the next open port
 function setPort(cEnv) {
   // copy env for child (separate PORT)
   var specifiedPort = getSpecificPort(cEnv['ADAPTER']);
