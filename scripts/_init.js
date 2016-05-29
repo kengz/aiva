@@ -3,6 +3,7 @@
 global._ = require('lomath')
 global.co = require('co')
 global.Promise = require('bluebird')
+var Log = require('log');
 
 // declare global assets
 // the knowledge base
@@ -13,8 +14,9 @@ global.KB = require('neo4jkb')({
 
 // export for bot
 module.exports = function(robot) {
-  // set global for reference
+  // set global for usage by children
   global.robot = robot
+  global.log = new Log('info')
   
   ///////////////////
   // wake up, init //
@@ -32,7 +34,7 @@ module.exports = function(robot) {
     yield Promise.delay(500); // wait to connect, get users
     // emit 'ready' event to kick off initialization
     robot.emit('ready')
-  }).catch(console.log)
+  }).catch(global.log.error)
 
   /////////////////////
   // initializations //

@@ -8,8 +8,8 @@ var portfinder = require('portfinder');
 Promise.promisifyAll(portfinder)
 var ngrok = require('requireg')('ngrok');
 Promise.promisifyAll(ngrok);
-var Log = require('log');
-global.log = new Log('info'); // for children to use
+var Log = require('log'),
+log = new Log('info');
 
 // child processes for spawn
 var children = [];

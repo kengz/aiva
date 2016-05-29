@@ -19,7 +19,7 @@ function serialize_users(slackUsers) {
   });
   // add then return the number of members serialized
   return co(function*() {
-    return yield KB.addNode(Users).then(_.size).catch(console.log)
+    return yield KB.addNode(Users).then(_.size).catch(global.log.error)
   })
 
 }
@@ -37,7 +37,7 @@ module.exports = function(robot) {
       return
     }
     serialize_users(robot.brain.data.users).then(function(size) {
-      console.log("setting global.users from scripts/serialize_users.js")
+      global.log.info("setting global.users from scripts/serialize_users.js")
     })
   })
 
