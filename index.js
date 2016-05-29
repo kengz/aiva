@@ -49,9 +49,9 @@ module.exports = setEnv;
 // when running cmd `node index.js`, supply NODE_ENV and DEPLOY
 function setEnv() {
   try {
+    overrideDefaultEnv()
     env(__dirname + '/.env', { overwrite: false }) // process-level
     env(__dirname + '/bin/' + process.env.DEPLOY) // bot-level
-    overrideDefaultEnv()
     log.info("Using:", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
   } catch (e) {
     log.error('%s \nindex.js quitting.', e)
