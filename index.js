@@ -14,12 +14,10 @@ var children = [];
 
 var modulePorts = {
   production: {
-    IOPORT: 6363,
-    NGROK_PORT: 4040
+    IOPORT: 6363
   },
   development: {
-    IOPORT: 6365,
-    NGROK_PORT: 4042
+    IOPORT: 6365
   }
 }
 // make 2 levels of set env
@@ -170,7 +168,7 @@ if (require.main === module) {
   // start and kill neo4j brain server
   exec('neo4j start');
   console.log("Access neo4j at http://localhost:7474")
-  console.log("Access ngrok at http://localhost:4040")
+  console.log("Access ngrok at http://localhost:4040~4041")
 
   // start socket.io for polyglot communication
   require('./lib/io_start')()
