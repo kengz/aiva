@@ -1,7 +1,7 @@
 #!/bin/sh
 # Start aiva, use and start Docker container if exists
 
-container=aiva-run
+container=aiva-production
 
 if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
   echo "[Docker image kengz/aiva pulled, using it. Use Ctrl-p-q to detach]"
@@ -12,7 +12,7 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
 
   else
     echo "[Creating new Docker container $container, detached]"
-    docker run -it -p 4040:4041 -p 7474:7475 --name $container -v `pwd`:/opt/aiva kengz/aiva
+    docker run -c 2 -m 4G -it -p 4040:4041 -p 7474:7475 --name $container -v `pwd`:/opt/aiva kengz/aiva
   fi
 
 else # not using Docker

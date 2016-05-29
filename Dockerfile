@@ -81,3 +81,9 @@ CMD /usr/bin/supervisord
 # check: docker images
 # push: docker push kengz/aiva
 # to remove unused images: docker rmi -f $(docker images | grep "^<none>" | awk '{print $3}')
+
+# ohh prolly need tutprial on how to create a default vm, install virtualbox
+# docker-machine stop default
+# VBoxManage modifyvm default --cpus 2
+# VBoxManage modifyvm default --memory 4096
+# docker-machine start default
