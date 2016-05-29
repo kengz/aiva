@@ -17,25 +17,22 @@ var children = [];
 // list of all ports used, including for adapters
 var portList = {
   production: {
+    ngrok: '4040-4041',
     neo4j: 7474,
-    ngrok: 4040,
     socketIO: 6363,
     slack: 8343,
     telegram: 8443,
     fb: 8543
   },
   development: {
+    ngrok: '4040-4041',
     neo4j: 7474,
-    ngrok: 4040,
     socketIO: 6365,
     slack: 8345,
     telegram: 8443,
     fb: 8545
   }
 }
-// look at logger
-// also print all ports
-
 
 // process.env.<key> to set webhook for adapter
 var adapterWebhookKey = {
@@ -49,7 +46,7 @@ module.exports = setEnv;
 // when running cmd `node index.js`, supply NODE_ENV and DEPLOY
 function setEnv() {
   try {
-    overrideDefaultEnv()
+    hardsetEnv()
     env(__dirname + '/.env', { overwrite: false }) // process-level
     env(__dirname + '/bin/' + process.env.DEPLOY) // bot-level
     log.info("Using:", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
@@ -59,12 +56,13 @@ function setEnv() {
   }
 }
 
-// override default FB adapter env
-function overrideDefaultEnv() {
+// hard-set env, i.e. not reading from file
+function hardsetEnv() {
   // fallback if runnning `node index.js` directly
   process.env.NODE_ENV = process.env.NODE_ENV || 'development'
   process.env.DEPLOY = process.env.DEPLOY || '.keys-aivadev'
   process.env.BOTNAME = process.env.BOTNAME || 'aivadev'
+  process.env.IOPORT = _.get(portList, [process.env.NODE_ENV, 'socketIO'])
   // override default FB adapter env
   process.env.FB_AUTOHEAR = 'true'
   process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
@@ -153,8 +151,11 @@ function spawnHubot(adapter) {
 // if this file is run directly by `node index.js`
 /* istanbul ignore next */
 if (require.main === module) {
-  // call setEnv with a default key
+  // setEnv, then log live ports
   setEnv();
+  _.each(portList[process.env.NODE_ENV], function(k,v) {
+    log.info('http://localhost:%s used for %s',k,v)
+  })
   
   // so that hubot is killed when forever exits.
   process.on('exit', function() {
@@ -166,8 +167,6 @@ if (require.main === module) {
   
   // start and kill neo4j brain server
   exec('neo4j start');
-  log.info("Access neo4j at http://localhost:7474")
-  log.info("Access ngrok at http://localhost:4040~4041")
 
   // start socket.io for polyglot communication
   require('./lib/io_start')()
