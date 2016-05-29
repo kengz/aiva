@@ -4,7 +4,8 @@
 container=aiva-production
 
 if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
-  echo "[Docker image kengz/aiva pulled, using it. Use Ctrl-p-q to detach]"
+  echo "[Docker image kengz/aiva pulled, using it.]"
+  echo "\n[ ******** Use Ctrl-p-q to detach bash session ******** ]\n"
 
   if [[ "$(docker ps -qa --filter name=$container 2> /dev/null)" != "" ]]; then
     echo "[Docker container $container exists; attaching to it]"
@@ -19,6 +20,3 @@ else # not using Docker
   echo "[Start on local machine, not Docker]"
   npm start
 fi;
-
-# this script always attach to the main supervisord bash session
-# add note to use Ctrl-p-q
