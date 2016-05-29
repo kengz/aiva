@@ -1,7 +1,7 @@
 #!/bin/sh
 # Start aiva, use and start Docker container if exists
 
-container=aiva-production
+container="${1:-aiva-production}"
 
 if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
   echo "[Docker image kengz/aiva pulled, using it.]"
