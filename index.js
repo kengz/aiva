@@ -46,9 +46,10 @@ module.exports = setEnv;
 // when running cmd `node index.js`, supply NODE_ENV and DEPLOY
 function setEnv() {
   try {
-    hardsetEnv()
     env(__dirname + '/.env', { overwrite: false }) // process-level
+    hardsetEnv()
     env(__dirname + '/bin/' + process.env.DEPLOY) // bot-level
+    hardsetBotEnv()
     log.info("Using:", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
   } catch (e) {
     log.error('%s \nindex.js quitting.', e)
@@ -56,13 +57,17 @@ function setEnv() {
   }
 }
 
-// hard-set env, i.e. not reading from file
+// hard-set env on process-level, i.e. not reading from file
 function hardsetEnv() {
   // fallback if runnning `node index.js` directly
   process.env.NODE_ENV = process.env.NODE_ENV || 'development'
   process.env.DEPLOY = process.env.DEPLOY || '.keys-aivadev'
   process.env.BOTNAME = process.env.BOTNAME || 'aivadev'
   process.env.IOPORT = _.get(portList, [process.env.NODE_ENV, 'socketIO'])
+}
+
+// hard-set env on bot-level
+function hardsetBotEnv() {
   // override default FB adapter env
   process.env.FB_AUTOHEAR = 'true'
   process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
