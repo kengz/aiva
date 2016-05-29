@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kengz/peppurr.git"
+    "url": "git+https://github.com/kengz/aiva.git"
   },
   "keywords": [
     "bot"
@@ -27,9 +27,9 @@
   "author": "kengz kengzwl@gmail.com",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/kengz/peppurr/issues"
+    "url": "https://github.com/kengz/aiva/issues"
   },
-  "homepage": "https://github.com/kengz/peppurr#readme",
+  "homepage": "https://github.com/kengz/aiva#readme",
   "dependencies": {
     "bluebird": "^3.1.1",
     "co": "^4.6.0",
