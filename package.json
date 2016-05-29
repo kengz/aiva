@@ -9,10 +9,10 @@
     "shell": "neo4j start; env $(cat .env bin/.keys-aivadev) NODE_ENV=development bin/hubot",
     "test": "istanbul cover ./node_modules/.bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json npm-debug.log*",
-    "start": "npm run deploy",
+    "start": "npm run production",
     "stop": "forever stopall",
-    "deploy": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aiva; fi; NODE_ENV=production DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
-    "debug": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aivadev; fi; NODE_ENV=development DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
+    "production": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aiva; fi; NODE_ENV=production DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
+    "development": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aivadev; fi; NODE_ENV=development DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
     "server": "node lib/io_start.js",
     "pip3": "pip3 install -r requirements.txt",
     "bundler": "bundle install"

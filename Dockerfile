@@ -72,7 +72,7 @@ VOLUME ["/data", "/var/log"]
 EXPOSE 80 4040 4041 7474 7475
 
 # default command on creating a new container
-CMD /usr/bin/supervisord
+CMD NPM_RUN="development" supervisord
 
 # useful Docker commands
 # build: docker build -t kengz/aiva .
@@ -81,9 +81,3 @@ CMD /usr/bin/supervisord
 # check: docker images
 # push: docker push kengz/aiva
 # to remove unused images: docker rmi -f $(docker images | grep "^<none>" | awk '{print $3}')
-
-# ohh prolly need tutprial on how to create a default vm, install virtualbox
-# docker-machine stop default
-# VBoxManage modifyvm default --cpus 2
-# VBoxManage modifyvm default --memory 4096
-# docker-machine start default
