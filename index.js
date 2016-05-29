@@ -52,7 +52,7 @@ function setEnv() {
     env(__dirname + '/.env', { overwrite: false }) // process-level
     env(__dirname + '/bin/' + process.env.DEPLOY) // bot-level
     overrideDefaultEnv()
-    log.info("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
+    log.info("Using:", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
   } catch (e) {
     log.error('%s \nindex.js quitting.', e)
     process.exit(1)
@@ -121,7 +121,7 @@ function setWebhook(cEnv) {
     return ngrok.connectAsync(ngrokOpts)
     .then(function(url) {
       cEnv[webhookKey] = url
-      log.info("[", cEnv['ADAPTER'], "webhook url: ", url, "at PORT:", cEnv['PORT'], "]")
+      log.info(cEnv['ADAPTER'], "webhook url: ", url, "at PORT:", cEnv['PORT'])
       return cEnv
     })
     .catch(function(err) {
@@ -137,7 +137,7 @@ function spawnProcess(cEnv) {
   // spawn hubot with the copied env for childprocess
   var hb = spawn('./bin/hubot', ['-a', cEnv['ADAPTER'], '--name', cEnv['BOTNAME']], { stdio: 'inherit', env: cEnv })
   children.push(hb);
-  log.info("Deploy", cEnv['BOTNAME'], "with", cEnv['ADAPTER'])
+  log.info("Deploy bot:", cEnv['BOTNAME'], "with adapter:", cEnv['ADAPTER'])
   return cEnv
 }
 
