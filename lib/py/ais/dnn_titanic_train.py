@@ -7,12 +7,13 @@ from sklearn import cross_validation, metrics
 import pandas
 import tensorflow.contrib.learn as skflow
 
+# reliable absolute path when this module is called elsewhere
+data_path = preprocess.abspath('data/titanic.csv')
+model_path = preprocess.abspath('models/dnn_titanic')
+
 # method wrap for safety, so training doesn't run when imported by accident
 def train():
-  # reliable absolute path when this module is called elsewhere
-  data_path = preprocess.abspath('data/titanic.csv')
-  model_path = preprocess.abspath('models/dnn_titanic')
-
+  print("Training dnn_titanic")
   # load and clean the dataset
   df = pandas.read_csv(data_path)
   X, y = df[['Sex', 'Age', 'SibSp', 'Fare']], df['Survived']
@@ -51,8 +52,9 @@ def train():
 
 
 # auto train first time if models/ does not exist
-if not os.path.exists(os.path.normpath(os.path.join(os.path.dirname(__file__), 'models'))):
-  print("Training dnn_titanic")
+try:
+  classifier = skflow.TensorFlowEstimator.restore(model_path)
+except ValueError:
   train()
 
 # Uncomment to train it
