@@ -13,7 +13,7 @@
     "stop": "forever stopall",
     "deploy": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aiva; fi; NODE_ENV=production DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
     "debug": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aivadev; fi; NODE_ENV=development DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
-    "server": "NODE_ENV=development node lib/io_start.js",
+    "server": "node lib/io_start.js",
     "pip3": "pip3 install -r requirements.txt",
     "bundler": "bundle install"
   },
