@@ -1,9 +1,3 @@
-# build: docker build -t kengz/aiva .
-# run: docker run -it -P --rm --name aiva-build kengz/aiva /bin/bash
-# post-build: docker commit -m "base ubuntu 14.04 node python ruby java neo4j" -a "kengz" <id while a container persists> kengz/aiva:v0
-# check: docker images
-# push: docker push kengz/aiva
-
 FROM ubuntu:14.04
 MAINTAINER Wah Loon Keng <kengzwl@gmail.com>
 
@@ -80,4 +74,10 @@ EXPOSE 80 4040 4041 7474 7475
 # default command on creating a new container
 CMD /usr/bin/supervisord
 
+# useful Docker commands
 # build: docker build -t kengz/aiva .
+# run: docker run -it -P --rm --name aiva-build kengz/aiva /bin/bash
+# post-build: docker commit -m "base ubuntu 14.04 node python ruby java neo4j" -a "kengz" <id while a container persists> kengz/aiva:v0
+# check: docker images
+# push: docker push kengz/aiva
+# to remove unused images: docker rmi -f $(docker images | grep "^<none>" | awk '{print $3}')
