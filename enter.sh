@@ -1,12 +1,14 @@
 #!/bin/sh
-# A simple docker script to enter the container
+# enter the container with a new bash session
 
-if [ "`docker ps | grep aiva-run`" = "" ]; then
-    echo "[Start container aiva-enter, un-detached, making volume]"
-    docker run -it -p 80:80 -p 4040:4041 -p 7474:7475 --rm --name aiva-enter -v `pwd`:/opt/aiva kengz/aiva /bin/bash
+container=aiva-production
+
+if [[ "$(docker images -qa kengz/aiva:latest 2> /dev/null)" != "" ]]; then
+  echo "[Docker container $container exists; entering with a new bash session]"
+  echo "\n[ ******** Use Ctrl-p-q to detach bash session ******** ]\n"
+
+  docker start $container && docker exec -it $container /bin/bash
+  
 else
-    # echo "[Attaching to container aiva-run, use Ctrl-p-q to detach]"
-    # docker attach aiva-run
-    echo "[Attaching to container aiva-run with a new shell]"
-    docker exec -it aiva-run /bin/bash
+  echo "[Docker container $container not found; start it first]"
 fi
