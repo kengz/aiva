@@ -12,15 +12,30 @@ Promise.promisifyAll(ngrok);
 // child processes for spawn
 var children = [];
 
+var modulePorts = {
+  production: {
+    IOPORT: 6363,
+    NGROK_PORT: 4040
+  },
+  development: {
+    IOPORT: 6365,
+    NGROK_PORT: 4042
+  }
+}
+// make 2 levels of set env
+// also print all ports
+
 // some adapters need specific ports to work with
 var adapterPorts = {
   production: {
+    slack: 8343,
     telegram: 8443,
-    fb: 8047
+    fb: 8543
   },
   development: {
+    slack: 8345,
     telegram: 8443,
-    fb: 8049
+    fb: 8545
   }
 }
 
@@ -33,27 +48,29 @@ var adapterWebhookKey = {
 // export the setEnv for convenient usage in dev
 module.exports = setEnv;
 
-// set env if not already set externally
-// .env must exist if setting env vars externally
-function setEnv(defaultKey) {
-  // optionally set defaultKey
-  process.env.DEPLOY = process.env.DEPLOY || defaultKey || '.keys-aivadev';
+// when running cmd `node index.js`, supply NODE_ENV and DEPLOY
+function setEnv() {
   try {
-    env(__dirname + '/.env', { overwrite: false });
-    process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-    // then set env keys for the deployed bot
+    env(__dirname + '/.env', { overwrite: false }) // process-level
+    env(__dirname + '/bin/' + process.env.DEPLOY) // bot-level
+    overrideDefaultEnv()
     console.log("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
-    env(__dirname + '/bin/' + process.env.DEPLOY);
-    process.env.BOTNAME = process.env.DEPLOY.split("-").pop()
-    // override default FB adapter env
-    process.env.FB_AUTOHEAR = 'true'
-    process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
-    process.env.FB_ROUTE_URL = '/fb'
   } catch (e) {
-    console.log(e)
-    console.log('index.js quitting.')
+    console.log(e, '\nindex.js quitting.')
     process.exit(1)
   }
+}
+
+// override default FB adapter env
+function overrideDefaultEnv() {
+  // fallback if runnning `node index.js` directly
+  process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+  process.env.DEPLOY = process.env.DEPLOY || '.keys-aivadev'
+  process.env.BOTNAME = process.env.BOTNAME || 'aivadev'
+  // override default FB adapter env
+  process.env.FB_AUTOHEAR = 'true'
+  process.env.FB_WEBHOOK_BASE = process.env.FB_WEBHOOK_BASE || process.env.FB_WEBHOOK
+  process.env.FB_ROUTE_URL = '/fb'
 }
 
 // get the specific port for the adapter
@@ -65,7 +82,7 @@ function getSpecificPort(adapter) {
 function copyEnv(adapter) {
   var cEnv = _.clone(process.env)
   cEnv['ADAPTER'] = adapter
-  cEnv['BOTNAME'] = cEnv[_.toUpper(adapter)+'_BOTNAME'] || cEnv['BOTNAME']
+  cEnv['BOTNAME'] = cEnv[_.toUpper(adapter)+'_BOTNAME'] || cEnv['BOTNAME'] // override default if specified
   return Promise.resolve(cEnv)
 }
 
