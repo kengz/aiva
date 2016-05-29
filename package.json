@@ -11,8 +11,8 @@
     "posttest": "rm -rf .hubot_history brain.json Gemfile.lock",
     "start": "npm run deploy",
     "stop": "forever stopall",
-    "deploy": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aiva; fi; NODE_ENV=production DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a -p ./logs -l $bot.log index.js",
-    "debug": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aivadev; fi; NODE_ENV=development DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js",
+    "deploy": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aiva; fi; NODE_ENV=production DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
+    "debug": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aivadev; fi; NODE_ENV=development DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
     "server": "NODE_ENV=development node lib/io_start.js",
     "pip3": "pip3 install -r requirements.txt",
     "bundler": "bundle install"
@@ -47,6 +47,7 @@
     "hubot-slack": "^3.4.2",
     "hubot-telegram": "^0.1.0",
     "indico.io": "^0.9.3",
+    "log": "^1.4.0",
     "lomath": "latest",
     "neo4jkb": "latest",
     "node-env-file": "^0.1.8",

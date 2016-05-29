@@ -8,6 +8,8 @@ var portfinder = require('portfinder');
 Promise.promisifyAll(portfinder)
 var ngrok = require('requireg')('ngrok');
 Promise.promisifyAll(ngrok);
+var Log = require('log');
+global.log = new Log('info'); // for children to use
 
 // child processes for spawn
 var children = [];
@@ -50,9 +52,9 @@ function setEnv() {
     env(__dirname + '/.env', { overwrite: false }) // process-level
     env(__dirname + '/bin/' + process.env.DEPLOY) // bot-level
     overrideDefaultEnv()
-    console.log("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
+    log.info("Deploying using", process.env.DEPLOY, "in NODE_ENV:", process.env.NODE_ENV)
   } catch (e) {
-    console.log(e, '\nindex.js quitting.')
+    log.error('%s \nindex.js quitting.', e)
     process.exit(1)
   }
 }
@@ -119,12 +121,11 @@ function setWebhook(cEnv) {
     return ngrok.connectAsync(ngrokOpts)
     .then(function(url) {
       cEnv[webhookKey] = url
-      console.log("[", cEnv['ADAPTER'], "webhook url: ", url, "at PORT:", cEnv['PORT'], "]")
+      log.info("[", cEnv['ADAPTER'], "webhook url: ", url, "at PORT:", cEnv['PORT'], "]")
       return cEnv
     })
     .catch(function(err) {
-      console.log(err)
-      console.log("You may have specified a wrong pair of ngrok subdomain and NGROK_AUTH, or trying to use more than 1 custom subdomain at once.")
+      log.error("%s \nYou may have specified a wrong pair of ngrok subdomain and NGROK_AUTH, or trying to use more than 1 custom subdomain at once.", e)
     })
   } else {
     return cEnv
@@ -136,7 +137,7 @@ function spawnProcess(cEnv) {
   // spawn hubot with the copied env for childprocess
   var hb = spawn('./bin/hubot', ['-a', cEnv['ADAPTER'], '--name', cEnv['BOTNAME']], { stdio: 'inherit', env: cEnv })
   children.push(hb);
-  console.log("Deploy", cEnv['BOTNAME'], "with", cEnv['ADAPTER'])
+  log.info("Deploy", cEnv['BOTNAME'], "with", cEnv['ADAPTER'])
   return cEnv
 }
 
@@ -160,13 +161,13 @@ if (require.main === module) {
     children.forEach(function(child) {
       child.kill();
     });
-    console.log("Shutting down")
+    log.info("Shutting down")
   });
   
   // start and kill neo4j brain server
   exec('neo4j start');
-  console.log("Access neo4j at http://localhost:7474")
-  console.log("Access ngrok at http://localhost:4040~4041")
+  log.info("Access neo4j at http://localhost:7474")
+  log.info("Access ngrok at http://localhost:4040~4041")
 
   // start socket.io for polyglot communication
   require('./lib/io_start')()
