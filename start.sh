@@ -30,7 +30,7 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
     if [[ $1 && $1=='production' ]]; then
       echo "[ Production: Creating new Docker container '$container' ]"
       echo "[ ------ To attach, run again: start production ------- ]\n"
-      docker run -m 4G -it -d -p 4040:4039 -p 7474:7473 -p 6464:6463 --name $container -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN="production" supervisord'
+      docker run -m 4G -it -d -p 4040:4039 -p 7474:7472 -p 6464:6463 --name $container -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN="production" supervisord'
     else
       echo "[ Development: Creating new Docker container '$container' ]"
       echo "[ ---------------- To run: supervisord ---------------- ]\n"

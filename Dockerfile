@@ -69,7 +69,7 @@ VOLUME ["/data", "/var/log"]
 
 # expose ports for prod/dev, see index.js for all: 4040 4041 7474 7476 6464 6466
 # the ports on the left of each is the surrogate port for nginx redirection
-EXPOSE 4039 4040 4038 4041 7473 7474 7475 7476 6463 6464 6465 6466
+EXPOSE 4039 4040 4038 4041 7472 7474 7475 7476 6463 6464 6465 6466
 
 # default command on creating a new container
 # CMD NPM_RUN="development" supervisord
