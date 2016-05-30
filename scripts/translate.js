@@ -8,8 +8,8 @@ var _ = require('lomath')
 
 // global.gPass({
 //   input: "hola amigos",
-//   to: 'ai.py',
-//   intent: 'nlp.translate'
+//   to: 'nlp.py',
+//   intent: 'translate'
 // }).then(console.log)
 // // hello friends
 
