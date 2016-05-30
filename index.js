@@ -19,15 +19,15 @@ var portList = {
   production: {
     ngrok: '4040-4041',
     neo4j: 7474,
-    socketIO: 6364,
+    socketIO: 6464,
     slack: 8343,
     telegram: 8443,
     fb: 8543
   },
   development: {
     ngrok: '4040-4041',
-    neo4j: 7474,
-    socketIO: 6464,
+    neo4j: 7476,
+    socketIO: 6466,
     slack: 8345,
     telegram: 8443,
     fb: 8545
