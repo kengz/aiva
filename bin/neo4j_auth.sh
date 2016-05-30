@@ -10,7 +10,7 @@ if [ "${NEO4J_AUTH:-}" == "none" ]; then
     echo "dbms.security.auth_enabled=false" >> /etc/neo4j/neo4j.conf
 elif [[ "${NEO4J_AUTH:-}" == neo4j:* ]]; then
     password="${NEO4J_AUTH#neo4j:}"
-    echo "Using NEO4J_AUTH: '$NEO4J_AUTH' and $password"
+    echo "Using NEO4J_AUTH: '$NEO4J_AUTH'"
     neo4j start
 
     echo "Attempting to verify/set your NEO4J_AUTH in the background ..."

@@ -1,7 +1,7 @@
 // dependencies
 var env = require('node-env-file');
 var spawn = require('child_process').spawn;
-var exec = require('child_process').exec;
+var execSync = require('child_process').execSync;
 var Promise = require('bluebird');
 var _ = require('lomath');
 var portfinder = require('portfinder');
@@ -171,7 +171,7 @@ if (require.main === module) {
   });
   
   // start and kill neo4j brain server
-  exec('neo4j start');
+  execSync('./bin/neo4j_auth.sh', { stdio: [process.stdin, process.stdout, 'pipe'] });
 
   // start socket.io for polyglot communication
   require('./lib/io_start')()

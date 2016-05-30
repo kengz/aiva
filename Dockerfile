@@ -61,8 +61,6 @@ ADD bin/nginx.conf /etc/nginx/
 # Add a supervisor configuration file
 ADD bin/supervisord.conf /etc/supervisor/conf.d/
 
-ADD bin/neo4j_auth.sh /etc/neo4j_auth.sh
-
 # Define working directory.
 WORKDIR /opt/aiva
 
