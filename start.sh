@@ -1,5 +1,6 @@
 #!/bin/sh
 # Start aiva, use and start Docker container if exists
+# this bash session is for use with supervisord. For new bash sessions to the same container, use enter.sh
 
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production
@@ -20,7 +21,6 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
 
   echo "[ ----- Docker image kengz/aiva pulled, using it ------ ]"
   echo "[ -------- Use Ctrl-p-q to detach bash session -------- ]\n"
-  echo "[ ---------------- To run: supervisord ---------------- ]\n"
 
   if [[ "$(docker ps -qa --filter name=$container 2> /dev/null)" != "" ]]; then
     echo "[ --- Docker container '$container' exists; attaching to it --- ]"
@@ -28,11 +28,11 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
 
   else
     if [[ $1 && $1=='production' ]]; then
-      echo "[ --- Production: Creating new Docker container '$container' --- ]"
+      echo "[ Production: Creating new Docker container '$container' ]"
       echo "[ ------ To attach, run again: start production ------- ]\n"
       docker run -m 4G -it -d -p 4040:4039 -p 4041:4038 -p 7474:7473 -p 6464:6463 --name $container -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN="production" supervisord'
     else
-      echo "[ --- Development: Creating new Docker container '$container' --- ]"
+      echo "[ Development: Creating new Docker container '$container' ]"
       echo "[ ---------------- To run: supervisord ---------------- ]\n"
       docker run -m 4G -it -p 4040:4039 -p 4041:4038 -p 7476:7475 -p 6466:6465 --name $container -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN="development" $SHELL'
     fi

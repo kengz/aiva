@@ -1,18 +1,15 @@
 #!/bin/sh
-# remove all the containers
+# stop and remove the container for reset
 
-echo '[Removing Docker container for clean reset]'
-if [[ "$(docker ps -qa --filter name=aiva-production 2> /dev/null)" != "" ]]; then
-  docker stop aiva-production
-  docker rm aiva-production
+if [[ $1 && $1=='production' ]]; then
+  container=aiva-production
+else
+  container=aiva-development
 fi
 
-if [[ "$(docker ps -qa --filter name=aiva-development 2> /dev/null)" != "" ]]; then
-  docker stop aiva-development
-  docker rm aiva-development
-fi
+echo '[ -------- Stopping & Removing Docker container ------- ]'
 
-if [[ "$(docker ps -qa --filter name=aiva-enter 2> /dev/null)" != "" ]]; then
-  docker stop aiva-enter
-  docker rm aiva-enter
+if [[ "$(docker ps -qa --filter name=$container 2> /dev/null)" != "" ]]; then
+    echo "[ ---------- Stop & remove '$container' --------- ]\n"
+    docker stop $container && docker rm $container
 fi

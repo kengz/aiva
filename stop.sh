@@ -1,15 +1,15 @@
 #!/bin/sh
-# stop and cleanup the container
+# stop the container
 
-echo '[Stopping Docker container]'
-if [[ "$(docker ps -qa --filter name=aiva-production 2> /dev/null)" != "" ]]; then
-  docker stop aiva-production
+if [[ $1 && $1=='production' ]]; then
+  container=aiva-production
+else
+  container=aiva-development
 fi
 
-if [[ "$(docker ps -qa --filter name=aiva-development 2> /dev/null)" != "" ]]; then
-  docker stop aiva-development
-fi
+echo '[ ------------- Stopping Docker container ------------- ]'
 
-if [[ "$(docker ps -qa --filter name=aiva-enter 2> /dev/null)" != "" ]]; then
-  docker stop aiva-enter
+if [[ "$(docker ps -qa --filter name=$container 2> /dev/null)" != "" ]]; then
+    echo "[ -------------- Stop '$container' -------------- ]\n"
+    docker stop $container
 fi
