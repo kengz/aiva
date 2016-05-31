@@ -40,5 +40,5 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
 
 else # not using Docker
   echo "[ ------- Starting on local machine, not Docker ------- ]"
-  npm start
+  npm run _start
 fi;
