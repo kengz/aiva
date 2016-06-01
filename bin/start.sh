@@ -24,6 +24,11 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
 
   if [[ "$(docker ps -qa --filter name=$container 2> /dev/null)" != "" ]]; then
     echo "[ --- Docker container '$container' exists; attaching to it --- ]"
+    if [[ $1 && $1=='production' ]]; then
+      echo "[ ------ To attach, run again: start production ------- ]\n"
+    else
+      echo "[ ---------------- To run: supervisord ---------------- ]\n"
+    fi
     docker start $container && docker attach $container
 
   else
