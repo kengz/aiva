@@ -1,6 +1,6 @@
 {
   "name": "aiva",
-  "version": "3.0.0",
+  "version": "3.2.0",
   "description": "General-purpose virtual assistant for developers.",
   "private": true,
   "main": "index.js",
