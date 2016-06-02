@@ -98,3 +98,21 @@
 - implement multi-adapter omnipresence deployment
 - use npm run server to replace node lib/io_start.js
 - finish multiadapters with ngrok
+
+`April-May 2016`
+
+- experiment with deepdream in docker
+- work with other authors on hubot-adapters: fb, telegram
+- improve logging using `log` module
+- properly use 2 sets of ports for all in production/development. All ports listed in `index.js`
+- Dockerize aiva, is now the default distribution method
+- Docker and non-Docker dev is identical - no fragmentation
+- rewrite npm commands and delegate to bash scripts
+- use supervisord, nginx for Docker AIVA
+
+
+# remove docs entire to aivadoc
+doc updates:
+change npm test to be docker-compatible too
+
+# next try to link containers for deep dream.
