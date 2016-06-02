@@ -52,6 +52,11 @@ docker pull kengz/aiva
 - **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
 
 
+<aside class="notice">
+On Mac OSX, before using Docker, make sure there's a <code>default</code> docker machine running: <code>docker-machine start default</code>.
+</aside>
+
+
 ### <a name="run"></a>Run
 - **run**: 
 
