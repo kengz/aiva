@@ -212,7 +212,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="aiva">AIVA <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=master" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master" /></a> <a href="https://gemnasium.com/kengz/aiva"><img alt="Dependency Status" src="https://gemnasium.com/kengz/aiva.svg" /></a> <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></h1>
+        <h1 id="aiva">AIVA <a href="http://badge.fury.io/gh/kengz%2Faiva"><img alt="GitHub version" src="https://badge.fury.io/gh/kengz%2Faiva.svg" /></a> <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=master" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master" /></a> <a href="https://gemnasium.com/kengz/aiva"><img alt="Dependency Status" src="https://gemnasium.com/kengz/aiva.svg" /></a> <a href="https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE"><img alt="MIT licensed" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a> <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></h1>
 
 <p><strong>AIVA</strong> (A.I. Virtual Assistant): General-purpose virtual assistant for developers.</p>
 
@@ -272,36 +272,29 @@
 <pre class="highlight shell"><code>git clone https://github.com/YOURUSERNAME/aiva.git
 </code></pre>
 
-<p>Use <strong>Ubuntu &gt;14.04</strong> or <strong>MacOSX</strong>; For the fastest VM setup, I recommend <a href="https://www.digitalocean.com">Digital Ocean</a>, with this automatic <a href="https://github.com/kengz/mac_setup">setup script</a>. Optionally for manual setup, see <a href="#dependencies">Dependencies</a>.</p>
-
 <h2 id="setup-run"><a name="setup"></a>Setup, Run</h2>
 
-<h3 id="one-time-setup"><a name="one-time-setup"></a>One-time Setup</h3>
+<p>You can run AIVA on your local machine or a Ubuntu server - <a href="https://www.digitalocean.com">Digital Ocean</a> recommended. See <a href="#docker-installation">Docker installation</a> if you&rsquo;re new to it, or the <a href="#dependencies">alternate setups</a>.</p>
 
 <ul>
-<li><strong>install dependencies</strong>: (first installation may take ~20 mins, mainly due to the AI modules)</li>
+<li><strong>dependencies</strong>: Pull the <a href="https://hub.docker.com/r/kengz/aiva/">AIVA Docker image</a>:</li>
 </ul>
-<pre class="highlight shell"><code>npm run gi
+<pre class="highlight shell"><code>docker pull kengz/aiva
 </code></pre>
 
 <ul>
 <li><strong>setup keys</strong>: update <code class="prettyprint">.env</code>, <code class="prettyprint">bin/.key-aiva</code> (production), <code class="prettyprint">bin/.key-aivadev</code> (development).</li>
 </ul>
 
-<aside class="notice">
-If you prefer a different bot name, replace &ldquo;aiva&rdquo; from the <code>bin/.keys-</code> and in <code>package.json</code>.
-</aside>
-
 <h3 id="run"><a name="run"></a>Run</h3>
 
 <ul>
 <li><strong>run</strong>: </li>
 </ul>
-<pre class="highlight shell"><code>npm start <span class="c"># runs aiva</span>
-npm run debug <span class="c"># runs aivadev</span>
+<pre class="highlight shell"><code>npm start <span class="c"># runs aivadev</span>
 </code></pre>
 
-<p>This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
+<p>See <a href="#commands">Commands</a> for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
 
 <blockquote>
 <p>AIVA saying hi, translating, running deep neural net; on Slack, Telegram, Facebook:
@@ -322,6 +315,10 @@ npm run debug <span class="c"># runs aivadev</span>
 </thead><tbody>
 <tr>
 <td style="text-align: left"><a href="#setup2">fast setup</a></td>
+<td>yes</td>
+</tr>
+<tr>
+<td style="text-align: left"><a href="#docker">docker</a></td>
 <td>yes</td>
 </tr>
 <tr>
@@ -355,6 +352,14 @@ npm run debug <span class="c"># runs aivadev</span>
 <p><a href="#setup">3 steps</a> to get a bot installed and running. It once took me just 15 seconds to deploy a bot for an unexpected demo. </p>
 
 <p><em>P/S &ldquo;fast&rdquo; implies the least number of steps; dependency installation can be heavy and long.</em></p>
+
+<h2 id="docker"><a name="docker"></a>Docker</h2>
+
+<p>Complex projects tend to be difficult to install and distribute. Docker has become a preferred solution, especially for heavy machine learning projects. Docker also provides a fast and safe development environment through containerization.</p>
+<pre class="highlight shell"><code>docker pull kengz/aiva
+</code></pre>
+
+<p>AIVA is quite heavy on dependencies, understandably. So we&rsquo;ve add an <a href="https://hub.docker.com/r/kengz/aiva/">AIVA docker image <code class="prettyprint">kengz/aiva</code></a> since <code class="prettyprint">v3.2.0</code>, and development is seamless with it. See <a href="#docker-installation">Docker installation</a>.</p>
 
 <h2 id="cross-platform"><a name="cross-platform"></a>cross-platform</h2>
 
@@ -985,19 +990,52 @@ Note that Facebook takes 10 mins to update webhook, so you may need to wait till
 
 <h3 id="production-and-development">Production and Development</h3>
 
-<p>Per common practice, we distinguish between production and development version, using <code class="prettyprint">NODE_ENV</code> environment variables. So we generate two sets of keys for two bots:</p>
+<p>Per common practice, we distinguish between production and development version using <code class="prettyprint">NODE_ENV</code> environment variables. So we generate two sets of keys for two bots:</p>
 
 <aside class="success">
 Use &ldquo;aiva&rdquo; for production, &ldquo;aivadev&rdquo; for development. They can coexist without system conflicts.
 </aside>
-<pre class="highlight shell"><code><span class="c"># alternative commands</span>
-forever list <span class="c"># see the list of bots running</span>
-npm stop <span class="c"># stop all bots</span>
-npm run debug <span class="c"># run aivadev, log to terminal</span>
-npm run debug --bot<span class="o">=</span>aiva <span class="c"># debug aiva</span>
-npm run shell <span class="c"># fast dev, run aivadev with shell-adapter</span>
+
+<p>For Dockers, there are 2 containers: <code class="prettyprint">aiva-production</code> and <code class="prettyprint">aiva-development</code>, which provide good isolation. You can develop safely in parallel without needing to take down your deployed version.</p>
+
+<h3 id="docker">Docker</h3>
+
+<p>All the commands/scripts are compatible for use with/without Docker. The Docker image syncs the repo volume, so you can edit the source code and run the terminal commands as usual. The shell will enter a Docker container and run the same thing as it would on a local machine, so you can barely feel the difference when developing.</p>
+
+<p>See <a href="#dockerization">Dockerization</a> for how AIVA is packaged into Docker.</p>
+
+<p>The commands run Docker if the image <code class="prettyprint">kengz/aiva</code> is pulled, otherwise they run locally without entering a Docker container. We&rsquo;ll list them separately for clarity:</p>
+
+<h3 id="commands-with-docker"><a name="commands"></a>Commands (with Docker)</h3>
+<pre class="highlight shell"><code><span class="c"># All commands, uses `development` if not specified</span>
+npm start <span class="c"># run aivadev (thru supervisord on Docker)</span>
+npm start production <span class="c"># runs aiva</span>
+<span class="c"># append `production` below as needed</span>
+npm stop <span class="c"># stop the container along with the bots</span>
 npm <span class="nb">test</span> <span class="c"># run unit tests</span>
+npm run enter <span class="c"># enter a parallel bash session in the Docker container</span>
+npm run reset <span class="c"># stop and remove the container</span>
 </code></pre>
+
+<aside class="notice">
+<code>npm start</code> launches the primary bash session, which is used only for <code>supervisord</code>. Use <code>npm run enter</code> to launch parallel bash sessions for all other purposes.
+</aside>
+
+<h3 id="commands-without-docker">Commands (without Docker)</h3>
+
+<p>On your local machine without containerization:</p>
+<pre class="highlight shell"><code><span class="c"># All commands, uses `development` if not specified</span>
+npm start <span class="c"># run aivadev</span>
+npm start production <span class="c"># runs aiva</span>
+<span class="c"># append `production` below as needed</span>
+npm stop <span class="c"># stop the bots</span>
+npm <span class="nb">test</span> <span class="c"># run unit tests</span>
+forever list <span class="c"># see the list of bots running</span>
+</code></pre>
+
+<h3 id="custom-dependencies">Custom Dependencies</h3>
+
+<p>The Docker containers on start will auto install any new dependencies specified in the right config files. They&rsquo;re listed in <a href="#project-dependencies">Project Dependencies</a>.</p>
 
 <h2 id="polyglot-environment"><a name="polyglot"></a>Polyglot Environment</h2>
 
@@ -1025,8 +1063,8 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
   <span class="na">input</span><span class="p">:</span> <span class="s2">"hola amigos"</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s1">'ai.py'</span><span class="p">,</span>
-  <span class="na">intent</span><span class="p">:</span> <span class="s1">'nlp.translate'</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'nlp.py'</span><span class="p">,</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'translate'</span>
 <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="c1">// hello friends</span>
 </code></pre>
@@ -1167,8 +1205,8 @@ npm run server
 
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
   <span class="na">input</span><span class="p">:</span> <span class="s2">"hola amigos"</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s1">'ai.py'</span><span class="p">,</span>
-  <span class="na">intent</span><span class="p">:</span> <span class="s1">'nlp.translate'</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'nlp.py'</span><span class="p">,</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'translate'</span>
 <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="c1">// hello friends</span>
 </code></pre>
@@ -1315,8 +1353,8 @@ This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it be
 
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
   <span class="na">input</span><span class="p">:</span> <span class="s2">"hola amigos"</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s1">'ai.py'</span><span class="p">,</span>
-  <span class="na">intent</span><span class="p">:</span> <span class="s1">'nlp.translate'</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'nlp.py'</span><span class="p">,</span>
+  <span class="na">intent</span><span class="p">:</span> <span class="s1">'translate'</span>
 <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
 <span class="c1">// hello friends</span>
 </code></pre>
@@ -1426,18 +1464,91 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
           <h1 id="setup-tips"><a name="setup-tips"></a>Setup tips</h1>
 
-<h2 id="setup-script">Setup script</h2>
+<h2 id="docker-installation"><a name="docker-installation"></a>Docker installation</h2>
 
-<p><code class="prettyprint">npm run gi</code> runs the following in sequence:</p>
+<p><a href="https://www.docker.com/">Docker</a> is a nice way to package and distribute complex modules, it also allows you to develop in safe isolated environment with containerization. </p>
+
+<p>The <a href="https://hub.docker.com/r/kengz/aiva/">AIVA Docker image</a> (2Gb) comes ready-to-run for the repo source code. It includes all the needed components, e.g. the runtimes (nodejs, python, ruby, Java), Neo4j, the ML modules (Tensorflow, scikitlearn, scipy, numpy, spacy etc.). Depending on which OS you use, the setups are easy:</p>
+
+<h3 id="ubuntu">Ubuntu</h3>
 
 <ul>
-<li>the shell setup script in <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a></li>
+<li>Digital Ocean: The easiest, using their <a href="https://www.digitalocean.com/features/one-click-apps/docker/">Docker 1-click app on Ubuntu</a>. Docker comes installed with it.</li>
+<li>Ubuntu from scratch: See <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">this guide</a> by Digital Ocean.</li>
+</ul>
+
+<p>Then, you need <code class="prettyprint">nodejs</code> to run basic setup for entering Docker.</p>
+<pre class="highlight shell"><code><span class="c"># Nodejs</span>
+curl -sL https://deb.nodesource.com/setup_6.x | bash -
+sudo apt-get install -y nodejs
+</code></pre>
+
+<p>If your Digital Ocean instance has insufficient swap memory, boost it:</p>
+<pre class="highlight shell"><code><span class="c"># Ensure you have enough swap memory. Typically you'd have to run this</span>
+<span class="c"># Setting 1Gb swap space.</span>
+swapoff -a
+sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/swapfile <span class="nv">bs</span><span class="o">=</span>1024 <span class="nv">count</span><span class="o">=</span>1024k
+sudo mkswap /swapfile
+sudo swapon /swapfile
+swapon -s
+</code></pre>
+
+<h3 id="mac-osx">Mac OSX</h3>
+
+<p>Mac needs a VM driver on top to run Docker. Here&rsquo;s the complete Docker installation, with <code class="prettyprint">nodejs</code></p>
+<pre class="highlight shell"><code><span class="c"># Install Homebrew</span>
+ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
+<span class="c"># Install Cask</span>
+brew install caskroom/cask/brew-cask
+<span class="c"># Install docker toolbox</span>
+brew cask install dockertoolbox
+
+<span class="c"># create the docker machine. Note that 'default' is the vm name we will be using</span>
+docker-machine create --driver virtualbox default
+<span class="c"># allocate resource for the docker machine when stopped</span>
+VBoxManage modifyvm default --cpus 2 --memory 4096
+docker-machine start default
+
+<span class="c"># to use vm in terminal</span>
+<span class="nb">echo</span> <span class="s1">'eval "$(docker-machine env default)"'</span> &gt;&gt; ~/.bash_profile
+<span class="nb">source</span> ~/.bash_profile
+
+<span class="c"># Nodejs</span>
+brew install node
+npm update npm -g
+</code></pre>
+
+<h2 id="system-dependencies"><a name="dependencies"></a>System Dependencies</h2>
+
+<p>Though not advised, you can skip Docker and develop on your machine directly without containerization. </p>
+
+<ul>
+<li>Use this automatic <a href="https://github.com/kengz/mac_setup">setup script</a> for Ubuntu and MacOSX, </li>
+<li>run <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>. </li>
+<li>run <code class="prettyprint">npm run gi</code></li>
+</ul>
+
+<p>These install all the system and project dependencies automatically. There is a lot of components listed there for your inspection.</p>
+
+<h2 id="project-dependencies"><a name="project-dependencies"></a>Project Dependencies</h2>
+
+<p>You can save your project dependencies:</p>
+
+<ul>
+<li><code class="prettyprint">package.json</code> for <code class="prettyprint">node.js</code></li>
+<li><code class="prettyprint">requirements.txt</code> for <code class="prettyprint">python</code></li>
+<li><code class="prettyprint">Gemfile</code> for <code class="prettyprint">ruby</code></li>
+</ul>
+
+<p>and the Docker container autoruns the installation script on every start: <code class="prettyprint">npm run gi</code> runs the following in sequence:</p>
+
+<ul>
 <li><code class="prettyprint">npm install</code></li>
 <li><code class="prettyprint">pip3 install -r requirements.txt</code></li>
 <li><code class="prettyprint">bundle install</code></li>
 </ul>
 
-<p>It&rsquo;s save to run multiple times; they&rsquo;ll just update. The shell install script is necessary because &hellip; just look at how many things get installed there.</p>
+<p>If you&rsquo;re not using Docker, you need to run <code class="prettyprint">npm run gi</code> manually.</p>
 
 <h2 id="custom-deployment">Custom deployment</h2>
 
@@ -1445,29 +1556,74 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <h2 id="different-botname">Different Botname</h2>
 
+<p>If you prefer a different bot name, replace &ldquo;aiva&rdquo; from the <code class="prettyprint">bin/.keys-</code> and in <code class="prettyprint">package.json</code>.</p>
+
 <p>Sometimes you just can&rsquo;t use the bot name across platforms - maybe it&rsquo;s already taken, or they require a &ldquo;bot&rdquo; word be added to it. </p>
 
 <p>For all adapters, <code class="prettyprint">process.env.BOTNAME</code> defaults to the name after &ldquo;-&rdquo; in <code class="prettyprint">.keys-&lt;botname&gt;</code>. You can change this by providing in there an env variable <code class="prettyprint">&lt;ADAPTER&gt;_BOTNAME</code>, e.g. <code class="prettyprint">TELEGRAM_BOTNAME=AIVAthebot</code>.</p>
 
 <h2 id="monitoring">Monitoring</h2>
 
-<p>AIVA uses <a href="https://github.com/foreverjs/forever"><code class="prettyprint">forever</code></a> to keep-alive (with 10 max restarts). <code class="prettyprint">npm start</code> runs the process in the background, with it stdout logs written to <code class="prettyprint">/logs</code>. <code class="prettyprint">npm run debug</code> runs the same thing except it logs stdout to the terminal.</p>
+<p>AIVA uses [<code class="prettyprint">supervisord</code>] with Docker, and <a href="https://github.com/foreverjs/forever"><code class="prettyprint">forever</code></a> without Docker. Either way, the bot logs are written to <code class="prettyprint">logs/</code>.</p>
+
+<p>Additionally, the non-bot logs are written to <code class="prettyprint">/var/log/</code> for <code class="prettyprint">supervisor</code>, <code class="prettyprint">nginx</code> and <code class="prettyprint">neo4j</code> in Docker.</p>
+
+<h2 id="dockerization"><a name="dockerization"></a>Dockerization</h2>
+
+<aside class="notice">
+Advanced users can use this section to configure and extend AIVA.
+</aside>
+
+<p>With some spirit of try-hard devops, we package the Docker image so it follows common deployment practices. Below are the primary processes that are ran in the Docker container, and the relevant config files. They package the original AIVA that is ran on a local machine into Docker.</p>
+
+<ul>
+<li><code class="prettyprint">supervisord</code>, with <code class="prettyprint">bin/supervisord.conf</code>: The main entry-point process that runs everything else. Logs output to the main bash session started by <code class="prettyprint">npm start</code></li>
+<li><code class="prettyprint">nginx</code>, with <code class="prettyprint">bin/nginx.conf</code>: Helps expose the Docker port to the host machine and the outside world. See <a href="#docker-port">Docker Port-forwarding</a> for how it&rsquo;s done.</li>
+</ul>
+
+<p>Helper bash scripts for running <a href="#commands">Commands</a>;</p>
+
+<ul>
+<li><code class="prettyprint">bin/start.sh</code> ran by <code class="prettyprint">npm start</code>: start a container in <code class="prettyprint">production</code> or <code class="prettyprint">development</code> environment, with the primary bash session to use <code class="prettyprint">supervisord</code> only.</li>
+<li><code class="prettyprint">bin/enter.sh</code> ran by <code class="prettyprint">npm run enter</code>: start a parallel non-primary bash session to enter the container.</li>
+<li><code class="prettyprint">bin/stop.sh</code> ran by <code class="prettyprint">npm stop</code>: stop a container and the bot inside.</li>
+<li><code class="prettyprint">bin/reset.sh</code> ran by <code class="prettyprint">npm run reset</code>: stop and remove a container, so you can create a fresh one with <code class="prettyprint">npm start</code> if shit goes wrong.</li>
+</ul>
+
+<h2 id="docker-port-forwarding"><a name="docker-port"></a>Docker Port-forwarding</h2>
+
+<p>In the uncommon case where you need to expose a port from Docker, there are 4 steps:</p>
+
+<ul>
+<li>EXPOSE the port and its suggorate in <code class="prettyprint">bin/Dockerfile</code>, then rebuild the Docker image for changes to apply.</li>
+<li>define the reverse proxy for the port following the pattern in <code class="prettyprint">bin/nginx.conf</code></li>
+<li>for MacOSX, add the ports for host-container port forwarding by Virtualbox in <code class="prettyprint">bin/start.sh</code> above <code class="prettyprint">VBoxManage controlvm ...</code></li>
+<li>publish the Docker port in <code class="prettyprint">bin/start.sh</code> at <code class="prettyprint">docker run ... -p &lt;hostport&gt;:&lt;containerport&gt;</code></li>
+</ul>
 
 <h2 id="webhook-using-ngrok"><a name="ngrok"></a>Webhook using ngrok</h2>
 
-<p>You don&rsquo;t need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/master/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at <a href="http://localhost:4040"><code class="prettyprint">http://localhost:4040</code></a> after AIVA is run.</p>
+<p>You don&rsquo;t need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/master/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at <a href="http://localhost:4040"><code class="prettyprint">http://localhost:4040</code></a> (production) or <a href="http://localhost:4041"><code class="prettyprint">http://localhost:4041</code></a> (development) after AIVA is run.</p>
 
 <p>Note that for each adapter, if it needs a webhook, you need to specify the <code class="prettyprint">PORT</code> and the environment key for the webhook, at the top of <a href="https://github.com/kengz/aiva/blob/master/index.js" target="_blank"><code>index.js</code></a> in variables <code class="prettyprint">adapterPorts</code>, <code class="prettyprint">adapterWebhookKey</code>.</p>
 <pre class="highlight javascript"><code><span class="c1">// js: index.js</span>
-<span class="c1">// some adapters need specific ports to work with</span>
-<span class="kd">var</span> <span class="nx">adapterPorts</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">// list of all ports used, including for adapters</span>
+<span class="kd">var</span> <span class="nx">portList</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">production</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ngrok</span><span class="p">:</span> <span class="s1">'4040-4041'</span><span class="p">,</span>
+    <span class="na">neo4j</span><span class="p">:</span> <span class="mi">7474</span><span class="p">,</span>
+    <span class="na">socketIO</span><span class="p">:</span> <span class="mi">6464</span><span class="p">,</span>
+    <span class="na">slack</span><span class="p">:</span> <span class="mi">8343</span><span class="p">,</span>
     <span class="na">telegram</span><span class="p">:</span> <span class="mi">8443</span><span class="p">,</span>
-    <span class="na">fb</span><span class="p">:</span> <span class="mi">8047</span>
+    <span class="na">fb</span><span class="p">:</span> <span class="mi">8543</span>
   <span class="p">},</span>
   <span class="na">development</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">ngrok</span><span class="p">:</span> <span class="s1">'4040-4041'</span><span class="p">,</span>
+    <span class="na">neo4j</span><span class="p">:</span> <span class="mi">7476</span><span class="p">,</span>
+    <span class="na">socketIO</span><span class="p">:</span> <span class="mi">6466</span><span class="p">,</span>
+    <span class="na">slack</span><span class="p">:</span> <span class="mi">8345</span><span class="p">,</span>
     <span class="na">telegram</span><span class="p">:</span> <span class="mi">8443</span><span class="p">,</span>
-    <span class="na">fb</span><span class="p">:</span> <span class="mi">8049</span>
+    <span class="na">fb</span><span class="p">:</span> <span class="mi">8545</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -1489,10 +1645,10 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <span class="c"># ... AIVA is run, Telegram is given a random url</span>
 <span class="c"># stdout log</span>
-<span class="o">[</span> telegram webhook url:  https://aivabot.ngrok.io at PORT: 8443 <span class="o">]</span>
-Deploy aivadev with telegram
-<span class="o">[</span> fb webhook url:  https://86eb7da1.ngrok.io at PORT: 8049 <span class="o">]</span>
-Deploy aivadev with fb
+<span class="o">[</span>Wed Jun 01 2016 12:02:33 GMT+0000 <span class="o">(</span>UTC<span class="o">)]</span> INFO telegram webhook url:  https://ddba2b46.ngrok.io at PORT: 8443
+<span class="o">[</span>Wed Jun 01 2016 12:02:33 GMT+0000 <span class="o">(</span>UTC<span class="o">)]</span> INFO Deploy bot: AIVAthebot with adapter: telegram
+<span class="o">[</span>Wed Jun 01 2016 12:02:33 GMT+0000 <span class="o">(</span>UTC<span class="o">)]</span> INFO fb webhook url:  https://aivadev.ngrok.io at PORT: 8545
+<span class="o">[</span>Wed Jun 01 2016 12:02:33 GMT+0000 <span class="o">(</span>UTC<span class="o">)]</span> INFO Deploy bot: aivadev with adapter: fb
 </code></pre>
 
 <aside class="notice">
@@ -1512,7 +1668,7 @@ Remember to use HTTPS urls.
 curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&lt;OLD_PSWD&gt; http://localhost:7474/user/neo4j/password
 </code></pre>
 
-<p>Access the Neo4j browser GUI at <a href="http://localhost:7474"><code class="prettyprint">http://localhost:7474</code></a></p>
+<p>Access the Neo4j browser GUI at <a href="http://localhost:7474"><code class="prettyprint">http://localhost:7474</code></a> (production) or <a href="http://localhost:7476"><code class="prettyprint">http://localhost:7476</code></a> (development)</p>
 
 <h2 id="ssh-browser-forwarding">SSH Browser-forwarding</h2>
 
@@ -1521,23 +1677,6 @@ curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&l
 </code></pre>
 
 <p>Then you can go to <code class="prettyprint">http://localhost:8080/</code> on your local browser.</p>
-
-<h2 id="dependencies"><a name="dependencies"></a>Dependencies</h2>
-
-<p>All the system dependencies are installed automatically by running <code class="prettyprint">npm run gi</code>, which executes <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>. If you&rsquo;d like to setup your VM manually, see/edit the setup script; below is the (non-exhaustive) list:</p>
-
-<ul>
-<li><code class="prettyprint">node.js &gt;v5.x</code></li>
-<li><code class="prettyprint">java jdk &gt;7, export $JAVA_HOME path</code></li>
-<li><code class="prettyprint">neo4j &gt;v2.3.0</code></li>
-<li><code class="prettyprint">neo4j shell tool</code></li>
-<li><code class="prettyprint">python3, pip3</code></li>
-<li><code class="prettyprint">setuptools virtualenvwrapper</code> (<code class="prettyprint">pip3</code>)</li>
-<li><code class="prettyprint">libatlas-dev libblas-dev gfortran</code> (<code class="prettyprint">Linux apt-get</code>)</li>
-<li><code class="prettyprint">numpy scipy tensorflow scikit-learn skflow pandas matplotlib</code> (<code class="prettyprint">pip3</code>)</li>
-<li><code class="prettyprint">ruby, bundler</code></li>
-<li><code class="prettyprint">forever, istanbul</code> (<code class="prettyprint">npm -g</code>)</li>
-</ul>
 
           <h1 id="roadmap-amp-changelog"><a name="changelog"></a>Roadmap &amp; Changelog</h1>
 
