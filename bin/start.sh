@@ -6,7 +6,7 @@
 eval "$(cat .env | sed 's/^/export /')"
 
 if [[ $CLOUDDREAM_PATH && -d ${HOME}/clouddream ]]; then
-  echo 'Using AIVA with Deepdream: make sure you start ${HOME}/clouddream'
+  echo "Using AIVA with Deepdream: make sure you start ${HOME}/clouddream"
   CLOUDDREAM_LINK_VOL="-v ${HOME}/clouddream:${CLOUDDREAM_PATH}"
 else
   CLOUDDREAM_LINK_VOL=""
