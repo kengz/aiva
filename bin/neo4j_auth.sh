@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # set from .env
 eval "$(cat /opt/aiva/.env | sed 's/^/export /')"

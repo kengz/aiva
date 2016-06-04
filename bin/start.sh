@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Start aiva, use and start Docker container if exists
 # this bash session is for use with supervisord. For new bash sessions to the same container, use enter.sh
 
