@@ -10,6 +10,8 @@ var request = require('request')
 /* istanbul ignore next */
 module.exports = function(robot) {
   robot.on("fb_richMsg", function(envelope) {
+    res = new Response(robot, envelope, undefined)
+    res.send('running DeepDream. This may take up to 2 minutes :)')
     robot.logger.info("got fb richMsg", envelope.attachments[0])
     runDeepdream(envelope)
     .then(function(outFilepath) {
@@ -28,12 +30,12 @@ module.exports = function(robot) {
     if (robot.adapterName != 'telegram') { return };
     if (_.has(res.message, 'photo')) {
       robot.logger.info("got telegram photo")
-      res.reply('running DeepDream. This may take up to 5 minutes :)')
+      res.send('running DeepDream. This may take up to 2 minutes :)')
       runDeepdream(res.message)
       .then(function(outFilepath) {
         robot.logger.info('DeepDream outFile', outFilepath)
         robot.emit('telegram:invoke', 'sendPhoto', { chat_id: res.message.from.id, photo: fs.createReadStream(outFilepath) }, function (error, response) {
-          if (err) { console.log(err) };
+          if (error) { console.log(error) };
         });
       })
       .catch(console.log)
