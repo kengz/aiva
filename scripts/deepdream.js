@@ -23,7 +23,7 @@ module.exports = function(robot) {
   robot.on("fb_richMsg", function(envelope) {
     res = new Response(robot, envelope, undefined)
     // rate limit
-    remain = count(envelope.user.id)
+    remain = deduct(envelope.user.id)
     if (remain < 0) {
       res.send(`Sorry, you ran out of your ${maxUse} uses of Deepdream. Hope you enjoyed!`)
       return
@@ -48,7 +48,7 @@ module.exports = function(robot) {
     if (robot.adapterName != 'telegram') { return };
     if (_.has(res.message, 'photo')) {
       // rate limit
-      remain = count(envelope.user.id)
+      remain = deduct(envelope.user.id)
       if (remain < 0) {
         res.send(`Sorry, you ran out of your ${maxUse} uses of Deepdream. Hope you enjoyed!`)
         return
