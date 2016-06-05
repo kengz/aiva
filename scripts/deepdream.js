@@ -55,7 +55,7 @@ module.exports = function(robot) {
       }
     
       robot.logger.info("got telegram photo")
-      res.send('running DeepDream. This may take up to 2 minutes :) Meanwhile you have ${remain} uses left.')
+      res.send(`running DeepDream. This may take up to 2 minutes :) Meanwhile you have ${remain} uses left.`)
       runDeepdream(res.message)
       .then(function(outFilepath) {
         robot.logger.info('DeepDream outFile', outFilepath)
