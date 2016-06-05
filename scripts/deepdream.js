@@ -20,6 +20,11 @@ function deduct(userId) {
 // quick test scripts
 /* istanbul ignore next */
 module.exports = function(robot) {
+  // ensure bot name
+  robot.respond(/hi|hello|hey/i, function(res) {
+    res.send(`Hi, I'm ${robot.name}. Upload a photo to run DeepDream.`)
+  })
+
   robot.on("fb_richMsg", function(envelope) {
     res = new Response(robot, envelope, undefined)
     // rate limit
