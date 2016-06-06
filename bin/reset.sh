@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # stop and remove the container for reset
 
 if [[ $1 && $1=='production' ]]; then

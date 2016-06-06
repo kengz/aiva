@@ -1,11 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 # Start aiva, use and start Docker container if exists
 # this bash session is for use with supervisord. For new bash sessions to the same container, use enter.sh
 
+# set from .env
+eval "$(cat .env | sed 's/^/export /')"
+
+if [[ $CLOUDDREAM_PATH && -d ${HOME}/clouddream ]]; then
+  echo "Using AIVA with Deepdream: make sure you start ${HOME}/clouddream"
+  CLOUDDREAM_LINK_VOL="-v ${HOME}/clouddream:${CLOUDDREAM_PATH}"
+else
+  CLOUDDREAM_LINK_VOL=""
+fi
+
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production
+  COMMAND="docker run -m 4G -it -d -p 4040:4039 -p 7474:7472 -p 6464:6463 --name $container $CLOUDDREAM_LINK_VOL -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN=\"production\" supervisord'"
 else
   container=aiva-development
+  COMMAND="docker run -m 4G -it -p 4041:4038 -p 7476:7475 -p 6466:6465 --name $container $CLOUDDREAM_LINK_VOL -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN=\"development\" $SHELL'"
 fi
 
 if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
@@ -35,11 +47,11 @@ if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then
     if [[ $1 && $1=='production' ]]; then
       echo "[ Production: Creating new Docker container '$container' ]"
       echo "[ ------ To attach, run again: start production ------- ]\n"
-      docker run -m 4G -it -d -p 4040:4039 -p 7474:7472 -p 6464:6463 --name $container -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN="production" supervisord'
+      eval ${COMMAND}
     else
       echo "[ Development: Creating new Docker container '$container' ]"
       echo "[ ---------------- To run: supervisord ---------------- ]\n"
-      docker run -m 4G -it -p 4041:4038 -p 7476:7475 -p 6466:6465 --name $container -v `pwd`:/opt/aiva kengz/aiva /bin/bash -c 'NPM_RUN="development" $SHELL'
+      eval ${COMMAND}
     fi
   fi
 

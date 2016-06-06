@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # stop the container
 
 if [[ $1 && $1=='production' ]]; then
