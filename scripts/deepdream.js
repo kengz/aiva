@@ -12,6 +12,7 @@ var counter = {
   'id': 0
 }
 // deduct usages for each user
+/* istanbul ignore next */
 function deduct(userId) {
   counter[userId] = (counter[userId]||maxUse)-1
   return counter[userId]
