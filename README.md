@@ -1,6 +1,6 @@
-# AIVA [![GitHub version](https://badge.fury.io/gh/kengz%2Faiva.svg)](http://badge.fury.io/gh/kengz%2Faiva) [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+# AIVA [![GitHub version](https://badge.fury.io/gh/kengz%2Faiva.svg)](http://badge.fury.io/gh/kengz%2Faiva) [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![GitHub forks](https://img.shields.io/github/forks/kengz/aiva.svg?style=social&label=Fork)](https://github.com/kengz/aiva) [![GitHub stars](https://img.shields.io/github/stars/kengz/aiva.svg?style=social&label=Star)](https://github.com/kengz/aiva)
 
-**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
+**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. [http://kengz.me/aiva/](http://kengz.me/aiva/)
 
 It is a **bot-generalization**: you can implement any features, use with major AI tools, deploy across platforms, and code in multiple languages.
 
@@ -33,7 +33,7 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 
 1\. Fork this repo so you can pull the new releases later:
 
-&nbsp; &nbsp; <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+&nbsp; &nbsp; [![GitHub forks](https://img.shields.io/github/forks/kengz/aiva.svg?style=social&label=Fork)](https://github.com/kengz/aiva) [![GitHub stars](https://img.shields.io/github/stars/kengz/aiva.svg?style=social&label=Star)](https://github.com/kengz/aiva)
 
 2\. Clone **your forked repository**:
 
