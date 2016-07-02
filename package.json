@@ -55,7 +55,7 @@
     "lomath": "latest",
     "neo4jkb": "latest",
     "node-env-file": "^0.1.8",
-    "node-wit": "^3.2.2",
+    "node-wit": "^4.0.0",
     "path-exists": "^3.0.0",
     "portfinder": "^1.0.3",
     "randombytes": "^2.0.3",
