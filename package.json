@@ -40,7 +40,7 @@
     "concept-net": "^0.3.0",
     "coveralls": "^2.11.9",
     "date.js": "^0.3.1",
-    "download": "^4.4.3",
+    "download": "^5.0.2",
     "express": "^4.13.4",
     "geocoder": "^0.2.2",
     "google": "^2.0.0",
