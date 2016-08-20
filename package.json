@@ -48,7 +48,7 @@
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-fb": "^3.0.0",
-    "hubot-slack": "^3.4.2",
+    "hubot-slack": "^4.0.2",
     "hubot-telegram": "^0.1.0",
     "indico.io": "latest",
     "log": "^1.4.0",
@@ -73,7 +73,7 @@
     "coffee-script": "^1.10.0",
     "hubot-test-helper": "^1.4.4",
     "istanbul": "^0.4.2",
-    "mocha": "^2.3.4",
+    "mocha": "^3.0.2",
     "sinon": "^1.17.2"
   }
 }
