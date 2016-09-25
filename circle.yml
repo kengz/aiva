@@ -1,0 +1,13 @@
+machine:
+  python:
+    version: 3.5.1
+  node:
+    version: 6
+
+dependencies:
+  override:
+    - npm install --only=dev
+
+test:
+  override:
+    - npm test
