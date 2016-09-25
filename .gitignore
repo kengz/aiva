@@ -24,11 +24,10 @@ Gemfile.lock
 /lib/bundler/man/
 
 # Bot-specific
-.env
 .hubot_history
-bin/.keys*
-!bin/.keys-example
 **/brain.json
+config/default.json
+config/production.json
 
 # Vagrant travis files
 .vagrant/

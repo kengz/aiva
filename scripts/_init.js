@@ -7,10 +7,10 @@ var Log = require('log');
 
 // declare global assets
 // the knowledge base
-global.KB = require('neo4jkb')({
-  NEO4J_AUTH: process.env.NEO4J_AUTH,
-  NEO4J_PORT: process.env.NEO4J_PORT
-});
+// global.KB = require('neo4jkb')({
+//   NEO4J_AUTH: process.env.NEO4J_AUTH,
+//   NEO4J_PORT: process.env.NEO4J_PORT
+// });
 
 // export for bot
 module.exports = function(robot) {

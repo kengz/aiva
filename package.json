@@ -29,7 +29,7 @@
     "bot"
   ],
   "author": "kengz kengzwl@gmail.com",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kengz/aiva/issues"
   },
@@ -37,35 +37,23 @@
   "dependencies": {
     "bluebird": "^3.1.1",
     "co": "^4.6.0",
-    "concept-net": "^0.3.0",
+    "config": "^1.21.0",
     "coveralls": "^2.11.9",
     "date.js": "^0.3.1",
-    "download": "^5.0.2",
     "express": "^4.13.4",
-    "geocoder": "^0.2.2",
-    "google": "^2.0.0",
-    "googleapis": "latest",
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-fb": "^3.0.0",
     "hubot-slack": "^4.0.2",
     "hubot-telegram": "^0.1.0",
-    "indico.io": "latest",
     "log": "^1.4.0",
     "lomath": "latest",
-    "neo4jkb": "latest",
-    "node-env-file": "^0.1.8",
-    "node-wit": "latest",
-    "path-exists": "^3.0.0",
+    "ngrok": "^2.2.3",
     "portfinder": "^1.0.3",
     "randombytes": "^2.0.3",
-    "reqscraper": "^0.1.2",
     "require-dir": "^0.3.0",
-    "requireg": "^0.1.5",
     "socket.io": "^1.4.5",
-    "socket.io-client": "^1.4.5",
-    "untildify": "^3.0.2",
-    "watson-developer-cloud": "latest"
+    "socket.io-client": "^1.4.5"
   },
   "devDependencies": {
     "chai": "^3.4.1",
