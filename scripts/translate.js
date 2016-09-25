@@ -1,6 +1,6 @@
 // Module for translation
 // dependencies
-var _ = require('lomath')
+const _ = require('lomath')
 
 // // Development process, testing after starting server with "npm run server"
 // var client = require('../lib/client.js')
@@ -15,24 +15,23 @@ var _ = require('lomath')
 
 
 // deploy feature: export for bot
-module.exports = function(robot) {
+module.exports = (robot) => {
   // menu
-  robot.respond(/translate\s*$/i, function(res) {
+  robot.respond(/translate\s*$/i, (res) => {
     res.send('`translate <text>`')
   })
 
   // translate
   /* istanbul ignore next */
-  robot.respond(/translate\s*(.+)/i, function(res) {
-    var str = res.match[1];
+  robot.respond(/translate\s*(.+)/i, (res) => {
+    var str = res.match[1]
     global.gPass({
-      input: str,
-      to: 'nlp.py',
-      intent: 'translate'
-    })
-    .then(function(reply) {
-      res.send(reply.output)
-    })
+        input: str,
+        to: 'nlp.py',
+        intent: 'translate'
+      })
+      .then((reply) => {
+        res.send(reply.output)
+      })
   })
-
 }

@@ -2,15 +2,15 @@
 // Sample interface script for lib/py/hello.py
 
 // Bot will call this function with the robot argument
-module.exports = function(robot) {
+module.exports = (robot) => {
   // menu
-  robot.respond(/hello_py$/i, function(res) {
+  robot.respond(/hello_py$/i, (res) => {
     res.send('`hello_py [py]`')
   })
 
   // call the hello.py methods
-  robot.respond(/hello_py\s*(.+)/i, function(res) {
-    var str = res.match[1];
+  robot.respond(/hello_py\s*(.+)/i, (res) => {
+    var str = res.match[1]
     /* istanbul ignore else */
     if (str == 'py') {
       // use the global client to pass to the hello.py client
@@ -23,10 +23,9 @@ module.exports = function(robot) {
         })
         // this goes through hello.py -> client.js
         // respond to user when client.js resolves the promise
-        .then(function(reply) {
+        .then((reply) => {
           res.send(reply.output)
         }).catch(console.log)
-    };
+    }
   })
-
 }
