@@ -1,5 +1,5 @@
 # hasher = require('../../lib/js/hasher.js')
-helper = new Helper('../scripts/ping.js')
+helper = new Helper('../scripts/info.js')
 id = __filename.split("/").pop();
 
 describe 'lib/hasher.js', ->

@@ -7,7 +7,7 @@ global._ = require('lomath')
 const path = require('path')
 
 
-rootPath = path.join(__dirname, '..')
+global.rootPath = path.join(__dirname, '..')
 
 
 // export for bot

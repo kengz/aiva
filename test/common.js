@@ -1,18 +1,20 @@
 // dependencies
 // common setups for tests, run before tests
-var env = require('node-env-file');
+// var env = require('node-env-file');
+const config = require('config')
+var setEnv = require('../index')
 
 // set env if not already set externally
 // .env must exist if setting env vars externally
 try {
-  env(__dirname + '/../.env', { overwrite: false });
   // set the port to test
+  setEnv()
   process.env.NODE_ENV = 'development'
   process.env.PORT = 9090
   console.log("Test is using PORT:", process.env.PORT)
 } catch (e) {
   console.log(e)
-  if (process.env.TRAVIS) {
+  if (process.env.CIRCLECI || process.env.TRAVIS) {
     console.log("Using env vars from Travis if exist.")
   } else {
     console.log("No .env and not in Travis, please provide your .env file.")

@@ -14,7 +14,9 @@ Promise.promisifyAll(portfinder)
 var children = [] // child processes for spawn
 logLevel = process.env['npm_config_debug'] ? 'debug' : 'info'
 const log = new Log(logLevel)
-
+var globalKeys = _.difference(_.keys(config), ['ADAPTERS'])
+var globalConfig = _.pick(config, globalKeys)
+var activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
 
 // helper to set process.env (or copy) from config
 function configToEnv(config, env = process.env) {
@@ -28,8 +30,7 @@ function setEnv() {
   try {
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'
     process.env.IOPORT = config.get('PORTS.SOCKETIO')
-    globalKeys = _.difference(_.keys(config), ['ADAPTERS'])
-    globalConfig = _.pick(config, globalKeys)
+    process.env.CLIENT_COUNT = _.size(activeAdapters)
     log.debug(`globalConfig ${JSON.stringify(globalConfig, null, 2)}`)
     configToEnv(globalConfig)
   } catch (e) {

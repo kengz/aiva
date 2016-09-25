@@ -27,7 +27,7 @@ module.exports = (robot) => {
   robot.respond(/write brain/i, (res) => {
     try {
       fs.writeFile(brainDumpPath, JSON.stringify(robot.brain.data))
-      res.send(`Brain dumped to output ${brainDumpPath}`)
+      res.send(`Brain written to output.`)
     } catch (e) {
       res.send(`No permission to write brain to output.`)
     }

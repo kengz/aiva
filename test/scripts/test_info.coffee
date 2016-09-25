@@ -1,7 +1,7 @@
-helper = new Helper('../scripts/ping.js')
+helper = new Helper('../scripts/info.js')
 
-# test ping script
-describe 'scripts/ping.js', ->
+# test info script
+describe 'scripts/info.js', ->
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
     @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
@@ -46,7 +46,7 @@ describe 'scripts/ping.js', ->
     it 'hubot: development (in Mocha test)', ->
       @room.messages.should.eql [
         ['alice', '@hubot nodeenv']
-        ['hubot', 'This is in development mode.']
+        ['hubot', 'aivadev with adapter undefined is deployed in development mode.']
       ]
 
 
