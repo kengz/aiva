@@ -4,7 +4,7 @@ machine:
   node:
     version: 6
   environment:
-    COVERALLS_REPO_TOKEN: etDLVZ6U9Q77ilGeLwhNd76OB9JMJdL6d
+    CODECLIMATE_REPO_TOKEN: df0a1e703d4e417fb88724c9e1f7c4b49f53c9c17494d59cd182aa6cc2daccf8
 
 dependencies:
   override:
@@ -15,4 +15,4 @@ test:
   override:
     - npm test
   post:
-    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+    - cat ./coverage/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimte.js
