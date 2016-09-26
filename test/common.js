@@ -39,9 +39,7 @@ global.say = function(room, name, key) {
 global.delayer = function(factor) {
   factor = factor || 1
   var timeout = 100 * factor
-  if (process.env.CI) { timeout = 10 * timeout }
-  // timeout is capped at 16s
-  timeout = _.min([timeout, 16000])
+  timeout = _.min([timeout, 16000]) // timeout is capped at 16s
   return Promise.delay(timeout)
 }
 

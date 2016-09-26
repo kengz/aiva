@@ -11,6 +11,7 @@ module.exports = (robot) => {
   // call the hello.py methods
   robot.respond(/hello_py\s*(.+)/i, (res) => {
     var str = res.match[1]
+
     /* istanbul ignore else */
     if (str == 'py') {
       // use the global client to pass to the hello.py client
