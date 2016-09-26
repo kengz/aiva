@@ -2,23 +2,25 @@
 // common setups for tests, run before tests
 // var env = require('node-env-file');
 const config = require('config')
+const Log = require('log')
 const path = require('path')
 const setEnv = require(path.join(__dirname, '..', 'index'))
 
-// set env if not already set externally
-// .env must exist if setting env vars externally
+const log = new Log('debug')
+global.log = log
+
 try {
   // set the port to test
   setEnv()
   process.env.NODE_ENV = 'development'
   process.env.PORT = 9090
-  console.log("Test is using PORT:", process.env.PORT)
+  log.info("Test is using PORT:", process.env.PORT)
 } catch (e) {
-  console.log(e)
+  log.error(JSON.stringify(e, null, 2))
   if (process.env.CI) {
-    console.log("Using config file from CI if exist.")
+    log.info("Using config file from CI if exist.")
   } else {
-    console.log("No config and not in CI, please provide your config file.")
+    log.error("No config and not in CI, please provide your config file.")
     process.exit(1)
   }
 }
