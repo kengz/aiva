@@ -7,7 +7,7 @@
   "scripts": {
     "shell": "NODE_ENV=development bin/hubot",
     "test": "bin/test.sh",
-    "_test": "istanbul cover ./node_modules/.bin/_mocha",
+    "_test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json npm-debug.log*",
     "_stop": "forever stopall",
     "start": "bin/start.sh",
@@ -40,7 +40,6 @@
     "bluebird": "^3.1.1",
     "co": "^4.6.0",
     "config": "^1.21.0",
-    "coveralls": "^2.11.9",
     "date.js": "^0.3.1",
     "express": "^4.13.4",
     "hubot": "^2.18.0",
@@ -61,9 +60,11 @@
     "chai": "^3.4.1",
     "chai-as-promised": "^5.2.0",
     "coffee-script": "^1.10.0",
+    "coveralls": "^2.11.14",
     "hubot-test-helper": "^1.4.4",
     "istanbul": "^0.4.2",
     "mocha": "^3.0.2",
+    "mocha-lcov-reporter": "^1.2.0",
     "sinon": "^1.17.2"
   }
 }
