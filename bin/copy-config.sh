@@ -8,10 +8,10 @@ PROD_CONFIG="$CONFIG_DIR/production.json"
 
 if [ ! -e "$PROD_CONFIG" ]; then
   cp $EXAMPLE_CONFIG $PROD_CONFIG
-  echo "Created $PROD_CONFIG"
+  echo "[ --- Created $PROD_CONFIG --- ]\n"
 fi
 
 if [ ! -e "$PROD_CONFIG" ]; then
   cp $EXAMPLE_CONFIG $PROD_CONFIG
-  echo "Created $PROD_CONFIG"
+  echo "[ --- Created $PROD_CONFIG --- ]\n"
 fi

@@ -1,6 +1,10 @@
 #!/bin/bash
 # stop and remove the container for reset
 
+# copy keys file if not already exist
+BIN_DIR=`pwd`/bin
+$BIN_DIR/copy-config.sh
+
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production
 else

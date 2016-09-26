@@ -2,6 +2,10 @@
 # enter the container with a new bash session, separate from the supervisord session
 # If you wanna run supervisord, use start.sh
 
+# copy keys file if not already exist
+BIN_DIR=`pwd`/bin
+$BIN_DIR/copy-config.sh
+
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production
 else

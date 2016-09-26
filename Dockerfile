@@ -56,10 +56,10 @@ RUN apt-get install -y nginx supervisor dialog net-tools
 
 # Replace the default Nginx configuration file
 RUN rm -v /etc/nginx/nginx.conf
-ADD bin/nginx.conf /etc/nginx/
+ADD config/nginx.conf /etc/nginx/
 
 # Add a supervisor configuration file
-ADD bin/supervisord.conf /etc/supervisor/conf.d/
+ADD config/supervisord.conf /etc/supervisor/conf.d/
 
 # Define working directory.
 WORKDIR /opt/aiva

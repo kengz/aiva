@@ -6,12 +6,12 @@
 BIN_DIR=`pwd`/bin
 $BIN_DIR/copy-config.sh
 
-# if [[ $CLOUDDREAM_PATH && -d ${HOME}/clouddream ]]; then
-#   echo "Using AIVA with Deepdream: make sure you start ${HOME}/clouddream"
-#   CLOUDDREAM_LINK_VOL="-v ${HOME}/clouddream:${CLOUDDREAM_PATH}"
-# else
-#   CLOUDDREAM_LINK_VOL=""
-# fi
+if [[ $CLOUDDREAM_PATH && -d ${HOME}/clouddream ]]; then
+  echo "Using AIVA with Deepdream: make sure you start ${HOME}/clouddream"
+  CLOUDDREAM_LINK_VOL="-v ${HOME}/clouddream:${CLOUDDREAM_PATH}"
+else
+  CLOUDDREAM_LINK_VOL=""
+fi
 
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production
