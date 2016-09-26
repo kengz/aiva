@@ -15,6 +15,7 @@ const _ = require('lomath')
 
 
 // deploy feature: export for bot
+/* istanbul ignore next */
 module.exports = (robot) => {
   // menu
   robot.respond(/translate\s*$/i, (res) => {

@@ -129,3 +129,5 @@ def translate(source, to="en"):
 
 def detect_language(source):
   return t.detect(source)
+
+# print(translate('hola amigos'))

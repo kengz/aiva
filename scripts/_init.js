@@ -14,9 +14,6 @@ module.exports = (robot) => {
   // set global for usage by children
   global.robot = robot
 
-  /* istanbul ignore next */
-  global.log = log
-
   // wake up, init
   co(function*() {
     // connect socket.io client to socket.io server for polyglot communication
