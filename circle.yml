@@ -3,6 +3,8 @@ machine:
     version: 3.5.1
   node:
     version: 6
+  environment:
+    COVERALLS_REPO_TOKEN: etDLVZ6U9Q77ilGeLwhNd76OB9JMJdL6d
 
 dependencies:
   override:
