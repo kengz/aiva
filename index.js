@@ -123,9 +123,6 @@ if (require.main === module) {
     log.info("Shutting down")
   })
 
-  // start and kill neo4j brain server
-  // execSync('./bin/neo4j_auth.sh', { stdio: [process.stdin, process.stdout, 'pipe'] })
-
   // detect all active adapters, spawn a hubot for each
   activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
   process.env.CLIENT_COUNT = _.size(activeAdapters)
