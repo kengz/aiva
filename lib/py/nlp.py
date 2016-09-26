@@ -1,10 +1,10 @@
 """
 Translator module that uses the Google Translate API.
-Taken and modified from textblob 
+Taken and modified from textblob
 https://github.com/sloria/TextBlob/blob/dev/textblob/translate.py
 Adapted from Terry Yin's google-translate-python.
 Language detection added by Steven Loria.
-For lang code refer 
+For lang code refer
 https://cloud.google.com/translate/v2/using_rest#language-params
 """
 from __future__ import absolute_import
@@ -95,7 +95,9 @@ def _unescape(text):
     """Unescape unicode character codes within a string.
     """
     pattern = r'\\{1,2}u[0-9a-fA-F]{4}'
-    decode = lambda x: codecs.getdecoder('unicode_escape')(x.group())[0]
+
+    def decode(x):
+        return codecs.getdecoder('unicode_escape')(x.group())[0]
     return re.sub(pattern, decode, text)
 
 
