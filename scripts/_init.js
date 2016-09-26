@@ -14,6 +14,8 @@ global.rootPath = path.join(__dirname, '..')
 module.exports = (robot) => {
   // set global for usage by children
   global.robot = robot
+
+  /* istanbul ignore next */
   logLevel = process.env['npm_config_debug'] ? 'debug' : 'info'
   global.log = new Log(logLevel)
 
@@ -28,7 +30,7 @@ module.exports = (robot) => {
       require(path.join(rootPath, 'test', 'asset'))
       robot.brain.data.users = global.users
     }
-    yield Promise.delay(500); // wait to connect, get users
+    yield Promise.delay(10); // wait to connect, get users
     // emit 'ready' event to kick off initialization
     robot.emit('ready')
   }).catch(global.log.error)

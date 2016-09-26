@@ -11,12 +11,13 @@ const portfinder = require('portfinder')
 Promise.promisifyAll(portfinder)
 
 
-var children = [] // child processes for spawn
+/* istanbul ignore next */
 logLevel = process.env['npm_config_debug'] ? 'debug' : 'info'
 const log = new Log(logLevel)
 var globalKeys = _.difference(_.keys(config), ['ADAPTERS'])
 var globalConfig = _.pick(config, globalKeys)
 var activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
+var children = [] // child processes for spawn
 
 // helper to set process.env (or copy) from config
 function configToEnv(config, env = process.env) {
@@ -26,6 +27,7 @@ function configToEnv(config, env = process.env) {
 }
 
 // when running cmd `node index.js`, supply NODE_ENV and DEPLOY
+/* istanbul ignore next */
 function setEnv() {
   try {
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'
@@ -40,6 +42,7 @@ function setEnv() {
 }
 
 // spawn a new env copy for an adapter, return in Promise for chaining
+/* istanbul ignore next */
 function spawnEnv(adapter) {
   var env = _.clone(process.env)
   env['ADAPTER'] = adapter
@@ -50,6 +53,7 @@ function spawnEnv(adapter) {
 }
 
 // set the PORT of env if specified in adapterConfig
+/* istanbul ignore next */
 function setPort(env) {
   portfinder.basePort = config.get(`PORTS.${env['ADAPTER']}`)
   return portfinder.getPortAsync()
@@ -63,6 +67,7 @@ function setPort(env) {
 
 // set the webhook of env if it's specified in adapterConfig
 // Spawn a ngrok automatically to handle the webhook
+/* istanbul ignore next */
 function setWebhook(env) {
   var webhookKey = env['WEBHOOK_KEY']
   if (!webhookKey) {
@@ -97,6 +102,7 @@ function setWebhook(env) {
 }
 
 // finally, spawn a hubot in child.process using env
+/* istanbul ignore next */
 function spawnProcess(env) {
   var hb = spawn('./bin/hubot', ['-a', env['ADAPTER'], '--name', env['BOTNAME']], { stdio: 'inherit', env: env })
   children.push(hb)
@@ -105,6 +111,7 @@ function spawnProcess(env) {
 }
 
 // Spawn hubot for an adapter by chaining the setups above
+/* istanbul ignore next */
 function spawnHubot(adapter) {
   return spawnEnv(adapter)
     .then(setPort)

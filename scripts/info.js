@@ -4,7 +4,7 @@ const fs = require('fs')
 const _ = require('lomath')
 const path = require('path')
 
-const brainDumpPath = path.join(__dirname, '..' , 'brain.json')
+const brainDumpPath = path.join(__dirname, '..', 'brain.json')
 
 // quick test scripts
 module.exports = (robot) => {
@@ -29,6 +29,7 @@ module.exports = (robot) => {
       fs.writeFile(brainDumpPath, JSON.stringify(robot.brain.data))
       res.send(`Brain written to output.`)
     } catch (e) {
+      /* istanbul ignore next */
       res.send(`No permission to write brain to output.`)
     }
   })
