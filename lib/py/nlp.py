@@ -1,151 +1,131 @@
-# import google translate
-from ais.ai_lib.translate import *
-# print(translate('hola amigos'))
-# print(detect_language('hola amigos'))
+"""
+Translator module that uses the Google Translate API.
+Taken and modified from textblob https://github.com/sloria/TextBlob/blob/dev/textblob/translate.py
+Adapted from Terry Yin's google-translate-python.
+Language detection added by Steven Loria.
+For lang code refer https://cloud.google.com/translate/v2/using_rest#language-params
+"""
+from __future__ import absolute_import
 
-# NLP with spaCy https://spacy.io
-from spacy.en import English
-nlp = English()
-
-# Useful properties, summary of the docs from https://spacy.io
-
-# class Doc
-# properties: text, vector, vector_norm, ents, noun_chunks, sents
-# method: similarity
-# NER specs https://spacy.io/docs#annotation-ner
-# doc tokenization will preserve meaningful units together
-
-# class Token
-# token.doc -> parent sequence
-# string features: text, lemma, lower, shape
-# boolean flags: https://spacy.io/docs#token-booleanflags
-# POS: pos_, tag_
-# tree: https://spacy.io/docs#token-navigating 
-# ner: ent_type, ent_iob
-
-# class Span
-# span.doc -> parent sequence
-# vector, vector_norm
-# string features: text, lemma
-# methods: similarity
-# syntactic parse: use root, lefts, rights, subtree https://spacy.io/docs#span-navigativing-parse
+import codecs
+import ctypes
+import json
+import re
+import time
+from urllib import request
+from urllib.parse import urlencode
 
 
-# !more to implement:
-# also filter to prepare for tree
-# syntactic parse tree https://spacy.io/docs#span-navigativing-parse
-# word2vec, numpy array
-# similarity https://spacy.io/docs#examples-word-vectors https://spacy.io/docs#span-similarity
+class Translator(object):
 
-# https://github.com/spacy-io/sense2vec/
-# tuts https://spacy.io/docs#tutorials
-# custom NER and intent arg parsing eg https://github.com/spacy-io/spaCy/issues/217
+  """A language translator and detector.
+  Usage:
+  ::
+    >>> from textblob.translate import Translator
+    >>> t = Translator()
+    >>> t.translate('hello', from_lang='en', to_lang='fr')
+    u'bonjour'
+    >>> t.detect("hola")
+    u'es'
+  """
 
+  url = "http://translate.google.com/translate_a/t"
 
-# Helper methods
-##########################################
-
-def merge_ents(doc):
-  '''Helper: merge adjacent entities into single tokens; modifies the doc.'''
-  for ent in doc.ents:
-    ent.merge(ent.root.tag_, ent.text, ent.label_)
-  return doc
-
-def _NER_POS_lr_subtree(root):
-  '''Helper: generate a NER_POS subtree with left/right for a root token. The doc must have merge_ents(doc) ran on it.'''
-  subtree = {
-    root.text: {
-      "edge": root.dep_,
-      "tag": root.ent_type_ or root.pos_,
-      "lefts": [],
-      "rights": []
-    }
+  headers = {
+    'Accept': '*/*',
+    'Connection': 'keep-alive',
+    'User-Agent': (
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) '
+      'AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.168 Safari/535.19')
   }
-  for l in root.lefts:
-    subtree[root.text]["lefts"].append(_NER_POS_subtree(l))
-  for r in root.rights:
-    subtree[root.text]["rights"].append(_NER_POS_subtree(r))
-  return subtree
 
-def _NER_POS_subtree(root):
-  '''Helper: generate a NER_POS subtree without left/right for a root token. The doc must have merge_ents(doc) ran on it.'''
-  subtree = {
-    root.text: {
-      "edge": root.dep_,
-      "tag": root.ent_type_ or root.pos_,
-      "children": []
-    }
-  }
-  for c in root.children:
-    subtree[root.text]["children"].append(_NER_POS_subtree(c))
-  return subtree
+  def translate(self, source, from_lang='auto', to_lang='en', host=None, type_=None):
+    """Translate the source text from one language to another."""
+    data = {"client": "p",
+            "ie": "UTF-8", "oe": "UTF-8",
+            "dt": "at", "tk": _calculate_tk(source),
+            "sl": from_lang, "tl": to_lang, "text": source}
+    response = self._request(self.url, host=host, type_=type_, data=data)
+    result = json.loads(response)
+    if isinstance(result, list):
+      try:
+        result = result[0]  # ignore detected language
+      except IndexError:
+        pass
+    self._validate_translation(source, result)
+    return result
 
-def _NER_POS_lr_tree(sent):
-  '''Helper: generate the NER_POS tree (with left/right) for a sentence'''
-  return _NER_POS_lr_subtree(sent.root)
+  def detect(self, source, host=None, type_=None):
+    """Detect the source text's language."""
+    if len(source) < 3:
+      raise Error('Must provide a string with at least 3 characters.')
+    data = {"client": "p",
+            "ie": "UTF-8", "oe": "UTF-8",
+            "dt": "at", "tk": _calculate_tk(source),
+            "sl": "auto", "text": source}
+    response = self._request(self.url, host=host, type_=type_, data=data)
+    result, language = json.loads(response)
+    return language
 
-def _NER_POS_tree(sent):
-  '''Helper: generate the NER_POS tree for a sentence'''
-  return _NER_POS_subtree(sent.root)
+  def _validate_translation(self, source, result):
+    """Validate API returned expected schema, and that the translated text
+    is different than the original string.
+    """
+    if not result:
+      raise Error('Translation API returned and empty response.')
+    if result.strip() == source.strip():
+      raise Error('Translation API returned the input string unchanged.')
 
-
-def NER_POS_lr_tree(doc):
-  '''generate the NER_POS tree (with left/right) for all sentences in a doc'''
-  merge_ents(doc) # merge the entities into single tokens first
-  return [_NER_POS_lr_tree(sent) for sent in doc.sents]
-
-def NER_POS_tree(doc):
-  '''generate the NER_POS tree for all sentences in a doc'''
-  merge_ents(doc) # merge the entities into single tokens first
-  return [_NER_POS_tree(sent) for sent in doc.sents]
-
-def NER_POS_tag(doc):
-  '''tag the doc first by NER (merged as tokens) then POS. Can be seen as the flat version of NER_POS_tree'''
-  merge_ents(doc) # merge the entities into single tokens first
-  return [(token.text, token.ent_type_ or token.pos_) for token in doc]
-
-# s = "find me flights from New York to London next month"
-# doc = nlp(s)
-# NER_POS_tag(doc)
-# => [('find', 'VERB'), ('me', 'NOUN'), ('flights', 'NOUN'), ('from', 'ADP'), ('New York', 'GPE'), ('to', 'ADP'), ('London', 'GPE'), ('next month', 'DATE')]
-# => [{'find': {'edge': 'ROOT', 'children': [{'flights': {'edge': 'ccomp', 'children': [{'me': {'edge': 'nsubj', 'children': [], 'tag': 'NOUN'}}, {'from': {'edge': 'prep', 'children': [{'New York': {'edge': 'pobj', 'children': [], 'tag': 'GPE'}}], 'tag': 'ADP'}}, {'to': {'edge': 'prep', 'children': [{'London': {'edge': 'pobj', 'children': [], 'tag': 'GPE'}}], 'tag': 'ADP'}}], 'tag': 'NOUN'}}, {'next month': {'edge': 'npadvmod', 'children': [], 'tag': 'DATE'}}], 'tag': 'VERB'}}]
+  def _request(self, url, host=None, type_=None, data=None):
+    encoded_data = urlencode(data).encode('utf-8')
+    req = request.Request(url=url, headers=self.headers, data=encoded_data)
+    if host or type_:
+      req.set_proxy(host=host, type=type_)
+    resp = request.urlopen(req)
+    content = resp.read()
+    return content.decode('utf-8')
 
 
+def _unescape(text):
+  """Unescape unicode character codes within a string.
+  """
+  pattern = r'\\{1,2}u[0-9a-fA-F]{4}'
+  decode = lambda x: codecs.getdecoder('unicode_escape')(x.group())[0]
+  return re.sub(pattern, decode, text)
 
-# Primary methods
-##########################################
 
-def parse(sentence):
-  '''
-  Main method: parse an input sentence and return the nlp properties.
-  '''
-  doc = nlp(sentence)
-  reply = {
-    "text": doc.text,
-    "len": len(doc),
+def _calculate_tk(source):
+  """Reverse engineered cross-site request protection."""
+  # Source: https://github.com/soimort/translate-shell/issues/94#issuecomment-165433715
+  b = int(time.time() / 3600)
 
-    "tokens": [token.text for token in doc],
-    "lemmas": [token.lemma_ for token in doc],
-    # "lower": [token.lower_ for token in doc],
-    # "shape": [token.shape_ for token in doc],
+  d = source.encode('utf-8')
 
-    "NER": list(zip([token.text for token in doc.ents], [token.label_ for token in doc.ents])),
-    "noun_phrases": [token.text for token in doc.noun_chunks],
-    "pos_coarse": list(zip([token.text for token in doc], [token.pos_ for token in doc])),
-    "pos_fine": list(zip([token.text for token in doc], [token.tag_ for token in doc])),
-    "NER_POS_tree": NER_POS_tree(doc),
-    "NER_POS_tag": NER_POS_tag(doc)
-  }
-  return reply
+  def RL(a, b):
+    for c in range(0, len(b) - 2, 3):
+      d = b[c+2]
+      d = ord(d) - 87 if d >= 'a' else int(d)
+      xa = ctypes.c_uint32(a).value
+      d = xa >> d if b[c+1] == '+' else xa << d
+      a = a + d & 4294967295 if b[c] == '+' else a ^ d
+    return ctypes.c_int32(a).value
 
-# res = parse("find me flights from New York to London next month.")
+  a = b
+  for di in d:
+    a = RL(a + di, "+-a^+6")
+  a = RL(a, "+-3^+b+-f")
+  a = a if a >= 0 else ((a & 2147483647) + 2147483648)
+  a %= pow(10, 6)
 
-def parsedoc(input):
-  '''
-  parse for multi-sentences; split and apply parse in a list.
-  '''
-  doc = nlp(input, tag=False, entity=False)
-  return [parse(sent.text) for sent in doc.sents]
+  tk = '{0:d}.{1:d}'.format(a, a ^ b)
+  return tk
 
-# res = parsedoc("find me flights from New York to London next month.")
 
+# Wrap up for py.ai.nlp to use
+t = Translator()
+
+def translate(source, to="en"):
+  return t.translate(source, from_lang="auto", to_lang=to)
+
+def detect_language(source):
+  return t.detect(source)

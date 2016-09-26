@@ -37,7 +37,6 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 # Hack ends
 ##########################################
 from py import *
-print('import py scripts from client.py')
 
 class dotdict(dict):
   """dot.notation access to dictionary attributes"""

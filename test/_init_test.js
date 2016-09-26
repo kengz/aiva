@@ -12,7 +12,7 @@ var helper = new Helper(path.join(rootPath, 'scripts')) // emulate full hubot in
 before(() => {
   return co(function*() {
     global.log.info(`Running in ${process.env.NODE_ENV} mode`)
-    global.log.info(`Creating rooms, initializing brain for tests`)
+    global.log.info(`Create rooms, init brain for tests`)
 
     // emulate full hubot initialization, set to global.room for use
     global.room = helper.createRoom({ name: global.DEFAULT_ROOM });

@@ -24,7 +24,7 @@
 #     beforeEach ->
 #       co =>
 #         yield @room.user.say 'alice', '@hubot translate 我是机器人'
-#         yield delayer(10)
+#         yield delayer(20)
 
 #     # response
 #     it 'hubot: I Robot', ->

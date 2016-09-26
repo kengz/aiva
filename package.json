@@ -16,7 +16,8 @@
     "reset": "bin/reset.sh",
     "production": "mkdir -p ./logs; NODE_ENV=production forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-production -m 10 -a index.js | tee ./logs/aiva-production.log",
     "development": "mkdir -p ./logs; NODE_ENV=development forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-development -m 10 -a index.js | tee ./logs/aiva-development.log",
-    "server": "node lib/io_start.js"
+    "server": "node lib/io_start.js",
+    "pip3": "pip3 install socketIO-client"
   },
   "repository": {
     "type": "git",

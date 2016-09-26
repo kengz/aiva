@@ -2,11 +2,10 @@
 // Module that runs after bot is constructed, before all other scripts are loaded; emit 'ready' to kickstart things such as auto-serialization
 global.Promise = require('bluebird')
 global.co = require('co')
-const Log = require('log')
 global._ = require('lomath')
 const path = require('path')
 
-
+const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
 global.rootPath = path.join(__dirname, '..')
 
 
@@ -16,8 +15,7 @@ module.exports = (robot) => {
   global.robot = robot
 
   /* istanbul ignore next */
-  logLevel = process.env['npm_config_debug'] ? 'debug' : 'info'
-  global.log = new Log(logLevel)
+  global.log = log
 
   // wake up, init
   co(function*() {

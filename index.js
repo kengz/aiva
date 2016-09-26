@@ -32,7 +32,6 @@ function setEnv() {
   try {
     process.env.NODE_ENV = process.env.NODE_ENV || 'development'
     process.env.IOPORT = config.get('PORTS.SOCKETIO')
-    process.env.CLIENT_COUNT = _.size(activeAdapters)
     log.debug(`globalConfig ${JSON.stringify(globalConfig, null, 2)}`)
     configToEnv(globalConfig)
   } catch (e) {
@@ -132,7 +131,6 @@ if (require.main === module) {
 
   // detect all active adapters, spawn a hubot for each
   activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
-  process.env.CLIENT_COUNT = _.size(activeAdapters)
   require(path.join(__dirname, 'lib', 'io_start'))() // start socketIO
   _.each(_.keys(activeAdapters), spawnHubot) // start hubot with adapters
 
@@ -146,4 +144,7 @@ if (require.main === module) {
 
 
 // export the setEnv for convenient usage in dev
-module.exports = setEnv
+module.exports = {
+  setEnv: setEnv,
+  log: log
+}

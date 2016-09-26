@@ -2,9 +2,8 @@
 const config = require('config')
 const Log = require('log')
 const path = require('path')
-const setEnv = require(path.join(__dirname, '..', 'index'))
+const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
 
-const log = new Log('debug')
 global.log = log
 
 try {
