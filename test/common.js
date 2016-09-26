@@ -1,6 +1,5 @@
 // common setups for tests, run before tests
 const config = require('config')
-const Log = require('log')
 const path = require('path')
 const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
 

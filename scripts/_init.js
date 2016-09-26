@@ -4,8 +4,8 @@ global.Promise = require('bluebird')
 global.co = require('co')
 global._ = require('lomath')
 const path = require('path')
-
 const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
+
 global.rootPath = path.join(__dirname, '..')
 
 

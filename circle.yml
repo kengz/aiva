@@ -8,6 +8,7 @@ machine:
 
 dependencies:
   override:
+    - pip install socketIO-client
     - npm install
 
 test:
