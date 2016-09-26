@@ -24,7 +24,11 @@ var children = [] // child processes for spawn
 // helper to set process.env (or copy) from config
 function configToEnv(config, env = process.env) {
   _.forOwn(config, (v, k) => {
-    _.isPlainObject(v) ? configToEnv(v, env) : env[k] = v
+    if _.isPlainObject(v) {
+      configToEnv(v, env)
+    } else {
+      env[k] = v
+    }
   })
 }
 

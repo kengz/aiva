@@ -8,4 +8,4 @@ from os.path import dirname, basename, isfile
 import glob
 pattern = "/[!ai]*.py" if os.environ.get('TRAVIS') else "/*.py"
 modules = glob.glob(dirname(__file__)+pattern)
-__all__ = [ basename(f)[:-3] for f in modules if isfile(f)]
+__all__ = [basename(f)[:-3] for f in modules if isfile(f)]

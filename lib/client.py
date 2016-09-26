@@ -1,14 +1,17 @@
 # The client for py; imports all py modules
 
 ##########################################
-# !Hack for SocketIO py client to work with unicode. Overrides the recv_packet of WebsocketTransport, changing from six.b to six.u when failing
+# !Hack for SocketIO py client to work with unicode.
+# Overrides the recv_packet of WebsocketTransport,
+# changing from six.b to six.u when failing
 # !Awaiting module author to fix the issue from source
-from socketIO_client import SocketIO, WebsocketTransport
 import sys
 import os
 import six
 import socket
 import websocket
+from socketIO_client import SocketIO, WebsocketTransport
+from py import *
 
 
 def recv_packet_unicode(self):
@@ -25,7 +28,6 @@ def recv_packet_unicode(self):
     try:
         encoded = six.b(packet_text)
     except (UnicodeEncodeError):
-        # print("six.b latin-l encoding fails, switching to six.u unicode uncoding")
         pass
     else:
         encoded = six.u(packet_text)
@@ -37,7 +39,6 @@ WebsocketTransport.recv_packet = recv_packet_unicode
 
 # Hack ends
 ##########################################
-from py import *
 
 
 class dotdict(dict):
