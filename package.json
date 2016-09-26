@@ -1,12 +1,11 @@
 {
   "name": "aiva",
-  "version": "3.2.1",
+  "version": "4.0.0",
   "description": "General-purpose virtual assistant for developers.",
   "private": true,
   "main": "index.js",
   "scripts": {
-    "gi": "npm i; mkdir -p ./logs; npm run pip3; npm run bundler",
-    "shell": "neo4j start; env $(cat .env bin/.keys-aivadev) NODE_ENV=development bin/hubot",
+    "shell": "NODE_ENV=development bin/hubot",
     "test": "bin/test.sh",
     "_test": "istanbul cover ./node_modules/.bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json npm-debug.log*",
@@ -15,18 +14,21 @@
     "stop": "bin/stop.sh",
     "enter": "bin/enter.sh",
     "reset": "bin/reset.sh",
-    "production": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aiva; fi; NODE_ENV=production DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
-    "development": "if [ $npm_config_bot ]; then bot=$npm_config_bot; else bot=aivadev; fi; NODE_ENV=development DEPLOY=.keys-$bot BOTNAME=$bot forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid $bot -m 10 -a index.js | tee ./logs/$bot.log",
-    "server": "node lib/io_start.js",
-    "pip3": "pip3 install -r requirements.txt",
-    "bundler": "bundle install"
+    "production": "mkdir -p ./logs; NODE_ENV=production forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-production -m 10 -a index.js | tee ./logs/aiva-production.log",
+    "development": "mkdir -p ./logs; NODE_ENV=development forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-development -m 10 -a index.js | tee ./logs/aiva-development.log",
+    "server": "node lib/io_start.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kengz/aiva.git"
   },
   "keywords": [
-    "bot"
+    "bot",
+    "aiva",
+    "virtual assistant",
+    "chatbot",
+    "hubot",
+    "artificial intelligence"
   ],
   "author": "kengz kengzwl@gmail.com",
   "license": "MIT",
