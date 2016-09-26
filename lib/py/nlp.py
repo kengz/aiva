@@ -1,9 +1,11 @@
 """
 Translator module that uses the Google Translate API.
-Taken and modified from textblob https://github.com/sloria/TextBlob/blob/dev/textblob/translate.py
+Taken and modified from textblob 
+https://github.com/sloria/TextBlob/blob/dev/textblob/translate.py
 Adapted from Terry Yin's google-translate-python.
 Language detection added by Steven Loria.
-For lang code refer https://cloud.google.com/translate/v2/using_rest#language-params
+For lang code refer 
+https://cloud.google.com/translate/v2/using_rest#language-params
 """
 from __future__ import absolute_import
 
@@ -40,9 +42,9 @@ class Translator(object):
             'Chrome/18.0.1025.168 Safari/535.19')
     }
 
-    def translate(self, source, 
-      from_lang='auto', to_lang='en', 
-      host=None, type_=None):
+    def translate(self, source,
+                  from_lang='auto', to_lang='en',
+                  host=None, type_=None):
         """Translate the source text from one language to another."""
         data = {"client": "p",
                 "ie": "UTF-8", "oe": "UTF-8",
