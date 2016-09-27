@@ -1,22 +1,30 @@
 // dependencies
 const Promise = require('bluebird')
-const { spawn, execSync } = require('child_process')
+const { spawn } = require('child_process')
 const config = require('config')
-const Log = require('log')
 const _ = require('lomath')
 const ngrok = require('ngrok')
 Promise.promisifyAll(ngrok)
 const path = require('path')
 const portfinder = require('portfinder')
 Promise.promisifyAll(portfinder)
+const winston = require('winston')
 
 
 /* istanbul ignore next */
 logLevel = process.env['npm_config_debug'] ? 'debug' : 'info'
-const log = global.log || new Log(logLevel)
+const log = global.log || new(winston.Logger)({
+  level: logLevel,
+  transports: [new(winston.transports.Console)({
+    formatter: (options) => {
+      /* istanbul ignore next */
+      return `[${new Date}] ${winston.config.colorize(options.level, options.level.toUpperCase())} ${options.message || ''}`
+    }
+  })]
+})
 global.log = log
 global.config = config
-var globalKeys = _.difference(_.keys(config), ['ADAPTERS'])
+var globalKeys = _.difference(_.keys(config), ['ADAPTERS', 'ACTIVATE_IO_CLIENTS'])
 var globalConfig = _.pick(config, globalKeys)
 var activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
 var children = [] // child processes for spawn

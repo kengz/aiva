@@ -49,14 +49,14 @@
     "hubot-fb": "^3.0.0",
     "hubot-slack": "^4.0.2",
     "hubot-telegram": "^0.1.0",
-    "log": "^1.4.0",
     "lomath": "latest",
     "ngrok": "^2.2.3",
     "portfinder": "^1.0.3",
     "randombytes": "^2.0.3",
     "require-dir": "^0.3.0",
     "socket.io": "^1.4.5",
-    "socket.io-client": "^1.4.5"
+    "socket.io-client": "^1.4.5",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
