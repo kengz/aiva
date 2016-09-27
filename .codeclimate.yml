@@ -8,8 +8,6 @@ engines:
         ruby:
   fixme:
     enabled: true
-  # nodesecurity:
-  #   enabled: true
   eslint:
     enabled: true
   csslint:
