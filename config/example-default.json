@@ -9,6 +9,10 @@
   },
   "NGROK_AUTH": "sign up at https://ngrok.com for custom domain",
   "ADMINS": ["your_chat_account@email.com"],
+  "ACTIVATE_IO_CLIENTS": {
+    "ruby": false,
+    "python3": true
+  },
   "ADAPTERS": {
     "SLACK": {
       "ACTIVATE": false,
