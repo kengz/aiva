@@ -13,9 +13,9 @@ Promise.promisifyAll(portfinder)
 
 /* istanbul ignore next */
 logLevel = process.env['npm_config_debug'] ? 'debug' : 'info'
-
 const log = global.log || new Log(logLevel)
 global.log = log
+global.config = config
 var globalKeys = _.difference(_.keys(config), ['ADAPTERS'])
 var globalConfig = _.pick(config, globalKeys)
 var activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
