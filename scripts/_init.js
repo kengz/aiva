@@ -6,6 +6,8 @@ global._ = require('lomath')
 const path = require('path')
 
 global.ROOTPATH = path.join(__dirname, '..')
+const log = require(path.join(__dirname, '..', 'src', 'log'))
+global.log = log
 
 // export for bot
 module.exports = (robot) => {

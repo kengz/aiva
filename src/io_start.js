@@ -27,7 +27,7 @@ var ioClientCmds = _.pickBy({
     return global.config.get("ACTIVATE_IO_CLIENTS").get(cmd)
   })
 
-const CLIENT_COUNT = 1 + _.size(ioClientCmds)
+const CLIENT_COUNT = 2 + _.size(ioClientCmds)
 
 /**
  * Start a Socket IO server connecting to a robot.server (an Expressjs server), or a brand new Express server for use in dev. Sets global.io too.
