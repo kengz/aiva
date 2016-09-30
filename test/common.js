@@ -1,9 +1,8 @@
 // common setups for tests, run before tests
-const config = require('config')
 const path = require('path')
-const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
-
-global.log = log
+const SRCPATH = path.join(__dirname, '..', 'src')
+const log = require(path.join(SRCPATH, 'log'))
+const { setEnv } = require(path.join(SRCPATH, 'env'))
 
 try {
   // set the port to test

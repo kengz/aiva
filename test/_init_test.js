@@ -5,9 +5,9 @@ const _ = require('lomath')
 const path = require('path')
 delete process.env['ADAPTERS']
 process.env.IOPORT = 7676
-const rootPath = path.join(__dirname, '..')
-require(path.join(rootPath, 'lib', 'io_start'))() // start socketIO
-var helper = new Helper(path.join(rootPath, 'scripts')) // emulate full hubot init
+const ROOTPATH = path.join(__dirname, '..')
+require(path.join(ROOTPATH, 'src', 'io_start'))() // start socketIO
+var helper = new Helper(path.join(ROOTPATH, 'scripts')) // emulate full hubot init
 
 before(() => {
   return co(function*() {

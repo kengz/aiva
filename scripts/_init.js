@@ -4,10 +4,8 @@ global.Promise = require('bluebird')
 global.co = require('co')
 global._ = require('lomath')
 const path = require('path')
-const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
 
-global.rootPath = path.join(__dirname, '..')
-
+global.ROOTPATH = path.join(__dirname, '..')
 
 // export for bot
 module.exports = (robot) => {
@@ -17,12 +15,12 @@ module.exports = (robot) => {
   // wake up, init
   co(function*() {
     // connect socket.io client to socket.io server for polyglot communication
-    require(path.join(rootPath, 'lib', 'client'))
+    require(path.join(ROOTPATH, 'lib', 'client'))
 
     /* istanbul ignore next */
     if (robot.adapter.constructor.name == 'Shell') {
       // set for Shell local dev
-      require(path.join(rootPath, 'test', 'asset'))
+      require(path.join(ROOTPATH, 'test', 'asset'))
       robot.brain.data.users = global.users
     }
     yield Promise.delay(10); // wait to connect, get users
