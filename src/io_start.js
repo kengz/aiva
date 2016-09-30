@@ -1,12 +1,13 @@
 // The socket.io server and polyglot clients. Called by scripts/_init.js
-
-// dependencies
 const Promise = require('bluebird')
 const { spawn, execSync } = require('child_process')
 const fs = require('fs')
 const _ = require('lomath')
 const path = require('path')
-const { setEnv, log } = require(path.join(__dirname, '..', 'index'))
+const log = require(path.join(__dirname, 'log'))
+const { setEnv } = require(path.join(__dirname, 'env'))
+
+const LIBPATH = path.join(__dirname, '..', 'lib')
 
 /* istanbul ignore next */
 if (process.env.IOPORT == undefined) { setEnv() }
@@ -15,11 +16,11 @@ if (process.env.IOPORT == undefined) { setEnv() }
 var ioClientCmds = _.pickBy({
     ruby: {
       install_dependency: "gem install socket.io-client-simple",
-      client: path.join(__dirname, 'client.rb')
+      client: path.join(LIBPATH, 'client.rb')
     },
     python3: {
       install_dependency: "python3 -m pip install socketIO-client",
-      client: path.join(__dirname, 'client.py')
+      client: path.join(LIBPATH, 'client.py')
     }
   },
   (args, cmd) => {
@@ -110,7 +111,7 @@ function io_client(robot) {
   })
 
   // import js locally
-  require(path.join(__dirname, 'client.js')).importAll()
+  require(path.join(LIBPATH, 'client.js')).importAll()
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn then add listeners, add to the list of child processes
