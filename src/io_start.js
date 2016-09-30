@@ -5,7 +5,7 @@ const fs = require('fs')
 const _ = require('lomath')
 const path = require('path')
 const log = require(path.join(__dirname, 'log'))
-const { setEnv } = require(path.join(__dirname, 'env'))
+const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 
 const LIBPATH = path.join(__dirname, '..', 'lib')
 
@@ -27,7 +27,7 @@ var ioClientCmds = _.pickBy({
     return global.config.get("ACTIVATE_IO_CLIENTS").get(cmd)
   })
 
-const CLIENT_COUNT = 2 + _.size(ioClientCmds)
+const CLIENT_COUNT = 1 + _.size(activeAdapters) + _.size(ioClientCmds)
 
 /**
  * Start a Socket IO server connecting to a robot.server (an Expressjs server), or a brand new Express server for use in dev. Sets global.io too.
@@ -111,7 +111,7 @@ function io_client(robot) {
   })
 
   // import js locally
-  require(path.join(LIBPATH, 'client.js')).importAll()
+  require(path.join(LIBPATH, 'client')).importAll()
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn then add listeners, add to the list of child processes

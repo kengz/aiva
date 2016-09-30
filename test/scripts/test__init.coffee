@@ -1,7 +1,7 @@
-# helper = new Helper('../scripts/.init.js')
+# helper = new Helper('../scripts/_init.js')
 
 # test ping script
-describe 'scripts/.init.js', ->
+describe 'scripts/_init.js', ->
   beforeEach ->
     # there's a global.room from test/0_init_test.js
     @room = global.room
