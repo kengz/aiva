@@ -18,7 +18,7 @@ describe 'src/hasher.js', ->
       # response
       it 'return hashStr, add cb to hashMap', ->
         hashStr = hasher.gen(id, global.say(@room, 'hubot'))
-        hashStr.should.match(/^test_hasher/)
+        hashStr.should.match(/^test-hasher/)
         msg = 
           hash: hashStr
           output: str

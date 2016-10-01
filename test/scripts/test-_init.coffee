@@ -3,7 +3,7 @@
 # test ping script
 describe 'scripts/_init.js', ->
   beforeEach ->
-    # there's a global.room from test/0_init_test.js
+    # there's a global.room from test/_init_test.js
     @room = global.room
     @robot = @room.robot
 
