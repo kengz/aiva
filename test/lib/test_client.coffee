@@ -1,4 +1,4 @@
-helper = new Helper('../scripts/hello_py.js')
+helper = new Helper('../scripts/hello_io.js')
 
 describe 'src/global-client.js', ->
   msgDirect =
