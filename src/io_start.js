@@ -44,7 +44,7 @@ function io_server(robot) {
 
   global.log.info(`Starting socket.io server on IOPORT: ${process.env.IOPORT}`)
   var server
-  var app = require('express')()
+  const app = require('express')()
   process.on('uncaughtException', global.log.error)
   server = app.listen(process.env.IOPORT)
 
@@ -138,7 +138,7 @@ function io_start(robot) {
 }
 
 /* istanbul ignore next */
-var cleanExit = () => { process.exit() }
+const cleanExit = () => { process.exit() }
 process.on('SIGINT', cleanExit) // catch ctrl-c
 process.on('SIGTERM', cleanExit) // catch kill
 

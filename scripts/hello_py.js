@@ -1,4 +1,3 @@
-// dependencies
 // Sample interface script for lib/py/hello.py
 
 // Bot will call this function with the robot argument

@@ -2,7 +2,7 @@
 helper = new Helper('../scripts/info.js')
 id = __filename.split("/").pop();
 
-describe 'lib/hasher.js', ->
+describe 'src/hasher.js', ->
   # declare variables
   str = 'hasher test'
   hashStr = null

@@ -74,7 +74,7 @@ function clientPass(cbBinded, to, input) {
  */
 /* istanbul ignore next */
 function cdefer() {
-  var maxWait = 20000
+  const maxWait = 20000
   var resolve, reject
   var promise = new Promise((...args) => {
       resolve = args[0]

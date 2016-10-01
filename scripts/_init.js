@@ -1,4 +1,3 @@
-// dependencies
 // Module that runs after bot is constructed, before all other scripts are loaded; emit 'ready' to kickstart things such as auto-serialization
 global.Promise = require('bluebird')
 global.co = require('co')
@@ -7,8 +6,7 @@ const path = require('path')
 
 global.ROOTPATH = path.join(__dirname, '..')
 const log = require(path.join(__dirname, '..', 'src', 'log'))
-global.log = log
-require(path.join(ROOTPATH, 'src', 'global-client')) // global js io client
+require(path.join(ROOTPATH, 'src', 'global-client')) // js io global-client
 
 // export for bot
 module.exports = (robot) => {

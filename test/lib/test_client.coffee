@@ -1,6 +1,6 @@
 helper = new Helper('../scripts/hello_py.js')
 
-describe 'lib/global-client.js', ->
+describe 'src/global-client.js', ->
   msgDirect =
     input: 'Hello from user.',
     to: 'hello.py',

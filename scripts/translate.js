@@ -1,5 +1,4 @@
 // Module for translation
-// dependencies
 const _ = require('lomath')
 
 // // Development process, testing after starting server with "npm run server"

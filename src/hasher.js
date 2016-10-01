@@ -17,7 +17,7 @@ function gen(id, cb) {
   /* istanbul ignore next */
   id = id || 'unidentified';
   /* istanbul ignore next */
-  var hashStr = id + '_' + randomBytes(16).toString('hex');
+  const hashStr = id + '_' + randomBytes(16).toString('hex');
   /* istanbul ignore next */
   if (cb) {
     global.log.debug(`Added a callback to hasher for global-client`)
@@ -37,7 +37,7 @@ function handle(msg) {
   // skip if it's an outgoing request (sending input to people to wait for output reply to handle)
   if (msg.input && !msg.output) { return }
   msg = msg || {};
-  var hashStr = _.isString(msg) ? msg : msg.hash;
+  const hashStr = _.isString(msg) ? msg : msg.hash;
   if (hashStr) {
     global.log.debug('hash string exists for global-client')
     var cb = hashMap[hashStr];

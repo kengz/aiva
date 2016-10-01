@@ -39,7 +39,7 @@ function start() {
   require(path.join(__dirname, 'io_start'))() // start socketIO
   _.each(_.keys(activeAdapters), spawnHubot) // start hubot with adapters
 
-  var cleanExit = () => {
+  const cleanExit = () => {
     ngrok.kill()
     process.exit()
   }
