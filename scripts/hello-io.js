@@ -3,12 +3,12 @@
 // Bot will call this function with the robot argument
 module.exports = (robot) => {
   // menu
-  robot.respond(/hello_io$/i, (res) => {
-    res.send('`hello_io [js, py, rb]`')
+  robot.respond(/hello-io$/i, (res) => {
+    res.send('`hello-io [js, py, rb]`')
   })
 
   // call the hello.py methods
-  robot.respond(/hello_io\s*(.+)/i, (res) => {
+  robot.respond(/hello-io\s*(.+)/i, (res) => {
     var lang = res.match[1]
 
     // use the global client to pass to the hello.py client

@@ -15,7 +15,7 @@ if (process.env.IOPORT == undefined) { setEnv() }
 // import other languages via child_process
 var ioClientCmds = _.pickBy({
     ruby: {
-      install_dependency: "gem install socket.io-client-simple",
+      install_dependency: "gem install socket.io-client-simple activesupport",
       client: path.join(LIBPATH, 'client.rb')
     },
     python3: {

@@ -36,7 +36,7 @@ function start() {
   })
 
   // spawn a hubot for each active adapter
-  require(path.join(__dirname, 'io_start'))() // start socketIO
+  require(path.join(__dirname, 'start-io'))() // start socketIO
   _.each(_.keys(activeAdapters), spawnHubot) // start hubot with adapters
 
   const cleanExit = () => {

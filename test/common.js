@@ -42,4 +42,4 @@ try {
 }
 
 const ROOTPATH = path.join(__dirname, '..')
-require(path.join(ROOTPATH, 'src', 'io_start'))() // start socketIO
+require(path.join(ROOTPATH, 'src', 'start-io'))() // start socketIO
