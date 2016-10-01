@@ -1,32 +1,18 @@
 // common setups for tests, run before tests
+global.Promise = require('bluebird')
+global.co = require('co')
 const path = require('path')
 const SRCPATH = path.join(__dirname, '..', 'src')
 const log = require(path.join(SRCPATH, 'log'))
 const { setEnv } = require(path.join(SRCPATH, 'env'))
-
-try {
-  // set the port to test
-  setEnv()
-  process.env.NODE_ENV = 'development'
-  process.env.PORT = 9090
-  log.info(`Test is using PORT: ${process.env.PORT}`)
-} catch (e) {
-  log.error(JSON.stringify(e, null, 2))
-  log.error("No config and not in CI, please provide your config file.")
-  process.exit(1)
-}
-
-// unit test global dependencies
-require(path.join(__dirname, '..', 'scripts', '_init'))
-global.DEFAULT_ROOM = "bot-test" // set for test
-global.Promise.config({ warnings: false })
-
 global.chai = require('chai') // chai assertation library
-global.chaiAsPromised = require("chai-as-promised")
-chai.use(chaiAsPromised)
+chai.use(require("chai-as-promised"))
 global.should = chai.should()
 global.sinon = require('sinon') // sinon spy/stub library
 global.Helper = require('hubot-test-helper')
+global.Promise.config({ warnings: false })
+global.DEFAULT_ROOM = "bot-test" // set for test
+global.A = require(path.join(__dirname, 'asset')) // global asset
 
 // set the hubot say handlers for unit tests: send reply to room
 global.say = function(room, name, key) {
@@ -42,5 +28,18 @@ global.delayer = function(factor) {
   return Promise.delay(timeout)
 }
 
-// declare global assets
-global.A = require(path.join(__dirname, 'asset'))
+try {
+  // set the port to test
+  setEnv()
+  process.env.NODE_ENV = 'test'
+  process.env.PORT = 9090
+  process.env.IOPORT = 7676
+  log.info(`Test is using PORT: ${process.env.PORT}; IOPORT: ${process.env.IOPORT}`)
+} catch (e) {
+  log.error(JSON.stringify(e, null, 2))
+  log.error("No config and not in CI, please provide your config file.")
+  process.exit(1)
+}
+
+const ROOTPATH = path.join(__dirname, '..')
+require(path.join(ROOTPATH, 'src', 'io_start'))() // start socketIO

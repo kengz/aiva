@@ -27,7 +27,7 @@ var ioClientCmds = _.pickBy({
     return global.config.get("ACTIVATE_IO_CLIENTS").get(cmd)
   })
 
-const CLIENT_COUNT = 1 + _.size(activeAdapters) + _.size(ioClientCmds)
+const CLIENT_COUNT = 1 + _.size(ioClientCmds) + _.size(activeAdapters)
 
 /**
  * Start a Socket IO server connecting to a robot.server (an Expressjs server), or a brand new Express server for use in dev. Sets global.io too.
@@ -72,7 +72,7 @@ function io_server(robot) {
   global.io.on('connection', (socket) => {
     // generic pass to other script
     socket.on('pass', (msg, fn) => {
-      // console.log(msg)
+      global.log.debug(`IO on pass, msg: ${JSON.stringify(msg, null, 2)} fn: ${fn}`)
       try {
         // e.g. split 'hello.py' into ['hello', 'py']
         // lang = 'py', module = 'hello'
@@ -82,7 +82,7 @@ function io_server(robot) {
           // reset of <to> for easy calling. May be empty if just passing to client.<lang>
         msg.to = module
         global.io.sockets.in(lang).emit('take', msg)
-      } catch (e) { global.log.error(e) }
+      } catch (e) { global.log.error(JSON.stringify(e, null, 2)) }
     })
   })
 
@@ -90,7 +90,6 @@ function io_server(robot) {
   io_client(robot)
   return global.ioPromise
 }
-
 
 /**
  * Helper: called from within io_server after its setup.
@@ -111,7 +110,7 @@ function io_client(robot) {
   })
 
   // import js locally
-  require(path.join(LIBPATH, 'client')).importAll()
+  require(path.join(LIBPATH, 'client'))
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn then add listeners, add to the list of child processes
@@ -137,7 +136,6 @@ function io_start(robot) {
   io_server(robot)
   return global.ioPromise
 }
-
 
 /* istanbul ignore next */
 var cleanExit = () => { process.exit() }

@@ -1,8 +1,6 @@
 // Module for socket communication: use hash string and hashMap of callback functions for correct identification and execution. Is set as global.
-
-// dependencies
-var _ = require('lomath')
-var randomBytes = require('randombytes')
+const _ = require('lomath')
+const randomBytes = require('randombytes')
 
 // The hashMap for this global hash
 var hashMap = {};
@@ -22,6 +20,7 @@ function gen(id, cb) {
   var hashStr = id + '_' + randomBytes(16).toString('hex');
   /* istanbul ignore next */
   if (cb) {
+    global.log.debug(`Added a callback to hasher for global-client`)
     // if exists, add the callback function to map
     hashMap[hashStr] = cb
   };
@@ -40,15 +39,15 @@ function handle(msg) {
   msg = msg || {};
   var hashStr = _.isString(msg) ? msg : msg.hash;
   if (hashStr) {
+    global.log.debug('hash string exists for global-client')
     var cb = hashMap[hashStr];
     if (cb) {
-      global.log.debug('hasher.handle invoking cb')
+      global.log.debug('hasher.handle invoking cb for global-client')
       _.omit(hashMap, hashStr);
       cb(msg)
     };
   };
 }
-
 
 module.exports = {
   hashMap: hashMap,

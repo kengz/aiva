@@ -8,6 +8,7 @@ const path = require('path')
 global.ROOTPATH = path.join(__dirname, '..')
 const log = require(path.join(__dirname, '..', 'src', 'log'))
 global.log = log
+require(path.join(ROOTPATH, 'src', 'global-client')) // global js io client
 
 // export for bot
 module.exports = (robot) => {
@@ -16,9 +17,6 @@ module.exports = (robot) => {
 
   // wake up, init
   co(function*() {
-    // connect socket.io client to socket.io server for polyglot communication
-    require(path.join(ROOTPATH, 'lib', 'client'))
-
     /* istanbul ignore next */
     if (robot.adapter.constructor.name == 'Shell') {
       // set for Shell local dev

@@ -43,10 +43,10 @@ describe 'scripts/info.js', ->
         yield @room.user.say 'alice', '@hubot nodeenv'
 
     # response
-    it 'hubot: development (in Mocha test)', ->
+    it 'hubot: (in Mocha test)', ->
       @room.messages.should.eql [
         ['alice', '@hubot nodeenv']
-        ['hubot', 'aivadev with adapter undefined is deployed in development mode.']
+        ['hubot', 'aivadev with adapter undefined is deployed in test mode.']
       ]
 
 
