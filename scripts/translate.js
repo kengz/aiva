@@ -1,3 +1,4 @@
+// dependencies
 // Module for translation
 const _ = require('lomath')
 

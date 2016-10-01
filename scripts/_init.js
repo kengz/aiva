@@ -1,3 +1,4 @@
+// dependencies
 // Module that runs after bot is constructed, before all other scripts are loaded; emit 'ready' to kickstart things such as auto-serialization
 global.Promise = require('bluebird')
 global.co = require('co')

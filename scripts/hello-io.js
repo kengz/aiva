@@ -1,3 +1,4 @@
+// dependencies
 // Sample interface script for lib/<lang>/hello.<lang>
 
 // Bot will call this function with the robot argument

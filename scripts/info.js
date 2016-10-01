@@ -1,3 +1,4 @@
+// dependencies
 // Module to ping the robot and get basic info
 const fs = require('fs')
 const _ = require('lomath')
