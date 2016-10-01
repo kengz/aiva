@@ -15,11 +15,11 @@ if (process.env.IOPORT == undefined) { setEnv() }
 // import other languages via child_process
 var ioClientCmds = _.pickBy({
     ruby: {
-      install_dependency: "gem install socket.io-client-simple activesupport",
+      // install_dependency: "gem install socket.io-client-simple activesupport",
       client: path.join(LIBPATH, 'client.rb')
     },
     python3: {
-      install_dependency: "python3 -m pip install socketIO-client",
+      // install_dependency: "python3 -m pip install socketIO-client",
       client: path.join(LIBPATH, 'client.py')
     }
   },
@@ -36,9 +36,9 @@ const CLIENT_COUNT = 1 + _.size(ioClientCmds) + _.size(activeAdapters)
  * @return {server} server
  */
 /* istanbul ignore next */
-function io_server(robot) {
+function ioServer(robot) {
   if (global.io) {
-    // if already started elsewhere, skip below including io_client, return promise with the existing server
+    // if already started elsewhere, skip below including ioClient, return promise with the existing server
     return Promise.resolve(global.io.server)
   }
 
@@ -87,17 +87,17 @@ function io_server(robot) {
   })
 
   // call clients after setup, or skipped together above
-  io_client(robot)
+  ioClient(robot)
   return global.ioPromise
 }
 
 /**
- * Helper: called from within io_server after its setup.
- * Start all polyglot io_client processes using spawn. Kill them on error to prevent runaway processes, i.e. run all the io_import.<language> processes. The io_import.<language> im turn runs all the io clients of that language.
+ * Helper: called from within ioServer after its setup.
+ * Start all polyglot ioClient processes using spawn. Kill them on error to prevent runaway processes, i.e. run all the io_import.<language> processes. The io_import.<language> im turn runs all the io clients of that language.
  * @param  {*} robot The hubot object
  */
 /* istanbul ignore next */
-function io_client(robot) {
+function ioClient(robot) {
   // the child processes,kill all on death
   var children = []
 
@@ -106,7 +106,7 @@ function io_client(robot) {
     children.forEach((child) => {
       child.kill()
     })
-    global.log.info('Exit: killed io_client.js children')
+    global.log.info('Exit: killed ioClient.js children')
   })
 
   // import js locally
@@ -115,7 +115,7 @@ function io_client(robot) {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn then add listeners, add to the list of child processes
     global.log.info(`Starting socketIO client for ${lang}`)
-    global.log.debug(execSync(cmds['install_dependency']).toString())
+    // global.log.debug(execSync(cmds['install_dependency']).toString())
     var cp = spawn(lang, [cmds['client']], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
@@ -132,8 +132,8 @@ function io_client(robot) {
  * Calls server and client methods above.
  */
 /* istanbul ignore next */
-function io_start(robot) {
-  io_server(robot)
+function ioStart(robot) {
+  ioServer(robot)
   return global.ioPromise
 }
 
@@ -143,10 +143,10 @@ process.on('SIGINT', cleanExit) // catch ctrl-c
 process.on('SIGTERM', cleanExit) // catch kill
 
 // export for use by hubot
-module.exports = io_start
+module.exports = ioStart
 
 // if this file is run directly by `node server.js`
 /* istanbul ignore next */
 if (require.main === module) {
-  io_start()
+  ioStart()
 }
