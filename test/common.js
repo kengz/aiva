@@ -15,13 +15,13 @@ global.DEFAULT_ROOM = "bot-test" // set for test
 global.A = require(path.join(__dirname, 'asset')) // global asset
 
 // set the hubot say handlers for unit tests: send reply to room
-global.say = function(room, name, key) {
+global.say = (room, name, key) => {
   key = key || 'output'
   return _.flow(_.partial(_.get, _, key), _.bind(room.user.say, room, name))
 }
 
 // Promise.delay, with adjusted time factors. for use with yield
-global.delayer = function(factor) {
+global.delayer = (factor) => {
   factor = factor || 1
   var timeout = 100 * factor
   timeout = _.min([timeout, 16000]) // timeout is capped at 16s
