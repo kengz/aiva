@@ -50,10 +50,13 @@
     "hubot-slack": "^4.0.2",
     "hubot-telegram": "^0.1.0",
     "lomath": "latest",
+    "mysql": "^2.11.1",
+    "mysql2": "^1.1.0",
     "ngrok": "^2.2.3",
     "portfinder": "^1.0.3",
     "randombytes": "^2.0.3",
     "require-dir": "^0.3.0",
+    "sequelize": "^3.24.3",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "winston": "^2.2.0"
@@ -70,6 +73,6 @@
     "sinon": "^1.17.2"
   },
   "engines": {
-    "node": ">=5"
+    "node": ">=6"
   }
 }

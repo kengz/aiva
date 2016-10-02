@@ -1,0 +1,25 @@
+{
+  "sql": {
+    "test": {
+      "adapter": "mysql",
+      "database": "aiva_test",
+      "pool": 5,
+      "username": "root",
+      "password": ""
+    },
+    "development": {
+      "adapter": "mysql",
+      "database": "aiva_dev",
+      "pool": 5,
+      "username": "root",
+      "password": ""
+    },
+    "production": {
+      "adapter": "mysql",
+      "database": "aiva_prod",
+      "pool": 5,
+      "username": "root",
+      "password": ""
+    }
+  }
+}
