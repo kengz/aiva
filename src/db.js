@@ -6,33 +6,26 @@ const log = require(path.join(__dirname, 'log'))
 const dbConfig = require(path.join(__dirname, '..', 'config', 'db.json'))
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-const sqlConfig = _.get(dbConfig, `sql.${process.env.NODE_ENV}`)
-
-// automate:
-// 2. database creation
-// 3. table creation
+const sqlConfig = _.get(dbConfig, `${process.env.NODE_ENV}`)
 
 const sequelize = new Sequelize(
-  sqlConfig['database'],
-  sqlConfig['username'],
-  sqlConfig['password'], {
-    dialect: sqlConfig['adapter'],
-    pool: {
-      max: sqlConfig['pool']
-    },
+  sqlConfig.database,
+  sqlConfig.username,
+  sqlConfig.password, {
+    dialect: sqlConfig.dialect,
     logging: false
   })
 
 function createDb() {
   const sysSeq = new Sequelize(
     'sys',
-    sqlConfig['username'],
-    sqlConfig['password'], {
-      dialect: sqlConfig['adapter']
+    sqlConfig.username,
+    sqlConfig.password, {
+      dialect: sqlConfig.dialect
     })
   var nodeEnvs = ['test', 'development', 'production']
   var createDbQueries = _.map(nodeEnvs, (nodeEnv) => {
-    return "CREATE DATABASE " + _.get(dbConfig, `sql.${nodeEnv}.database`) + ";"
+    return "CREATE DATABASE " + _.get(dbConfig, `${nodeEnv}.database`) + ";"
   })
 
   Promise.any(

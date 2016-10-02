@@ -1,25 +1,23 @@
 {
-  "sql": {
-    "test": {
-      "adapter": "mysql",
-      "database": "aiva_test",
-      "pool": 5,
-      "username": "root",
-      "password": ""
-    },
-    "development": {
-      "adapter": "mysql",
-      "database": "aiva_dev",
-      "pool": 5,
-      "username": "root",
-      "password": ""
-    },
-    "production": {
-      "adapter": "mysql",
-      "database": "aiva_prod",
-      "pool": 5,
-      "username": "root",
-      "password": ""
-    }
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "aiva_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "aiva_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "aiva_prod",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   }
 }
