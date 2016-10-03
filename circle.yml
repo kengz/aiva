@@ -15,8 +15,8 @@ dependencies:
 
 database:
   override:
-    - node src/db.js
     - mv config/db.ci.json config/db.json
+    - node src/db.js
     - node_modules/.bin/sequelize db:migrate --env test
 
 test:

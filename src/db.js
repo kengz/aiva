@@ -43,6 +43,6 @@ sequelize
   })
   .catch((e) => {
     if (_.get(e, 'original.code') == 'ER_BAD_DB_ERROR') {
-      createDb().then(sequelize.close)
+      createDb().then(() => { sequelize.close() })
     }
   })
