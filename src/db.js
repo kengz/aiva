@@ -25,7 +25,7 @@ function createDb() {
     return "CREATE DATABASE " + _.get(dbConfig, `${nodeEnv}.database`) + ";"
   })
 
-  Promise.any(
+  return Promise.any(
       _.map(createDbQueries, (createDbQuery) => {
         return sysSeq.query(createDbQuery)
       })).then(() => {
@@ -39,9 +39,10 @@ sequelize
   .authenticate()
   .then((e) => {
     log.info('Connected to SQL database successfully');
+    sequelize.close()
   })
   .catch((e) => {
     if (_.get(e, 'original.code') == 'ER_BAD_DB_ERROR') {
-      createDb()
+      createDb().then(sequelize.close)
     }
   })
