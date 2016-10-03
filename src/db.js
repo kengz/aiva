@@ -50,7 +50,7 @@ function authDb() {
     })
 }
 
-function execMigrateDb() {
+function migrateDb() {
   return new Promise((resolve, reject) => {
     exec(`./node_modules/.bin/sequelize db:migrate --env ${process.env.NODE_ENV}`, (err, stdout, stderr) => {
       if (err) {
@@ -63,10 +63,7 @@ function execMigrateDb() {
   })
 }
 
-function migrateDb() {
-  return authDb()
-    .then(execMigrateDb)
-}
+authDb()
 
 module.exports = {
   authDb: authDb,
