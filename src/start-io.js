@@ -27,7 +27,9 @@ var ioClientCmds = _.pickBy({
     return global.config.get("ACTIVATE_IO_CLIENTS").get(cmd)
   })
 
-const CLIENT_COUNT = 1 + _.size(ioClientCmds) + _.size(activeAdapters)
+/* istanbul ignore next */
+const adapterCount = (process.env.NODE_ENV == 'test') ? 1 : _.size(activeAdapters)
+const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount
 
 /**
  * Start a Socket IO server connecting to a robot.server (an Expressjs server), or a brand new Express server for use in dev. Sets global.io too.
@@ -115,7 +117,7 @@ function ioClient(robot) {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn then add listeners, add to the list of child processes
     global.log.info(`Starting socketIO client for ${lang}`)
-    // global.log.debug(execSync(cmds['install_dependency']).toString())
+      // global.log.debug(execSync(cmds['install_dependency']).toString())
     var cp = spawn(lang, [cmds['client']], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
