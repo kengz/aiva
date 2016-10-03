@@ -10,6 +10,9 @@ engines:
     enabled: true
   eslint:
     enabled: true
+    checks:
+      no-process-exit:
+        enabled: false
   csslint:
     enabled: true
   radon:
