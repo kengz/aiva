@@ -25,7 +25,6 @@ Gemfile.lock
 config/default.json
 config/production.json
 config/development.json
-config/db.json
 
 # Vagrant travis files
 .vagrant/
