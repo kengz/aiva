@@ -6,7 +6,7 @@ const aiva = require(path.join(__dirname, 'common'))
 before(() => {
   return co(function*() {
     yield aiva.start()
-    
+
     global.log.info(`Running in ${process.env.NODE_ENV} mode`)
     global.log.info(`Create rooms, init brain for tests`)
     var helper = new Helper(path.join(__dirname, '..', 'scripts')) // emulate full hubot init
@@ -16,7 +16,6 @@ before(() => {
 
     // set the brain to test/asset.js's
     _.set(this.room.robot, 'brain.data.users', users)
-    console.log('global ioPromise', global.ioPromise)
     yield global.ioPromise
   })
 })
