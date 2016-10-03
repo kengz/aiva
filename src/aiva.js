@@ -6,6 +6,7 @@ const path = require('path')
 
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, spawnEnv, activeAdapters } = require(path.join(__dirname, 'env'))
+const { createDb } = require(path.join(__dirname, 'db'))
 var children = [] // child processes for spawn
 
 // finally, spawn a hubot in child.process using env

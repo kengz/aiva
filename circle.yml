@@ -5,11 +5,20 @@ machine:
     version: 6
   environment:
     CODECLIMATE_REPO_TOKEN: df0a1e703d4e417fb88724c9e1f7c4b49f53c9c17494d59cd182aa6cc2daccf8
+  services:
+    - mysql
 
 dependencies:
   override:
     - pip install socketIO-client
     - npm install
+    - npm i -g sequelize-cli
+
+database:
+  override:
+    - node src/db.js
+    - mv config/db.ci.json config/db.json
+    - sequelize db:migrate
 
 test:
   override:
