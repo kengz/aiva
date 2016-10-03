@@ -1,12 +1,12 @@
 const Promise = require('bluebird')
-const { spawn } = require('child_process')
+const { spawn, exec } = require('child_process')
 const _ = require('lomath')
 const ngrok = require('ngrok')
 const path = require('path')
 
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, spawnEnv, activeAdapters } = require(path.join(__dirname, 'env'))
-const { createDb } = require(path.join(__dirname, 'db'))
+const { migrateDb } = require(path.join(__dirname, 'db'))
 var children = [] // child processes for spawn
 
 // finally, spawn a hubot in child.process using env
@@ -25,28 +25,36 @@ function spawnHubot(adapter) {
     .then(spawnProcess)
 }
 
-// if this file is run directly by `node index.js`
 /* istanbul ignore next */
-function start() {
-  setEnv()
+function startProcess() {
+  return new Promise((resolve, reject) => {
+    log.info(`Starting aiva process`)
+    setEnv()
 
-  // so that hubot is killed when forever exits.
-  process.on('exit', () => {
-    children.forEach((child) => { child.kill() })
-    log.info("Shutting down")
+    // so that hubot is killed when forever exits.
+    process.on('exit', () => {
+      children.forEach((child) => { child.kill() })
+      log.info("Shutting down")
+    })
+
+    require(path.join(__dirname, 'start-io'))() // start socketIO
+    _.each(_.keys(activeAdapters), spawnHubot) // start hubot with adapters
+    resolve()
   })
-
-  // spawn a hubot for each active adapter
-  require(path.join(__dirname, 'start-io'))() // start socketIO
-  _.each(_.keys(activeAdapters), spawnHubot) // start hubot with adapters
-
-  const cleanExit = () => {
-    ngrok.kill()
-    process.exit()
-  }
-  process.on('SIGINT', cleanExit) // catch ctrl-c
-  process.on('SIGTERM', cleanExit) // catch kill
 }
+
+// primary start method
+function start() {
+  return migrateDb()
+    .then(startProcess)
+}
+
+const cleanExit = () => {
+  ngrok.kill()
+  process.exit()
+}
+process.on('SIGINT', cleanExit) // catch ctrl-c
+process.on('SIGTERM', cleanExit) // catch kill
 
 // export the setEnv for convenient usage in dev
 module.exports = {

@@ -5,6 +5,7 @@ const path = require('path')
 const SRCPATH = path.join(__dirname, '..', 'src')
 const log = require(path.join(SRCPATH, 'log'))
 const { setEnv } = require(path.join(SRCPATH, 'env'))
+const { migrateDb } = require(path.join(SRCPATH, 'db'))
 global.chai = require('chai') // chai assertation library
 chai.use(require("chai-as-promised"))
 global.should = chai.should()
@@ -28,18 +29,35 @@ global.delayer = (factor) => {
   return Promise.delay(timeout)
 }
 
-try {
-  // set the port to test
-  setEnv()
-  process.env.NODE_ENV = 'test'
-  process.env.PORT = 9090
-  process.env.IOPORT = 7676
-  log.info(`Test is using PORT: ${process.env.PORT}; IOPORT: ${process.env.IOPORT}`)
-} catch (e) {
-  log.error(JSON.stringify(e, null, 2))
-  log.error("No config and not in CI, please provide your config file.")
-  process.exit(1)
+function startProcess() {
+  return new Promise((resolve, reject) => {
+    try {
+      // set the port to test
+      process.env.NODE_ENV = 'test'
+      log.info(`Starting aiva test process`)
+      setEnv()
+      process.env.PORT = 9090
+      process.env.IOPORT = 7676
+      log.info(`Test is using PORT: ${process.env.PORT}; IOPORT: ${process.env.IOPORT}`)
+    } catch (e) {
+      log.error(JSON.stringify(e, null, 2))
+      log.error("No config and not in CI, please provide your config file.")
+      reject()
+      process.exit(1)
+    }
+
+    const ROOTPATH = path.join(__dirname, '..')
+    require(path.join(ROOTPATH, 'src', 'start-io'))() // start socketIO
+    resolve()
+  })
 }
 
-const ROOTPATH = path.join(__dirname, '..')
-require(path.join(ROOTPATH, 'src', 'start-io'))() // start socketIO
+// primary start method
+function start() {
+  return migrateDb()
+    .then(startProcess)
+}
+
+module.exports = {
+  start: start
+}

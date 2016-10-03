@@ -1,4 +1,5 @@
 const Promise = require('bluebird')
+const { exec } = require('child_process')
 const _ = require('lomath')
 const path = require('path')
 const Sequelize = require('sequelize')
@@ -35,14 +36,39 @@ function createDb() {
     .catch(e => { log.error(JSON.stringify(e, null, 2)) })
 }
 
-sequelize
-  .authenticate()
-  .then((e) => {
-    log.info('Connected to SQL database successfully');
-    sequelize.close()
+function authDb() {
+  return sequelize
+    .authenticate()
+    .then((e) => {
+      log.info('Authenticated SQL database successfully');
+      sequelize.close().finally()
+    })
+    .catch((e) => {
+      if (_.get(e, 'original.code') == 'ER_BAD_DB_ERROR') {
+        createDb().then(() => { sequelize.close().finally() })
+      }
+    })
+}
+
+function execMigrateDb() {
+  return new Promise((resolve, reject) => {
+    exec(`./node_modules/.bin/sequelize db:migrate --env ${process.env.NODE_ENV}`, (err, stdout, stderr) => {
+      if (err) {
+        log.error(stderr.toString())
+        reject(err)
+      }
+      log.debug(stdout.toString())
+      resolve()
+    })
   })
-  .catch((e) => {
-    if (_.get(e, 'original.code') == 'ER_BAD_DB_ERROR') {
-      createDb().then(() => { sequelize.close() })
-    }
-  })
+}
+
+function migrateDb() {
+  return authDb()
+    .then(execMigrateDb)
+}
+
+module.exports = {
+  authDb: authDb,
+  migrateDb: migrateDb
+}
