@@ -3,7 +3,7 @@
 // sequelize model:create --name Chatlog --attributes "adapter:string"
 
 module.exports = function(sequelize, DataTypes) {
-  var Chatlog = sequelize.define('Chatlog', {
+  var Chatlog = sequelize.define('chatlog', {
     adapter: DataTypes.STRING,
     userid: DataTypes.STRING,
     username: DataTypes.STRING,
