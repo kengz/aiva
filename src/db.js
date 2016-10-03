@@ -15,6 +15,7 @@ const sequelize = new Sequelize(
   sqlConfig.password,
   sqlConfig)
 
+/* istanbul ignore next */
 function createDb() {
   const sysSeq = new Sequelize(
     'sys',
@@ -36,6 +37,7 @@ function createDb() {
     .catch(e => { log.error(JSON.stringify(e, null, 2)) })
 }
 
+/* istanbul ignore next */
 function authDb() {
   return sequelize
     .authenticate()
@@ -50,6 +52,7 @@ function authDb() {
     })
 }
 
+/* istanbul ignore next */
 function migrateDb() {
   return new Promise((resolve, reject) => {
     exec(`./node_modules/.bin/sequelize db:migrate --env ${process.env.NODE_ENV}`, (err, stdout, stderr) => {
