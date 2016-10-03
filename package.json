@@ -7,7 +7,7 @@
   "scripts": {
     "shell": "NODE_ENV=development bin/hubot",
     "test": "bin/test.sh",
-    "_test": "./node_modules/.bin/istanbul cover -x 'db/**' ./node_modules/mocha/bin/_mocha",
+    "_test": "NODE_ENV=test ./node_modules/.bin/istanbul cover -x 'db/**' ./node_modules/mocha/bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json npm-debug.log*",
     "_stop": "./node_modules/forever/bin/forever stopall",
     "start": "bin/start.sh",
