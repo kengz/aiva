@@ -1,12 +1,13 @@
 // dependencies
 const _ = require('lomath')
+const path = require('path')
+const models = require(path.join(__dirname, '..', 'db', 'models', 'index'))
 
 module.exports = (robot) => {
   robot.listenerMiddleware((context, next, done) => {
     next()
     source = context.response.envelope
     inlogs = [{
-      'timestamp': `${new Date()}`,
       'adapter': process.env.ADAPTER,
       'userid': _.get(source, 'user.id'),
       'username': _.get(source, 'user.username'),
@@ -15,7 +16,7 @@ module.exports = (robot) => {
       'method': 'receive',
       'message': _.get(source, 'message.text')
     }]
-    console.log(inlogs)
+    _.each(inlogs, (inlog) => { models.Chatlog.create(inlog) })
   })
 
   robot.responseMiddleware((context, next, done) => {
@@ -23,7 +24,6 @@ module.exports = (robot) => {
     target = context.response.envelope
     replies = context.strings
     outlogs = _.map(replies, (text) => ({
-      'timestamp': `${new Date()}`,
       'adapter': process.env.ADAPTER,
       'userid': _.get(target, 'user.id'),
       'username': _.get(target, 'user.username'),
@@ -32,6 +32,6 @@ module.exports = (robot) => {
       'method': context.method,
       'message': text
     }))
-    console.log(outlogs)
+    _.each(outlogs, (outlog) => { models.Chatlog.create(outlog) })
   })
 }

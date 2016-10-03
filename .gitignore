@@ -11,10 +11,6 @@ pyenv/
 __pycache__/
 *.py[cod]
 *$py.class
-models/
-lib/py/ai/data/*
-!lib/py/ai/data/titanic.csv
-!lib/py/ai/data/titanic_test.csv
 
 # Ruby
 *.gem

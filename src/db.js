@@ -11,18 +11,15 @@ const sqlConfig = _.get(dbConfig, `${process.env.NODE_ENV}`)
 const sequelize = new Sequelize(
   sqlConfig.database,
   sqlConfig.username,
-  sqlConfig.password, {
-    dialect: sqlConfig.dialect,
-    logging: false
-  })
+  sqlConfig.password,
+  sqlConfig)
 
 function createDb() {
   const sysSeq = new Sequelize(
     'sys',
     sqlConfig.username,
-    sqlConfig.password, {
-      dialect: sqlConfig.dialect
-    })
+    sqlConfig.password,
+    sqlConfig)
   var nodeEnvs = ['test', 'development', 'production']
   var createDbQueries = _.map(nodeEnvs, (nodeEnv) => {
     return "CREATE DATABASE " + _.get(dbConfig, `${nodeEnv}.database`) + ";"
