@@ -6,6 +6,7 @@ const Sequelize = require('sequelize')
 const log = require(path.join(__dirname, 'log'))
 const dbConfig = require(path.join(__dirname, '..', 'config', 'db.json'))
 
+/* istanbul ignore next */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 const sqlConfig = _.get(dbConfig, `${process.env.NODE_ENV}`)
 
