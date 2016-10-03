@@ -47,7 +47,7 @@ function authDb() {
     })
     .catch((e) => {
       if (_.get(e, 'original.code') == 'ER_BAD_DB_ERROR') {
-        createDb().then(() => { sequelize.close().finally() })
+        createDb().then(() => { sequelize.close() })
       }
     })
 }
