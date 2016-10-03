@@ -12,13 +12,12 @@ dependencies:
   override:
     - pip install socketIO-client
     - npm install
-    - npm i -g sequelize-cli
 
 database:
   override:
     - node src/db.js
     - mv config/db.ci.json config/db.json
-    - sequelize db:migrate
+    - node_modules/.bin/sequelize db:migrate
 
 test:
   override:
