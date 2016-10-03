@@ -10,7 +10,7 @@ module.exports = (robot) => {
     inlogs = [{
       'adapter': process.env.ADAPTER,
       'userid': _.get(source, 'user.id'),
-      'username': _.get(source, 'user.username'),
+      'username': _.get(source, 'user.username') || _.get(source, 'user.name'),
       'room': _.get(source, 'room'),
       'incoming': true,
       'method': 'receive',
@@ -26,7 +26,7 @@ module.exports = (robot) => {
     outlogs = _.map(replies, (text) => ({
       'adapter': process.env.ADAPTER,
       'userid': _.get(target, 'user.id'),
-      'username': _.get(target, 'user.username'),
+      'username': _.get(target, 'user.username') || _.get(source, 'user.name'),
       'room': _.get(target, 'room'),
       'incoming': false,
       'method': context.method,

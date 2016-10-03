@@ -4,8 +4,8 @@ const _ = require('lomath')
 const ngrok = require('ngrok')
 Promise.promisifyAll(ngrok)
 const path = require('path')
-const portfinder = require('portfinder')
-Promise.promisifyAll(portfinder)
+const portscanner = require('portscanner')
+Promise.promisifyAll(portscanner)
 const log = require(path.join(__dirname, 'log'))
 
 global.config = config
@@ -52,12 +52,11 @@ function cloneEnv(adapter) {
 // set the PORT of env if specified in adapterConfig
 /* istanbul ignore next */
 function setPort(env) {
-  portfinder.basePort = config.get(`PORTS.${env['ADAPTER']}`)
-  return portfinder.getPortAsync()
-    .then((newPort) => {
-      env['PORT'] = newPort
-      log.debug(`Set ${env['ADAPTER']} PORT: ${newPort}`)
-      portfinder.basePort += 1 // prevent conflict
+  var basePort = config.get(`PORTS.${env['ADAPTER']}`)
+  return portscanner.findAPortNotInUseAsync(basePort, basePort + 50, '127.0.0.1')
+    .then((port) => {
+      env['PORT'] = port
+      log.debug(`Set ${env['ADAPTER']} PORT: ${port}`)
       return env
     })
 }
