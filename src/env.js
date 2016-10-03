@@ -71,7 +71,7 @@ function setWebhook(env) {
     return env
   } else {
     var webhook = env[webhookKey]
-    var subdomain = undefined
+    var subdomain
     if (webhook && webhook.match(/\/\/(\w+)\.ngrok/)) {
       subdomain = webhook.match(/\/\/(\w+)\.ngrok/)[1]
     }

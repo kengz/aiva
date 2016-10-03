@@ -1,16 +1,18 @@
 // The socket.io server and polyglot clients. Called by scripts/_init.js
 const Promise = require('bluebird')
 const { spawn, execSync } = require('child_process')
+const express = require('express')
 const fs = require('fs')
 const _ = require('lomath')
 const path = require('path')
+const socketIO = require('socket.io')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 
 const LIBPATH = path.join(__dirname, '..', 'lib')
 
 /* istanbul ignore next */
-if (process.env.IOPORT == undefined) { setEnv() }
+if (process.env.IOPORT === undefined) { setEnv() }
 
 // import other languages via child_process
 var ioClientCmds = _.pickBy({
@@ -27,9 +29,6 @@ var ioClientCmds = _.pickBy({
     return global.config.get("ACTIVATE_IO_CLIENTS").get(cmd)
   })
 
-/* istanbul ignore next */
-const adapterCount = (process.env.NODE_ENV == 'test') ? 1 : _.size(activeAdapters)
-const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount
 
 /**
  * Start a Socket IO server connecting to a robot.server (an Expressjs server), or a brand new Express server for use in dev. Sets global.io too.
@@ -46,11 +45,15 @@ function ioServer(robot) {
 
   global.log.info(`Starting socket.io server on IOPORT: ${process.env.IOPORT}`)
   var server
-  const app = require('express')()
+  const app = express()
   process.on('uncaughtException', global.log.error)
   server = app.listen(process.env.IOPORT)
 
-  global.io = require('socket.io').listen(server)
+  global.io = socketIO.listen(server)
+
+  const adapterCount = (process.env.NODE_ENV === 'test') ? 1 : _.size(activeAdapters)
+  const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount
+  global.log.debug(`start-io expecting ${CLIENT_COUNT} IO clients`)
   var count = CLIENT_COUNT
   global.ioPromise = new Promise((resolve, reject) => {
     global.io.sockets.on('connection', (socket) => {
@@ -58,7 +61,7 @@ function ioServer(robot) {
       socket.on('join', (id) => {
         socket.join(id)
         global.log.debug(id, socket.id, 'joined')
-        if (--count == 0) {
+        if (--count === 0) {
           global.log.info(`All ${CLIENT_COUNT} clients have joined`)
           resolve(server) // resolve with the server
         }

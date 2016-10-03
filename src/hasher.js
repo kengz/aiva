@@ -3,7 +3,7 @@ const _ = require('lomath')
 const randomBytes = require('randombytes')
 
 // The hashMap for this global hash
-var hashMap = {};
+var hashMap = {}
 // !for future multiple replies: don't delete on 'handle', but do a periodic scan and prune keys with older hash timestamp
 
 /**
@@ -15,16 +15,16 @@ var hashMap = {};
  */
 function gen(id, cb) {
   /* istanbul ignore next */
-  id = id || 'unidentified';
+  id = id || 'unidentified'
   /* istanbul ignore next */
-  const hashStr = id + '_' + randomBytes(16).toString('hex');
+  const hashStr = id + '_' + randomBytes(16).toString('hex')
   /* istanbul ignore next */
   if (cb) {
     global.log.debug(`Added a callback to hasher for global-client`)
     // if exists, add the callback function to map
     hashMap[hashStr] = cb
-  };
-  return hashStr;
+  }
+  return hashStr
 }
 
 /**
@@ -36,17 +36,17 @@ function gen(id, cb) {
 function handle(msg) {
   // skip if it's an outgoing request (sending input to people to wait for output reply to handle)
   if (msg.input && !msg.output) { return }
-  msg = msg || {};
-  const hashStr = _.isString(msg) ? msg : msg.hash;
+  msg = msg || {}
+  const hashStr = _.isString(msg) ? msg : msg.hash
   if (hashStr) {
     global.log.debug('hash string exists for global-client')
-    var cb = hashMap[hashStr];
+    var cb = hashMap[hashStr]
     if (cb) {
       global.log.debug('hasher.handle invoking cb for global-client')
-      _.omit(hashMap, hashStr);
-      cb(msg)
-    };
-  };
+      _.omit(hashMap, hashStr)
+      return cb(msg)
+    }
+  }
 }
 
 module.exports = {

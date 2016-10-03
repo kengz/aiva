@@ -68,7 +68,7 @@ function gen(res, atts, parser) {
     atts = parser(atts)
   } else {
     // no parser, ensure atts is an array of attachment JSONs
-    if (!_.isArray(atts)) { atts = [atts] };
+    if (!_.isArray(atts)) { atts = [atts] }
   }
   return {
     channel: res.message.room,
@@ -86,16 +86,16 @@ function genAttach(Att) {
   // cleanup the fieldmat
   Att["fieldMat"] = cleanFieldMat(Att["fieldMat"])
   // filter out undefined values
-  Att = _.pickBy(Att);
+  Att = _.pickBy(Att)
   // the 3 keys for each field
   var fieldKeys = ["title", "value", "short"]
   var fields = _.map(Att.fieldMat, (fieldArr) => {
     // for default: short = true
     fieldArr.push(true)
     return _.zipObject(fieldKeys, fieldArr)
-  });
+  })
   // make null if is empty
-  fields = _.isEmpty(fields) ? null : fields;
+  fields = _.isEmpty(fields) ? null : fields
   // filter out null values
   return _.pickBy({
     "fallback": _.join(_.compact([Att.pretext, Att.title, Att.title_link]), ' - '),
@@ -191,7 +191,7 @@ function _gsearchParser(item) {
     fieldMat: [
       // the "short" key defaults to true
       ["url", _.get(item, "link"), false]
-    ],
+    ]
   }
   return att
 }

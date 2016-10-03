@@ -4,6 +4,7 @@ const _ = require('lomath')
 const ngrok = require('ngrok')
 const path = require('path')
 
+const startIO = require(path.join(__dirname, 'start-io'))
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, spawnEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 const { migrateDb } = require(path.join(__dirname, 'db'))
@@ -37,7 +38,7 @@ function startProcess() {
       log.info("Shutting down")
     })
 
-    require(path.join(__dirname, 'start-io'))() // start socketIO
+    startIO() // start socketIO
     _.each(_.keys(activeAdapters), spawnHubot) // start hubot with adapters
     resolve()
   })

@@ -3,6 +3,7 @@ global.Promise = require('bluebird')
 global.co = require('co')
 const path = require('path')
 const SRCPATH = path.join(__dirname, '..', 'src')
+const startIO = require(path.join(SRCPATH, 'start-io'))
 const log = require(path.join(SRCPATH, 'log'))
 const { setEnv } = require(path.join(SRCPATH, 'env'))
 const { migrateDb } = require(path.join(SRCPATH, 'db'))
@@ -47,7 +48,7 @@ function startProcess() {
     }
 
     const ROOTPATH = path.join(__dirname, '..')
-    require(path.join(ROOTPATH, 'src', 'start-io'))() // start socketIO
+    startIO() // start socketIO
     resolve()
   })
 }

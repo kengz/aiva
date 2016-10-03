@@ -1,14 +1,15 @@
 const Promise = require('bluebird')
 const _ = require('lomath')
 const path = require('path')
+const socketIOClient = require('socket.io-client')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv } = require(path.join(__dirname, 'env'))
 global.hasher = require(path.join(__dirname, 'hasher')) // the js handler hasher
 
 /* istanbul ignore next */
-if (process.env.IOPORT == undefined) { setEnv() }
+if (process.env.IOPORT === undefined) { setEnv() }
 
-global.client = global.client || require('socket.io-client')(`http://localhost:${process.env.IOPORT}`)
+global.client = global.client || socketIOClient(`http://localhost:${process.env.IOPORT}`)
 log.debug(`Started global js socketIO client`)
 const ioid = 'global-client-js' // the id of this script for io client registration
 client.emit('join', ioid) // first join for serialization
