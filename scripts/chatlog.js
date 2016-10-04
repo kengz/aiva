@@ -3,6 +3,7 @@ const _ = require('lomath')
 const path = require('path')
 const models = require(path.join(__dirname, '..', 'db', 'models', 'index'))
 
+/* istanbul ignore next */
 module.exports = (robot) => {
   robot.hear(/.*/, (res) => {})
 
