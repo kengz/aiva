@@ -12,7 +12,7 @@ const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 
 /* istanbul ignore next */
 if (process.env.IOPORT === undefined) { setEnv() }
-const LIBPATH = path.join(__dirname, '..', 'lib')
+  const LIBPATH = path.join(__dirname, '..', 'lib')
 const jsIOClient = require(path.join(LIBPATH, 'client'))
 const app = express()
 const server = http.Server(app)
@@ -20,7 +20,7 @@ const server = http.Server(app)
 
 // import other languages via child_process
 var ioClientCmds = _.pickBy({
-    ruby: {
+  ruby: {
       // install_dependency: "gem install socket.io-client-simple activesupport",
       client: path.join(LIBPATH, 'client.rb')
     },
@@ -40,8 +40,8 @@ var ioClientCmds = _.pickBy({
  * @param  {*} robot The hubot object
  * @return {server} server
  */
-/* istanbul ignore next */
-function ioServer(robot) {
+ /* istanbul ignore next */
+ function ioServer(robot) {
   if (global.io) {
     // if already started
     return Promise.resolve(robot)
@@ -62,17 +62,19 @@ function ioServer(robot) {
         socket.join(id)
         global.log.debug(id, socket.id, 'joined')
         if (--count === 0) {
-          global.log.info(`All ${CLIENT_COUNT} clients have joined`)
+          global.log.info(`All ${CLIENT_COUNT} IO clients have joined`)
           resolve(server) // resolve with the server
         }
       })
       socket.on('disconnect', () => { global.log.info(socket.id, 'left') })
     })
-  }).catch((err) => {
+  })
+  .timeout(10000)
+  .catch((err) => {
     global.log.error(JSON.stringify(err, null, 2))
     global.log.error("Clients initialization error.")
-    process.exit(0)
-  }).timeout(3000)
+    process.exit(1)
+  })
 
   global.io.on('connection', (socket) => {
     // generic pass to other script
@@ -82,13 +84,13 @@ function ioServer(robot) {
         // e.g. split 'hello.py' into ['hello', 'py']
         // lang = 'py', module = 'hello'
         var tokens = msg.to.split('.'),
-          lang = tokens.pop(),
-          module = _.join(tokens, '.')
+        lang = tokens.pop(),
+        module = _.join(tokens, '.')
           // reset of <to> for easy calling. May be empty if just passing to client.<lang>
-        msg.to = module
-        global.io.sockets.in(lang).emit('take', msg)
-      } catch (e) { global.log.error(JSON.stringify(e, null, 2)) }
-    })
+          msg.to = module
+          global.io.sockets.in(lang).emit('take', msg)
+        } catch (e) { global.log.error(JSON.stringify(e, null, 2)) }
+      })
   })
 
   return new Promise((resolve, reject) => {
@@ -103,8 +105,8 @@ function ioServer(robot) {
  * Start all polyglot ioClient processes using spawn. Kill them on error to prevent runaway processes, i.e. run all the io_import.<language> processes. The io_import.<language> im turn runs all the io clients of that language.
  * @param  {*} robot The hubot object
  */
-/* istanbul ignore next */
-function ioClient(robot) {
+ /* istanbul ignore next */
+ function ioClient(robot) {
   // the child processes,kill all on death
   var children = []
 
@@ -137,10 +139,10 @@ function ioClient(robot) {
  * The main method to start the io server then clients.
  * Calls server and client methods above.
  */
-/* istanbul ignore next */
-function ioStart(robot) {
+ /* istanbul ignore next */
+ function ioStart(robot) {
   ioServer(robot)
-    .then(ioClient)
+  .then(ioClient)
   return global.ioPromise
 }
 

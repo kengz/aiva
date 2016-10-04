@@ -4,6 +4,8 @@ const path = require('path')
 const models = require(path.join(__dirname, '..', 'db', 'models', 'index'))
 
 module.exports = (robot) => {
+  robot.catchAll((res) => {})
+
   robot.listenerMiddleware((context, next, done) => {
     source = context.response.envelope
     inlogs = [{
