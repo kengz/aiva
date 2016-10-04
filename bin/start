@@ -1,10 +1,10 @@
 #!/bin/bash
 # Start aiva, use and start Docker container if exists
-# this bash session is for use with supervisord. For new bash sessions to the same container, use enter.sh
+# this bash session is for use with supervisord. For new bash sessions to the same container, use enter
 
 # copy keys file if not already exist
 BIN_DIR=`pwd`/bin
-$BIN_DIR/copy-config.sh
+$BIN_DIR/copy-config
 
 if [[ $CLOUDDREAM_PATH && -d ${HOME}/clouddream ]]; then
   echo "Using AIVA with Deepdream: make sure you start ${HOME}/clouddream"

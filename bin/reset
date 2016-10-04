@@ -3,7 +3,7 @@
 
 # copy keys file if not already exist
 BIN_DIR=`pwd`/bin
-$BIN_DIR/copy-config.sh
+$BIN_DIR/copy-config
 
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production

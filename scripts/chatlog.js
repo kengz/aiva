@@ -9,6 +9,7 @@ module.exports = (robot) => {
 
   robot.receiveMiddleware((context, next, done) => {
     source = context.response.envelope
+    global.log.info(JSON.stringify(source, null, 2))
     inlogs = [{
       'adapter': process.env.ADAPTER,
       'userid': _.get(source, 'user.id'),
