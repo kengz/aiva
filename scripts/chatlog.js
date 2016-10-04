@@ -6,7 +6,7 @@ const models = require(path.join(__dirname, '..', 'db', 'models', 'index'))
 module.exports = (robot) => {
   robot.hear(/.*/, (res) => {})
 
-  robot.listenerMiddleware((context, next, done) => {
+  robot.receiveMiddleware((context, next, done) => {
     source = context.response.envelope
     inlogs = [{
       'adapter': process.env.ADAPTER,
@@ -15,7 +15,7 @@ module.exports = (robot) => {
       'room': _.get(source, 'room'),
       'incoming': true,
       'method': 'receive',
-      'message': _.get(source, 'message.text')
+      'message': _.get(source, 'message.text') || _.join(_.keys(_.get(source, 'message.message')), ', ')
     }]
     _.each(inlogs, (inlog) => { models.Chatlog.create(inlog) })
     return next()
@@ -23,6 +23,7 @@ module.exports = (robot) => {
 
   robot.responseMiddleware((context, next, done) => {
     target = context.response.envelope
+    global.log.info(JSON.stringify(target, null, 2))
     replies = context.strings
     outlogs = _.map(replies, (text) => ({
       'adapter': process.env.ADAPTER,
