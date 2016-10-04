@@ -3,16 +3,20 @@ const Promise = require('bluebird')
 const { spawn, execSync } = require('child_process')
 const express = require('express')
 const fs = require('fs')
+const http = require('http')
 const _ = require('lomath')
 const path = require('path')
 const socketIO = require('socket.io')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 
-const LIBPATH = path.join(__dirname, '..', 'lib')
-
 /* istanbul ignore next */
 if (process.env.IOPORT === undefined) { setEnv() }
+const LIBPATH = path.join(__dirname, '..', 'lib')
+const jsIOClient = require(path.join(LIBPATH, 'client'))
+const app = express()
+const server = http.Server(app)
+
 
 // import other languages via child_process
 var ioClientCmds = _.pickBy({
@@ -39,17 +43,13 @@ var ioClientCmds = _.pickBy({
 /* istanbul ignore next */
 function ioServer(robot) {
   if (global.io) {
-    // if already started elsewhere, skip below including ioClient, return promise with the existing server
-    return Promise.resolve(global.io.server)
+    // if already started
+    return Promise.resolve(robot)
   }
 
   global.log.info(`Starting socket.io server on IOPORT: ${process.env.IOPORT}`)
-  var server
-  const app = express()
-  process.on('uncaughtException', global.log.error)
-  server = app.listen(process.env.IOPORT)
 
-  global.io = socketIO.listen(server)
+  global.io = socketIO(server)
 
   const adapterCount = (process.env.NODE_ENV === 'test') ? 1 : _.size(activeAdapters)
   const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount
@@ -91,9 +91,11 @@ function ioServer(robot) {
     })
   })
 
-  // call clients after setup, or skipped together above
-  ioClient(robot)
-  return global.ioPromise
+  return new Promise((resolve, reject) => {
+    server.listen(process.env.IOPORT, () => {
+      resolve(robot)
+    })
+  })
 }
 
 /**
@@ -115,12 +117,11 @@ function ioClient(robot) {
   })
 
   // import js locally
-  require(path.join(LIBPATH, 'client'))
+  jsIOClient.join()
 
   _.each(ioClientCmds, (cmds, lang) => {
-    // spawn then add listeners, add to the list of child processes
+    // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang}`)
-      // global.log.debug(execSync(cmds['install_dependency']).toString())
     var cp = spawn(lang, [cmds['client']], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
@@ -139,6 +140,7 @@ function ioClient(robot) {
 /* istanbul ignore next */
 function ioStart(robot) {
   ioServer(robot)
+    .then(ioClient)
   return global.ioPromise
 }
 
@@ -146,6 +148,7 @@ function ioStart(robot) {
 const cleanExit = () => { process.exit() }
 process.on('SIGINT', cleanExit) // catch ctrl-c
 process.on('SIGTERM', cleanExit) // catch kill
+process.on('uncaughtException', global.log.error)
 
 // export for use by hubot
 module.exports = ioStart
