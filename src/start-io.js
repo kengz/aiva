@@ -72,7 +72,7 @@ function ioServer(robot) {
     global.log.error(JSON.stringify(err, null, 2))
     global.log.error("Clients initialization error.")
     process.exit(0)
-  })
+  }).timeout(3000)
 
   global.io.on('connection', (socket) => {
     // generic pass to other script
