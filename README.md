@@ -41,36 +41,31 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 git clone https://github.com/YOURUSERNAME/aiva.git
 ```
 
-## <a name="setup"></a>Setup, Run
+## <a name="setup"></a>Setup
+
+The line below runs `bin/setup && bin/copy-config && npm install`:
+
+```shell
+npm run setup
+```
+
+Then edit `config/` files: `default.json`(development), `production.json`(production, optional), `db.json`(mysql)
+
+The command installs the dependencies via `bin/install && npm install`, and prepare the database for aiva to run on. The dependencies are minimal: `nodejs>=6`, `python3`, and `mysql`.
+
+See `bin/install` for the full list, and customize your own. This also runs the same sequence as the CircleCI build in `circle.yml`.
+
+**Docker**. We also offer a Docker image [kengz/aiva](https://hub.docker.com/r/kengz/aiva/). It runs the same except with an extra layer of Docker. See [Docker installation](http://kengz.me/aiva/#docker-installation) for more.
 
 
-- **dependencies**: The line below runs `bin/setup && bin/copy-config && npm install`:
-
-    ```shell
-    npm run setup
-    ```
-
-    This installs the dependencies via `bin/install && npm install`, and prepare the database for aiva to run on. The dependencies are minimal: `nodejs>=6`, `python3`, and `mysql`.
-
-    See `bin/install` for the full list, and customize your own. This also runs the same sequence as the CircleCI build in `circle.yml`.
-
-    **Docker**. We also offer a Docker image [kengz/aiva](https://hub.docker.com/r/kengz/aiva/). It runs the same except with an extra layer of Docker. See [Docker installation](http://kengz.me/aiva/#docker-installation) for more.
-
-- **setup** `config/`:
-
-
-    *Edit `default.json`(development), `production.json`(production, optional), `db.json`(mysql)*
-
-
-### <a name="run"></a>Run
+## <a name="run"></a>Run
 
 ```shell
 npm start # runs 'aivadev' in development mode
 ```
 
-Add flags for more modes
-
 ```shell
+# Add flags for more modes
 npm start --debug # activate debug logger
 npm start production # runs 'aiva' in production mode
 ```
@@ -82,6 +77,7 @@ See [Commands](http://kengz.me/aiva/#commands) for more. This will start AIVA wi
 
 
 Check [**Setup tips**](http://kengz.me/aiva/#setup-tips) for help.
+
 
 ## Legacy Releases
 
