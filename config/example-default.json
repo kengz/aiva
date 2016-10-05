@@ -1,0 +1,43 @@
+{
+  "BOTNAME": "aivadev",
+  "PORTS": {
+    "NEO4J": 7476,
+    "SOCKETIO": 6466,
+    "SLACK": 8345,
+    "TELEGRAM": 8443,
+    "FB": 8545
+  },
+  "NGROK_AUTH": "sign up at https://ngrok.com for custom domain",
+  "ADMINS": ["your_chat_account@email.com"],
+  "ACTIVATE_IO_CLIENTS": {
+    "ruby": false,
+    "python3": true
+  },
+  "ADAPTERS": {
+    "SLACK": {
+      "ACTIVATE": false,
+      "HUBOT_SLACK_TOKEN": "add custom slack bot https://my.slack.com/services/new/bot"
+    },
+    "TELEGRAM": {
+      "ACTIVATE": true,
+      "TELEGRAM_TOKEN": "get from bot father https://core.telegram.org/bots#3-how-do-i-create-a-bot",
+      "BOTNAME": "your bot name from bot father",
+      "WEBHOOK_KEY": "TELEGRAM_WEBHOOK"
+    },
+    "FB": {
+      "ACTIVATE": false,
+      "FB_PAGE_ID": "see aiva doc on adapters",
+      "FB_APP_ID": "see aiva doc on adapters",
+      "FB_APP_SECRET": "see aiva doc on adapters",
+      "FB_PAGE_TOKEN": "see aiva doc on adapters",
+      "FB_AUTOHEAR": true,
+      "WEBHOOK_KEY": "FB_WEBHOOK_BASE",
+      "FB_WEBHOOK_BASE": "optional: set a persistent webhook url if you have one on ngrok, since FB takes 10 mins to update it",
+      "FB_ROUTE_URL": "/fb"
+    }
+  },
+  "TEST": {
+    "HUBOT_SHELL_USER_ID": "ID0000001",
+    "HUBOT_SHELL_USER_NAME": "alice"
+  }
+}

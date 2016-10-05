@@ -1,4 +1,4 @@
-# AIVA [![GitHub version](https://badge.fury.io/gh/kengz%2Faiva.svg)](http://badge.fury.io/gh/kengz%2Faiva) [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![GitHub forks](https://img.shields.io/github/forks/kengz/aiva.svg?style=social&label=Fork)](https://github.com/kengz/aiva) [![GitHub stars](https://img.shields.io/github/stars/kengz/aiva.svg?style=social&label=Star)](https://github.com/kengz/aiva)
+# AIVA [![GitHub version](https://badge.fury.io/gh/kengz%2Faiva.svg)](http://badge.fury.io/gh/kengz%2Faiva) [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Code Climate](https://codeclimate.com/github/kengz/aiva/badges/gpa.svg)](https://codeclimate.com/github/kengz/aiva) [![Test Coverage](https://codeclimate.com/github/kengz/aiva/badges/coverage.svg)](https://codeclimate.com/github/kengz/aiva/coverage) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![GitHub forks](https://img.shields.io/github/forks/kengz/aiva.svg?style=social&label=Fork)](https://github.com/kengz/aiva) [![GitHub stars](https://img.shields.io/github/stars/kengz/aiva.svg?style=social&label=Star)](https://github.com/kengz/aiva)
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. [http://kengz.me/aiva/](http://kengz.me/aiva/)
 
@@ -9,14 +9,14 @@ It is a **bot-generalization**: you can implement any features, use with major A
 |:---|---|
 | general-purpose | An app interface, AI assistant, anything! |
 | cross-platform | Deploy simultaneously on **Slack, Telegram, Facebook**, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
-| multi-language | Code in and coordinate among `Node.js`, `Python`, `Ruby`, etc. |
-| built-in with AI tools | Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs |
+| multi-language | Cross-interaction among `Node.js`, `Python`, `Ruby`, etc. using `SocketIO`. |
+| built-in with AI tools (not preinstalled since v4) | Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](http://kengz.me/aiva/#setup) and [features](http://kengz.me/aiva/#features) |
 
 >To see what they mean, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.
 
->Deepdream in AIVA, only took a few hours on the Deepdream module, and deployed it in AIVA in just minutes. Runs on Fb and Telegram simulteneously: <img alt="Deepdream in AIVA" src="http://kengz.me/aiva/images/deepdream.gif" />
+>Deepdream in AIVA (checkout v3.2.1), only took a few hours on the Deepdream module, and deployed it in AIVA in just minutes. Runs on Fb and Telegram simulteneously: <img alt="Deepdream in AIVA" src="http://kengz.me/aiva/images/deepdream.gif" />
 
 We see people spending a lot of time building bots instead of focusing on what they want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities.
 
@@ -41,32 +41,36 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 git clone https://github.com/YOURUSERNAME/aiva.git
 ```
 
-## <a name="setup"></a>Setup, Run
+## <a name="setup"></a>Setup
 
-You can run AIVA on your local machine or a Ubuntu server - [Digital Ocean](https://www.digitalocean.com) recommended. See [Docker installation](http://kengz.me/aiva/#docker-installation) if you're new to it, or the [alternate setups](http://kengz.me/aiva/#dependencies).
-
-- **dependencies**: Pull the [AIVA Docker image](https://hub.docker.com/r/kengz/aiva/):
+The line below runs `bin/setup && bin/copy-config && npm install`:
 
 ```shell
-docker pull kengz/aiva
+npm run setup
 ```
 
-- **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
+Then edit `config/` files: `default.json`(development), `production.json`(production, optional), `db.json`(mysql)
+
+The command installs the dependencies via `bin/install && npm install`, and prepare the database for aiva to run on. The dependencies are minimal: `nodejs>=6`, `python3`, and `mysql`.
+
+See `bin/install` for the full list, and customize your own. This also runs the same sequence as the CircleCI build in `circle.yml`.
+
+**Docker**. We also offer a Docker image [kengz/aiva](https://hub.docker.com/r/kengz/aiva/). It runs the same except with an extra layer of Docker. See [Docker installation](http://kengz.me/aiva/#docker-installation) for more.
 
 
-<aside class="notice">
-On Mac OSX, before using Docker, make sure there's a <code>default</code> docker machine running: <code>docker-machine start default</code>.
-</aside>
-
-
-### <a name="run"></a>Run
-- **run**: 
+## <a name="run"></a>Run
 
 ```shell
-npm start # runs aivadev
+npm start # runs 'aivadev' in development mode
 ```
 
-See [Commands](http://kengz.me/aiva/#commands) for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](http://kengz.me/aiva/#adapters) for connecting to different chat platforms.
+```shell
+# Add flags for more modes
+npm start --debug # activate debug logger
+npm start production # runs 'aiva' in production mode
+```
+
+See [Commands](http://kengz.me/aiva/#commands) for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook (only if activated). See [**Adapters**](http://kengz.me/aiva/#adapters) for connecting to different chat platforms.
 
 >AIVA saying hi, translating, running deep neural net; on Slack, Telegram, Facebook:
 <img alt="AIVA on Slack, Telegram" src="http://kengz.me/aiva/images/npm_start.png" />
@@ -74,10 +78,17 @@ See [Commands](http://kengz.me/aiva/#commands) for more. This will start AIVA wi
 
 Check [**Setup tips**](http://kengz.me/aiva/#setup-tips) for help.
 
+
 ## Legacy Releases
 
 AIVA was known as Jarvis in version 2. It is now deprecated, but if you need to reference stuff from Jarvis, do `git checkout tags/v2.0` or checkout [the releases](https://github.com/kengz/aiva/releases).
 
+AIVA v3 was last released at [v3.2.1](https://github.com/kengz/aiva/releases/tag/v3.2.1), which was full featured, but quite heavy. We retire it in favor of a lighter, more developer-friendly and extendible version.
+
+## Roadmap
+
+- a built in graph brain for ad-hoc knowledge encoding, using [CGKB](http://kengz.me/aiva/#cgkb) and [HTMI](http://kengz.me/aiva/#htmi)
+- a built in NLP intent-parsing engine
 
 ## Contributing
 

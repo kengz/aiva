@@ -1,0 +1,26 @@
+machine:
+  python:
+    version: 3.5.1
+  node:
+    version: 6
+  environment:
+    CODECLIMATE_REPO_TOKEN: df0a1e703d4e417fb88724c9e1f7c4b49f53c9c17494d59cd182aa6cc2daccf8
+  services:
+    - mysql
+
+dependencies:
+  override:
+    - pip install socketIO-client
+    - npm install
+
+database:
+  override:
+    - mv config/db.ci.json config/db.json
+    - node src/db.js
+    - node_modules/.bin/sequelize db:migrate --env test
+
+test:
+  override:
+    - npm test
+  post:
+    - cat ./coverage/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js

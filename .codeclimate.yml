@@ -1,0 +1,33 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        javascript:
+        python:
+        ruby:
+  fixme:
+    enabled: true
+  eslint:
+    enabled: true
+    checks:
+      no-process-exit:
+        enabled: false
+  csslint:
+    enabled: true
+  radon:
+    enabled: true
+  pep8:
+    enabled: true
+  rubocop:
+    enabled: true
+
+ratings:
+  paths:
+  - "**.js"
+  - "**.jsx"
+  - "**.py"
+  - "**.rb"
+
+exclude_paths:
+- test/

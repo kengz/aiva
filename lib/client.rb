@@ -1,32 +1,32 @@
 # The client for rb; imports all rb modules
-
 require 'rubygems'
-require 'bundler/setup'
+require File.join('bundler', 'setup')
+require File.join('active_support', 'core_ext', 'string')
 require 'socket.io-client-simple'
 
-Dir[File.dirname(__FILE__) + '/rb/*.rb'].each {|file| require file }
+Dir[File.join(File.dirname(__FILE__), 'rb', '*.rb')
+  ].sort.each { |file| require file }
 puts 'import rb scripts from client.rb'
 
 # 1. Register the socket.io client
-##########################################
-# Ruby scoping doesn't allow local var to be accessed within method, so set global
+#########################################
+# Ruby scoping doesn't allow local var to be accessed
+# within method, so set global
 ioport = (ENV['IOPORT'] || '6466')
-$client = SocketIO::Client::Simple.connect 'http://localhost:'+ioport
+CLIENT = SocketIO::Client::Simple.connect 'http://localhost:' + ioport
 # the id of this script for io client registration
 ioid = 'rb'
 # first join for serialization
-$client.on :connect do
-  $client.emit :join, ioid
+CLIENT.on :connect do
+  CLIENT.emit :join, ioid
 end
-$client.on :disconnect do
-  $client.disconnect()
+CLIENT.on :disconnect do
+  CLIENT.disconnect
 end
-
 
 # 2. Write module methods and register as handlers
 ##########################################
 # done in your module scripts
-
 
 # 3. listener to handle incoming payload.
 ##########################################
@@ -35,23 +35,18 @@ end
 def handle(msg)
   to = msg['to']
   intent = msg['intent']
-  if to && intent
-    begin
-      # !Note that the access isn't flexible as in py and js where dotpath can be use
-      reply = Module.const_get(to).method(intent).call(msg)
-      if reply['to']
-        $client.emit(:pass, reply)
-      end
-    rescue
-      puts 'rb handle fails'
-    end
+  return unless to && intent
+  begin
+    reply = Module.const_get(to.classify).public_send(intent, msg)
+    CLIENT.emit(:pass, reply) if reply['to']
+  rescue
+    puts 'rb handle fails'
   end
 end
 
-$client.on :take do |msg|
+CLIENT.on :take do |msg|
   handle(msg)
 end
-
 
 # keep-alive
 loop do

@@ -1,52 +1,40 @@
 // dependencies
 // Module that runs after bot is constructed, before all other scripts are loaded; emit 'ready' to kickstart things such as auto-serialization
-global._ = require('lomath')
-global.co = require('co')
 global.Promise = require('bluebird')
-var Log = require('log');
+global.co = require('co')
+global._ = require('lomath')
+const path = require('path')
 
-// declare global assets
-// the knowledge base
-global.KB = require('neo4jkb')({
-  NEO4J_AUTH: process.env.NEO4J_AUTH,
-  NEO4J_PORT: process.env.NEO4J_PORT
-});
+global.ROOTPATH = path.join(__dirname, '..')
+const log = require(path.join(__dirname, '..', 'src', 'log'))
+require(path.join(ROOTPATH, 'src', 'global-client')) // js io global-client
 
 // export for bot
-module.exports = function(robot) {
+module.exports = (robot) => {
   // set global for usage by children
   global.robot = robot
-  global.log = new Log('info')
-  
-  ///////////////////
-  // wake up, init //
-  ///////////////////
-  co(function*() {
-    // connect socket.io client to socket.io server for polyglot communication
-    require('../lib/client')
 
+  // wake up, init
+  co(function*() {
     /* istanbul ignore next */
     if (robot.adapter.constructor.name == 'Shell') {
       // set for Shell local dev
-      require('../test/asset')
+      require(path.join(ROOTPATH, 'test', 'asset'))
       robot.brain.data.users = global.users
-    };
-    yield Promise.delay(500); // wait to connect, get users
+    }
+    yield Promise.delay(10); // wait to connect, get users
     // emit 'ready' event to kick off initialization
     robot.emit('ready')
   }).catch(global.log.error)
 
-  /////////////////////
-  // initializations //
-  /////////////////////
-  robot.on('ready', function() {
+  // initializations
+  robot.on('ready', () => {
     robot.emit('serialize_users')
   })
 
   // manually emit "ready" to simulate initialization
-  robot.respond(/manual ready/i, function(res) {
+  robot.respond(/manual ready/i, (res) => {
     res.send('Manually starting initialization, emitting "ready".')
     robot.emit('ready')
   })
-
 }
