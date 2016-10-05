@@ -18,7 +18,7 @@ engines:
   radon:
     enabled: true
     config:
-      threshold: 8
+      threshold: "C"
   pep8:
     enabled: true
   rubocop:
