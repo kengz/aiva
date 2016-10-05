@@ -17,9 +17,8 @@ module.exports = (robot) => {
   // wake up, init
   co(function*() {
     /* istanbul ignore next */
-    if (robot.adapter.constructor.name == 'Shell') {
+    if (robot.adapter.constructor.name === 'Shell') {
       // set for Shell local dev
-      require(path.join(ROOTPATH, 'test', 'asset'))
       robot.brain.data.users = global.users
     }
     yield Promise.delay(10); // wait to connect, get users
