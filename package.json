@@ -46,7 +46,7 @@
     "forever": "^0.15.2",
     "hubot": "^2.18.0",
     "hubot-diagnostics": "0.0.1",
-    "hubot-fb": "^3.0.0",
+    "hubot-fb": "^5.0.0",
     "hubot-slack": "^4.0.2",
     "hubot-telegram": "^0.1.0",
     "lomath": "latest",
@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
-    "chai-as-promised": "^5.2.0",
+    "chai-as-promised": "^6.0.0",
     "codeclimate-test-reporter": "^0.3.3",
     "coffee-script": "^1.10.0",
     "hubot-test-helper": "^1.4.4",
