@@ -64,7 +64,6 @@ else
 fi
 
 # install npm modules
-# speed this up by checking if dir exists
 if [ -d ./node_modules ]; then
   echo "Npm modules already installed"
 else
