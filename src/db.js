@@ -44,7 +44,7 @@ function authDb() {
     .authenticate()
     .then((e) => {
       log.info('Authenticated SQL database successfully');
-      sequelize.close().finally()
+      sequelize.close()
     })
     .catch((e) => {
       if (_.get(e, 'original.code') === 'ER_BAD_DB_ERROR') {
