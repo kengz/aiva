@@ -1,6 +1,14 @@
 #!/bin/bash
 # This script runs the same sequence as the CircleCI build
 
+if [ $(uname) == "Darwin" ]; then
+  if which brew >/dev/null; then
+    echo "Brew is already installed"
+  else
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+fi
+
 # install nodejs
 if which node >/dev/null; then
   echo "Nodejs is already installed"
@@ -56,8 +64,12 @@ else
 fi
 
 # install npm modules
-npm install
-echo "Npm modules are installed"
+# speed this up by checking if dir exists
+if [ -d ./node_modules ]; then
+  echo "Npm modules already installed"
+else
+  npm install
+fi
 
 # copy keys file if not already exist
 BIN_DIR=`pwd`/bin
