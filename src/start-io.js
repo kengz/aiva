@@ -123,7 +123,7 @@ var ioClientCmds = _.pickBy({
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
-    global.log.info(`Starting socketIO client for ${lang}`)
+    global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
     var cp = spawn(lang, [cmds['client']], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 

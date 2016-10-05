@@ -10,7 +10,7 @@ global.hasher = require(path.join(__dirname, 'hasher')) // the js handler hasher
 if (process.env.IOPORT === undefined) { setEnv() }
 
 global.client = global.client || socketIOClient(`http://localhost:${process.env.IOPORT}`)
-log.debug(`Started global js socketIO client`)
+log.debug(`Started global js socketIO client for ${process.env.ADAPTER} at ${process.env.IOPORT}`)
 const ioid = 'global-client-js' // the id of this script for io client registration
 client.emit('join', ioid) // first join for serialization
 client.on('disconnect', client.disconnect)

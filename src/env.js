@@ -91,7 +91,7 @@ function setWebhook(env) {
         return env
       })
       .catch((e) => {
-        log.error(`${JSON.stringify(e, null, 2)} \nYou may have specified a wrong pair of ngrok subdomain and NGROK_AUTH, or trying to use more than 1 custom subdomain at once.`)
+        log.error(`${JSON.stringify(e, null, 2)}`)
         return env
       })
   }

@@ -7,7 +7,7 @@ const path = require('path')
 const startIO = require(path.join(__dirname, 'start-io'))
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, spawnEnv, activeAdapters } = require(path.join(__dirname, 'env'))
-const { migrateDb } = require(path.join(__dirname, 'db'))
+const { authDb, migrateDb } = require(path.join(__dirname, 'db'))
 var children = [] // child processes for spawn
 
 // finally, spawn a hubot in child.process using env
@@ -46,7 +46,8 @@ function startProcess() {
 
 // primary start method
 function start() {
-  return migrateDb()
+  return authDb()
+    .then(migrateDb)
     .then(startProcess)
 }
 

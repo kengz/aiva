@@ -67,9 +67,12 @@ function migrateDb() {
   })
 }
 
-authDb()
-
 module.exports = {
   authDb: authDb,
   migrateDb: migrateDb
+}
+
+/* istanbul ignore next */
+if (require.main === module) {
+  authDb()
 }
