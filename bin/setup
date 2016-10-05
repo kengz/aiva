@@ -59,6 +59,10 @@ fi
 npm install
 echo "Npm modules are installed"
 
+# copy keys file if not already exist
+BIN_DIR=`pwd`/bin
+$BIN_DIR/copy-config
+
 # run migration
 node src/db.js
 node_modules/.bin/sequelize db:migrate --env development

@@ -9,8 +9,8 @@ It is a **bot-generalization**: you can implement any features, use with major A
 |:---|---|
 | general-purpose | An app interface, AI assistant, anything! |
 | cross-platform | Deploy simultaneously on **Slack, Telegram, Facebook**, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
-| multi-language | Code in and coordinate among `Node.js`, `Python`, `Ruby`, etc. |
-| built-in with AI tools | Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs |
+| multi-language | Cross-interaction among `Node.js`, `Python`, `Ruby`, etc. using `SocketIO`. |
+| built-in with AI tools (not preinstalled since v4) | Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](http://kengz.me/aiva/#setup) and [features](http://kengz.me/aiva/#features) |
 
@@ -43,30 +43,39 @@ git clone https://github.com/YOURUSERNAME/aiva.git
 
 ## <a name="setup"></a>Setup, Run
 
-You can run AIVA on your local machine or a Ubuntu server - [Digital Ocean](https://www.digitalocean.com) recommended. See [Docker installation](http://kengz.me/aiva/#docker-installation) if you're new to it, or the [alternate setups](http://kengz.me/aiva/#dependencies).
 
-- **dependencies**: Pull the [AIVA Docker image](https://hub.docker.com/r/kengz/aiva/):
+- **dependencies**: The line below runs `bin/setup && bin/copy-config && npm install`:
 
-```shell
-docker pull kengz/aiva
-```
+    ```shell
+    npm run setup
+    ```
 
-- **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
+    This installs the dependencies via `bin/install && npm install`, and prepare the database for aiva to run on. The dependencies are minimal: `nodejs>=6`, `python3`, and `mysql`.
+
+    See `bin/install` for the full list, and customize your own. This also runs the same sequence as the CircleCI build in `circle.yml`.
+
+    **Docker**. We also offer a Docker image [kengz/aiva](https://hub.docker.com/r/kengz/aiva/). It runs the same except with an extra layer of Docker. See [Docker installation](http://kengz.me/aiva/#docker-installation) for more.
+
+- **setup** `config/`:
 
 
-<aside class="notice">
-On Mac OSX, before using Docker, make sure there's a <code>default</code> docker machine running: <code>docker-machine start default</code>.
-</aside>
+    *Edit `default.json`(development), `production.json`(production, optional), `db.json`(mysql)*
 
 
 ### <a name="run"></a>Run
-- **run**: 
 
 ```shell
-npm start # runs aivadev
+npm start # runs 'aivadev' in development mode
 ```
 
-See [Commands](http://kengz.me/aiva/#commands) for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](http://kengz.me/aiva/#adapters) for connecting to different chat platforms.
+Add flags for more modes
+
+```shell
+npm start --debug # activate debug logger
+npm start production # runs 'aiva' in production mode
+```
+
+See [Commands](http://kengz.me/aiva/#commands) for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook (only if activated). See [**Adapters**](http://kengz.me/aiva/#adapters) for connecting to different chat platforms.
 
 >AIVA saying hi, translating, running deep neural net; on Slack, Telegram, Facebook:
 <img alt="AIVA on Slack, Telegram" src="http://kengz.me/aiva/images/npm_start.png" />
@@ -77,6 +86,8 @@ Check [**Setup tips**](http://kengz.me/aiva/#setup-tips) for help.
 ## Legacy Releases
 
 AIVA was known as Jarvis in version 2. It is now deprecated, but if you need to reference stuff from Jarvis, do `git checkout tags/v2.0` or checkout [the releases](https://github.com/kengz/aiva/releases).
+
+AIVA v3 was last released at [v3.2.1](https://github.com/kengz/aiva/releases/tag/v3.2.1), which was full featured, but quite heavy. We retire it in favor of a lighter, more developer-friendly and extendible version.
 
 
 ## Contributing
