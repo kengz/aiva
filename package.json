@@ -64,7 +64,7 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "chai-as-promised": "^6.0.0",
-    "codeclimate-test-reporter": "^0.3.3",
+    "codeclimate-test-reporter": "^0.4.0",
     "coffee-script": "^1.10.0",
     "hubot-test-helper": "^1.4.4",
     "istanbul": "^0.4.2",
