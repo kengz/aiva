@@ -16,7 +16,7 @@ It is a **bot-generalization**: you can implement any features, use with major A
 
 >To see what they mean, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.
 
->Deepdream in AIVA, only took a few hours on the Deepdream module, and deployed it in AIVA in just minutes. Runs on Fb and Telegram simulteneously: <img alt="Deepdream in AIVA" src="http://kengz.me/aiva/images/deepdream.gif" />
+>Deepdream in AIVA (checkout v3.2.1), only took a few hours on the Deepdream module, and deployed it in AIVA in just minutes. Runs on Fb and Telegram simulteneously: <img alt="Deepdream in AIVA" src="http://kengz.me/aiva/images/deepdream.gif" />
 
 We see people spending a lot of time building bots instead of focusing on what they want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities.
 
@@ -89,6 +89,10 @@ AIVA was known as Jarvis in version 2. It is now deprecated, but if you need to 
 
 AIVA v3 was last released at [v3.2.1](https://github.com/kengz/aiva/releases/tag/v3.2.1), which was full featured, but quite heavy. We retire it in favor of a lighter, more developer-friendly and extendible version.
 
+## Roadmap
+
+- a built in graph brain for ad-hoc knowledge encoding, using [CGKB](http://kengz.me/aiva/#cgkb) and [HTMI](http://kengz.me/aiva/#htmi)
+- a built in NLP intent-parsing engine
 
 ## Contributing
 
