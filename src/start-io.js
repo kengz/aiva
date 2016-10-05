@@ -60,7 +60,7 @@ var ioClientCmds = _.pickBy({
       // serialize for direct communication by using join room
       socket.on('join', (id) => {
         socket.join(id)
-        global.log.debug(id, socket.id, 'joined')
+        global.log.debug(`${id} ${socket.id} joined, ${count} remains`)
         if (--count === 0) {
           global.log.info(`All ${CLIENT_COUNT} IO clients have joined`)
           resolve(server) // resolve with the server
