@@ -13,7 +13,7 @@ var children = [] // child processes for spawn
 // finally, spawn a hubot in child.process using env
 /* istanbul ignore next */
 function spawnProcess(env) {
-  var hb = spawn('./bin/hubot', ['-a', env['ADAPTER'], '--name', env['BOTNAME']], { stdio: 'inherit', env: env })
+  var hb = spawn('./bin/hubot', ['-a', _.toLower(env['ADAPTER']), '--name', env['BOTNAME']], { stdio: 'inherit', env: env })
   children.push(hb)
   log.info(`Deploying bot ${env['BOTNAME']} with adapter ${env['ADAPTER']}`)
   return env

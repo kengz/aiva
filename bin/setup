@@ -39,7 +39,11 @@ fi
 UP=$(pgrep mysql | wc -l);
 if [ "$UP" -eq 0 ];
 then
-  mysql.server start
+  if [ $(uname) == "Darwin" ]; then
+    mysql.server start
+  else
+    service mysql start
+  fi
 else
   echo "MySQL is already started"
 fi
@@ -57,4 +61,6 @@ echo "Npm modules are installed"
 
 # run migration
 node src/db.js
+node_modules/.bin/sequelize db:migrate --env development
 node_modules/.bin/sequelize db:migrate --env test
+node_modules/.bin/sequelize db:migrate --env production

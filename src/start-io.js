@@ -60,8 +60,9 @@ var ioClientCmds = _.pickBy({
       // serialize for direct communication by using join room
       socket.on('join', (id) => {
         socket.join(id)
+        count--
         global.log.debug(`${id} ${socket.id} joined, ${count} remains`)
-        if (--count === 0) {
+        if (count === 0) {
           global.log.info(`All ${CLIENT_COUNT} IO clients have joined`)
           resolve(server) // resolve with the server
         }
@@ -69,7 +70,7 @@ var ioClientCmds = _.pickBy({
       socket.on('disconnect', () => { global.log.info(socket.id, 'left') })
     })
   })
-  .timeout(10000)
+  .timeout(15000)
   .catch((err) => {
     global.log.error(JSON.stringify(err, null, 2))
     global.log.error("Clients initialization error.")
