@@ -212,7 +212,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="aiva">AIVA <a href="http://badge.fury.io/gh/kengz%2Faiva"><img alt="GitHub version" src="https://badge.fury.io/gh/kengz%2Faiva.svg" /></a> <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=master" /></a> <a href="https://coveralls.io/github/kengz/aiva?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master" /></a> <a href="https://gemnasium.com/kengz/aiva"><img alt="Dependency Status" src="https://gemnasium.com/kengz/aiva.svg" /></a> <a href="https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE"><img alt="MIT licensed" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a> <a href="https://github.com/kengz/aiva"><img alt="GitHub forks" src="https://img.shields.io/github/forks/kengz/aiva.svg?style=social&amp;label=Fork" /></a> <a href="https://github.com/kengz/aiva"><img alt="GitHub stars" src="https://img.shields.io/github/stars/kengz/aiva.svg?style=social&amp;label=Star" /></a></h1>
+        <h1 id="aiva">AIVA <a href="http://badge.fury.io/gh/kengz%2Faiva"><img alt="GitHub version" src="https://badge.fury.io/gh/kengz%2Faiva.svg" /></a> <a href="https://travis-ci.org/kengz/aiva"><img alt="Build Status" src="https://travis-ci.org/kengz/aiva.svg?branch=master" /></a> <a href="https://codeclimate.com/github/kengz/aiva"><img alt="Code Climate" src="https://codeclimate.com/github/kengz/aiva/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/kengz/aiva/coverage"><img alt="Test Coverage" src="https://codeclimate.com/github/kengz/aiva/badges/coverage.svg" /></a> <a href="https://gemnasium.com/kengz/aiva"><img alt="Dependency Status" src="https://gemnasium.com/kengz/aiva.svg" /></a> <a href="https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE"><img alt="MIT licensed" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a> <a href="https://github.com/kengz/aiva"><img alt="GitHub forks" src="https://img.shields.io/github/forks/kengz/aiva.svg?style=social&amp;label=Fork" /></a> <a href="https://github.com/kengz/aiva"><img alt="GitHub stars" src="https://img.shields.io/github/stars/kengz/aiva.svg?style=social&amp;label=Star" /></a></h1>
 
 <p><strong>AIVA</strong> (A.I. Virtual Assistant): General-purpose virtual assistant for developers. <a href="http://kengz.me/aiva/">http://kengz.me/aiva/</a></p>
 
@@ -234,10 +234,10 @@
 </tr>
 <tr>
 <td style="text-align: left">multi-language</td>
-<td>Code in and coordinate among <code class="prettyprint">Node.js</code>, <code class="prettyprint">Python</code>, <code class="prettyprint">Ruby</code>, etc.</td>
+<td>Cross-interaction among <code class="prettyprint">Node.js</code>, <code class="prettyprint">Python</code>, <code class="prettyprint">Ruby</code>, etc. using <code class="prettyprint">SocketIO</code>.</td>
 </tr>
 <tr>
-<td style="text-align: left">built-in with AI tools</td>
+<td style="text-align: left">built-in with AI tools (not preinstalled since v4)</td>
 <td>Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs</td>
 </tr>
 <tr>
@@ -246,14 +246,14 @@
 </tr>
 <tr>
 <td style="text-align: left">powerful, easy to use</td>
-<td>Check out <a href="#setup">setup</a> and <a href="#features">features</a></td>
+<td>Check out <a href="http://kengz.me/aiva/#setup">setup</a> and <a href="http://kengz.me/aiva/#features">features</a></td>
 </tr>
 </tbody></table>
 
 <blockquote>
 <p>To see what they mean, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.</p>
 
-<p>Deepdream in AIVA, only took a few hours on the Deepdream module, and deployed it in AIVA in just minutes. Runs on Fb and Telegram simulteneously: <img alt="Deepdream in AIVA" src="./images/deepdream.gif" /></p>
+<p>Deepdream in AIVA (checkout v3.2.1), only took a few hours on the Deepdream module, and deployed it in AIVA in just minutes. Runs on Fb and Telegram simulteneously: <img alt="Deepdream in AIVA" src="http://kengz.me/aiva/images/deepdream.gif" /></p>
 </blockquote>
 
 <p>We see people spending a lot of time building bots instead of focusing on what they want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities.</p>
@@ -262,7 +262,7 @@
 
 <p>AIVA exists to help with that - we do the heavy-lifting and build a ready-to-use bot; it is general purpose, multi-language, cross-platform, with robust design and tests, to suite your needs. </p>
 
-<p>AIVA gives you powerful bot tools, saves you the time to build from scratch, and allows you to focus on what you want to do. Morever, you can <strong>build once, run everywhere</strong> with AIVA&rsquo;s multi-adapter <a href="#adapters">(Slack, Telegram, Fb)</a>.</p>
+<p>AIVA gives you powerful bot tools, saves you the time to build from scratch, and allows you to focus on what you want to do. Morever, you can <strong>build once, run everywhere</strong> with AIVA&rsquo;s multi-adapter <a href="http://kengz.me/aiva/#adapters">(Slack, Telegram, Fb)</a>.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -274,40 +274,36 @@
 <pre class="highlight shell"><code>git clone https://github.com/YOURUSERNAME/aiva.git
 </code></pre>
 
-<h2 id="setup-run"><a name="setup"></a>Setup, Run</h2>
+<h2 id="setup"><a name="setup"></a>Setup</h2>
 
-<p>You can run AIVA on your local machine or a Ubuntu server - <a href="https://www.digitalocean.com">Digital Ocean</a> recommended. See <a href="#docker-installation">Docker installation</a> if you&rsquo;re new to it, or the <a href="#dependencies">alternate setups</a>.</p>
-
-<ul>
-<li><strong>dependencies</strong>: Pull the <a href="https://hub.docker.com/r/kengz/aiva/">AIVA Docker image</a>:</li>
-</ul>
-<pre class="highlight shell"><code>docker pull kengz/aiva
+<p>The line below runs <code class="prettyprint">bin/setup &amp;&amp; bin/copy-config &amp;&amp; npm install</code>:</p>
+<pre class="highlight shell"><code>npm run setup
 </code></pre>
 
-<ul>
-<li><strong>setup keys</strong>: update <code class="prettyprint">.env</code>, <code class="prettyprint">bin/.key-aiva</code> (production), <code class="prettyprint">bin/.key-aivadev</code> (development).</li>
-</ul>
+<p>Then edit <code class="prettyprint">config/</code> files: <code class="prettyprint">default.json</code>(development), <code class="prettyprint">production.json</code>(production, optional), <code class="prettyprint">db.json</code>(mysql)</p>
 
-<aside class="notice">
-On Mac OSX, before using Docker, make sure there&rsquo;s a <code>default</code> docker machine running: <code>docker-machine start default</code>.
-</aside>
+<p>The command installs the dependencies via <code class="prettyprint">bin/install &amp;&amp; npm install</code>, and prepare the database for aiva to run on. The dependencies are minimal: <code class="prettyprint">nodejs&gt;=6</code>, <code class="prettyprint">python3</code>, and <code class="prettyprint">mysql</code>.</p>
 
-<h3 id="run"><a name="run"></a>Run</h3>
+<p>See <code class="prettyprint">bin/install</code> for the full list, and customize your own. This also runs the same sequence as the CircleCI build in <code class="prettyprint">circle.yml</code>.</p>
 
-<ul>
-<li><strong>run</strong>: </li>
-</ul>
-<pre class="highlight shell"><code>npm start <span class="c"># runs aivadev</span>
+<p><strong>Docker</strong>. We also offer a Docker image <a href="https://hub.docker.com/r/kengz/aiva/">kengz/aiva</a>. It runs the same except with an extra layer of Docker. See <a href="http://kengz.me/aiva/#docker-installation">Docker installation</a> for more.</p>
+
+<h2 id="run"><a name="run"></a>Run</h2>
+<pre class="highlight shell"><code>npm start <span class="c"># runs 'aivadev' in development mode</span>
+</code></pre>
+<pre class="highlight shell"><code><span class="c"># Add flags for more modes</span>
+npm start --debug <span class="c"># activate debug logger</span>
+npm start production <span class="c"># runs 'aiva' in production mode</span>
 </code></pre>
 
-<p>See <a href="#commands">Commands</a> for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See <a href="#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
+<p>See <a href="http://kengz.me/aiva/#commands">Commands</a> for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook (only if activated). See <a href="http://kengz.me/aiva/#adapters"><strong>Adapters</strong></a> for connecting to different chat platforms.</p>
 
 <blockquote>
 <p>AIVA saying hi, translating, running deep neural net; on Slack, Telegram, Facebook:
-<img alt="AIVA on Slack, Telegram" src="./images/npm_start.png" /></p>
+<img alt="AIVA on Slack, Telegram" src="http://kengz.me/aiva/images/npm_start.png" /></p>
 </blockquote>
 
-<p>Check <a href="#setup-tips"><strong>Setup tips</strong></a> for help.</p>
+<p>Check <a href="http://kengz.me/aiva/#setup-tips"><strong>Setup tips</strong></a> for help.</p>
 
           <h1 id="features"><a name="features"></a>Features</h1>
 
@@ -329,7 +325,7 @@ On Mac OSX, before using Docker, make sure there&rsquo;s a <code>default</code> 
 </tr>
 <tr>
 <td style="text-align: left"><a href="#cross-platform">cross-platform</a></td>
-<td>implementing</td>
+<td>yes</td>
 </tr>
 <tr>
 <td style="text-align: left"><a href="#custom-msg">customMessage</a></td>
@@ -337,14 +333,14 @@ On Mac OSX, before using Docker, make sure there&rsquo;s a <code>default</code> 
 </tr>
 <tr>
 <td style="text-align: left"><a href="#graph-brain">graph brain</a></td>
-<td>improving</td>
+<td>pending</td>
 </tr>
 <tr>
 <td style="text-align: left"><a href="#multi-language">multi-language</a></td>
 <td>yes</td>
 </tr>
 <tr>
-<td style="text-align: left"><a href="#builtin-ai">built-in AI tools</a></td>
+<td style="text-align: left"><a href="#builtin-ai">AI tools</a></td>
 <td>yes</td>
 </tr>
 <tr>
@@ -399,12 +395,6 @@ Implementation is complete for Slack, Telegram, but partial for Facebook adapter
 
 <p>Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice, and it&rsquo;s data units can be schema-free. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier, schema-free allows knowledge creation on-the-fly.</p>
 
-<p>AIVA uses <a href="https://github.com/kengz/neo4jKB"><code class="prettyprint">neo4jKB</code></a> as the brain - a knowledge base implemented graph with <a href="http://neo4j.com"><code class="prettyprint">neo4j</code></a>. Specifically, <code class="prettyprint">neo4jKB</code> imposes a <a href="https://github.com/kengz/neo4jKB#kb-standard-basic">KB standard</a> on the graph for proper usage as a knowledge base.</p>
-
-<aside class="notice">
-Neo4jKB is a completed project. Currently it is used for user-recognition and user todo list. AIVA doesn&rsquo;t fully utilize Neo4jKB yet as the AI tools are under development. When done, AIVA will be able to automatically form and extract knowledge from the graph brain.
-</aside>
-
 <aside class="notice">
 User serialization that depends on the brain is complete for Slack, but partial for Telegram, Facebook. They will be done in the next release soon.
 </aside>
@@ -415,11 +405,9 @@ User serialization that depends on the brain is complete for Slack, but partial 
 
 <p>For more, see <a href="#polyglot">Polyglot environment</a> and <a href="#clients">Socket.io clients</a> for how it&rsquo;s done. We now support <code class="prettyprint">node.js, python, ruby</code>.</p>
 
-<h2 id="built-in-ai-tools"><a name="builtin-ai"></a>built-in AI tools</h2>
+<h2 id="ai-tools"><a name="builtin-ai"></a>AI tools</h2>
 
-<p>AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. </p>
-
-<p><code class="prettyprint">lib/&lt;lang&gt;/ais/</code> contains the specific implementations of the AI modules/models, and <code class="prettyprint">lib/&lt;lang&gt;/ai.&lt;lang&gt;</code> is the high-level script that imports the functions from <code class="prettyprint">lib/&lt;lang&gt;/ais/</code> for usage.</p>
+<p>AIVA can be used with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. The recommendations below saves you the tideous hunt, installation, and setup. </p>
 
 <p>Thanks to the multi-language feature, we can easily access the machine learning universe of Python. For example, <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a> contains a sample Tensorflow training script <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_train.py" target="_blank"><code>dnn_titanic_train.py</code></a>, and a script to deploy that DNN for usage <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank"><code>dnn_titanic_deploy.py</code></a>. It is interfaced through <a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank"><code>scripts/dnn_titanic.js</code></a> that allows you to use run predictions.</p>
 
@@ -494,9 +482,7 @@ User serialization that depends on the brain is complete for Slack, but partial 
 </tr>
 </tbody></table>
 
-<p>These tools are put close together in a <a href="#polyglot">polyglot environment</a>, so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/master/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses <code class="prettyprint">date.js</code> and <code class="prettyprint">spaCy</code>.</p>
-
-<p>For more in-depth details, see <a href="#modules">modules</a>. Also if find a great ML tool we should include, submit a Pull Request!</p>
+<p>These tools are put close together in a <a href="#polyglot">polyglot environment</a>, so you can start combining them in brand new ways. An example is the generic NLP parser for parsing user input into intent and functional arguments.</p>
 
 <h2 id="theoretical-power"><a name="theoretical"></a>theoretical power</h2>
 
@@ -504,451 +490,15 @@ User serialization that depends on the brain is complete for Slack, but partial 
 
 <p>Why is this important? Because for far too many times people have tried to solve problems that are unsolvable. Many of the bots out there are actually very restrictive. To allow developers to solve problems with full power, and with easy, we have built a general-purpose tool and made it theoretically complete, so you can focus on solving your problem.</p>
 
-          <h1 id="ai-modules"><a name="modules"></a>AI Modules</h1>
-
-<p>AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. You can use the as needed, directly from within AIVA without extra installations. This section gives a quick overview of their uses, and some useful helper modules.</p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">Module</th>
-<th>Implemented?</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><a href="#gen_nlp">general NLP</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#witai">Wit.ai</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#tensorflow">TensorFlow</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#skflow">SkFlow</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#indico">Indico.io</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#kbase">Knowledge base</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#neo4jKB-brain">neo4jKB brain</a></td>
-<td>minimal</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#google-api">Google APIs</a></td>
-<td>yes</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="#watson">IBM Watson</a></td>
-<td>yes</td>
-</tr>
-</tbody></table>
-
-<aside class="notice">
-To see all the available AI modules and methods, print the <code>ai</code> objects from <code>lib/js/ai.js</code> and <code>lib/py/ai.py</code>.
-</aside>
-
-<h2 id="general-nlp"><a name="gen_nlp"></a>general NLP</h2>
-<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_ai.js</span>
-<span class="kd">var</span> <span class="nx">genNLP</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/gen_nlp'</span><span class="p">)</span>
-
-<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/client.js'</span><span class="p">)</span>
-<span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
-
-<span class="kd">var</span> <span class="nx">input</span> <span class="o">=</span> <span class="s1">'find me flights from New York to London at 9pm tomorrow.'</span>
-
-<span class="nx">genNLP</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">reply</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">reply</span><span class="p">))</span>
-<span class="p">})</span>
-</code></pre>
-
-<p>NLP is core to a human-machine interactions. We provide one of the fastest and most advanced NLP module in <code class="prettyprint">lib/js/gen_nlp</code> for generic usage. It serves as a convenient method to get all the vital NLP results. This is especially useful in the <code class="prettyprint">js</code> <strong>interface</strong> scripts for <em>parsing user inputs, normalizing texts, and extracting information</em>.</p>
-
-<p>A large part of it is powered by <a href="https://spacy.io">spaCy</a>, which is <em>&ldquo;the fastest syntactic parser in the world and that its accuracy is within 1% of the best available&rdquo;</em>. The time parser uses <a href="https://github.com/matthewmueller/date">date</a>. Together, <code class="prettyprint">gen_nlp</code> extracts a rich and accurate set of results for connecting natural language input to your modules.</p>
-
-<p>Next we show an example of how a flight finder can benefit from it. For instance, it can get the <code class="prettyprint">NER</code> or <code class="prettyprint">noun_phrases</code> for the locations, time, person; the <code class="prettyprint">time</code> for a normalized form of ISO time string; <code class="prettyprint">NER_POS_TREE</code> to understand the dependencies, e.g. what&rsquo;s the origin and target destinations.</p>
-
-<blockquote>
-<p>The example in <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_ai.js#L5" target="_blank"><code>scripts/hello_ai.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/master/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="c1">// the result from genNLP.parse(input)</span>
-
-<span class="nx">result</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"len"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
-  <span class="s2">"pos_fine"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VB"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"PRP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"NNS"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"New"</span><span class="p">,</span> <span class="s2">"NNP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"York"</span><span class="p">,</span> <span class="s2">"NNP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"NNP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"at"</span><span class="p">,</span> <span class="s2">"IN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"9"</span><span class="p">,</span> <span class="s2">"CD"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"NN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"NN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"."</span><span class="p">]</span>
-  <span class="p">],</span>
-  <span class="s2">"NER"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"9pm"</span><span class="p">,</span> <span class="s2">"TIME"</span><span class="p">]</span>
-  <span class="p">],</span>
-  <span class="s2">"lemmas"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"me"</span><span class="p">,</span> <span class="s2">"flight"</span><span class="p">,</span> <span class="s2">"from"</span><span class="p">,</span> <span class="s2">"new"</span><span class="p">,</span> <span class="s2">"york"</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="s2">"london"</span><span class="p">,</span> <span class="s2">"at"</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">,</span> <span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">],</span>
-  <span class="s2">"tokens"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"me"</span><span class="p">,</span> <span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"from"</span><span class="p">,</span> <span class="s2">"New"</span><span class="p">,</span> <span class="s2">"York"</span><span class="p">,</span> <span class="s2">"to"</span><span class="p">,</span> <span class="s2">"London"</span><span class="p">,</span> <span class="s2">"at"</span><span class="p">,</span> <span class="s2">"9"</span><span class="p">,</span> <span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">],</span>
-  <span class="s2">"pos_coarse"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VERB"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"New"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"York"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"at"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"9"</span><span class="p">,</span> <span class="s2">"NUM"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"pm"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"PUNCT"</span><span class="p">]</span>
-  <span class="p">],</span>
-  <span class="s2">"NER_POS_tag"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s2">"find"</span><span class="p">,</span> <span class="s2">"VERB"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"flights"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"London"</span><span class="p">,</span> <span class="s2">"GPE"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"at"</span><span class="p">,</span> <span class="s2">"ADP"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"9pm"</span><span class="p">,</span> <span class="s2">"TIME"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"tomorrow"</span><span class="p">,</span> <span class="s2">"NOUN"</span><span class="p">],</span>
-    <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"PUNCT"</span><span class="p">]</span>
-  <span class="p">],</span>
-  <span class="s2">"NER_POS_tree"</span><span class="p">:</span> <span class="p">[{</span>
-    <span class="s2">"find"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">"flights"</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
-            <span class="s2">"me"</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
-              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"nsubj"</span><span class="p">,</span>
-              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"NOUN"</span>
-            <span class="p">}</span>
-          <span class="p">},</span> <span class="p">{</span>
-            <span class="s2">"from"</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
-                <span class="s2">"New York"</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
-                  <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"pobj"</span><span class="p">,</span>
-                  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"GPE"</span>
-                <span class="p">}</span>
-              <span class="p">}],</span>
-              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"prep"</span><span class="p">,</span>
-              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"ADP"</span>
-            <span class="p">}</span>
-          <span class="p">},</span> <span class="p">{</span>
-            <span class="s2">"to"</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
-                <span class="s2">"London"</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
-                  <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"pobj"</span><span class="p">,</span>
-                  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"GPE"</span>
-                <span class="p">}</span>
-              <span class="p">}],</span>
-              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"prep"</span><span class="p">,</span>
-              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"ADP"</span>
-            <span class="p">}</span>
-          <span class="p">},</span> <span class="p">{</span>
-            <span class="s2">"at"</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[{</span>
-                <span class="s2">"9pm"</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
-                  <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"pobj"</span><span class="p">,</span>
-                  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"TIME"</span>
-                <span class="p">}</span>
-              <span class="p">}],</span>
-              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"prep"</span><span class="p">,</span>
-              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"ADP"</span>
-            <span class="p">}</span>
-          <span class="p">},</span> <span class="p">{</span>
-            <span class="s2">"tomorrow"</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
-              <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"npadvmod"</span><span class="p">,</span>
-              <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"NOUN"</span>
-            <span class="p">}</span>
-          <span class="p">}],</span>
-          <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"ccomp"</span><span class="p">,</span>
-          <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"NOUN"</span>
-        <span class="p">}</span>
-      <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">"."</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
-          <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"punct"</span><span class="p">,</span>
-          <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"PUNCT"</span>
-        <span class="p">}</span>
-      <span class="p">}],</span>
-      <span class="s2">"edge"</span><span class="p">:</span> <span class="s2">"ROOT"</span><span class="p">,</span>
-      <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"VERB"</span>
-    <span class="p">}</span>
-  <span class="p">}],</span>
-  <span class="s2">"noun_phrases"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"me"</span><span class="p">,</span> <span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"London"</span><span class="p">,</span> <span class="s2">"9pm"</span><span class="p">],</span>
-  <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"find me flights from New York to London at 9 pm tomorrow ."</span><span class="p">,</span>
-  <span class="s2">"time"</span><span class="p">:</span> <span class="s2">"2016-04-24T01:00:00.042Z"</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The extracted NLP properties are listed below. For more details, refer to the links.</p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">NLP property</th>
-<th>Reference</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">text</td>
-<td>The original input text.</td>
-</tr>
-<tr>
-<td style="text-align: left">len</td>
-<td>Length: <a href="https://spacy.io/docs#doc-sequenceapi">number of tokens in text</a>.</td>
-</tr>
-<tr>
-<td style="text-align: left">tokens</td>
-<td>Text broken into <a href="https://spacy.io/docs#annotation-tokenization">array of tokens</a>.</td>
-</tr>
-<tr>
-<td style="text-align: left">lemmas</td>
-<td>The <a href="https://spacy.io/docs#annotation-lemmatization">base form</a> of each token.</td>
-</tr>
-<tr>
-<td style="text-align: left">NER</td>
-<td><a href="https://spacy.io/docs#annotation-ner">Named Entity Recognition</a></td>
-</tr>
-<tr>
-<td style="text-align: left">noun_phrases</td>
-<td><a href="https://spacy.io/docs#doc-spans-nounchunks">grouping of meaningful nouns</a></td>
-</tr>
-<tr>
-<td style="text-align: left">pos_coarse</td>
-<td><a href="https://spacy.io/docs#token-postags">Coarse</a> Part-of-speech tagging.</td>
-</tr>
-<tr>
-<td style="text-align: left">pos_fine</td>
-<td><a href="https://spacy.io/docs#token-postags">Finer</a> Part-of-speech tagging.</td>
-</tr>
-<tr>
-<td style="text-align: left">NER_POS_tree</td>
-<td>The <a href="https://spacy.io/docs#doc-spans-nounchunks">syntactic and dependency parse tree</a> of text, seen in <a href="https://spacy.io/demos/displacy">DisplaCy</a></td>
-</tr>
-<tr>
-<td style="text-align: left">NER_POS_tag</td>
-<td>The flatten array of NER_POS_tree, without the dependencies.</td>
-</tr>
-<tr>
-<td style="text-align: left">time</td>
-<td><a href="https://github.com/matthewmueller/date">Parsed time</a> if any, as ISO time string.</td>
-</tr>
-</tbody></table>
-
-<h2 id="wit-ai"><a name="witai"></a>Wit.ai</h2>
-
-<p><a href="https://wit.ai/">Wit.ai</a> is pretty sick, with a bot engine powered by AI. They are now part of Facebook, if you don&rsquo;t already know, and it&rsquo;s free to use.</p>
-
-<p>AIVA is fully compatible with Wit.ai, and we use its <a href="https://github.com/wit-ai/node-wit">Node.js client</a>. Bear in mind that you need to manually train it for each human input you wish to parse, or you can find some existing trained models. Their own guide is pretty comprehensive, so we won&rsquo;t discuss much here.</p>
-<pre class="highlight shell"><code><span class="c"># install to use wit.ai</span>
-npm i --save node-wit
-</code></pre>
-
-<blockquote>
-<p>Then add the token to bin/.keys-aiva and bin/.keys-aivadev; it will be set automatically.</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="nv">WIT_TOKEN</span><span class="o">=</span>&lt;your_wit_token&gt;
-</code></pre>
-
-<h2 id="tensorflow"><a name="tensorflow"></a>TensorFlow</h2>
-
-<p><a href="https://www.tensorflow.org">TensorFlow</a> is used mainly to build neural networks. There is a lot of comprehensive tutorials for it, so instead we will introduce you to the fastest TensorFlow interface: <a href="https://github.com/tensorflow/skflow">SkFlow</a>.</p>
-
-<p>SkFlow makes it very easy to use TensorFlow, and insanely fast to build a model. It comes with many useful wrapped methods and models. Check out this <a href="http://terrytangyuan.github.io/2016/03/14/scikit-flow-intro/">demo post written by the team</a>, their <a href="https://github.com/tensorflow/skflow#tutorial">tutorials</a>, and <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/skflow">examples</a>.</p>
-
-<p>We show how you can deploy a neural net with AIVA, with a sample Deep Neural Network trained on the Titanic data.</p>
-
-<p>The TensorFlow (and other) AI models shall be grouped under <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a>. The top level <a href="https://github.com/kengz/aiva/tree/master/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> script will import from this folder for usage via Socket.io.</p>
-
-<blockquote>
-<p>The Titanic DNN model can be trained using TensorFlow under <a href="https://github.com/kengz/aiva/blob/master/lib/py/ais/dnn_titanic_train.py#L53" target="_blank"><code>lib/py/ais/dnn_titanic_train.py</code></a> after you uncomment and run it. It draws data from the sibling folder <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/data/" target="_blank"><code>lib/py/ais/data/</code></a>, and the model is saved to <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a>. </p>
-
-<p>For deployment, <a href="https://github.com/kengz/aiva/tree/master/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> imports and exposes the methods in <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a>. They can then be used to do predictions from the interface <a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a>.</p>
-
-<p>TensorFlow Titanic DNN on Slack:
-<img alt="Titanic DNN on Slack" src="./images/titanic_dnn.png" /></p>
-</blockquote>
-
-<p>This demonstrates another AI component of AIVA; not only AI can power the bot, the bot can serve as an interface to specific AIs too. Feel free to explore the examples in AIVA and the resources given earlier. Doing AI is much easier today!</p>
-
-<table><thead>
-<tr>
-<th style="text-align: left">file/folder</th>
-<th>details</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_train.py" target="_blank">lib/py/ais/dnn_titanic_train.py</a></td>
-<td>Train and save the Titanic DNN model.</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/data/" target="_blank">lib/py/ais/data/</a></td>
-<td>Folder for training and test data.</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a></td>
-<td>Folder for the saved model for deployment. Will be created when new model is trained.</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/" target="_blank">lib/py/ais/ai_lib/</a></td>
-<td>Library with helpers for the AI folder.</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a></td>
-<td>Deploy the DNN titatnic model.</td>
-</tr>
-<tr>
-<td style="text-align: left"><a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a></td>
-<td>Interface script for the deployed model.</td>
-</tr>
-</tbody></table>
-
-<p>Yes, <em>you did just train a Deep Neural Network and deploy it on Slack for use</em>. The mythical creative of deep learning - now at your fingertips - is going to help you unleash a whole new world of possibilities. And that’s not all; remember, there is an entire package of every major type of machine learning tools, all included in AIVA. Next, we will go over them quickly, and leave you to explore them more deeply.</p>
-
-<p>See <a href="https://github.com/tensorflow/skflow">SkFlow</a> for their tutorials and documentation.</p>
-
-<h2 id="skflow-modules"><a name="skflow"></a>SkFlow Modules</h2>
-
-<p>SkFlow is under TensorFlow. Besides, SkFlow also comes with:</p>
-
-<ul>
-<li><a href="http://scikit-learn.org"><strong>scikit-learn</strong></a></li>
-<li><a href="http://pandas.pydata.org"><strong>pandas</strong></a> </li>
-</ul>
-
-<p>both of which are very popular Python machine learning libraries for techniques that complement the neural nets. SkFlow is designed to be used with all three of them: TensorFlow, scikit and pandas.</p>
-
-<h2 id="indico-io"><a name="indico"></a>Indico.io</h2>
-
-<p><a href="https://indico.io">Indico.io</a> is <strong>the go-to machine learning API</strong> for developers. It focuses on the most applicable and useful ML tools for <a href="https://indico.io/product">text and image analysis</a>. This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.</p>
-
-<blockquote>
-<p>The indico wrapper is grouped under the <code class="prettyprint">ai</code> module. Remember to save your API key into the <code class="prettyprint">.keys-</code> before using. A simple example can be found at <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_ai.js#L18" target="_blank"><code>scripts/hello_ai.js</code></a>.</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="c1">// js: scripts/hello_ai.js</span>
-<span class="kd">var</span> <span class="nx">ai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../lib/js/ai'</span><span class="p">)</span>
-<span class="nx">ai</span><span class="p">.</span><span class="nx">indico</span><span class="p">.</span><span class="nx">sentiment</span><span class="p">([</span><span class="s1">'indico is so easy to use!'</span><span class="p">,</span> <span class="s1">'Still really easy, yiss'</span><span class="p">])</span>
-<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
-<span class="c1">// [ 0.9782025594088044, 0.9895808115135271 ]</span>
-</code></pre>
-
-<blockquote>
-<p>We also add an interface script <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_ai.js" target="_blank"><code>below that</code></a>, and demo it on Telegram. Of course the real application is likely backend oriented, such as gauging the quality of your customer service by analyzing their sentiment in chat.</p>
-
-<p>Indico on Telegram:
-<img alt="Indico on Telegram" src="./images/indico.png" /></p>
-</blockquote>
-
-<p>With Indico.io, everything is done via its REST API or their <a href="https://indico.io/docs">wrapper clients</a> - no model/training is needed. AIVA includes the <a href="https://github.com/IndicoDataSolutions/IndicoIo-node">Node.js Indico.io wrapper</a>, nested under the <a href="https://github.com/kengz/aiva/tree/master/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.</p>
-
-<p>In fact, Indico is currently <a href="https://indico.io/news/121515_indico_SentimentHQ_Release">state of the art</a> in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.</p>
-
-<p><a href="https://indico.io/docs">Read their docs</a>, <a href="https://indico.io/product">see what they offer</a>, and get <a href="https://indico.io/plans">your API key here</a>. You can get 10k free calls per month, which is sufficient for personal/small team usage.</p>
-
-<h2 id="knowledge-base"><a name="kbase"></a>Knowledge base</h2>
-
-<p>Sometimes we need a bot to have general knowledge, such as what a phone is, as well as local knowledge, such as user preferences. This can aid with its functions, and allow for <strong>autoplanning</strong>.</p>
-
-<p>Autoplanning is vital for a bot to be able to function on its own without being explicitly told about every small detail of a task. Take the example input &ldquo;call my wife&rdquo;. It&rsquo;s true that we can hard-code the logic to find who &ldquo;wife&rdquo; is for a given person, get &ldquo;wife&rdquo;&rsquo;s number, and execute the dial function with it as the argument. What about plenty of other tasks? We can&rsquo;t possibly hand-code each one.</p>
-
-<p>Here&rsquo;s a slightly different approach: for every function we allow the bot to do, we only define the function and its needed arguments. For calling a number it&rsquo;d be <code class="prettyprint">function = dial, args = [number]</code>. With a knowledge base and autoplanning, the input &ldquo;call my wife&rdquo; will be parsed into <code class="prettyprint">function = dial</code>, <code class="prettyprint">args = [number]</code>. Since it&rsquo;s only given a <code class="prettyprint">person</code>, it can use the knowledge base to trace the connection <code class="prettyprint">person -[has]-&gt; number</code>, and proceed to retrieve the needed information from memory. The bot can use its own knowledge to plan and execute the function autonomously.</p>
-
-<p>This is a pretty advanced feature that&rsquo;s still being implemented for AIVA. It is based on the theoretical proofs and outlines for a generic interface <a href="https://github.com/kengz/aiva/tree/master/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/master/docs/CGKB.md">CGKB</a>.</p>
-
-<p>AIVA comes with 3 knowledge bases, from generic to local: </p>
-
-<ul>
-<li><a href="https://developers.google.com/knowledge-graph/">Google Knowledge Graph Search</a></li>
-<li><a href="https://github.com/Planeshifter/node-concept-net">MIT ConceptNet</a></li>
-<li>the local <a href="#graph-brain">neo4jKB brain</a>.</li>
-</ul>
-
-<blockquote>
-<p>For now you can use Google Knowledge Graph directly to query knowledge. Note this is distinct from normal Google search:
-<img alt="Google Knowledge Graph on Slack" src="./images/googlekg.png" /></p>
-</blockquote>
-
-<h2 id="neo4jkb-brain"><a name="#neo4jKB-brain"></a>Neo4jKB brain</h2>
-
-<p>We discussed the <a href="#graph-brain">graph brain</a> above, known as <a href="https://github.com/kengz/neo4jKB"><code class="prettyprint">neo4jKB</code></a>, implemented in neo4j. It has a defined <a href="https://github.com/kengz/neo4jKB#kb-standard-basic">KB standard</a> on the graph for proper usage as a knowledge base.</p>
-
-<p>This serves as the local knowledge and the central memory system. It is the reason AIVA can behave as one consistent entity across different chat platforms. All of the memory-dependent tasks shall be read from and write to the brain.</p>
-
-<p>AIVA uses the brain for user serialization, standardized in <a href="https://github.com/kengz/aiva/tree/master/lib/js/user.js" target="_blank"><code>lib/js/user.js</code></a> and called automatically on start from <a href="https://github.com/kengz/aiva/tree/master/scripts/serialize_users.js" target="_blank"><code>scripts/serialize_users.js</code></a>. It will match up the multiple identities of a same user from different platforms. You can see all the serialized user nodes on neo4j&rsquo;s browser interface at <code class="prettyprint">http://localhost:7474/</code> if you are running locally, or use <a href="#ssh-browser-forwarding">SSH forwarding described here</a>.</p>
-
-<blockquote>
-<p>The serialized users in AIVA&rsquo;s neo4jKB graph brain:
-<img alt="Users in brain" src="./images/serialized_users.png" /></p>
-</blockquote>
-
-<p>The todo list feature is another relevant example. The todo items are connected to their owner. The module logic for neo4jKB is defined in <a href="https://github.com/kengz/aiva/tree/master/lib/js/todo.js" target="_blank"><code>lib/js/todo.js</code></a>.</p>
-
-<blockquote>
-<p>The todos belonging to a user as connected unit of information, in AIVA&rsquo;s neo4jKB graph brain:
-<img alt="User todos" src="./images/user_todo.png" /></p>
-</blockquote>
-
-<p>These two examples show briefly how to use neo4jKB for AIVA&rsquo;s modules, to help you get started. On our roadmap, we plan to complete the auto-parsing NLP module that automatically canonicalize knowledge from user input, so you don&rsquo;t have to write the define the knowledge yourself. This is closely related to the <strong>autoplanning</strong> of the <a href="#kbase">knowledge base feature</a>, and is part of <a href="https://github.com/kengz/aiva/tree/master/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/master/docs/CGKB.md">CGKB</a>.</p>
-
-<p>See <a href="https://github.com/kengz/neo4jKB">neo4jKB</a> for documentation.</p>
-
-<h2 id="google-apis"><a name="#google-api"></a>Google APIs</h2>
-
-<p>Google APIs are grouped under the <code class="prettyprint">ai</code> module because many of them are actually AI or powered by AI. <a href="https://github.com/kengz/aiva/tree/master/lib/js/ais/google.js" target="_blank"><code>lib/js/ais/google.js</code></a> imports the <a href="https://github.com/google/google-api-nodejs-client">Google APIs Node.js client</a>. Not all of the APIs are initialized, you&rsquo;d have to activate each one as you wish to use on <a href="https://console.developers.google.com">Google API Manager</a> and in <code class="prettyprint">lib/js/ais/google.js</code>.</p>
-
-<aside class="notice">
-You must &ldquo;enable APIs&rdquo; from Google API Manager for your Google API key to use them.
-</aside>
-
-<p>We have seen Knowledge Graph Search earlier; Google Search actually uses a <a href="https://www.npmjs.com/package/google">npm module google</a> powered by a scraper, so it is free without quota. The interface script is at <a href="https://github.com/kengz/aiva/tree/master/scripts/google.js" target="_blank"><code>scripts/google.js</code></a>. Google Translate and language detection are also based on a scraper, in <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a> and is free without quota as well. The interface script is at <a href="https://github.com/kengz/aiva/tree/master/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>.</p>
-
-<p>See <a href="https://github.com/google/google-api-nodejs-client">google API Nodejs client</a> for their documentation.</p>
-
-<h2 id="ibm-watson"><a name="watson"></a>IBM Watson</h2>
-
-<p>IBM Watson is a collection of cognitive computing tools. AIVA&rsquo;s <code class="prettyprint">ai</code> module includes the IBM Watson Node.js client at <a href="https://github.com/kengz/aiva/tree/master/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a>.</p>
-
-<p>To use Watson, you need to register at <a href="http://www.ibm.com/cloud-computing/bluemix/watson/">IBM Watson Bluemix</a>, activate the API you want, and get the individual credentials <code class="prettyprint">&lt;username&gt;:&lt;password&gt;</code>. Note that the credentials are distinct for each API you activate.</p>
-
-<p>Then, add the credentials in <code class="prettyprint">bin/.keys-aiva</code> and <code class="prettyprint">bin/.keys-aivadev</code> with the format <code class="prettyprint">WATSON_&lt;API-NAME&gt;_CRED=&lt;username&gt;:&lt;password&gt;</code>, for example <code class="prettyprint">WATSON_PERSONALITY_INSIGHTS_CRED=&lt;username&gt;:&lt;password&gt;</code> for Personality Insights. The <a href="https://github.com/kengz/aiva/tree/master/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a> module will automatically read the environment variable and activate the function for your usage.</p>
-
-<p>See the <a href="https://github.com/watson-developer-cloud/node-sdk">Watson node sdk</a> for their documentation.</p>
-
           <h1 id="adapters"><a name="adapters"></a>Adapters</h1>
 
-<p>AIVA can simultaneously connect to multiple chat platforms and still behave as one entity, due to its central <a href="#neo4jKB-brain">graph brain</a>. This allows you to <strong>build once, run everywhere</strong>.</p>
+<p>AIVA can simultaneously connect to multiple chat platforms and still behave as one entity. This allows you to <strong>build once, run everywhere</strong>.</p>
 
-<p>It utilizes <a href="https://github.com/github/hubot/blob/master/docs/adapters.md">hubot&rsquo;s adapters</a>. So, feel free to add any as you wish. AIVA comes with <strong>Slack, Telegram, Fb</strong> adapters, installed with <code class="prettyprint">npm run gi</code>, and auto-run with AIVA.</p>
+<p>It utilizes <a href="https://github.com/github/hubot/blob/master/docs/adapters.md">hubot&rsquo;s adapters</a>. So, feel free to add any as you wish. AIVA comes with <strong>Slack, Telegram, Fb</strong> adapters. See <code class="prettyprint">config/default.json</code> at key <code class="prettyprint">ADAPTERS</code> to activate or add more.</p>
 
-<p>For each adapter, we encourage you to create two tokens, for <strong>production</strong> and <strong>development</strong> respectively. All bot tokens go into <a href="https://github.com/kengz/aiva/blob/master/bin/.keys-example" target="_blank"><code>bin/.keys-aiva or bin/.keys-aiva</code></a> created automatically during <code class="prettyprint">npm run gi</code>. If you do not wish to use an adapter, simple remove its token.</p>
+<p>For each adapter, we encourage you to create two tokens, for <strong>production</strong> and <strong>development</strong> respectively. The credentials go into <code class="prettyprint">config/default.json</code>(development), and <code class="prettyprint">config/production.json</code>.</p>
 
-<p>The webhooks for adapters are auto-set in <a href="#ngrok"><code class="prettyprint">ngrok</code></a> in <code class="prettyprint">index.js</code>; you don&rsquo;t even need to provide a webhook url.</p>
+<p>The webhooks for adapters are auto-set in <a href="#ngrok"><code class="prettyprint">ngrok</code></a> in <code class="prettyprint">src/aiva.js</code>; you don&rsquo;t even need to provide a webhook url.</p>
 
 <p>As mentioned, we can use the custom message formatting of a platform, such as Slack attachment or Facebook rich messages. You can check the adapter by <code class="prettyprint">robot.adapterName</code> to format message accordingly, then send it using the method <code class="prettyprint">robot.adapter.customMessage</code> for any adapter. More below.</p>
 
@@ -958,30 +508,30 @@ customMessage will be generalized soon - we are still working with the developer
 
 <h2 id="slack">Slack</h2>
 
-<p><a href="https://github.com/slackhq/hubot-slack">hubot-slack</a> comes with AIVA. It uses Slack&rsquo;s RTC API. Create your bot and get the token <a href="https://my.slack.com/services/new/bot">here</a>, to set <a href="https://github.com/kengz/aiva/blob/master/bin/.keys-example#L2" target="_blank"><code>HUBOT_SLACK_TOKEN</code></a>.</p>
+<p><a href="https://github.com/slackhq/hubot-slack">hubot-slack</a> comes with AIVA. It uses Slack&rsquo;s RTC API. Create your bot and get the token <a href="https://my.slack.com/services/new/bot">here</a>.</p>
 
 <p>To use customMessage, see the <a href="https://github.com/slackhq/hubot-slack/issues/170#issuecomment-113315455">example (pending update)</a>, invoked when <code class="prettyprint">robot.adapterName == &#39;slack&#39;</code>. Refer to the <a href="https://api.slack.com/docs/attachments">Slack attachments</a> for formatting.</p>
 
 <h2 id="telegram">Telegram</h2>
 
-<p><a href="https://github.com/lukefx/hubot-telegram">hubot-telegram</a> comes with AIVA. Create your bot and get the token <a href="https://core.telegram.org/bots#3-how-do-i-create-a-bot">here</a>, to set <a href="https://github.com/kengz/aiva/blob/master/bin/.keys-example#L3" target="_blank"><code>TELEGRAM_TOKEN</code></a>.</p>
+<p><a href="https://github.com/lukefx/hubot-telegram">hubot-telegram</a> comes with AIVA. Create your bot and get the token <a href="https://core.telegram.org/bots#3-how-do-i-create-a-bot">here</a>.</p>
 
 <aside class="notice">
-It&rsquo;s optional to provide a webhook url in bin/.keys-aiva with TELEGRAM_WEBHOOK; it is set up automatically in <a href="#ngrok"><code>index.js with ngrok</code></a>.
+It&rsquo;s optional to provide a webhook url in config/ with TELEGRAM_WEBHOOK; it is set up automatically in <a href="#ngrok"><code>index.js with ngrok</code></a>.
 </aside>
 
 <p>To use customMessage, see the <a href="https://github.com/lukefx/hubot-telegram#telegram-specific-functionality-ie-stickers-images">example</a>, invoked when <code class="prettyprint">robot.adapterName == &#39;telegram&#39;</code>. Refer to <a href="https://core.telegram.org/bots/api">Telegram bot API</a> for formatting.</p>
 
 <h2 id="facebook">Facebook</h2>
 
-<p><a href="https://github.com/chen-ye/hubot-fb">hubot-fb</a> comes with AIVA. Create your bot by creating a Fb App and Page, as detailed <a href="https://developers.facebook.com/docs/messenger-platform/quickstart">here</a>. Set the <a href="https://github.com/kengz/aiva/blob/master/bin/.keys-example#L4" target="_blank">keys</a> <code>FB_PAGE_ID, FB_APP_ID, FB_APP_SECRET, FB_PAGE_TOKEN</code> as explained in the adapter&rsquo;s page <a href="https://github.com/kengz/hubot-fb#configuration">hubot-fb</a>.</p>
+<p><a href="https://github.com/chen-ye/hubot-fb">hubot-fb</a> comes with AIVA. Create your bot by creating a Fb App and Page, as detailed <a href="https://developers.facebook.com/docs/messenger-platform/quickstart">here</a>. Set the <code class="prettyprint">FB_PAGE_ID, FB_APP_ID, FB_APP_SECRET, FB_PAGE_TOKEN</code> as explained in the adapter&rsquo;s page <a href="https://github.com/kengz/hubot-fb#configuration">hubot-fb</a>.</p>
 
 <aside class="notice">
-It&rsquo;s optional to provide a webhook url in bin/.keys-aiva with FB_WEBHOOK; it is set up automatically in <a href="#ngrok"><code>index.js with ngrok</code></a>.
+It&rsquo;s optional to provide a webhook url; it is set up automatically in <a href="#ngrok"><code>aiva.js with ngrok</code></a>.
 </aside>
 
 <aside class="warning">
-Note that Facebook takes 10 mins to update webhook, so you may need to wait till then to start receiving messages. We advice using a persistent url in bin/.keys-aiva key FB_WEBHOOK, e.g. a Heroku url, or ngrok custom domain url; see <a href="#ngrok"><code>Tips on Webhook with ngrok</code></a>.
+Note that Facebook takes 10 mins to update webhook, so you may need to wait till then to start receiving messages. We advice using a persistent url in config/ key FB_WEBHOOK, e.g. a Heroku url, or ngrok custom domain url; see <a href="#ngrok"><code>Tips on Webhook with ngrok</code></a>.
 </aside>
 
 <p>To use customMessage, see <a href="https://github.com/chen-ye/hubot-fb#sending-rich-messages-templates-images">the examples</a>, invoked when <code class="prettyprint">robot.adapterName == &#39;fb&#39;</code>. Refer to the <a href="https://developers.facebook.com/docs/messenger-platform/send-api-reference">Send API</a> for formatting.</p>
@@ -989,8 +539,6 @@ Note that Facebook takes 10 mins to update webhook, so you may need to wait till
           <h1 id="development-guide"><a name="dev-guide"></a>Development Guide</h1>
 
 <p>AIVA is created as an A.I. general purpose interface for developers. You can implement any features, use it simultaneously on the major platforms, and code in multiple languages. This solves the problem that many bots out there are are too specific, often bounded to one chat platform, and can only be developed in one language.</p>
-
-<p>It has a NLP parser and KB brain out of the box. We take care of the crucial backend and system, so <em>developers can focus on things that matter</em>.</p>
 
 <p>Since it is a generic interface, you can focus on writing your app/module. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails to serve it.</p>
 
@@ -1002,42 +550,33 @@ Note that Facebook takes 10 mins to update webhook, so you may need to wait till
 Use &ldquo;aiva&rdquo; for production, &ldquo;aivadev&rdquo; for development. They can coexist without system conflicts.
 </aside>
 
-<p>For Dockers, there are 2 containers: <code class="prettyprint">aiva-production</code> and <code class="prettyprint">aiva-development</code>, which provide good isolation. You can develop safely in parallel without needing to take down your deployed version.</p>
+<h3 id="commands"><a name="commands"></a>Commands</h3>
+
+<p>All the commands are coded through <code class="prettyprint">package.json</code> and can be ran from <code class="prettyprint">npm</code>:</p>
+<pre class="highlight shell"><code>npm start <span class="c"># run development mode 'aivadev'</span>
+npm start --debug <span class="c"># activate debug logger</span>
+npm start production <span class="c"># runs production mode 'aiva'</span>
+npm stop <span class="c"># stop the bots</span>
+npm <span class="nb">test</span> <span class="c"># run unit tests</span>
+forever list <span class="c"># see the list of bots running</span>
+</code></pre>
 
 <h3 id="docker">Docker</h3>
 
 <p>All the commands/scripts are compatible for use with/without Docker. The Docker image syncs the repo volume, so you can edit the source code and run the terminal commands as usual. The shell will enter a Docker container and run the same thing as it would on a local machine, so you can barely feel the difference when developing.</p>
 
+<p>For Dockers, there are 2 containers: <code class="prettyprint">aiva-production</code> and <code class="prettyprint">aiva-development</code>, which provide good isolation. You can develop safely in parallel without needing to take down your deployed version.</p>
+
 <p>See <a href="#dockerization">Dockerization</a> for how AIVA is packaged into Docker.</p>
 
-<p>The commands run Docker if the image <code class="prettyprint">kengz/aiva</code> is pulled, otherwise they run locally without entering a Docker container. We&rsquo;ll list them separately for clarity:</p>
-
-<h3 id="commands-with-docker"><a name="commands"></a>Commands (with Docker)</h3>
-<pre class="highlight shell"><code><span class="c"># All commands, uses `development` if not specified</span>
-npm start <span class="c"># run aivadev (thru supervisord on Docker)</span>
-npm start production <span class="c"># runs aiva</span>
-<span class="c"># append `production` below as needed</span>
-npm stop <span class="c"># stop the container along with the bots</span>
-npm <span class="nb">test</span> <span class="c"># run unit tests</span>
-npm run enter <span class="c"># enter a parallel bash session in the Docker container</span>
+<p>Everything runs pretty much the same with Docker, except for a layer of wrapped abstractions. There are some extra commands for Docker:</p>
+<pre class="highlight shell"><code>npm run enter <span class="c"># enter a parallel bash session in the Docker container</span>
 npm run reset <span class="c"># stop and remove the container</span>
 </code></pre>
 
 <aside class="notice">
-<code>npm start</code> launches the primary bash session, which is used only for <code>supervisord</code>. Use <code>npm run enter</code> to launch parallel bash sessions for all other purposes.
+For Docker, <code>npm start</code> launches the primary bash session, which is used only for <code>supervisord</code>. Use <code>npm run enter</code> to launch parallel bash sessions for all other purposes.
 </aside>
-
-<h3 id="commands-without-docker">Commands (without Docker)</h3>
-
-<p>On your local machine without containerization:</p>
-<pre class="highlight shell"><code><span class="c"># All commands, uses `development` if not specified</span>
-npm start <span class="c"># run aivadev</span>
-npm start production <span class="c"># runs aiva</span>
-<span class="c"># append `production` below as needed</span>
-npm stop <span class="c"># stop the bots</span>
-npm <span class="nb">test</span> <span class="c"># run unit tests</span>
-forever list <span class="c"># see the list of bots running</span>
-</code></pre>
 
 <h3 id="custom-dependencies">Custom Dependencies</h3>
 
@@ -1049,8 +588,12 @@ forever list <span class="c"># see the list of bots running</span>
 
 <p>For now we have <code class="prettyprint">/lib/client.{js, py, rb}</code>. Feel free to add <code class="prettyprint">Socket.io</code> client for more languages through pull request!</p>
 
+<aside class="notice">
+Note that the examples below are no longer included, but can be found in aiva v3.2.1
+</aside>
+
 <blockquote>
-<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code> with:</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">src/start-io.js</code> with:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
 npm run server
@@ -1064,7 +607,7 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 <p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/master/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in <code class="prettyprint">python</code>. Uncomment and run it.</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="c1">// js: scripts/translate.js</span>
-<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
 
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
@@ -1076,7 +619,7 @@ This is automatically run with <code>npm run</code>, so don&rsquo;t manual-run i
 </code></pre>
 
 <aside class="success">
-For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>config/</code> if not already.
 </aside>
 
 <h2 id="polyglot-development"><a name="polyglot-dev"></a>Polyglot Development</h2>
@@ -1196,7 +739,7 @@ The generic advice: ensure that your functions return the correct JSON <code>msg
 <p>In fact, <a href="https://github.com/kengz/aiva/tree/master/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/master/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a></p>
 
 <blockquote>
-<p>To test-run it, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code> with:</p>
+<p>To test-run it, you can start the <strong>polyglot server</strong> at <code class="prettyprint">src/start-io.js</code> with:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
 npm run server
@@ -1206,7 +749,7 @@ npm run server
 <p>Uncomment the snippet at the top of <a href="https://github.com/kengz/aiva/blob/master/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> and run it.</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="c1">// js: scripts/translate.js</span>
-<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
 
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
@@ -1336,7 +879,7 @@ Socket.io can send deeply nested JSON with standard data type.
 <p>There is a socket.io server that extends Hubot&rsquo;s Express.js server: <a href="https://github.com/kengz/aiva/tree/master/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All <code class="prettyprint">msg</code>s go through it. For example, let <code class="prettyprint">msg.to = &#39;hello.py&#39;, msg.intent = &#39;sayHi&#39;</code>. The server splits this into <code class="prettyprint">module = &#39;hello&#39;, lang = &#39;py&#39;</code>, modifies <code class="prettyprint">msg.to = module</code>, then sends the <code class="prettyprint">msg</code> to the client of <code class="prettyprint">lang</code>.</p>
 
 <blockquote>
-<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">lib/io_start.js</code> with:</p>
+<p>For quick multilingual dev, you can start the <strong>polyglot server</strong> at <code class="prettyprint">src/start-io.js</code> with:</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="c"># shell: start the polyglot server</span>
 npm run server
@@ -1354,7 +897,7 @@ This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it be
 <p>then import a <code class="prettyprint">lib/client.js</code> to test a local feature from the <code class="prettyprint">js</code> interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/master/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in <code class="prettyprint">python</code>. Uncomment and run it.</p>
 </blockquote>
 <pre class="highlight javascript"><code><span class="c1">// js: scripts/translate.js</span>
-<span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../client.js'</span><span class="p">)</span>
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">gPass</span>
 
 <span class="nx">global</span><span class="p">.</span><span class="nx">gPass</span><span class="p">({</span>
@@ -1366,7 +909,7 @@ This is automatically with <code>npm run</code>, so don&rsquo;t manual-run it be
 </code></pre>
 
 <aside class="success">
-For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>config/</code> if not already.
 </aside>
 
 <blockquote>
@@ -1428,19 +971,23 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 </thead><tbody>
 <tr>
 <td style="text-align: left">bin/</td>
-<td>bot keys, binaries, bash setup scripts.</td>
+<td>Binary executables</td>
+</tr>
+<tr>
+<td style="text-align: left">config/</td>
+<td>credentials</td>
+</tr>
+<tr>
+<td style="text-align: left">db/</td>
+<td>Database migration files, models</td>
 </tr>
 <tr>
 <td style="text-align: left">lib/&lt;lang&gt;/</td>
 <td>Module scripts, grouped by language, callable via socket.io. See <a href="#polyglot-dev">Polyglot Development</a>.</td>
 </tr>
 <tr>
-<td style="text-align: left">lib/client.&lt;lang&gt;</td>
-<td>Import all scripts from <code class="prettyprint">lib/&lt;lang&gt;/</code> and expose them to socket.io for cross-language communication.</td>
-</tr>
-<tr>
-<td style="text-align: left">lib/io_start.js</td>
-<td>socket.io server and client logic for cross-language communication.</td>
+<td style="text-align: left">src/</td>
+<td>core bot logic</td>
 </tr>
 <tr>
 <td style="text-align: left">logs</td>
@@ -1459,10 +1006,6 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 <td>Unit tests; uses Mocha.</td>
 </tr>
 <tr>
-<td style="text-align: left">.env</td>
-<td>Non-bot-specific environment variables.</td>
-</tr>
-<tr>
 <td style="text-align: left">external-scripts.json</td>
 <td>You can <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading">load Hubot npm modules</a> by specifying them in here and <code class="prettyprint">package.json</code>.</td>
 </tr>
@@ -1474,7 +1017,7 @@ To add support for other language, say Java, you can add a <code>lib/client.java
 
 <p><a href="https://www.docker.com/">Docker</a> is a nice way to package and distribute complex modules, it also allows you to develop in safe isolated environment with containerization. </p>
 
-<p>The <a href="https://hub.docker.com/r/kengz/aiva/">AIVA Docker image</a> (2Gb) comes ready-to-run for the repo source code. It includes all the needed components, e.g. the runtimes (nodejs, python, ruby, Java), Neo4j, the ML modules (Tensorflow, scikitlearn, scipy, numpy, spacy etc.). Depending on which OS you use, the setups are easy:</p>
+<p>The <a href="https://hub.docker.com/r/kengz/aiva/">AIVA Docker image</a> (1Gb) comes ready-to-run for the repo source code, same as if ran locally.</p>
 
 <h3 id="ubuntu">Ubuntu</h3>
 
@@ -1524,49 +1067,9 @@ brew install node
 npm update npm -g
 </code></pre>
 
-<h2 id="system-dependencies"><a name="dependencies"></a>System Dependencies</h2>
-
-<p>Though not advised, you can skip Docker and develop on your machine directly without containerization. </p>
-
-<ul>
-<li>Use this automatic <a href="https://github.com/kengz/mac_setup">setup script</a> for Ubuntu and MacOSX, </li>
-<li>run <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>. </li>
-<li>run <code class="prettyprint">npm run gi</code></li>
-</ul>
-
-<p>These install all the system and project dependencies automatically. There is a lot of components listed there for your inspection.</p>
-
-<h2 id="project-dependencies"><a name="project-dependencies"></a>Project Dependencies</h2>
-
-<p>You can save your project dependencies:</p>
-
-<ul>
-<li><code class="prettyprint">package.json</code> for <code class="prettyprint">node.js</code></li>
-<li><code class="prettyprint">requirements.txt</code> for <code class="prettyprint">python</code></li>
-<li><code class="prettyprint">Gemfile</code> for <code class="prettyprint">ruby</code></li>
-</ul>
-
-<p>and the Docker container autoruns the installation script on every start: <code class="prettyprint">npm run gi</code> runs the following in sequence:</p>
-
-<ul>
-<li><code class="prettyprint">npm install</code></li>
-<li><code class="prettyprint">pip3 install -r requirements.txt</code></li>
-<li><code class="prettyprint">bundle install</code></li>
-</ul>
-
-<p>If you&rsquo;re not using Docker, you need to run <code class="prettyprint">npm run gi</code> manually.</p>
-
 <h2 id="custom-deployment">Custom deployment</h2>
 
 <p>All bot deployment commands are wrapped with <code class="prettyprint">npm</code> inside <code class="prettyprint">package.json</code>. For more novice users, you can customize the <code class="prettyprint">scripts</code> in <code class="prettyprint">package.json</code>. For example, changing &ldquo;aiva&rdquo; and &ldquo;aivadev&rdquo; to your bot name of choice.</p>
-
-<h2 id="different-botname">Different Botname</h2>
-
-<p>If you prefer a different bot name, replace &ldquo;aiva&rdquo; from the <code class="prettyprint">bin/.keys-</code> and in <code class="prettyprint">package.json</code>.</p>
-
-<p>Sometimes you just can&rsquo;t use the bot name across platforms - maybe it&rsquo;s already taken, or they require a &ldquo;bot&rdquo; word be added to it. </p>
-
-<p>For all adapters, <code class="prettyprint">process.env.BOTNAME</code> defaults to the name after &ldquo;-&rdquo; in <code class="prettyprint">.keys-&lt;botname&gt;</code>. You can change this by providing in there an env variable <code class="prettyprint">&lt;ADAPTER&gt;_BOTNAME</code>, e.g. <code class="prettyprint">TELEGRAM_BOTNAME=AIVAthebot</code>.</p>
 
 <h2 id="monitoring">Monitoring</h2>
 
@@ -1611,42 +1114,14 @@ Advanced users can use this section to configure and extend AIVA.
 
 <p>You don&rsquo;t need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/master/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at <a href="http://localhost:4040"><code class="prettyprint">http://localhost:4040</code></a> (production) or <a href="http://localhost:4041"><code class="prettyprint">http://localhost:4041</code></a> (development) after AIVA is run.</p>
 
-<p>Note that for each adapter, if it needs a webhook, you need to specify the <code class="prettyprint">PORT</code> and the environment key for the webhook, at the top of <a href="https://github.com/kengz/aiva/blob/master/index.js" target="_blank"><code>index.js</code></a> in variables <code class="prettyprint">adapterPorts</code>, <code class="prettyprint">adapterWebhookKey</code>.</p>
-<pre class="highlight javascript"><code><span class="c1">// js: index.js</span>
-<span class="c1">// list of all ports used, including for adapters</span>
-<span class="kd">var</span> <span class="nx">portList</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">production</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">ngrok</span><span class="p">:</span> <span class="s1">'4040-4041'</span><span class="p">,</span>
-    <span class="na">neo4j</span><span class="p">:</span> <span class="mi">7474</span><span class="p">,</span>
-    <span class="na">socketIO</span><span class="p">:</span> <span class="mi">6464</span><span class="p">,</span>
-    <span class="na">slack</span><span class="p">:</span> <span class="mi">8343</span><span class="p">,</span>
-    <span class="na">telegram</span><span class="p">:</span> <span class="mi">8443</span><span class="p">,</span>
-    <span class="na">fb</span><span class="p">:</span> <span class="mi">8543</span>
-  <span class="p">},</span>
-  <span class="na">development</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">ngrok</span><span class="p">:</span> <span class="s1">'4040-4041'</span><span class="p">,</span>
-    <span class="na">neo4j</span><span class="p">:</span> <span class="mi">7476</span><span class="p">,</span>
-    <span class="na">socketIO</span><span class="p">:</span> <span class="mi">6466</span><span class="p">,</span>
-    <span class="na">slack</span><span class="p">:</span> <span class="mi">8345</span><span class="p">,</span>
-    <span class="na">telegram</span><span class="p">:</span> <span class="mi">8443</span><span class="p">,</span>
-    <span class="na">fb</span><span class="p">:</span> <span class="mi">8545</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// process.env.&lt;key&gt; to set webhook for adapter</span>
-<span class="kd">var</span> <span class="nx">adapterWebhookKey</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">telegram</span><span class="p">:</span> <span class="s1">'TELEGRAM_WEBHOOK'</span><span class="p">,</span>
-  <span class="na">fb</span><span class="p">:</span> <span class="s1">'FB_WEBHOOK_BASE'</span>
-<span class="p">}</span>
-</code></pre>
+<p>Note that for each adapter, if it needs a webhook, you need to specify the <code class="prettyprint">PORT</code> and the environment key for the webhook, from <code class="prettyprint">config/</code>.</p>
 
 <p>If the webhook environment key is not specified, then ngrok will assign it a random emphemeral web url. This is especially useful if you wish to specify a Heroku url, or a custom ngrok url. </p>
 
 <blockquote>
 <p>For example, since Facebook takes 10 minutes to update a webhook, we wish to use a persistent webhook url. We leave Telegram to a random url generated by ngrok.</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="c"># bin/.keys-aiva</span>
-<span class="nv">FB_WEBHOOK</span><span class="o">=</span>https://aivabot.ngrok.com
+<pre class="highlight shell"><code><span class="c"># FB_WEBHOOK is set as https://aivabot.ngrok.com</span>
 <span class="c"># TELEGRAM_WEBHOOK is not net</span>
 
 <span class="c"># ... AIVA is run, Telegram is given a random url</span>
@@ -1665,17 +1140,6 @@ If you use a custom ngrok domain, be sure to <a href="https://ngrok.com/docs#aut
 Remember to use HTTPS urls.
 </aside>
 
-<h2 id="neo4j">Neo4j</h2>
-
-<p>If it&rsquo;s your first installation of <code class="prettyprint">Neo4j</code>, the <code class="prettyprint">bin/install</code> script will reset the default <code class="prettyprint">username:pswd</code> from <code class="prettyprint">neo4j:neo4j</code> to <code class="prettyprint">neo4j:0000</code>, as required for direct usage. This is also consistent with the default <code class="prettyprint">NEO4J_AUTH</code> in <code class="prettyprint">.env</code>. If you wish to reset to your own password, use below:</p>
-<pre class="highlight shell"><code>neo4j start
-<span class="c"># change your password</span>
-<span class="c"># note the default username:pswd is neo4j:0000</span>
-curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&lt;OLD_PSWD&gt; http://localhost:7474/user/neo4j/password
-</code></pre>
-
-<p>Access the Neo4j browser GUI at <a href="http://localhost:7474"><code class="prettyprint">http://localhost:7474</code></a> (production) or <a href="http://localhost:7476"><code class="prettyprint">http://localhost:7476</code></a> (development)</p>
-
 <h2 id="ssh-browser-forwarding">SSH Browser-forwarding</h2>
 
 <p>If you&rsquo;re hosting Neo4j on a remote machine and want to access its browser GUI on your local machine, connect to it via </p>
@@ -1684,11 +1148,267 @@ curl -X POST -d <span class="s2">"password=YOUR_NEW_PASSWORD"</span> -u neo4j:&l
 
 <p>Then you can go to <code class="prettyprint">http://localhost:8080/</code> on your local browser.</p>
 
-          <h1 id="roadmap-amp-changelog"><a name="changelog"></a>Roadmap &amp; Changelog</h1>
+          <h1 id="human-turing-machine-interface"><a name="htmi"></a>Human-Turing Machine Interface</h1>
 
-<p><a href="https://github.com/kengz/aiva/blob/master/docs/CHANGELOG.md" target="_blank"><code>See the Roadmap and Changelog on Github.</code></a></p>
+<p>We present <em>Human-Turing Machine Interface (HTMI)</em> that is human-bounded Turing complete.</p>
 
-<p>The current phase focuses on <strong>system</strong> design. The next phases will deal with more integrated NLP, usage of the graph brain, and built in functions of a virtual assistant.</p>
+<h2 id="design">Design</h2>
+
+<p><strong>HTMI</strong> consists of a human, a Turing Machine, and an interface. The human sends queries and responses to the interface, which maps and canonicalizes them as inputs to the TM. Symmetrically, the TM sends queries and responses to the interface, which verbalize them as output to the human.</p>
+
+<p>The design outlines of HTMI are as follow:</p>
+
+<ul>
+<li>approximate human-human interaction</li>
+<li>implement Human-Centered Design (HCD): discoverability (no manual), with affordances, signifiers, mapping</li>
+<li>constraints and forcing functions (HCD)</li>
+<li>feedback (HCD)</li>
+<li>just as we don&rsquo;t see &ldquo;human errors&rdquo; in human-human interaction but to simply ask for clarification, the machine shall do the same. It should treat &ldquo;human error&rdquo; as approximation, ask for clarification, and try to complete the action (HCD). Call this &ldquo;error-resilience&rdquo;, and the machine reaction as &ldquo;inquiry&rdquo;</li>
+<li>long-short term memory (LSTM) on both human and TM</li>
+<li>TM must approximate human behavior and human-like brain function, using Contextual Graph Knowledge Base (CGKB)</li>
+</ul>
+
+<h2 id="theorem">Theorem</h2>
+
+<p><em>HTMI is human-bounded Turing complete.</em></p>
+
+<h4 id="definition">Definition</h4>
+
+<p><strong>Human-bounded Turing complete</strong>: The class that is the intersection between the Turing complete class and the class of problems enumerable by humans, i.e. the latter class bounds its Turing completeness. Note that it may be Turing complete class itself, if the latter class is bigger than the former.</p>
+
+<h4 id="proof">Proof</h4>
+
+<ol>
+<li>Let a HTMI be given. A TM is Turing complete. For practical interpretation, TM is equivalent to a pair <code class="prettyprint">{Fn, I}</code>, where <code class="prettyprint">Fn</code> is the set of functions invokable by a TM with random access of its information <code class="prettyprint">I</code> on its tape.</li>
+<li>The interface takes a human input and maps surjectively into <code class="prettyprint">Fn</code>. If the input cannot be mapped, it is rejected by the interface.</li>
+<li>For the mapped <code class="prettyprint">fn ∈ Fn</code>, TM computes using <code class="prettyprint">fn, I</code>.</li>
+<li>When the TM halts, the interface passes its output to the human, optionally verbalized.</li>
+<li>The map above is surjective, mapping from the class of problems enumerable by humans into the TM class.</li>
+<li>Since only <code class="prettyprint">fn ∈ Fn</code> are mapped into surjectively and computed, the HTMI class is a subset of the TM class. Since it maps from the class of problems enumerable by humans, the HTMI class is at the intersection between the two classes. Therefore HTMI is human-bounded Turing complete.</li>
+</ol>
+
+<h4 id="implication">Implication</h4>
+
+<p>The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a TM. For practical purposes, we focus on decidable problems.</p>
+
+          <h1 id="contextual-graph-knowledge-base"><a name="cgkb"></a>Contextual Graph Knowledge Base</h1>
+
+<p>We present <em>Contextual Graph Knowledge Base (CGKB)</em> as the TM memory implementation of <em>HTMI</em>. This shall be consistent with design outlines of <em>HTMI</em></p>
+
+<h2 id="design">Design</h2>
+
+<p>Recall that TM is equivalent to <code class="prettyprint">{Fn, I}</code>. CGKB serves as the implementation for <code class="prettyprint">I</code>. To also satisfy the approximation of human-human interaction, we have the following design outlines:</p>
+
+<ul>
+<li><p><strong>graph</strong>: just as all enumerable data types, this supports TM completeness. Besides, its generality and features are established mathematically. <code class="prettyprint">Fn</code> includes generic TM functions and graph operations on <code class="prettyprint">I</code>, which is information encoded in graph nodes and edges that richly represent properties and relationships.</p></li>
+<li><p><strong>context</strong>: the collective term for fundamental information types. To make TM operations tractable, contextualization restricts the scope to a manageable subgraph. The context filters are: privacy (public/private knowledge), entity, ranking, time, constraints, graph properties. </p></li>
+<li><p><strong>ranking</strong>: graph indexing analogous to how humans rank memories, for tractability. Ranking can use emotions (human analogy), LSTM (long-short term memories) for quick graph search.</p></li>
+<li><p><strong>learning</strong>: consistent with the &ldquo;inquiry&rdquo; feature of HTMI, CGKB will extend itself by inquiring for missing information.</p></li>
+</ul>
+
+<h4 id="terminologies">Terminologies</h4>
+
+<ul>
+<li><strong>auto-planning</strong>: the brain can build up and provide plans as causal graph automatically, such as in the simple case of getting a friend&rsquo;s phone number, or in the more complex case of playing chess. This utilizes all features of the brain enumerated above.</li>
+<li><strong>canonicalized input</strong> <code class="prettyprint">&lt;fn, i_p&gt;</code>: where <code class="prettyprint">fn</code> is a TM function, and <code class="prettyprint">i_p</code> the partial information needed for <code class="prettyprint">fn</code>&rsquo;s functional arguments. The output of the interface in HTMI on taking human input, for the TM to use. CGKB will attempt to extract the full information <code class="prettyprint">i</code> required for <code class="prettyprint">fn</code>.</li>
+<li><strong>causality</strong>: The directed structure of the graph. Used in search, planning, dependencies, chronology, etc.</li>
+<li><strong>cognition</strong>: graph operations as <code class="prettyprint">Fn</code> on <code class="prettyprint">I</code>, to mimic human cognition.</li>
+<li><strong>constraint</strong>: e.g. existence, soundness.</li>
+<li><strong>function execution</strong> <code class="prettyprint">fn(i)</code>: Execute TM function <code class="prettyprint">fn ∈ Fn</code> on information <code class="prettyprint">i ∈ I</code> to yield output</li>
+<li><strong>graph</strong>: the entire CGKB graph</li>
+<li><strong>norm</strong>: preferred defaults to resolve ambiguities.</li>
+<li><strong>plan</strong>: The causal graph of the necessary information in <code class="prettyprint">I</code> to execute in <code class="prettyprint">Fn</code>.</li>
+<li><strong>plan execution</strong>: Extraction of information by traversing plan in reverse causal order from leaves to root, using the supplied <code class="prettyprint">i_p</code> and contexts. Returns a subgraph for the extraction of <code class="prettyprint">i</code></li>
+</ul>
+
+<h2 id="formal-theory">Formal Theory</h2>
+
+<h4 id="definitions">Definitions</h4>
+
+<ul>
+<li><code class="prettyprint">g</code>: The entire graph of CGKB</li>
+<li><code class="prettyprint">g_i</code>, <code class="prettyprint">h</code>: placeholder for any subgraph of <code class="prettyprint">g</code></li>
+<li><code class="prettyprint">Contextualize</code>: the Contextualize algorithm</li>
+<li><code class="prettyprint">c_0</code>: the initial context, determined from <code class="prettyprint">fn, i_p</code></li>
+<li><code class="prettyprint">&lt;fn, i_p&gt;</code>: the canonicalized input from the interface of HTMI after parsing a human input, where <code class="prettyprint">fn</code> is a TM function, and <code class="prettyprint">i_p</code> the partial information needed for <code class="prettyprint">fn</code>&rsquo;s execution.</li>
+<li><code class="prettyprint">filter</code>: fields used to filter context, i.e. constrain the expansion of initial context in the <code class="prettyprint">Contexualize</code> algorithm; thus far they are <code class="prettyprint">{privacy, entity, ranking, time, constraints, graph properties}</code></li>
+<li><code class="prettyprint">scope</code>: the lists of fulfilled and unfulfilled information, <code class="prettyprint">scope_f, i_u</code> respectively for the extraction of <code class="prettyprint">i</code> for <code class="prettyprint">fn(i)</code>.</li>
+<li><code class="prettyprint">c</code>: contextual (knowledge) graph, or the contextualized subgraph, i.e. the output <code class="prettyprint">Contextualize(g, c_0, i_p)</code>; <code class="prettyprint">c ⊂ g</code></li>
+<li><code class="prettyprint">i ∈ I</code>: the complete information needed to compute <code class="prettyprint">fn(i)</code>. It is encoded within <code class="prettyprint">g</code>; obviously there exists a smallest subgraph <code class="prettyprint">h ⊂ g</code> that sufficiently encodes <code class="prettyprint">i</code>. Equivalently <code class="prettyprint">i</code> is the union of partial information <code class="prettyprint">i_1, i_2, ...</code></li>
+<li><code class="prettyprint">k</code>: knowledge, i.e. the complete information extractable from <code class="prettyprint">g</code>. Note <code class="prettyprint">i ⊂ k</code>, but <code class="prettyprint">fn(i) = fn(k)</code> since the TM function <code class="prettyprint">fn</code> only computes using the needed information.</li>
+<li><code class="prettyprint">k_h</code>: the information extractable from subgraph <code class="prettyprint">h ⊂ g</code>. Note <code class="prettyprint">k = k_g</code>.</li>
+<li><code class="prettyprint">Ex</code>: the extraction operator to extract knowledge from a graph, e.g. <code class="prettyprint">k = Ex(g), k_h = Ex(h)</code></li>
+<li><code class="prettyprint">-*-&gt;</code>: graph path, or &lsquo;derives&rsquo;. We say <code class="prettyprint">g_1 -*-&gt; g_2</code> if <code class="prettyprint">g_1</code> is connected to <code class="prettyprint">g_2</code>, and <code class="prettyprint">k_1 -*-&gt; k_2</code> if <code class="prettyprint">k_1</code> derives <code class="prettyprint">k_2</code>.</li>
+</ul>
+
+<h4 id="axioms">Axioms</h4>
+
+<blockquote>
+<ol>
+<li>Knowledge is encoded in a graph <code class="prettyprint">g</code>, and decoded using the <code class="prettyprint">Ex</code> operator.</li>
+<li>Knowledge is deriverable, and this is reflected in its graph encoding by connectedness. Let <code class="prettyprint">k_1 = Ex(g_1), k_2 = Ex(g_2)</code>, if <code class="prettyprint">k_1 derives k_2</code>, i.e. <code class="prettyprint">k_1 -*-&gt; k_2</code>, then there must exists a corresponding path <code class="prettyprint">g_1 -*-&gt; g_2</code>, s.t. <code class="prettyprint">(k_1 ∪ k_2)</code> is extractable from the connected component CC of <code class="prettyprint">g_1</code>, i.e. <code class="prettyprint">(k_1 ∪ k_2) ⊂ Ex(CC(g_1))</code>.</li>
+<li>Base knowledge (graph sink) is the most basic knowledge, and is the source of the derivation path. If the path is cyclic, arbitrarily choose the last-encountered node as the basic knowledge. Base knowledge resolves all knowledge along the derivation path by gradual substitutions.</li>
+</ol>
+</blockquote>
+
+<h2 id="contextualize-algorithm">Contextualize algorithm</h2>
+
+<p>Let there be given graph <code class="prettyprint">g</code>, initial context <code class="prettyprint">c_0</code>, partial information <code class="prettyprint">i_p</code>.</p>
+
+<p><strong>input</strong>: <code class="prettyprint">g, c_0, i_p</code></p>
+
+<p><strong>output</strong>: contextual knowledge graph <code class="prettyprint">c</code></p>
+
+<p><strong>enumerate</strong>:</p>
+
+<ol>
+<li>Initialize <code class="prettyprint">scope</code> from <code class="prettyprint">c_0, i_p</code></li>
+<li>while <code class="prettyprint">scope</code> is not completely fulfilled, do:
+
+<ol>
+<li>BFS expansion on <code class="prettyprint">c_0</code> using the unfulfilled scope, <code class="prettyprint">filters</code> and <code class="prettyprint">i_p</code>, and</li>
+<li>if context is expanded, update scope, continue; </li>
+<li>else, apply <code class="prettyprint">learning</code> with <code class="prettyprint">inquire</code> to expand <code class="prettyprint">g</code> (but not context and scope); then retry on success or break on failure.</li>
+</ol></li>
+<li>Return the context <code class="prettyprint">c</code>, along with the fulfilled scope for direct access of <code class="prettyprint">i</code>.</li>
+</ol>
+
+<p>We also call the resulting context <code class="prettyprint">c</code> the contextual knowledge graph, and the extractable knowledge <code class="prettyprint">k_c = Ex(c)</code> the contextual knowledge, obtained by using <code class="prettyprint">g, c_0, i_p, filters</code>. Note also <code class="prettyprint">fn(i) = fn(k_c)</code>, thus the resulting contextual knowledge is sufficient for TM computation.</p>
+
+<p>We prove below that this algorithm yields knowledge that is <code class="prettyprint">g-bounded complete</code>; it also proves that the algorithm is correct.</p>
+
+<h2 id="g-bounded-completeness-theorem">g-bounded Completeness Theorem</h2>
+
+<h4 id="facts">Facts</h4>
+
+<ol>
+<li>The initial context <code class="prettyprint">c_0</code> can be disjoint (multiple graph components)</li>
+<li>Thus the resulting context <code class="prettyprint">c</code> can also be a graph with disjoint components, each containing at least a node from <code class="prettyprint">c_0</code>.</li>
+<li>The resulting context <code class="prettyprint">c</code> is due to the provided <code class="prettyprint">g, c_0, i_p, filters</code>.</li>
+</ol>
+
+<h4 id="definition">Definition</h4>
+
+<p>Let there be given canonicalized input <code class="prettyprint">&lt;fn, i_p&gt;</code> with TM function <code class="prettyprint">fn</code>, partial information <code class="prettyprint">i_p</code>, graph <code class="prettyprint">g</code>, initial context <code class="prettyprint">c_0</code>, and let context <code class="prettyprint">c = Contextualize(g, c_0, i_p)</code>, and its extracted knowledge <code class="prettyprint">k_c = Ex(c)</code>. Let <code class="prettyprint">k_g = Ex(g)</code> be the complete knowledge extractable from <code class="prettyprint">g</code>.</p>
+
+<blockquote>
+<p>We say <code class="prettyprint">k_c</code> is <code class="prettyprint">g-bounded complete</code> <em>iff</em> <code class="prettyprint">fn(k_c) = fn(k_g)</code>.</p>
+</blockquote>
+
+<h4 id="lemma">Lemma</h4>
+
+<blockquote>
+<p><code class="prettyprint">k_g</code> is <code class="prettyprint">g-bounded complete</code>.</p>
+</blockquote>
+
+<p><strong>Proof</strong>: <code class="prettyprint">fn(k_g) = fn(k_g)</code> by identity. □</p>
+
+<h4 id="theorem">Theorem</h4>
+
+<blockquote>
+<p><code class="prettyprint">k_c</code> is <code class="prettyprint">g-bounded complete</code>.</p>
+</blockquote>
+
+<p><strong>Proof</strong>: The initial context <code class="prettyprint">c_0</code> is obtained from <code class="prettyprint">&lt;fn, i_p&gt;</code>. The <code class="prettyprint">scope</code> of the <code class="prettyprint">Contextualize</code> algorithm is initialized with all the necessary information needed for the resulting context and <code class="prettyprint">fn</code>. </p>
+
+<p>When the algorithm terminates with all the scopes fulfilled, by the axioms, we obtain in <code class="prettyprint">c</code> all the necessary basic knowledge to resolve <code class="prettyprint">c_0</code> entirely, thus yielding the necessary and sufficient <code class="prettyprint">i</code> for <code class="prettyprint">fn(i)</code>. The algorithm is correct.</p>
+
+<p>The context <code class="prettyprint">c</code> is thus the smallest subgraph in <code class="prettyprint">g</code> that encodes the complete information <code class="prettyprint">i</code> needed to compute <code class="prettyprint">fn(i) = fn(k_c)</code>, thus extending the context any further, even to <code class="prettyprint">g</code>, does not add to the already-complete <code class="prettyprint">i</code>, since we know <code class="prettyprint">fn(k_g) = fn(i)</code>. Thus, combining the two equalities, we get <code class="prettyprint">fn(k_c) = fn(k_g)</code>. □</p>
+
+<h2 id="cgkb-algorithm">CGKB algorithm</h2>
+
+<p>Let there be given the graph <code class="prettyprint">g</code> of CGKB, canonicalized input <code class="prettyprint">&lt;fn, i_p&gt;</code> from human input parsed by the interface of HTMI, where <code class="prettyprint">fn</code> is a TM function and <code class="prettyprint">i_p</code> the partial function for executing <code class="prettyprint">fn</code>.</p>
+
+<p><strong>input</strong>: <code class="prettyprint">g, fn, i_p</code></p>
+
+<p><strong>output</strong>: TM output utilizing contextual knowledge <code class="prettyprint">fn(i)</code></p>
+
+<p><strong>enumerate</strong>:</p>
+
+<ol>
+<li>Auto-planning: set <code class="prettyprint">plan = Contextualize(g, fn, i_p)</code>.</li>
+<li>Contextual knowledge extraction: set <code class="prettyprint">c = Contextualize(g, plan, i_p)</code>.</li>
+<li>Extract knowledge <code class="prettyprint">k_c = Ex(c)</code> from <code class="prettyprint">c</code> (and its <code class="prettyprint">scope</code>), compute and return <code class="prettyprint">fn(k_c) = fn(i)</code>.</li>
+</ol>
+
+<p><code class="prettyprint">fn</code> is used as the initial context for extracting a <code class="prettyprint">plan</code>. The <code class="prettyprint">plan</code> is used for TM to automatically extract the contextual knowledge needed for computation. This is similar to AI planning, except the plan is already encoded in <code class="prettyprint">g</code> when the CGKB learns, thus the planning is automatic.</p>
+
+<p>The context <code class="prettyprint">c</code> and its <code class="prettyprint">scope</code> are extracted from the <code class="prettyprint">plan</code> (or CGKB learns from the human otherwise). We then extract the contextual knowledge, <code class="prettyprint">k_c</code>, containing information <code class="prettyprint">i ⊂ k_c</code>, for computing and returning <code class="prettyprint">fn(k_c) = fn(i)</code>.</p>
+
+<p><strong>Proof</strong>: To prove that the algorithm is correct, we must show that it is <strong>Human-bounded Turing complete</strong>, as outlined in <a href="./HTMI.md">HTMI</a>. If so, CGKB can be used by HTMI.</p>
+
+<p>Recall again that TM is equivalent to <code class="prettyprint">{Fn, I}</code>. We know that knowledge <code class="prettyprint">k</code> or information <code class="prettyprint">i ⊂ k</code> is encoded in the graph <code class="prettyprint">g</code> of CGKB. For any <code class="prettyprint">fn ∈ Fn</code>, we can obtain a sufficient context <code class="prettyprint">c</code> such that <code class="prettyprint">i ⊂ k_c = Ex(c)</code> for computation <code class="prettyprint">fn(i)</code>. We show below.</p>
+
+<p>The graph <code class="prettyprint">g</code> of CGKB supports TM completeness, and thus without human restrictions, CGKB with TM is TM complete, as spanned by <code class="prettyprint">Fn(I)</code>. </p>
+
+<p>In HTMI, <code class="prettyprint">g</code> is used by queries from a human, which restrict its effective power. Note <code class="prettyprint">g</code> is also built upon the TM&rsquo;s interactions with a human via <code class="prettyprint">learning</code>: and thus <code class="prettyprint">g</code> of CGKB is <strong>Human-bounded Turing complete</strong> inductively: at every step for context <code class="prettyprint">c ⊂ g</code>, if CGKB can directly answer to a human, then it is already so; otherwise, it <code class="prettyprint">learns</code> from the human and extends its <code class="prettyprint">g</code> to be so, and it can answer the human with its new knowledge.</p>
+
+<p>Finally, for each <code class="prettyprint">fn ∈ Fn</code> and its corresponding context <code class="prettyprint">c</code>, the contextual knowledge <code class="prettyprint">k_c</code> is <strong>g-bounded complete</strong> by the theorem above, which implies <code class="prettyprint">fn(k_c) = fn(k_g)</code>. So, the context <code class="prettyprint">c</code> is always sufficient for emulating <code class="prettyprint">fn(k_g)</code> for the <strong>Human-bounded Turing complete</strong> <code class="prettyprint">g</code>. Therefore, CGKB is <strong>Human-bounded Turing complete</strong>. □</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>We provide simple examples of CGKB below. The real possibilities are only limited by <strong>Human-bounded Turing complete</strong>, as proven above. In principle, one can use the brain for any AI tasks, such as playing chess, acting as a generic knowledge base, perform basic cognition, carry out basic functions. Note that in practice, implementation will need to cover more specific details.</p>
+
+<h4 id="when-g-has-learned-the-knowledge">when <code class="prettyprint">g</code> has learned the knowledge</h4>
+
+<p>Given the graph <code class="prettyprint">g</code> of CGKB that knows how to call a person,</p>
+
+<ul>
+<li>Human input: <code class="prettyprint">&quot;Call John.&quot;</code></li>
+<li>HTMI interface canonicalize input to: <code class="prettyprint">&lt;fn = call, i_p = &quot;John&quot;&gt;</code>, where <code class="prettyprint">&quot;John&quot;</code> is tagged as <code class="prettyprint">proper noun</code> by a NLP POS Tagger.</li>
+<li>Algorithm <code class="prettyprint">CGKB(g, fn = call, i_p = &quot;John&quot;)</code>:
+
+<ol>
+<li>Auto-planning: <code class="prettyprint">plan = Contextualize(g, call, &quot;John&quot;) = (call)-[requires]-&gt;(phone_number)-[requires]-&gt;(person)</code></li>
+<li>Contextual knowledge extraction: <code class="prettyprint">c = Contextualize(g, plan, &quot;John&quot;) = (me)-[knows]-&gt;(John)</code>, where the node John contains his phone number. As stated in the <code class="prettyprint">Contextualize</code> algorithm, the operation utilizes filters with graph ranking such as emotions, LSTM, time, contraints, or ambiguity resolution, to provide the result context graph <code class="prettyprint">c</code>.</li>
+<li>Extract knowledge <code class="prettyprint">k_c = Ex(c) = { name: &quot;John&quot;, phone: &quot;(234)-567-8900&quot;}</code>, and execut the function <code class="prettyprint">call(&quot;(234)-567-8900&quot;)</code>.</li>
+</ol></li>
+</ul>
+
+<h4 id="when-g-doesn-39-t-have-the-knowledge">when <code class="prettyprint">g</code> doesn&rsquo;t have the knowledge</h4>
+
+<p>Given the graph <code class="prettyprint">g</code> of CGKB that <strong>does not</strong> know how to call a person,</p>
+
+<ul>
+<li>Human input: <code class="prettyprint">&quot;Call John.&quot;</code></li>
+<li>HTMI interface canonicalize input to: <code class="prettyprint">&lt;fn = call, i_p = &quot;John&quot;&gt;</code>, where <code class="prettyprint">&quot;John&quot;</code> is tagged as <code class="prettyprint">proper noun</code> by a NLP POS Tagger.</li>
+<li>Algorithm <code class="prettyprint">CGKB(g, fn = call, i_p = &quot;John&quot;)</code>:
+
+<ol>
+<li>Auto-planning: <code class="prettyprint">plan = Contextualize(g, call, &quot;John&quot;) = (call)-[requires]-&gt;(phone_number)</code>. The TM will call <code class="prettyprint">learning</code> to inquire missing information from the human, update <code class="prettyprint">g</code>, and recall the algorithm to yield <code class="prettyprint">(call)-[requires]-&gt;(phone_number)-[requires]-&gt;(person)</code>. The rest follows as before.</li>
+<li>Contextual knowledge extraction: Suppose the human doesn&rsquo;t know any &ldquo;John&rdquo;; TM will attempt to learn from the human, update CGKB and continue with the task accordingly. This happens for any missing knowledge.</li>
+</ol></li>
+</ul>
+
+<h4 id="explain-the-quot-thought-process-quot">explain the &ldquo;thought process&rdquo;</h4>
+
+<p>Another powerful feature of CGKB is that a human can inquire about the TM&rsquo;s thought process, like &ldquo;explain how do you call a person?&rdquo;. In this case, </p>
+
+<ul>
+<li><code class="prettyprint">fn = explain_thought_process</code>, </li>
+<li><code class="prettyprint">i_p = &quot;how do you call a person?&quot;</code></li>
+<li><code class="prettyprint">plan = (explain_thought_process)-[require]-(requirements)...</code></li>
+<li><code class="prettyprint">c = (call)-[requires]-&gt;(phone_number)</code></li>
+</ul>
+
+<p>And the TM may return <code class="prettyprint">fn(k_c) = &quot;(call)-[requires]-&gt;(phone_number)&quot;</code> and the response.</p>
+
+          <h1 id="changelog"><a name="changelog"></a>Changelog</h1>
+
+<p>Check the <a href="https://github.com/kengz/aiva/releases">Github releases</a>.</p>
+
+<h2 id="legacy-releases">Legacy Releases</h2>
+
+<p>AIVA was known as Jarvis in version 2. It is now deprecated, but if you need to reference stuff from Jarvis, do <code class="prettyprint">git checkout tags/v2.0</code> or checkout <a href="https://github.com/kengz/aiva/releases">the releases</a>.</p>
+
+<p>AIVA v3 was last released at <a href="https://github.com/kengz/aiva/releases/tag/v3.2.1">v3.2.1</a>, which was full featured, but quite heavy. We retire it in favor of a lighter, more developer-friendly and extendible version.</p>
+
+<h1 id="roadmap"><a name="roadmap"></a>Roadmap</h1>
+
+<ul>
+<li>a built in graph brain for ad-hoc knowledge encoding, using <a href="http://kengz.me/aiva/#cgkb">CGKB</a> and <a href="http://kengz.me/aiva/#htmi">HTMI</a></li>
+<li>a built in NLP intent-parsing engine</li>
+</ul>
 
           <h1 id="contributing"><a name="contributing"></a>Contributing</h1>
 
