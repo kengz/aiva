@@ -2,6 +2,8 @@
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. [http://kengz.me/aiva/](http://kengz.me/aiva/)
 
+*This project is under extension - to build a [Contextual Graph Knowledge Base](http://kengz.me/aiva/#contextual-graph-knowledge-base) for knowledge encoding. Check [Roadmap](#roadmap) for more.
+
 It is a **bot-generalization**: you can implement any features, use with major AI tools, deploy across platforms, and code in multiple languages.
 
 
