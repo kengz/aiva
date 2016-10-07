@@ -4,38 +4,38 @@ const _ = require('lomath')
 const path = require('path')
 const Sequelize = require('sequelize')
 const log = require(path.join(__dirname, 'log'))
-const dbConfig = require(path.join(__dirname, '..', 'config', 'db.json'))
+const dbEnvConfig = require(path.join(__dirname, '..', 'config', 'db.json'))
+Promise.config({ warnings: false })
 
 /* istanbul ignore next */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-const sqlConfig = _.get(dbConfig, `${process.env.NODE_ENV}`)
+const dbConfig = _.get(dbEnvConfig, `${process.env.NODE_ENV}`)
 
 const sequelize = new Sequelize(
-  sqlConfig.database,
-  sqlConfig.username,
-  sqlConfig.password,
-  sqlConfig)
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
+  dbConfig)
 
 /* istanbul ignore next */
 function createDb() {
   const sysSeq = new Sequelize(
-    'sys',
-    sqlConfig.username,
-    sqlConfig.password,
-    sqlConfig)
+    dbConfig.dialect,
+    dbConfig.username,
+    dbConfig.password,
+    dbConfig)
   var nodeEnvs = ['test', 'development', 'production']
   var createDbQueries = _.map(nodeEnvs, (nodeEnv) => {
-    return "CREATE DATABASE " + _.get(dbConfig, `${nodeEnv}.database`) + ";"
+    return "CREATE DATABASE " + _.get(dbEnvConfig, `${nodeEnv}.database`) + ";"
   })
 
   return Promise.any(
-      _.map(createDbQueries, (createDbQuery) => {
-        return sysSeq.query(createDbQuery)
-      })).then(() => {
-      sysSeq.close()
-      log.info(`Created the aiva sql databases`)
-    })
-    .catch(e => { log.error(JSON.stringify(e, null, 2)) })
+    _.map(createDbQueries, (createDbQuery) => {
+      return sysSeq.query(createDbQuery)
+    })).then(() => {
+    sysSeq.close()
+    log.info(`Created the aiva databases`)
+  }).catch(e => { log.error(JSON.stringify(e, null, 2)) })
 }
 
 /* istanbul ignore next */
@@ -43,13 +43,11 @@ function authDb() {
   return sequelize
     .authenticate()
     .then((e) => {
-      log.info('Authenticated SQL database successfully');
-      sequelize.close()
-    })
-    .catch((e) => {
-      if (_.get(e, 'original.code') === 'ER_BAD_DB_ERROR') {
-        createDb().then(() => { sequelize.close() })
-      }
+      log.info('Authenticated database successfully')
+    }).catch((e) => {
+      return createDb()
+    }).finally(() => {
+      return sequelize.close()
     })
 }
 
