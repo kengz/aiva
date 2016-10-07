@@ -43,6 +43,14 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 git clone https://github.com/YOURUSERNAME/aiva.git
 ```
 
+To sync the latest release of AIVA to your fork:
+
+```shell
+git remote add upstream https://github.com/kengz/aiva.git
+git fetch upstream
+git merge upstream/master
+```
+
 ## <a name="setup"></a>Setup
 
 The line below runs `bin/setup && bin/copy-config && npm install`:
