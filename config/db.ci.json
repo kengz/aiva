@@ -1,26 +1,26 @@
 {
   "development": {
-    "username": "ubuntu",
+    "username": "postgres",
     "password": null,
     "database": "aiva_dev",
     "host": "127.0.0.1",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "logging": false
   },
   "test": {
-    "username": "ubuntu",
+    "username": "postgres",
     "password": null,
     "database": "aiva_test",
     "host": "127.0.0.1",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "logging": false
   },
   "production": {
-    "username": "ubuntu",
+    "username": "postgres",
     "password": null,
     "database": "aiva_prod",
     "host": "127.0.0.1",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "logging": false
   }
 }

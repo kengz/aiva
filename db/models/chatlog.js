@@ -10,11 +10,12 @@ module.exports = function(sequelize, DataTypes) {
     room: DataTypes.STRING,
     incoming: DataTypes.BOOLEAN,
     method: DataTypes.STRING,
-    message: DataTypes.STRING
+    message: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        // Chatlog.belongsTo(models.User)
       }
     }
   });

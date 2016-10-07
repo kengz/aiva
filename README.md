@@ -2,6 +2,8 @@
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. [http://kengz.me/aiva/](http://kengz.me/aiva/)
 
+*This project is under extension - to build a [Contextual Graph Knowledge Base](http://kengz.me/aiva/#contextual-graph-knowledge-base) for knowledge encoding. Check [Roadmap](#roadmap) for more.*
+
 It is a **bot-generalization**: you can implement any features, use with major AI tools, deploy across platforms, and code in multiple languages.
 
 
@@ -39,6 +41,14 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 
 ```shell
 git clone https://github.com/YOURUSERNAME/aiva.git
+```
+
+To sync the latest release of AIVA to your fork:
+
+```shell
+git remote add upstream https://github.com/kengz/aiva.git
+git fetch upstream
+git merge upstream/master
 ```
 
 ## <a name="setup"></a>Setup

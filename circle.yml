@@ -6,7 +6,7 @@ machine:
   environment:
     CODECLIMATE_REPO_TOKEN: df0a1e703d4e417fb88724c9e1f7c4b49f53c9c17494d59cd182aa6cc2daccf8
   services:
-    - mysql
+    - postgresql
 
 dependencies:
   override:
@@ -24,3 +24,8 @@ test:
     - npm test
   post:
     - cat ./coverage/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
+
+general:
+  branches:
+    ignore:
+      - gh-pages

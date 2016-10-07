@@ -46,7 +46,7 @@ describe 'scripts/info.js', ->
     it 'hubot: (in Mocha test)', ->
       @room.messages.should.eql [
         ['alice', '@hubot nodeenv']
-        ['hubot', 'aivadev with adapter undefined is deployed in test mode.']
+        ['hubot', 'aivadev with adapter Shell is deployed in test mode.']
       ]
 
 
