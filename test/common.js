@@ -35,6 +35,7 @@ function startProcess() {
     try {
       // set the port to test
       process.env.NODE_ENV = 'test'
+      process.env.ADAPTER = 'Shell'
       log.info(`Starting aiva test process`)
       setEnv()
       process.env.PORT = 9090
