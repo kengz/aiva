@@ -53,6 +53,7 @@ function ioClient() {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
+    if (process.env.USE_PY2 === 'true') { lang = _.replace(lang, 'python3', 'python') }
     var cp = spawn(lang, [cmds['client']], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
