@@ -3,9 +3,9 @@ engines:
     enabled: true
     config:
       languages:
-        javascript:
-        python:
-        ruby:
+        - javascript
+        - python
+        - ruby
   fixme:
     enabled: true
   eslint:
