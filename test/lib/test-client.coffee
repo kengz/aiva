@@ -13,12 +13,12 @@ describe 'src/global-client.js', ->
     co =>
       yield delayer()
 
-  describe 'global.gClientPass', ->
+  describe 'global.client.clientPass', ->
     # test
     context "(cb, msgDirect)", ->
       beforeEach ->
         co =>
-          global.gClientPass(global.say(@room, 'hubot'), msgDirect)
+          global.client.clientPass(global.say(@room, 'hubot'), msgDirect)
           yield delayer()
       # response
       it 'successfully pass, callback executed on reply.', ->
@@ -27,9 +27,9 @@ describe 'src/global-client.js', ->
         ]
 
 
-  describe 'global.gPass', ->
+  describe 'global.client.pass', ->
     # test
     context "(msgDirect): js -> py", ->
       # response
       it 'successfully pass, return promise with JSON.', ->
-        global.gPass(msgDirect).should.eventually.have.all.keys('output', 'to', 'from', 'hash')
+        global.client.pass(msgDirect).should.eventually.have.all.keys('output', 'to', 'from', 'hash')

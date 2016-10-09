@@ -14,7 +14,7 @@ module.exports = (robot) => {
 
     // use the global client to pass to the hello.py client
     // this returns a promise
-    global.gPass({
+    global.client.pass({
         // must specify at least the following keys
         input: 'Hello from user.',
         to: `hello.${lang}`,

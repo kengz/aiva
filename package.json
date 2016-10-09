@@ -1,6 +1,6 @@
 {
   "name": "aiva",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "General-purpose virtual assistant for developers.",
   "private": true,
   "main": "index.js",
@@ -53,11 +53,11 @@
     "ngrok": "^2.2.3",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
+    "poly-socketio": "^1.0.1",
     "portscanner": "^1.0.0",
     "randombytes": "^2.0.3",
     "require-dir": "^0.3.0",
     "sequelize": "^3.24.3",
-    "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "winston": "^2.2.0"
   },
