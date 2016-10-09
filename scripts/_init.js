@@ -4,10 +4,11 @@ global.Promise = require('bluebird')
 global.co = require('co')
 global._ = require('lomath')
 const path = require('path')
+const polyIO = require('poly-socketio')
 
 global.ROOTPATH = path.join(__dirname, '..')
 const log = require(path.join(__dirname, '..', 'src', 'log'))
-require(path.join(ROOTPATH, 'src', 'global-client')) // js io global-client
+polyIO.gClient({ port: process.env.IOPORT })
 
 // export for bot
 module.exports = (robot) => {

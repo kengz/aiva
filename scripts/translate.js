@@ -3,10 +3,8 @@
 const _ = require('lomath')
 
 // // Development process, testing after starting server with "npm run server"
-// var client = require('../lib/client.js')
-// global.gPass = client.gPass
 
-// global.gPass({
+// global.client.pass({
 //   input: "hola amigos",
 //   to: 'nlp.py',
 //   intent: 'translate'
@@ -26,7 +24,7 @@ module.exports = (robot) => {
   /* istanbul ignore next */
   robot.respond(/translate\s*(.+)/i, (res) => {
     var str = res.match[1]
-    global.gPass({
+    global.client.pass({
         input: str,
         to: 'nlp.py',
         intent: 'translate'
