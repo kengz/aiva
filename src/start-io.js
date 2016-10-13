@@ -5,6 +5,8 @@ const path = require('path')
 const polyIO = require('poly-socketio')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
+const { nlpServer } = require(path.join(__dirname, '..', '..', 'CGKB'))
+var nlpServerCount = 1
 
 /* istanbul ignore next */
 if (process.env.IOPORT === undefined) { setEnv() }
@@ -28,7 +30,7 @@ var ioClientCmds = _.pickBy({
 
 /* istanbul ignore next */
 const adapterCount = (process.env.NODE_ENV === 'test') ? 1 : _.size(activeAdapters)
-const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount
+const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount + nlpServerCount
 
 /**
  * Helper: called from within ioServer after its setup.
@@ -49,6 +51,7 @@ function ioClient() {
 
   // import js locally
   jsIOClient.join()
+  nlpServer({ port: process.env.IOPORT }) // start nlp server
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
