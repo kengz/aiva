@@ -41,6 +41,7 @@ function buildSyntaxGraph(text) {
 module.exports = (robot) => {
   robot.respond(/nlp\s*demo\s*1$/i, (res) => {
     buildSyntaxGraph('Bob brought the pizza to Alice.')
+    res.send('Your wish is my command')
   })
 
   robot.respond(/nlp\s*demo\s*2$/i, (res) => {
@@ -49,10 +50,16 @@ module.exports = (robot) => {
 
   robot.respond(/.*/, (res) => {
     var text = res.match[0]
-    if (_.contains(text, 'nlp')) {
+    if (_.includes(text, 'nlp')) {
       return
     } else {
       buildSyntaxGraph(text)
+      .then(() => {
+        res.send('Saved to brain')
+      })
+    }
+    if (_.includes(text, 'flight')) {
+      res.send('Your wish is my command')
     }
   })
 }
