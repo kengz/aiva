@@ -9,6 +9,7 @@ var nodeROOT = {
   POS_fine: "ROOT"
 }
 
+/* istanbul ignore next */
 function graphifyParseTree(parseTree, nodeFrom = nodeROOT, graph = []) {
   nodeFrom['name'] = nodeFrom['word']
   nodeFrom['label'] = nodeFrom['POS_coarse'] == 'PUNCT' ? 'PUNCT' : nodeFrom['POS_fine']
@@ -34,6 +35,7 @@ var buildSyntaxGraph = co.wrap(function*(text) {
   return yield kb.db.cypherAsync(qp)
 })
 
+/* istanbul ignore next */
 module.exports = (robot) => {
   robot.respond(/nlp\s*demo\s*1$/i, (res) => {
     buildSyntaxGraph('Bob brought the pizza to Alice.')
