@@ -1,4 +1,5 @@
 // dependencies
+const co = require('co')
 const _ = require('lomath')
 const path = require('path')
 const { kb, nlp } = require(path.join(__dirname, '..', '..', 'CGKB'))
@@ -24,19 +25,14 @@ function graphifyParseTree(parseTree, nodeFrom = nodeROOT, graph = []) {
   return graph
 }
 
-function buildSyntaxGraph(text) {
-  return kb.clearDb()
-  .then(() => {
-    nlp.parse(text)
-    .then((output) => {
-      parseTree = output[0].parse_tree
-      graph = graphifyParseTree(parseTree, nodeROOT)
-      var qp = kb.addGraph(graph)
-      return kb.db.cypherAsync(qp)
-      .then(console.log)
-    })
-  })
-}
+var buildSyntaxGraph = co.wrap(function*(text) {
+  yield kb.clearDb()
+  var output = yield nlp.parse(text)
+  parseTree = output[0].parse_tree
+  graph = graphifyParseTree(parseTree, nodeROOT)
+  var qp = kb.addGraph(graph)
+  return yield kb.db.cypherAsync(qp)
+})
 
 module.exports = (robot) => {
   robot.respond(/nlp\s*demo\s*1$/i, (res) => {
@@ -54,9 +50,9 @@ module.exports = (robot) => {
       return
     } else {
       buildSyntaxGraph(text)
-      .then(() => {
-        res.send('Saved to brain')
-      })
+        .then(() => {
+          res.send('Saved to brain')
+        })
     }
     if (_.includes(text, 'flight')) {
       res.send('Your wish is my command')
