@@ -8,7 +8,7 @@ const polyIO = require('poly-socketio')
 
 global.ROOTPATH = path.join(__dirname, '..')
 const log = require(path.join(__dirname, '..', 'src', 'log'))
-polyIO.gClient({ port: process.env.IOPORT })
+polyIO.client({ port: process.env.IOPORT })
 
 // export for bot
 module.exports = (robot) => {
