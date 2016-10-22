@@ -15,11 +15,11 @@
   },
   "ADAPTERS": {
     "SLACK": {
-      "ACTIVATE": false,
+      "ACTIVATE": true,
       "HUBOT_SLACK_TOKEN": "add custom slack bot https://my.slack.com/services/new/bot"
     },
     "TELEGRAM": {
-      "ACTIVATE": true,
+      "ACTIVATE": false,
       "TELEGRAM_TOKEN": "get from bot father https://core.telegram.org/bots#3-how-do-i-create-a-bot",
       "BOTNAME": "your bot name from bot father",
       "WEBHOOK_KEY": "TELEGRAM_WEBHOOK"
