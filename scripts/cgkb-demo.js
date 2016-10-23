@@ -2,7 +2,7 @@
 const co = require('co')
 const _ = require('lomath')
 const path = require('path')
-const { kb, nlp } = require(path.join(__dirname, '..', '..', 'CGKB'))
+const { kb, nlp } = require('CGKB')
 
 var nodeROOT = {
   word: "ROOT",
