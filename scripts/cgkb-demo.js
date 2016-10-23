@@ -2,57 +2,31 @@
 const co = require('co')
 const _ = require('lomath')
 const path = require('path')
-const { kb, nlp } = require('CGKB')
-
-var nodeROOT = {
-  word: "ROOT",
-  POS_fine: "ROOT"
-}
-
-/* istanbul ignore next */
-function graphifyParseTree(parseTree, nodeFrom = nodeROOT, graph = []) {
-  nodeFrom['name'] = nodeFrom['word']
-  nodeFrom['label'] = nodeFrom['POS_coarse'] == 'PUNCT' ? 'PUNCT' : nodeFrom['POS_fine']
-  _.each(parseTree, (nodeTo) => {
-    // take out modifiers
-    var modifiers = _.get(nodeTo, 'modifiers')
-    _.unset(nodeTo, 'modifiers')
-    nodeTo['name'] = nodeTo['word']
-    nodeTo['label'] = nodeTo['POS_coarse'] == 'PUNCT' ? 'PUNCT' : nodeTo['POS_fine']
-    edge = { label: nodeTo['arc'] }
-    graph.push([nodeFrom, nodeTo, edge])
-    graphifyParseTree(modifiers, nodeTo, graph)
-  })
-  return graph
-}
-
-var buildSyntaxGraph = co.wrap(function*(text) {
-  yield kb.clearDb()
-  var output = yield nlp.parse(text)
-  parseTree = output[0].parse_tree
-  graph = graphifyParseTree(parseTree, nodeROOT)
-  var qp = kb.addGraph(graph)
-  return yield kb.db.cypherAsync(qp)
-})
+const cgkb = require('CGKB')
 
 /* istanbul ignore next */
 module.exports = (robot) => {
+  robot.respond(/clear\s*kb$/i, (res) => {
+    cgkb.kb.clear()
+    res.send('CGKB is cleared')
+  })
+
   robot.respond(/nlp\s*demo\s*1$/i, (res) => {
-    buildSyntaxGraph('Bob brought the pizza to Alice.')
+    cgkb.add('Bob brought the pizza to Alice.')
     res.send('Your wish is my command')
   })
 
   robot.respond(/nlp\s*demo\s*2$/i, (res) => {
-    buildSyntaxGraph('Book me a flight from New York to London for Sunday')
+    cgkb.add('Book me a flight from New York to London for Sunday')
   })
 
   robot.respond(/.*/, (res) => {
     var text = res.match[0]
     text = _.trim(_.replace(text, robot.name, ''))
-    if (_.includes(text, 'nlp')) {
+    if (_.includes(text, 'nlp') || _.includes(text, 'clear kb')) {
       return
     } else {
-      buildSyntaxGraph(text)
+      cgkb.add(text)
         .then(() => {
           res.send('Saved to brain')
         })
