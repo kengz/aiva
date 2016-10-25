@@ -486,7 +486,7 @@ User serialization that depends on the brain is complete for Slack, but partial 
 
 <h2 id="theoretical-power"><a name="theoretical"></a>theoretical power</h2>
 
-<p>AIVA is based on a theoretical interface <a href="https://github.com/kengz/aiva/tree/master/docs/HTMI.md">HTMI</a> and a brain <a href="https://github.com/kengz/aiva/tree/master/docs/CGKB.md">CGKB</a> that is <em>human-bounded Turing complete</em>. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.</p>
+<p>AIVA is based on a theoretical interface <a href="http://kengz.me/aiva/#human-turing-machine-interface">HTMI</a> and a brain <a href="http://kengz.me/aiva/#contextual-graph-knowledge-base">CGKB</a> that is <em>human-bounded Turing complete</em>. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.</p>
 
 <p>Why is this important? Because for far too many times people have tried to solve problems that are unsolvable. Many of the bots out there are actually very restrictive. To allow developers to solve problems with full power, and with easy, we have built a general-purpose tool and made it theoretically complete, so you can focus on solving your problem.</p>
 
@@ -1154,7 +1154,7 @@ Remember to use HTTPS urls.
 
 <h2 id="design">Design</h2>
 
-<p><strong>HTMI</strong> consists of a human, a Turing Machine, and an interface. The human sends queries and responses to the interface, which maps and canonicalizes them as inputs to the TM. Symmetrically, the TM sends queries and responses to the interface, which verbalize them as output to the human.</p>
+<p><strong>HTMI</strong> consists of a human, a Turing Machine, and an interface. The human sends queries and responses to the interface, which maps and canonicalizes them as inputs to the TM. Symmetrically, the TM sends queries and responses to the interface, which verbalizes them as output to the human.</p>
 
 <p>The design outlines of HTMI are as follow:</p>
 
@@ -1174,7 +1174,7 @@ Remember to use HTTPS urls.
 
 <h4 id="definition">Definition</h4>
 
-<p><strong>Human-bounded Turing complete</strong>: The class that is the intersection between the Turing complete class and the class of problems enumerable by humans, i.e. the latter class bounds its Turing completeness. Note that it may be Turing complete class itself, if the latter class is bigger than the former.</p>
+<p><strong>Human-bounded Turing complete</strong>: The class which is the intersection between the Turing-complete class and the class of problems enumerable by humans. The latter class bounds its Turing completeness. Note that it may be the Turing complete class itself, if the latter class is bigger than the former.</p>
 
 <h4 id="proof">Proof</h4>
 
@@ -1197,10 +1197,10 @@ Remember to use HTTPS urls.
 
 <h2 id="design">Design</h2>
 
-<p>Recall that TM is equivalent to <code class="prettyprint">{Fn, I}</code>. CGKB serves as the implementation for <code class="prettyprint">I</code>. To also satisfy the approximation of human-human interaction, we have the following design outlines:</p>
+<p>Recall that TM is equivalent to <code class="prettyprint">{Fn, I}</code>, where <code class="prettyprint">Fn</code> is the set of functions invokable by a TM with random access of its information <code class="prettyprint">I</code> on its tape. CGKB serves as the implementation for <code class="prettyprint">I</code>. To also satisfy the approximation of human-human interaction, we have the following design outlines:</p>
 
 <ul>
-<li><p><strong>graph</strong>: just as all enumerable data types, this supports TM completeness. Besides, its generality and features are established mathematically. <code class="prettyprint">Fn</code> includes generic TM functions and graph operations on <code class="prettyprint">I</code>, which is information encoded in graph nodes and edges that richly represent properties and relationships.</p></li>
+<li><p><strong>graph</strong>: just as all enumerable data types, this supports TM completeness. Besides, its generality and features are established mathematically, and this will be easier to use given the connected nature of knowledge. <code class="prettyprint">Fn</code> includes generic TM functions and graph operations on <code class="prettyprint">I</code>, which is information encoded in graph nodes and edges that richly represent properties and relationships.</p></li>
 <li><p><strong>context</strong>: the collective term for fundamental information types. To make TM operations tractable, contextualization restricts the scope to a manageable subgraph. The context filters are: privacy (public/private knowledge), entity, ranking, time, constraints, graph properties. </p></li>
 <li><p><strong>ranking</strong>: graph indexing analogous to how humans rank memories, for tractability. Ranking can use emotions (human analogy), LSTM (long-short term memories) for quick graph search.</p></li>
 <li><p><strong>learning</strong>: consistent with the &ldquo;inquiry&rdquo; feature of HTMI, CGKB will extend itself by inquiring for missing information.</p></li>
