@@ -5,7 +5,7 @@ const path = require('path')
 const polyIO = require('poly-socketio')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
-const { nlpServer } = require(path.join(__dirname, '..', '..', 'CGKB'))
+const { nlpServer } = require('CGKB')
 var nlpServerCount = 1
 
 /* istanbul ignore next */
