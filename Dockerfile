@@ -48,7 +48,7 @@ RUN ["/bin/bash", "-c", "npm i && npm run setup"]
 EXPOSE 4039 4040 4038 4041 7472 7474 7475 7476 6463 6464 6465 6466
 
 # default command on creating a new container
-# CMD service mysql start && NPM_RUN="development" supervisor
+# CMD service mysql start && NPM_RUN="development" supervisord
 
 # useful Docker commands
 # build: docker build -t kengz/aiva .
