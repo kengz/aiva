@@ -15,10 +15,10 @@ fi
 
 if [[ $1 && $1=='production' ]]; then
   container=aiva-production
-  COMMAND="docker run -m 4G -it -d -p 4040:4039 -p 7474:7472 -p 6464:6463 --name $container $CLOUDDREAM_LINK_VOL -v `pwd`:/var/www/aiva kengz/aiva /bin/bash -c 'service mysql start && NPM_RUN=\"production\" supervisord'"
+  COMMAND="docker run -m 4G -it -d -p 4040:4039 -p 7474:7472 -p 6464:6463 --name $container $CLOUDDREAM_LINK_VOL -v `pwd`:/var/www/aiva kengz/aiva /bin/bash -c 'service postgresql start && NPM_RUN=\"production\" supervisord'"
 else
   container=aiva-development
-  COMMAND="docker run -m 4G -it -p 4041:4038 -p 7476:7475 -p 6466:6465 --name $container $CLOUDDREAM_LINK_VOL -v `pwd`:/var/www/aiva kengz/aiva /bin/bash -c 'service mysql start && NPM_RUN=\"development\" $SHELL'"
+  COMMAND="docker run -m 4G -it -p 4041:4038 -p 7476:7475 -p 6466:6465 --name $container $CLOUDDREAM_LINK_VOL -v `pwd`:/var/www/aiva kengz/aiva /bin/bash -c 'service postgresql start && NPM_RUN=\"development\" $SHELL'"
 fi
 
 if [[ "$(docker images -q kengz/aiva:latest 2> /dev/null)" != "" ]]; then

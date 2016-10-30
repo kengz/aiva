@@ -2,35 +2,46 @@ FROM ubuntu:16.04
 MAINTAINER Wah Loon Keng <kengzwl@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# General dependencies
-RUN apt-get update
-RUN apt-get install -y git nano curl wget software-properties-common build-essential
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs
-RUN apt-get install -y python3-dev python3-pip python3-setuptools
-RUN apt-get install -y mysql-server
+# Get latest Node 6 install script and save it to /tmp
+ADD https://raw.githubusercontent.com/nodesource/distributions/master/deb/setup_6.x /tmp/node6_setup.sh
 
-# Install Nginx, supervisor, monitoring tools
-RUN apt-get install -y nginx supervisor dialog net-tools
+# Run node installer script to prepare apt-get for later install
+RUN cat /tmp/node6_setup.sh | bash \
+    &&  apt-get update \
+    && apt-get install -y build-essential \
+    dialog \
+    git \
+    net-tools \
+    nodejs \
+    nginx \
+    postgresql \
+    postgresql-contrib \
+    python3-dev \
+    python3-pip \
+    python3-setuptools \
+    software-properties-common \
+    supervisor \
+    && rm -rf /var/lib/apt/lists/*
+
 # Replace the default Nginx configuration file
-RUN rm -v /etc/nginx/nginx.conf
-ADD config/nginx.conf /etc/nginx/
+# RUN rm -v /etc/nginx/nginx.conf
+COPY config/nginx.conf /etc/nginx/
+
 # Add a supervisor configuration file
-ADD config/supervisord.conf /etc/supervisor/conf.d/
+COPY config/supervisord.conf /etc/supervisor/conf.d/
 
 # Define mountable directories
 VOLUME ["/var/log"]
 
 # Define working directory
 RUN mkdir -p /var/www/aiva
-WORKDIR /var/www/aiva
 
-ADD package.json ./
-RUN npm i
-ADD . /var/www/aiva
-RUN npm run setup
+WORKDIR /var/www/aiva
+COPY package.json ./
+COPY . ./
+RUN sed -i s/peer/trust/ /etc/postgresql/9.5/main/pg_hba.conf && /etc/init.d/postgresql restart
+RUN ["/bin/bash", "-c", "npm i && npm run setup"]
 
 # expose ports for prod/dev, see config/
 # the ports on the left of each is the surrogate port for nginx redirection
