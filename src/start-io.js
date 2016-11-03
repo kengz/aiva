@@ -5,7 +5,7 @@ const path = require('path')
 const polyIO = require('poly-socketio')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
-const { nlpServer } = require('CGKB')
+const { nlpServer } = require('cgkb')
 var nlpServerCount = 1
 
 /* istanbul ignore next */
@@ -77,6 +77,7 @@ function ioStart() {
   polyIO.server({
       port: process.env.IOPORT,
       clientCount: CLIENT_COUNT,
+      timeoutMs: 60000,
       debug: process.env['npm_config_debug']
     })
     .then(ioClient)

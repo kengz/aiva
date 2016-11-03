@@ -2,7 +2,7 @@
 const co = require('co')
 const _ = require('lomath')
 const path = require('path')
-const cgkb = require('CGKB')
+const cgkb = require('cgkb')
 
 /* istanbul ignore next */
 module.exports = (robot) => {
