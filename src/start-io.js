@@ -6,10 +6,11 @@ const polyIO = require('poly-socketio')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 const { nlpServer } = require('cgkb')
-var nlpServerCount = 1
+const nlpServerCount = 1
 
 /* istanbul ignore next */
 if (process.env.IOPORT === undefined) { setEnv() }
+const bashSrc = (process.platform == 'darwin') ? '~/.bash_profile' : '~/.bashrc'
 const LIBPATH = path.join(__dirname, '..', 'lib')
 const jsIOClient = require(path.join(LIBPATH, 'client'))
 
@@ -19,8 +20,8 @@ var ioClientCmds = _.pickBy({
       // install_dependency: "gem install socket.io-client-simple activesupport",
       client: path.join(LIBPATH, 'client.rb')
     },
-    python3: {
-      // install_dependency: "python3 -m pip install socketIO-client",
+    python: {
+      // install_dependency: "python -m pip install socketIO-client",
       client: path.join(LIBPATH, 'client.py')
     }
   },
@@ -56,8 +57,7 @@ function ioClient() {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
-    if (process.env.USE_PY2 === 'true') { lang = _.replace(lang, 'python3', 'python') }
-    var cp = spawn(lang, [cmds['client']], { stdio: [process.stdin, process.stdout, 'pipe'] })
+    var cp = spawn('/bin/sh', ['-c', `source ${bashSrc}; ${lang} ${cmds['client']}`], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
     /* istanbul ignore next */

@@ -11,7 +11,7 @@
   "ADMINS": ["your_chat_account@email.com"],
   "ACTIVATE_IO_CLIENTS": {
     "ruby": false,
-    "python3": true
+    "python": true
   },
   "ADAPTERS": {
     "SLACK": {
