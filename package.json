@@ -39,7 +39,7 @@
   "homepage": "https://github.com/kengz/aiva#readme",
   "dependencies": {
     "bluebird": "^3.1.1",
-    "cgkb": "^1.0.5",
+    "cgkb": "^1.0.6",
     "co": "^4.6.0",
     "config": "^1.21.0",
     "date.js": "^0.3.1",
@@ -54,7 +54,7 @@
     "ngrok": "^2.2.3",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
-    "poly-socketio": "^1.1.0",
+    "poly-socketio": "^1.1.1",
     "portscanner": "^1.0.0",
     "randombytes": "^2.0.3",
     "require-dir": "^0.3.0",

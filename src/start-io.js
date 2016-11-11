@@ -77,7 +77,6 @@ function ioStart() {
   polyIO.server({
       port: process.env.IOPORT,
       clientCount: CLIENT_COUNT,
-      timeoutMs: 60000,
       debug: process.env['npm_config_debug']
     })
     .then(ioClient)
