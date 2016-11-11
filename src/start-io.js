@@ -57,7 +57,7 @@ function ioClient() {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
-    var cp = spawn('/bin/sh', ['-c', `source ${bashSrc}; ${lang} ${cmds['client']}`], { stdio: [process.stdin, process.stdout, 'pipe'] })
+    var cp = spawn('/bin/sh', ['-c', `source ${bashSrc}`, `${lang} ${cmds['client']}`], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
     /* istanbul ignore next */
