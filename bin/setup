@@ -83,6 +83,33 @@ else
   echo "Postgresql is already started"
 fi
 
+# install neo4j
+if which neo4j >/dev/null; then
+  echo "Neo4j is already installed"
+else
+  if [ $(uname) == "Darwin" ]; then
+    brew install neo4j
+  else
+    wget -O - http://debian.neo4j.org/neotechnology.gpg.key | apt-key add -
+    echo 'deb http://debian.neo4j.org/repo stable/' > /etc/apt/sources.list.d/neo4j.list
+    sudo apt-get update
+    sudo apt-get install neo4j
+  fi
+fi
+
+# start neo4j
+UP=$(pgrep neo4j | wc -l);
+if [ "$UP" -eq 0 ];
+then
+  if [ $(uname) == "Darwin" ]; then
+    neo4j start
+  else
+    service neo4j start
+  fi
+else
+  echo "Neo4j is already started"
+fi
+
 # install pip modules
 if python3 -m pip show six socketIO-client >/dev/null; then
   echo "Pip modules already installed"
