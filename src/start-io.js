@@ -9,8 +9,11 @@ const { nlpServer } = require('cgkb')
 const nlpServerCount = 1
 
 /* istanbul ignore next */
-if (process.env.IOPORT === undefined) { setEnv() }
 const bashSrc = (process.platform == 'darwin') ? '~/.bash_profile' : '~/.bashrc'
+/* istanbul ignore next */
+const srcCmd = process.env.CI ? '' : `. ${bashSrc}`
+/* istanbul ignore next */
+if (process.env.IOPORT === undefined) { setEnv() }
 const LIBPATH = path.join(__dirname, '..', 'lib')
 const jsIOClient = require(path.join(LIBPATH, 'client'))
 
@@ -57,7 +60,10 @@ function ioClient() {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
-    var cp = spawn('/bin/sh', ['-c', `source ${bashSrc}`, `${lang} ${cmds['client']}`], { stdio: [process.stdin, process.stdout, 'pipe'] })
+    var cp = spawn('/bin/sh', ['-c', `
+      ${srcCmd}
+      ${lang} ${cmds['client']}
+      `], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
     /* istanbul ignore next */
