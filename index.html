@@ -237,8 +237,8 @@
 <td>Cross-interaction among <code class="prettyprint">Node.js</code>, <code class="prettyprint">Python</code>, <code class="prettyprint">Ruby</code>, etc. using <code class="prettyprint">SocketIO</code>.</td>
 </tr>
 <tr>
-<td style="text-align: left">built-in with AI tools (not preinstalled since v4)</td>
-<td>Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs</td>
+<td style="text-align: left">conversation-classifier</td>
+<td>Using Wordvec on spaCy NLP.</td>
 </tr>
 <tr>
 <td style="text-align: left">hackable</td>
@@ -340,6 +340,10 @@ npm start production <span class="c"># runs 'aiva' in production mode</span>
 <td>yes</td>
 </tr>
 <tr>
+<td style="text-align: left"><a href="#conversation-classifier">conversation classifier</a></td>
+<td>yes</td>
+</tr>
+<tr>
 <td style="text-align: left"><a href="#builtin-ai">AI tools</a></td>
 <td>yes</td>
 </tr>
@@ -404,6 +408,10 @@ User serialization that depends on the brain is complete for Slack, but partial 
 <p><strong>Unite we stand</strong>. When different languages work together, we can access a much larger set of development tools. Also, we wish that a developer can use the AIVA regardless of his/her favorite programming language. </p>
 
 <p>For more, see <a href="#polyglot">Polyglot environment</a> and <a href="#clients">Socket.io clients</a> for how it&rsquo;s done. We now support <code class="prettyprint">node.js, python, ruby</code>.</p>
+
+<h2 id="conversation-classifier"><a name="conversation-classifier"></a>conversation classifier</h2>
+
+<p>AIVA has a conversation classifier that uses <code class="prettyprint">wordvec</code> from <code class="prettyprint">spaCy</code>. It is pretty new, and is undergoing refinement. See <code class="prettyprint">lib/py/convo_classifier.py</code> for the backend logic, and <code class="prettyprint">scripts/convo.js</code> for the interface script. Define your convo classes, its queries and responses in <code class="prettyprint">data/convo_classes.json</code>.</p>
 
 <h2 id="ai-tools"><a name="builtin-ai"></a>AI tools</h2>
 
