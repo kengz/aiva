@@ -26,7 +26,7 @@ module.exports = (robot) => {
 
     User.findOrCreate({
       where: {adapter: adapter, userid: userid},
-      defaults: {username: username, profile: profile}})
+      defaults: {username: username, profile: JSON.stringify(profile)}})
     .spread((user, created) => {})
 
     _.each(inlogs, (inlog) => { Chatlog.create(inlog) })

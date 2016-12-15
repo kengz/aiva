@@ -28,7 +28,7 @@ module.exports = (robot) => {
     } else {
       cgkb.add(text)
         .then(() => {
-          res.send('Saved to brain')
+          global.log.info('Knowledge saved to brain')
         })
     }
     if (_.includes(text, 'flight')) {

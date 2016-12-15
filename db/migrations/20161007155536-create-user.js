@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       profile: {
-        type: Sequelize.JSON
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

@@ -32,56 +32,56 @@ else
   fi
 fi
 
-# # install MySQL
-# if which mysql >/dev/null; then
-#   echo "MySQL is already installed"
-# else
-#   if [ $(uname) == "Darwin" ]; then
-#     brew install mysql
-#   else
-#     sudo apt-get -y install mysql-server
-#   fi
-# fi
-
-# # start mysql
-# UP=$(pgrep mysql | wc -l);
-# if [ "$UP" -eq 0 ];
-# then
-#   if [ $(uname) == "Darwin" ]; then
-#     mysql.server start
-#   else
-#     service mysql start
-#   fi
-# else
-#   echo "MySQL is already started"
-# fi
-
-# install postgres
-if which postgres >/dev/null; then
-  echo "Postgresql is already installed"
+# install MySQL
+if which mysql >/dev/null; then
+  echo "MySQL is already installed"
 else
   if [ $(uname) == "Darwin" ]; then
-    brew install postgres
-    brew services start postgresql
-    sleep 5
-    createuser -s postgres
+    brew install mysql
   else
-    sudo apt-get -y install postgresql postgresql-contrib
+    sudo apt-get -y install mysql-server
   fi
 fi
 
-# start postgres
-UP=$(pgrep postgres | wc -l);
+# start mysql
+UP=$(pgrep mysql | wc -l);
 if [ "$UP" -eq 0 ];
 then
   if [ $(uname) == "Darwin" ]; then
-    brew services start postgresql
+    mysql.server start
   else
-    service postgresql start
+    service mysql start
   fi
 else
-  echo "Postgresql is already started"
+  echo "MySQL is already started"
 fi
+
+# # install postgres
+# if which postgres >/dev/null; then
+#   echo "Postgresql is already installed"
+# else
+#   if [ $(uname) == "Darwin" ]; then
+#     brew install postgres
+#     brew services start postgresql
+#     sleep 5
+#     createuser -s postgres
+#   else
+#     sudo apt-get -y install postgresql postgresql-contrib
+#   fi
+# fi
+
+# # start postgres
+# UP=$(pgrep postgres | wc -l);
+# if [ "$UP" -eq 0 ];
+# then
+#   if [ $(uname) == "Darwin" ]; then
+#     brew services start postgresql
+#   else
+#     service postgresql start
+#   fi
+# else
+#   echo "Postgresql is already started"
+# fi
 
 # install neo4j
 if which neo4j >/dev/null; then
