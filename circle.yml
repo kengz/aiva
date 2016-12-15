@@ -11,6 +11,7 @@ machine:
 
 dependencies:
   override:
+    - pip install autocorrect
     - pip install socketIO-client
     - pip install spacy
     - python -m sputnik --name spacy find || python -m spacy.en.download
