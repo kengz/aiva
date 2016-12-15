@@ -1,0 +1,45 @@
+{
+  "greeting": {
+    "queries": [
+      "Hi",
+      "Hello"
+    ],
+    "responses": [
+      "Hello there.",
+      "Hi how are you?"
+    ],
+    "weighted_keywords": []
+  },
+  "weather": {
+    "queries": [
+      "How is the weather?",
+      "The weather please",
+      "What's the weather like?"
+    ],
+    "responses": [
+      "It is raining today.",
+      "it is quite sunny today.",
+      "No idea, I live in the cloud and it's always sunny :)"
+    ],
+    "weighted_keywords": ["weather"]
+  },
+  "origin": {
+    "queries": [
+      "Who are you",
+      "What are you"
+    ],
+    "responses": [
+      "I'm AIVA, kengz created me.",
+      "AIVA, I'm a bot created by kengz."
+    ],
+    "weighted_keywords": []
+  },
+  "exception": {
+    "queries": [],
+    "responses": [
+      "Sorry, my capability is still quite limited.",
+      "Sorry this is too advanced for me, I'm a dum dum :P"
+    ],
+    "weighted_keywords": []
+  }
+}
