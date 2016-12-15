@@ -7,6 +7,10 @@ describe 'scripts/convo.js', ->
 
   # Test
   context 'alice: who are you', ->
+    if process.env.CI
+      # skip on CI due to spaCy model too big for CI
+      @skip
+    
     beforeEach ->
       co =>
         yield @room.user.say 'alice', '@hubot who are you'
