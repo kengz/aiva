@@ -56,7 +56,7 @@
     "mysql2": "^1.1.2",
     "ngrok": "^2.2.3",
     "poly-socketio": "^1.1.1",
-    "portscanner": "^1.0.0",
+    "portscanner": "^2.1.1",
     "randombytes": "^2.0.3",
     "require-dir": "^0.3.0",
     "sequelize": "^3.24.3",
@@ -64,7 +64,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "codeclimate-test-reporter": "^0.4.0",
     "coffee-script": "^1.10.0",
@@ -73,7 +73,7 @@
     "mocha": "^3.0.2",
     "mocha-lcov-reporter": "^1.2.0",
     "sequelize-cli": "^2.4.0",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.6"
   },
   "engines": {
     "node": ">=6"
