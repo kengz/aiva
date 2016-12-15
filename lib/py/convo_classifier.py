@@ -98,6 +98,3 @@ def classify(msg):
     }
     # the py client will send this to target <to>
     return reply
-
-
-classify_convo("hello")
