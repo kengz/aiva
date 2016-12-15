@@ -23,14 +23,24 @@
     ],
     "weighted_keywords": ["weather"]
   },
-  "origin": {
+  "info": {
     "queries": [
-      "Who are you",
-      "What are you"
+      "Who are you?",
+      "What are you?"
     ],
     "responses": [
-      "I'm AIVA, kengz created me.",
-      "AIVA, I'm a bot created by kengz."
+      "I am AIVA the bot."
+    ],
+    "weighted_keywords": []
+  },
+  "creator": {
+    "queries": [
+      "Who created you?",
+      "Who is your creator?"
+    ],
+    "responses": [
+      "I'm created by kengz",
+      "kengz created me"
     ],
     "weighted_keywords": []
   },
