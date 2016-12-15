@@ -10,6 +10,7 @@
     "test": "bin/test",
     "_test": "./node_modules/.bin/istanbul cover -x 'db/**' ./node_modules/mocha/bin/_mocha",
     "posttest": "rm -rf .hubot_history brain.json npm-debug.log*",
+    "clear": "rm -rf coverage htmlcov .coverage *.xml npm-debug.log* logs",
     "start": "bin/start",
     "stop": "bin/stop",
     "_stop": "./node_modules/forever/bin/forever stopall",
