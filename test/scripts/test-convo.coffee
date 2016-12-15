@@ -9,7 +9,7 @@ describe 'scripts/convo.js', ->
   context 'alice: who are you', ->
     if process.env.CI
       # skip on CI due to spaCy model too big for CI
-      @skip
+      @skip()
     
     beforeEach ->
       co =>

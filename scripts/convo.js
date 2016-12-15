@@ -5,6 +5,9 @@
 module.exports = (robot) => {
   /* istanbul ignore next */
   robot.respond(/.*/, (res) => {
+    if (process.env.CI) {
+      return
+    }
     var str = res.match[0].replace(`${robot.name} `, '')
     global.client.pass({
         input: str,
