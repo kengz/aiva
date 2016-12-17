@@ -5,8 +5,8 @@ const path = require('path')
 const polyIO = require('poly-socketio')
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, activeAdapters } = require(path.join(__dirname, 'env'))
-const { nlpServer } = require('cgkb')
-const nlpServerCount = 1
+// const { nlpServer } = require('cgkb')
+const nlpServerCount = 0
 
 /* istanbul ignore next */
 const bashSrc = (process.platform == 'darwin') ? '~/.bash_profile' : '~/.bashrc'
@@ -55,7 +55,7 @@ function ioClient() {
 
   // import js locally
   jsIOClient.join()
-  nlpServer({ port: process.env.IOPORT }) // start nlp server
+  // nlpServer({ port: process.env.IOPORT }) // start nlp server
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
