@@ -6,7 +6,6 @@ from autocorrect import spell
 from copy import deepcopy
 from os import path
 from os.path import basename
-from spacy.en import English
 
 # the ioid of this script for JSON payload 'from'
 ioid = basename(__file__)  # 'hello.py'
