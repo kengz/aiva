@@ -8,25 +8,24 @@ module.exports = (robot) => {
   robot.hear(/.*/, (res) => {})
 
   robot.receiveMiddleware((context, next, done) => {
-    var source = context.response.envelope
+    var envelope = context.response.envelope
     var adapter = process.env.ADAPTER
-    var userid = _.toString(_.get(source, 'user.id'))
-    var username = _.get(source, 'user.username') || _.get(source, 'user.name')
-    var profile = _.get(source, 'user')
+    var userid = _.toString(_.get(envelope, 'user.id'))
+    var username = _.get(envelope, 'user.username') || _.get(envelope, 'user.name')
 
     inlogs = [{
       'adapter': adapter,
       'userid': userid,
       'username': username,
-      'room': _.get(source, 'room'),
+      'room': _.get(envelope, 'room'),
       'incoming': true,
       'method': 'receive',
-      'message': _.get(source, 'message.text') || _.join(_.keys(_.get(source, 'message.message')), ', ')
+      'message': _.get(envelope, 'message.text') || _.join(_.keys(_.get(envelope, 'message.message')), ', ')
     }]
 
     User.findOrCreate({
       where: {adapter: adapter, userid: userid},
-      defaults: {username: username, profile: JSON.stringify(profile)}})
+      defaults: {username: username, envelope: JSON.stringify(envelope)}})
     .spread((user, created) => {})
 
     _.each(inlogs, (inlog) => { Chatlog.create(inlog) })

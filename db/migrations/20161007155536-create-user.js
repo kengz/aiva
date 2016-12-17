@@ -19,7 +19,7 @@ module.exports = {
       username: {
         type: Sequelize.STRING
       },
-      profile: {
+      envelope: {
         type: Sequelize.TEXT
       },
       createdAt: {
