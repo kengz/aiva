@@ -28,7 +28,10 @@ module.exports = (robot) => {
       defaults: {username: username, envelope: JSON.stringify(envelope)}})
     .spread((user, created) => {})
 
-    _.each(inlogs, (inlog) => { Chatlog.create(inlog) })
+    _.each(inlogs, (inlog) => {
+      Chatlog.create(inlog)
+      global.log.debug(`[In log]: ${inlog.message}`)
+    })
 
     return next()
   })
@@ -46,7 +49,10 @@ module.exports = (robot) => {
       'method': context.method,
       'message': text
     }))
-    _.each(outlogs, (outlog) => { Chatlog.create(outlog) })
+    _.each(outlogs, (outlog) => {
+      Chatlog.create(outlog)
+      global.log.debug(`[Out log]: ${outlog.message}`)
+    })
     return next()
   })
 }
