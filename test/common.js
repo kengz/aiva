@@ -25,7 +25,7 @@ global.say = (room, name, key) => {
 // Promise.delay, with adjusted time factors. for use with yield
 global.delayer = (factor) => {
   factor = factor || 1
-  var timeout = 100 * factor
+  let timeout = 100 * factor
   timeout = _.min([timeout, 16000]) // timeout is capped at 16s
   return Promise.delay(timeout)
 }

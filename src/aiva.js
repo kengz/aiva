@@ -8,12 +8,12 @@ const startIO = require(path.join(__dirname, 'start-io'))
 const log = require(path.join(__dirname, 'log'))
 const { setEnv, spawnEnv, activeAdapters } = require(path.join(__dirname, 'env'))
 const { authDb, migrateDb } = require(path.join(__dirname, 'db'))
-var children = [] // child processes for spawn
+let children = [] // child processes for spawn
 
 // finally, spawn a hubot in child.process using env
 /* istanbul ignore next */
 function spawnProcess(env) {
-  var hb = spawn('./bin/hubot', ['-a', _.toLower(env['ADAPTER']), '--name', env['BOTNAME']], { stdio: 'inherit', env: env })
+  let hb = spawn('./bin/hubot', ['-a', _.toLower(env['ADAPTER']), '--name', env['BOTNAME']], { stdio: 'inherit', env: env })
   children.push(hb)
   log.info(`Deploying bot ${env['BOTNAME']} with adapter ${env['ADAPTER']}`)
   return env

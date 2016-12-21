@@ -10,7 +10,7 @@ module.exports = (robot) => {
 
   // call the hello.py methods
   robot.respond(/hello-io\s*(.+)/i, (res) => {
-    var lang = res.match[1]
+    let lang = res.match[1]
 
     // use the global client to pass to the hello.py client
     // this returns a promise

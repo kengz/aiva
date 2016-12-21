@@ -8,12 +8,12 @@ module.exports = (robot) => {
   robot.hear(/.*/, (res) => {})
 
   robot.receiveMiddleware((context, next, done) => {
-    var envelope = context.response.envelope
-    var adapter = process.env.ADAPTER
-    var userid = _.toString(_.get(envelope, 'user.id'))
-    var username = _.get(envelope, 'user.username') || _.get(envelope, 'user.name')
+    let envelope = context.response.envelope
+    let adapter = process.env.ADAPTER
+    let userid = _.toString(_.get(envelope, 'user.id'))
+    let username = _.get(envelope, 'user.username') || _.get(envelope, 'user.name')
 
-    inlogs = [{
+    let inlogs = [{
       'adapter': adapter,
       'userid': userid,
       'username': username,
@@ -37,10 +37,10 @@ module.exports = (robot) => {
   })
 
   robot.responseMiddleware((context, next, done) => {
-    var target = context.response.envelope
+    let target = context.response.envelope
     // global.log.info(JSON.stringify(target, null, 2))
-    replies = context.strings
-    outlogs = _.map(replies, (text) => ({
+    let replies = context.strings
+    let outlogs = _.map(replies, (text) => ({
       'adapter': process.env.ADAPTER,
       'userid': _.get(target, 'user.id'),
       'username': _.get(target, 'user.username') || _.get(target, 'user.name'),

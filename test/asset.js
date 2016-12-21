@@ -1,7 +1,7 @@
 // Assets for the tests
 const _ = require('lomath')
 
-var A = {
+let A = {
   // lib/test_todo
   todoGenProp: {
     name: 'task1',

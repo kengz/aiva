@@ -9,9 +9,9 @@ Promise.promisifyAll(portscanner)
 const log = require(path.join(__dirname, 'log'))
 
 global.config = config
-var globalKeys = _.difference(_.keys(config), ['ADAPTERS', 'ACTIVATE_IO_CLIENTS'])
-var globalConfig = _.pick(config, globalKeys)
-var activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
+let globalKeys = _.difference(_.keys(config), ['ADAPTERS', 'ACTIVATE_IO_CLIENTS'])
+let globalConfig = _.pick(config, globalKeys)
+let activeAdapters = _.pickBy(config.get('ADAPTERS'), 'ACTIVATE')
 
 // helper to set process.env (or copy) from config
 function configToEnv(config, env = process.env) {
@@ -41,7 +41,7 @@ function setEnv() {
 // clone a new env copy for an adapter, return in Promise for chaining
 /* istanbul ignore next */
 function cloneEnv(adapter) {
-  var env = _.clone(process.env)
+  let env = _.clone(process.env)
   env['ADAPTER'] = adapter
   adapterConfig = config.get(`ADAPTERS.${adapter}`)
   log.debug(`adapterConfig ${JSON.stringify(adapterConfig, null, 2)}`)
@@ -52,7 +52,7 @@ function cloneEnv(adapter) {
 // set the PORT of env if specified in adapterConfig
 /* istanbul ignore next */
 function setPort(env) {
-  var basePort = config.get(`PORTS.${env['ADAPTER']}`)
+  let basePort = config.get(`PORTS.${env['ADAPTER']}`)
   return portscanner.findAPortNotInUseAsync(basePort, basePort + 50, '127.0.0.1')
     .then((port) => {
       env['PORT'] = port
@@ -65,18 +65,18 @@ function setPort(env) {
 // Spawn a ngrok automatically to handle the webhook
 /* istanbul ignore next */
 function setWebhook(env) {
-  var webhookKey = env['WEBHOOK_KEY']
+  let webhookKey = env['WEBHOOK_KEY']
   if (!webhookKey) {
     log.debug(`No WEBHOOK set for adapter ${env['ADAPTER']}`)
     return env
   } else {
-    var webhook = env[webhookKey]
-    var subdomain
+    let webhook = env[webhookKey]
+    let subdomain
     if (webhook && webhook.match(/\/\/(\w+)\.ngrok/)) {
       subdomain = webhook.match(/\/\/(\w+)\.ngrok/)[1]
     }
 
-    var ngrokOpts = _.pickBy({
+    let ngrokOpts = _.pickBy({
       proto: 'http', // http|tcp|tls 
       addr: env['PORT'], // port or network address 
       subdomain: subdomain,

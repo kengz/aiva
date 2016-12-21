@@ -18,7 +18,7 @@ const LIBPATH = path.join(__dirname, '..', 'lib')
 const jsIOClient = require(path.join(LIBPATH, 'client'))
 
 // import other languages via child_process
-var ioClientCmds = _.pickBy({
+let ioClientCmds = _.pickBy({
     ruby: {
       // install_dependency: "gem install socket.io-client-simple activesupport",
       client: path.join(LIBPATH, 'client.rb')
@@ -43,7 +43,7 @@ const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount + nlpServerCount
 /* istanbul ignore next */
 function ioClient() {
   // the child processes,kill all on death
-  var children = []
+  let children = []
 
   /* istanbul ignore next */
   process.on('exit', () => {
@@ -60,7 +60,7 @@ function ioClient() {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
-    var cp = spawn('/bin/sh', ['-c', `
+    let cp = spawn('/bin/sh', ['-c', `
       ${srcCmd}
       ${lang} ${cmds['client']}
       `], { stdio: [process.stdin, process.stdout, 'pipe'] })

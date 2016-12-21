@@ -8,9 +8,9 @@ const msgEmulator = require(path.join(__dirname, '..', 'src', 'msg-emulator'))
 
 // Create the real job from model job
 function createJob(job) {
-  var time = new Date(job.pattern)
+  let time = new Date(job.pattern)
   // when next phase complete, can just use date(job.pattern)
-  var pattern = _.isNaN(time.getTime()) ? job.pattern : time
+  let pattern = _.isNaN(time.getTime()) ? job.pattern : time
   new CronJob({
     cronTime: pattern,
     onTick: _.partial(msgEmulator.receive, job.userid, job.command),
@@ -28,11 +28,11 @@ Cronjob.all().then((jobs) => {
 /* istanbul ignore next */
 module.exports = (robot) => {
   robot.respond(/cron.*/i, (res) => {
-    var adapter = process.env.ADAPTER
-    var userid = _.toString(_.get(res.envelope, 'user.id'))
-    var text = res.match[0]
-    var parsedDate = date(text).toString()
-    var job = {
+    let adapter = process.env.ADAPTER
+    let userid = _.toString(_.get(res.envelope, 'user.id'))
+    let text = res.match[0]
+    let parsedDate = date(text).toString()
+    let job = {
       'adapter': adapter,
       'userid': userid,
       'pattern': parsedDate,

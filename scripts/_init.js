@@ -42,8 +42,8 @@ module.exports = (robot) => {
 
   // ensure bot name
   robot.respond(/bot info/i, (res) => {
-    var envelope = res.envelope
-    var info = _.join([
+    let envelope = res.envelope
+    let info = _.join([
       `robot.name: ${robot.name}`,
       `process.env.NODE_ENV: ${process.env.NODE_ENV}`,
       `adapter: ${process.env.ADAPTER}`,

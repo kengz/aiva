@@ -3,7 +3,7 @@ const _ = require('lomath')
 const randomBytes = require('randombytes')
 
 // The hashMap for this global hash
-var hashMap = {}
+let hashMap = {}
 // !for future multiple replies: don't delete on 'handle', but do a periodic scan and prune keys with older hash timestamp
 
 /**
@@ -40,7 +40,7 @@ function handle(msg) {
   const hashStr = _.isString(msg) ? msg : msg.hash
   if (hashStr) {
     global.log.debug('hash string exists for global-client')
-    var cb = hashMap[hashStr]
+    let cb = hashMap[hashStr]
     if (cb) {
       global.log.debug('hasher.handle invoking cb for global-client')
       _.omit(hashMap, hashStr)

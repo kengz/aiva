@@ -24,8 +24,8 @@ function createDb() {
     dbConfig.username,
     dbConfig.password,
     dbConfig)
-  var nodeEnvs = ['test', 'development', 'production']
-  var createDbQueries = _.map(nodeEnvs, (nodeEnv) => {
+  let nodeEnvs = ['test', 'development', 'production']
+  let createDbQueries = _.map(nodeEnvs, (nodeEnv) => {
     return "CREATE DATABASE " + _.get(dbEnvConfig, `${nodeEnv}.database`) + ";"
   })
 

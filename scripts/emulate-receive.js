@@ -8,7 +8,7 @@ const msgEmulator = require(path.join(__dirname, '..', 'src', 'msg-emulator'))
 module.exports = (robot) => {
   /* istanbul ignore next */
   robot.respond(/emulate.*/, (res) => {
-    var userid = _.toString(_.get(res.envelope, 'user.id'))
+    let userid = _.toString(_.get(res.envelope, 'user.id'))
     msgEmulator.receive(userid, 'ping')
   })
 }

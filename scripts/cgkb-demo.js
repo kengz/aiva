@@ -21,7 +21,7 @@ module.exports = (robot) => {
   })
 
   robot.respond(/.*/, (res) => {
-    var text = res.match[0]
+    let text = res.match[0]
     text = _.trim(_.replace(text, robot.name, ''))
     if (_.includes(text, 'nlp') || _.includes(text, 'clear kb')) {
       return

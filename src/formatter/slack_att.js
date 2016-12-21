@@ -32,7 +32,7 @@ function getColor(str) {
 
 // sample simple attachment
 // keys can be missing
-var Att = {
+let Att = {
   // color can be "good", "warning", "danger", hex #439FE0
   color: "good",
   pretext: "This is a pretext",
@@ -88,8 +88,8 @@ function genAttach(Att) {
   // filter out undefined values
   Att = _.pickBy(Att)
   // the 3 keys for each field
-  var fieldKeys = ["title", "value", "short"]
-  var fields = _.map(Att.fieldMat, (fieldArr) => {
+  let fieldKeys = ["title", "value", "short"]
+  let fields = _.map(Att.fieldMat, (fieldArr) => {
     // for default: short = true
     fieldArr.push(true)
     return _.zipObject(fieldKeys, fieldArr)
@@ -140,7 +140,7 @@ function cleanFieldMat(fieldMat) {
  */
 /* istanbul ignore next */
 function gkgParser(gkgRes) {
-  var items = (gkgRes.itemListElement || [])
+  let items = (gkgRes.itemListElement || [])
   return _.map(items, _gkgParser)
 }
 /**
@@ -148,7 +148,7 @@ function gkgParser(gkgRes) {
  */
 /* istanbul ignore next */
 function _gkgParser(item) {
-  var att = {
+  let att = {
     color: "purple",
     pretext: _.get(item, "result.description"),
     title: _.get(item, "result.name"),
@@ -174,7 +174,7 @@ function _gkgParser(item) {
  */
 /* istanbul ignore next */
 function gsearchParser(gsearchRes) {
-  var items = (gsearchRes.links || [])
+  let items = (gsearchRes.links || [])
   return _.compact(_.map(items, _gsearchParser))
 }
 /**
@@ -183,7 +183,7 @@ function gsearchParser(gsearchRes) {
 /* istanbul ignore next */
 function _gsearchParser(item) {
   if (!_.get(item, "href")) { return null }
-  var att = {
+  let att = {
     color: "indigo",
     title: _.get(item, "title"),
     title_link: _.get(item, "href"),
@@ -197,7 +197,7 @@ function _gsearchParser(item) {
 }
 
 
-var slackAtt = {
+let slackAtt = {
   gen: gen,
   gkgParser: gkgParser,
   gsearchParser: gsearchParser

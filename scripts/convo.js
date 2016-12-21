@@ -8,14 +8,14 @@ module.exports = (robot) => {
     if (process.env.CI) {
       return
     }
-    var str = res.match[0].replace(`${robot.name} `, '')
+    let str = res.match[0].replace(`${robot.name} `, '')
     global.client.pass({
         input: str,
         to: 'convo_classifier.py',
         intent: 'classify'
       })
       .then((reply) => {
-        convo = reply.output
+        let convo = reply.output
         global.log.info(`Convo Score ${convo.score}, Topic: ${convo.topic}`)
         if (convo.topic === 'exception') {
           // TODO can add some counter by user to activate
