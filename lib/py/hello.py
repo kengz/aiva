@@ -6,8 +6,8 @@ ioid = basename(__file__)  # 'hello.py'
 ##########################################
 
 
-def foo(input):
-    match = input.find('Hello') > -1
+def foo(incoming):
+    match = incoming.find('Hello') > -1
     return 'Hello from Python.' if match else 'Who are you?'
 
 
