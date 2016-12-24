@@ -1,5 +1,4 @@
 // Assets for the tests
-const _ = require('lomath')
 
 const A = {
   // lib/test_todo

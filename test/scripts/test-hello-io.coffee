@@ -45,6 +45,6 @@ describe 'scripts/hello-io.js', ->
     it 'hubot: Hello from Nodejs.', ->
       @room.messages.should.eql [
         ['alice', '@hubot hello-io js']
-        ['hubot', 'Hello from Nodejs.']
+        ['hubot', 'Hello from Nodejs, Hello from user.']
       ]
 
