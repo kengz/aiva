@@ -22,7 +22,7 @@ Cronjob.all().then((jobs) => {
   _.each(jobs, createJob)
   // need to delete overdue
   // need to also create on add below
-  // also need to consider the best way to parse command
+  // also need to consider the best way to parse command. do 'remind' vs 'emulate'
 })
 
 /* istanbul ignore next */
