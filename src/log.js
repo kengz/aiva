@@ -1,7 +1,7 @@
 const winston = require('winston')
 
 /* istanbul ignore next */
-logLevel = process.env.npm_config_debug ? 'debug' : 'info'
+const logLevel = process.env.npm_config_debug ? 'debug' : 'info'
 const log = global.log || new (winston.Logger)({
   level: logLevel,
   transports: [new (winston.transports.Console)({

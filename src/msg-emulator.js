@@ -1,8 +1,5 @@
-const _ = require('lomath')
-const path = require('path')
-const randomBytes = require('randombytes')
 const { TextMessage } = require('hubot')
-const { User } = require(path.join(__dirname, '..', 'db', 'models', 'index'))
+const { User } = require('../db/models/index')
 
 // emulate a user sending a message to bot
 // call as:
@@ -14,12 +11,12 @@ function receive(userid, text) {
   User.find({
     where: { adapter, userid },
   })
-    .then((user) => {
-      const envelope = JSON.parse(user.envelope)
-      const message = new TextMessage(envelope, `${global.robot.name} ${text}`, emulMsgID)
-      global.robot.receive(message)
-      // global.robot.send(envelope, 'Direct message')
-    })
+  .then((user) => {
+    const envelope = JSON.parse(user.envelope)
+    const message = new TextMessage(envelope, `${global.robot.name} ${text}`, emulMsgID)
+    global.robot.receive(message)
+    // global.robot.send(envelope, 'Direct message')
+  })
 }
 
 module.exports = {

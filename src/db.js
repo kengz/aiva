@@ -1,10 +1,10 @@
 const Promise = require('bluebird')
 const { exec } = require('child_process')
 const _ = require('lomath')
-const path = require('path')
 const Sequelize = require('sequelize')
-const log = require(path.join(__dirname, 'log'))
-const dbEnvConfig = require(path.join(__dirname, '..', 'config', 'db.json'))
+const log = require('./log')
+const dbEnvConfig = require('../config/db.json')
+
 Promise.config({ warnings: false })
 
 /* istanbul ignore next */
@@ -38,9 +38,9 @@ function createDb() {
 function authDb() {
   return sequelize
     .authenticate()
-    .then((e) => {
+    .then(() => {
       log.info('Authenticated database successfully')
-    }).catch(e => createDb()).finally(() => sequelize.close())
+    }).catch(() => createDb()).finally(() => sequelize.close())
 }
 
 /* istanbul ignore next */

@@ -1,13 +1,12 @@
 const Promise = require('bluebird')
-const { spawn, exec } = require('child_process')
+const { spawn } = require('child_process')
 const _ = require('lomath')
 const ngrok = require('ngrok')
-const path = require('path')
+const { authDb, migrateDb } = require('./db')
+const { setEnv, spawnEnv, activeAdapters } = require('./env')
+const log = require('./log')
+const startIO = require('./start-io')
 
-const startIO = require(path.join(__dirname, 'start-io'))
-const log = require(path.join(__dirname, 'log'))
-const { setEnv, spawnEnv, activeAdapters } = require(path.join(__dirname, 'env'))
-const { authDb, migrateDb } = require(path.join(__dirname, 'db'))
 const children = [] // child processes for spawn
 
 // finally, spawn a hubot in child.process using env
@@ -28,7 +27,7 @@ function spawnHubot(adapter) {
 
 /* istanbul ignore next */
 function startProcess() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     log.info('Starting aiva process')
     setEnv()
 
