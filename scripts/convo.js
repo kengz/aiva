@@ -1,3 +1,4 @@
+// dependencies
 // Interface script for convo engine
 const _ = require('lomath')
 const { Chatlog, User } = require('../db/models/index')
@@ -28,7 +29,7 @@ module.exports = (robot) => {
   // catch all chatlogs
   robot.hear(/.*/, () => {})
 
-  robot.receiveMiddleware((context, next) => {
+  robot.receiveMiddleware((context, next, done) => {
     const envelope = context.response.envelope
     const adapter = process.env.ADAPTER
     const userid = _.toString(_.get(envelope, 'user.id'))
@@ -54,10 +55,10 @@ module.exports = (robot) => {
       global.log.debug(`[In log]: ${inlog.message}`)
     })
 
-    return next()
+    return next(done)
   })
 
-  robot.responseMiddleware((context, next) => {
+  robot.responseMiddleware((context, next, done) => {
     const target = context.response.envelope
 
     // global.log.info(JSON.stringify(target, null, 2))
@@ -75,6 +76,6 @@ module.exports = (robot) => {
       Chatlog.create(outlog)
       global.log.debug(`[Out log]: ${outlog.message}`)
     })
-    return next()
+    return next(done)
   })
 }
