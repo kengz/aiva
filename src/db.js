@@ -27,8 +27,7 @@ function createDb() {
   const nodeEnvs = ['test', 'development', 'production']
   const createDbQueries = _.map(
     nodeEnvs,
-    nodeEnv => `CREATE DATABASE ${_.get(dbEnvConfig, `${nodeEnv}.database`)};`,
-    )
+    nodeEnv => `CREATE DATABASE ${_.get(dbEnvConfig, `${nodeEnv}.database`)};`)
 
   return Promise.any(
     _.map(createDbQueries, createDbQuery => sysSeq.query(createDbQuery))).then(() => {
