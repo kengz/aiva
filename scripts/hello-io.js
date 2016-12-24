@@ -1,4 +1,3 @@
-// dependencies
 // Sample interface script for lib/<lang>/hello.<lang>
 
 // Bot will call this function with the robot argument
@@ -24,6 +23,6 @@ module.exports = (robot) => {
       // respond to user when client.js resolves the promise
       .then((reply) => {
         res.send(reply.output)
-      }).catch(console.log)
+      }).catch(global.log.error)
   })
 }

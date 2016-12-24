@@ -1,8 +1,6 @@
-// dependencies
 // Interface script for convo engine
 const _ = require('lomath')
-const path = require('path')
-const { Chatlog, User } = require(path.join(__dirname, '..', 'db', 'models', 'index'))
+const { Chatlog, User } = require('../db/models/index')
 
 /* istanbul ignore next */
 module.exports = (robot) => {
@@ -17,21 +15,20 @@ module.exports = (robot) => {
       to: 'convo_classifier.py',
       intent: 'classify',
     })
-      .then((reply) => {
-        const convo = reply.output
-        global.log.info(`Convo Score ${convo.score}, Topic: ${convo.topic}`)
-        if (convo.topic === 'exception') {
-          // TODO can add some counter by user to activate
-          return
-        }
-        res.send(convo.response)
-      }).catch(console.log)
+    .then((reply) => {
+      const convo = reply.output
+      global.log.info(`Convo Score ${convo.score}, Topic: ${convo.topic}`)
+      if (convo.topic === 'exception') {
+        return
+      }
+      res.send(convo.response)
+    }).catch(global.log.error)
   })
 
   // catch all chatlogs
-  robot.hear(/.*/, (res) => {})
+  robot.hear(/.*/, () => {})
 
-  robot.receiveMiddleware((context, next, done) => {
+  robot.receiveMiddleware((context, next) => {
     const envelope = context.response.envelope
     const adapter = process.env.ADAPTER
     const userid = _.toString(_.get(envelope, 'user.id'))
@@ -51,7 +48,6 @@ module.exports = (robot) => {
       where: { adapter, userid },
       defaults: { username, envelope: JSON.stringify(envelope) },
     })
-      .spread((user, created) => {})
 
     _.each(inlogs, (inlog) => {
       Chatlog.create(inlog)
@@ -61,9 +57,10 @@ module.exports = (robot) => {
     return next()
   })
 
-  robot.responseMiddleware((context, next, done) => {
+  robot.responseMiddleware((context, next) => {
     const target = context.response.envelope
-      // global.log.info(JSON.stringify(target, null, 2))
+
+    // global.log.info(JSON.stringify(target, null, 2))
     const replies = context.strings
     const outlogs = _.map(replies, text => ({
       adapter: process.env.ADAPTER,
