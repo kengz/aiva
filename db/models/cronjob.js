@@ -1,9 +1,9 @@
 module.exports = function fn(sequelize, DataTypes) {
-  const User = sequelize.define('User', {
+  const Cronjob = sequelize.define('Cronjob', {
     adapter: DataTypes.STRING,
     userid: DataTypes.STRING,
-    username: DataTypes.STRING,
-    envelope: DataTypes.TEXT,
+    pattern: DataTypes.STRING,
+    command: DataTypes.TEXT,
   }, {
     classMethods: {
       // associate(models) {
@@ -11,5 +11,5 @@ module.exports = function fn(sequelize, DataTypes) {
       // },
     },
   })
-  return User
+  return Cronjob
 }

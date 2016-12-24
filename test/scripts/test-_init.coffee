@@ -1,4 +1,4 @@
-# helper = new Helper('../scripts/_init.js')
+helper = new Helper('../scripts/_init.js')
 
 # test ping script
 describe 'scripts/_init.js', ->
@@ -33,4 +33,28 @@ describe 'scripts/_init.js', ->
     it 'robot.emit(ready)', ->
       # re-invoke the initialization
       sinon.assert.calledOnce @spyRun
- 
+
+  # Test
+  context 'user: bot info', ->
+    beforeEach ->
+      co =>
+        @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
+        yield @room.user.say 'alice', '@hubot bot info'
+
+    # response
+    it 'hubot: <bot info>', ->
+      @room.messages.should.not.be.empty
+
+  # Test
+  context 'user: write brain', ->
+    beforeEach ->
+      co =>
+        @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
+        yield @room.user.say 'alice', '@hubot write brain'
+
+    # response
+    it 'hubot: Brain written to output.', ->
+      @room.messages.should.eql [
+        ['alice', '@hubot write brain']
+        ['hubot', 'Brain written to output.']
+      ]

@@ -1,7 +1,5 @@
 // dependencies
-const co = require('co')
 const _ = require('lomath')
-const path = require('path')
 const cgkb = require('cgkb')
 
 /* istanbul ignore next */
@@ -18,19 +16,19 @@ module.exports = (robot) => {
 
   robot.respond(/nlp\s*demo\s*2$/i, (res) => {
     cgkb.add('Book me a flight from New York to London for Sunday')
+    res.send('Your wish is my command')
   })
 
   robot.respond(/.*/, (res) => {
-    var text = res.match[0]
+    let text = res.match[0]
     text = _.trim(_.replace(text, robot.name, ''))
     if (_.includes(text, 'nlp') || _.includes(text, 'clear kb')) {
       return
-    } else {
-      cgkb.add(text)
-        .then(() => {
-          global.log.info('Knowledge saved to brain')
-        })
     }
+    cgkb.add(text)
+      .then(() => {
+        global.log.info('Knowledge saved to brain')
+      })
     if (_.includes(text, 'flight')) {
       res.send('Your wish is my command')
     }

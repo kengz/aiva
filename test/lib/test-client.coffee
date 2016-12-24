@@ -4,13 +4,13 @@ describe 'src/global-client.js', ->
   msgDirect =
     input: 'Hello from user.',
     to: 'hello.py',
-    intent: 'sayHi'
+    intent: 'say_hi'
 
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
     @room = helper.createRoom(httpd: false, name: global.DEFAULT_ROOM)
     # delay to wait for all clients to join
-    co =>
+    co ->
       yield delayer()
 
   describe 'global.client.clientPass', ->

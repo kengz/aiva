@@ -2,11 +2,11 @@
 
 module Hello
   class << self
-  # the id of this script for JSON payload 'from'
-  @@ioid = File.basename(__FILE__)
+    # the id of this script for JSON payload 'from'
+    @ioid = File.basename(__FILE__)
 
     # module method definition
-    def sayHi(msg)
+    def say_hi(msg)
       reply = {
         'output' => 'Hello from Ruby.',
         'to' => msg['from'],

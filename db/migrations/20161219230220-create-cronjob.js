@@ -1,6 +1,6 @@
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Cronjobs', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -8,17 +8,15 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       adapter: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       userid: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
-      username: {
+      pattern: {
         type: Sequelize.STRING,
       },
-      envelope: {
+      command: {
         type: Sequelize.TEXT,
       },
       createdAt: {
@@ -32,6 +30,6 @@ module.exports = {
     })
   },
   down(queryInterface) {
-    return queryInterface.dropTable('Users')
+    return queryInterface.dropTable('Cronjobs')
   },
 }

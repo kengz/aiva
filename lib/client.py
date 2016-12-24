@@ -73,7 +73,7 @@ def getAt(module, dotpath):
 
 def correctReply(reply, msg):
     '''correct the reply JSON'''
-    if type(reply) is not dict:
+    if not isinstance(reply, dict):
         reply = {"output": reply}
     # autofill if not already exist
     reply["to"] = reply.get("to") or msg.get("from")
@@ -111,10 +111,10 @@ def handle(msg):
         # try JSON or JSON.input as input
         try:
             reply = getAt(getAt(lib_py, to), intent)(msg)
-        except:
+        except Exception:
             try:
                 reply = getAt(getAt(lib_py, to), intent)(msg.get("input"))
-            except:
+            except Exception:
                 e = sys.exc_info()[0]
                 print('py handle fails.', e)
         finally:
