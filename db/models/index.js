@@ -1,11 +1,11 @@
-
-
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
+const fullConfig = require('../../config/db.json')
+
 const basename = path.basename(module.filename)
 const env = process.env.NODE_ENV || 'development'
-const config = require(path.join(__dirname, '..', '..', 'config', 'db.json'))[env]
+const config = fullConfig[env]
 const db = {}
 let sequelize
 

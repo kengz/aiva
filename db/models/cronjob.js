@@ -1,5 +1,3 @@
-
-
 module.exports = function fn(sequelize, DataTypes) {
   const Cronjob = sequelize.define('Cronjob', {
     adapter: DataTypes.STRING,
@@ -9,7 +7,7 @@ module.exports = function fn(sequelize, DataTypes) {
   }, {
     classMethods: {
       // associate(models) {
-        // associations can be defined here
+      // associations can be defined here
       // },
     },
   })

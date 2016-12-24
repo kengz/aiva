@@ -1,5 +1,3 @@
-
-
 // create with:
 // sequelize model:create --name Chatlog --attributes "adapter:string"
 
@@ -15,8 +13,8 @@ module.exports = function fn(sequelize, DataTypes) {
   }, {
     classMethods: {
       // associate(models) {
-        // associations can be defined here
-        // Chatlog.belongsTo(models.User)
+      // associations can be defined here
+      // Chatlog.belongsTo(models.User)
       // },
     },
   })

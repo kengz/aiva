@@ -1,5 +1,3 @@
-
-
 // to create: sequelize migration:create --name create-chatlog
 // to run: sequelize db:migrate
 // to revert: sequelize db:migrate:undo:all
