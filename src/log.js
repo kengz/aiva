@@ -7,7 +7,7 @@ const log = global.log || new (winston.Logger)({
   transports: [new (winston.transports.Console)({
     formatter: options =>
       /* istanbul ignore next */
-       `[${new Date()}] ${winston.config.colorize(options.level, options.level.toUpperCase())} ${options.message || ''}`,
+      `[${new Date()}] ${winston.config.colorize(options.level, options.level.toUpperCase())} ${options.message || ''}`,
   })],
 })
 global.log = log

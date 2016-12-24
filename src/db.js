@@ -25,7 +25,10 @@ function createDb() {
     dbConfig.password,
     dbConfig)
   const nodeEnvs = ['test', 'development', 'production']
-  const createDbQueries = _.map(nodeEnvs, nodeEnv => `CREATE DATABASE ${_.get(dbEnvConfig, `${nodeEnv}.database`)};`)
+  const createDbQueries = _.map(
+    nodeEnvs,
+    nodeEnv => `CREATE DATABASE ${_.get(dbEnvConfig, `${nodeEnv}.database`)};`,
+    )
 
   return Promise.any(
     _.map(createDbQueries, createDbQuery => sysSeq.query(createDbQuery))).then(() => {
@@ -46,7 +49,8 @@ function authDb() {
 /* istanbul ignore next */
 function migrateDb() {
   return new Promise((resolve, reject) => {
-    exec(`./node_modules/.bin/sequelize db:migrate --env ${process.env.NODE_ENV}`, (err, stdout, stderr) => {
+    const cmdStr = `./node_modules/.bin/sequelize db:migrate --env ${process.env.NODE_ENV}`
+    exec(cmdStr, (err, stdout, stderr) => {
       if (err) {
         log.error(stderr.toString())
         reject(err)

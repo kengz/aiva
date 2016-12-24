@@ -42,7 +42,9 @@ module.exports = (robot) => {
       room: _.get(envelope, 'room'),
       incoming: true,
       method: 'receive',
-      message: _.get(envelope, 'message.text') || _.join(_.keys(_.get(envelope, 'message.message')), ', '),
+      message: (
+        _.get(envelope, 'message.text') ||
+        _.join(_.keys(_.get(envelope, 'message.message')), ', ')),
     }]
 
     User.findOrCreate({

@@ -37,7 +37,7 @@ const sampleAtt = {
   pretext: 'This is a pretext',
   title: 'This is a title',
   title_link: 'https://api.slack.com/docs/attachments',
-  text: "This is the main text in a message attachment, and can contain standard message markup (see details below). The content will automatically collapse if it contains 700+ characters or 5+ linebreaks, and will display a 'Show more...' link to expand the content.",
+  text: 'This is the main text in a message attachment',
   fieldMat: [
     // the "short" key defaults to true
     ['Priority', 'high'],
