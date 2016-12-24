@@ -1,6 +1,6 @@
 
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function fn(sequelize, DataTypes) {
   const User = sequelize.define('User', {
     adapter: DataTypes.STRING,
     userid: DataTypes.STRING,
@@ -8,9 +8,9 @@ module.exports = function (sequelize, DataTypes) {
     envelope: DataTypes.TEXT,
   }, {
     classMethods: {
-      associate(models) {
+      // associate(models) {
         // associations can be defined here
-      },
+      // },
     },
   })
   return User

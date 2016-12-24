@@ -30,7 +30,7 @@ module.exports = {
       message: Sequelize.STRING,
     })
   },
-  down(queryInterface, Sequelize) {
+  down(queryInterface) {
     return queryInterface.dropTable('Chatlogs')
   },
 }
