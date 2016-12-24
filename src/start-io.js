@@ -1,5 +1,5 @@
 // The socket.io server and polyglot clients. Called by scripts/_init.js
-// const { nlpServer } = require('cgkb')
+const { nlpServer } = require('cgkb')
 const { spawn } = require('child_process')
 const _ = require('lomath')
 const path = require('path')
@@ -8,7 +8,7 @@ const { setEnv, activeAdapters } = require('./env')
 const log = require('./log')
 const jsIOClient = require('../lib/client')
 
-const nlpServerCount = 0
+const nlpServerCount = nlpServer ? 1 : 0
 const LIBPATH = path.join(__dirname, '..', 'lib')
 
 /* istanbul ignore next */
@@ -59,7 +59,7 @@ function ioClient() {
 
   // import js locally
   jsIOClient.join()
-    // nlpServer({ port: process.env.IOPORT }) // start nlp server
+  nlpServer({ port: process.env.IOPORT }) // start nlp server
 
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
