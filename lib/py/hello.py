@@ -12,7 +12,7 @@ def foo(incoming):
 
 
 # module method. Feel free to add more
-def sayHi(msg):
+def say_hi(msg):
     # the reply JSON payload.
     reply = {
         'output': foo(msg.get('input')),

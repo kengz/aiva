@@ -4,7 +4,7 @@ describe 'src/global-client.js', ->
   msgDirect =
     input: 'Hello from user.',
     to: 'hello.py',
-    intent: 'sayHi'
+    intent: 'say_hi'
 
   beforeEach ->
     # creating room with 'httpd: false' will auto tear-down
