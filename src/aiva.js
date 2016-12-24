@@ -15,8 +15,7 @@ function spawnProcess(env) {
   const hb = spawn(
     './bin/hubot',
     ['-a', _.toLower(env.ADAPTER), '--name', env.BOTNAME],
-    { stdio: 'inherit', env },
-    )
+    { stdio: 'inherit', env })
   children.push(hb)
   log.info(`Deploying bot ${env.BOTNAME} with adapter ${env.ADAPTER}`)
   return env
