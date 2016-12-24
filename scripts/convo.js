@@ -6,20 +6,19 @@ const { Chatlog, User } = require(path.join(__dirname, '..', 'db', 'models', 'in
 
 /* istanbul ignore next */
 module.exports = (robot) => {
-
   /* istanbul ignore next */
   robot.respond(/.*/, (res) => {
     if (process.env.CI) {
       return
     }
-    let str = res.match[0].replace(`${robot.name} `, '')
+    const str = res.match[0].replace(`${robot.name} `, '')
     global.client.pass({
-        input: str,
-        to: 'convo_classifier.py',
-        intent: 'classify'
-      })
+      input: str,
+      to: 'convo_classifier.py',
+      intent: 'classify',
+    })
       .then((reply) => {
-        let convo = reply.output
+        const convo = reply.output
         global.log.info(`Convo Score ${convo.score}, Topic: ${convo.topic}`)
         if (convo.topic === 'exception') {
           // TODO can add some counter by user to activate
@@ -33,25 +32,25 @@ module.exports = (robot) => {
   robot.hear(/.*/, (res) => {})
 
   robot.receiveMiddleware((context, next, done) => {
-    let envelope = context.response.envelope
-    let adapter = process.env.ADAPTER
-    let userid = _.toString(_.get(envelope, 'user.id'))
-    let username = _.get(envelope, 'user.username') || _.get(envelope, 'user.name')
+    const envelope = context.response.envelope
+    const adapter = process.env.ADAPTER
+    const userid = _.toString(_.get(envelope, 'user.id'))
+    const username = _.get(envelope, 'user.username') || _.get(envelope, 'user.name')
 
-    let inlogs = [{
-      'adapter': adapter,
-      'userid': userid,
-      'username': username,
-      'room': _.get(envelope, 'room'),
-      'incoming': true,
-      'method': 'receive',
-      'message': _.get(envelope, 'message.text') || _.join(_.keys(_.get(envelope, 'message.message')), ', ')
+    const inlogs = [{
+      adapter,
+      userid,
+      username,
+      room: _.get(envelope, 'room'),
+      incoming: true,
+      method: 'receive',
+      message: _.get(envelope, 'message.text') || _.join(_.keys(_.get(envelope, 'message.message')), ', '),
     }]
 
     User.findOrCreate({
-        where: { adapter: adapter, userid: userid },
-        defaults: { username: username, envelope: JSON.stringify(envelope) }
-      })
+      where: { adapter, userid },
+      defaults: { username, envelope: JSON.stringify(envelope) },
+    })
       .spread((user, created) => {})
 
     _.each(inlogs, (inlog) => {
@@ -63,17 +62,17 @@ module.exports = (robot) => {
   })
 
   robot.responseMiddleware((context, next, done) => {
-    let target = context.response.envelope
+    const target = context.response.envelope
       // global.log.info(JSON.stringify(target, null, 2))
-    let replies = context.strings
-    let outlogs = _.map(replies, (text) => ({
-      'adapter': process.env.ADAPTER,
-      'userid': _.get(target, 'user.id'),
-      'username': _.get(target, 'user.username') || _.get(target, 'user.name'),
-      'room': _.get(target, 'room'),
-      'incoming': false,
-      'method': context.method,
-      'message': text
+    const replies = context.strings
+    const outlogs = _.map(replies, text => ({
+      adapter: process.env.ADAPTER,
+      userid: _.get(target, 'user.id'),
+      username: _.get(target, 'user.username') || _.get(target, 'user.name'),
+      room: _.get(target, 'room'),
+      incoming: false,
+      method: context.method,
+      message: text,
     }))
     _.each(outlogs, (outlog) => {
       Chatlog.create(outlog)

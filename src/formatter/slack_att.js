@@ -21,7 +21,7 @@ const palette = {
   yellow: 'warning',
   orange: '#ffa726',
   brown: '#795548',
-  grey: '#546e7a'
+  grey: '#546e7a',
 }
 
 // quick function to get color from palette
@@ -32,20 +32,20 @@ function getColor(str) {
 
 // sample simple attachment
 // keys can be missing
-let Att = {
+const Att = {
   // color can be "good", "warning", "danger", hex #439FE0
-  color: "good",
-  pretext: "This is a pretext",
-  title: "This is a title",
-  title_link: "https://api.slack.com/docs/attachments",
+  color: 'good',
+  pretext: 'This is a pretext',
+  title: 'This is a title',
+  title_link: 'https://api.slack.com/docs/attachments',
   text: "This is the main text in a message attachment, and can contain standard message markup (see details below). The content will automatically collapse if it contains 700+ characters or 5+ linebreaks, and will display a 'Show more...' link to expand the content.",
   fieldMat: [
     // the "short" key defaults to true
-    ["Priority", "high"],
-    ["Status", "pending"]
+    ['Priority', 'high'],
+    ['Status', 'pending'],
   ],
-  image_url: "https://slack.global.ssl.fastly.net/ae57/img/slack_api_logo.png",
-  thumb_url: "https://slack.global.ssl.fastly.net/ae57/img/slack_api_logo.png"
+  image_url: 'https://slack.global.ssl.fastly.net/ae57/img/slack_api_logo.png',
+  thumb_url: 'https://slack.global.ssl.fastly.net/ae57/img/slack_api_logo.png',
 }
 
 // console.log(gen({ message: { room: 'kengz' } }, Att))
@@ -72,7 +72,7 @@ function gen(res, atts, parser) {
   }
   return {
     channel: res.message.room,
-    attachments: _.map(atts, genAttach)
+    attachments: _.map(atts, genAttach),
   }
 }
 
@@ -84,11 +84,11 @@ function gen(res, atts, parser) {
 /* istanbul ignore next */
 function genAttach(Att) {
   // cleanup the fieldmat
-  Att["fieldMat"] = cleanFieldMat(Att["fieldMat"])
+  Att.fieldMat = cleanFieldMat(Att.fieldMat)
   // filter out undefined values
   Att = _.pickBy(Att)
   // the 3 keys for each field
-  let fieldKeys = ["title", "value", "short"]
+  const fieldKeys = ['title', 'value', 'short']
   let fields = _.map(Att.fieldMat, (fieldArr) => {
     // for default: short = true
     fieldArr.push(true)
@@ -98,15 +98,15 @@ function genAttach(Att) {
   fields = _.isEmpty(fields) ? null : fields
   // filter out null values
   return _.pickBy({
-    "fallback": _.join(_.compact([Att.pretext, Att.title, Att.title_link]), ' - '),
-    "color": getColor(Att.color),
-    "pretext": Att.pretext,
-    "title": Att.title,
-    "title_link": Att.title_link,
-    "text": Att.text,
-    "fields": fields,
-    "image_url": Att.image_url,
-    "thumb_url": Att.thumb_url
+    fallback: _.join(_.compact([Att.pretext, Att.title, Att.title_link]), ' - '),
+    color: getColor(Att.color),
+    pretext: Att.pretext,
+    title: Att.title,
+    title_link: Att.title_link,
+    text: Att.text,
+    fields,
+    image_url: Att.image_url,
+    thumb_url: Att.thumb_url,
   })
 }
 
@@ -117,16 +117,14 @@ function genAttach(Att) {
  */
 /* istanbul ignore next */
 function cleanFieldMat(fieldMat) {
-  cleanMap = _.map(fieldMat, (row) => {
-    return row[1] ? row : null
-  })
+  cleanMap = _.map(fieldMat, row => row[1] ? row : null)
   return _.compact(cleanMap)
 }
 
 
-//////////////////////////////////////////////
+// ////////////////////////////////////////////
 // The parsers into Slack attachment format //
-//////////////////////////////////////////////
+// ////////////////////////////////////////////
 
 
 /**
@@ -136,11 +134,11 @@ function cleanFieldMat(fieldMat) {
  * @example
  * gen(res, gkgseachRes, slackAtt.gkgParser)
  * // => gkgsearchRes as array of Slack attachments
- * 
+ *
  */
 /* istanbul ignore next */
 function gkgParser(gkgRes) {
-  let items = (gkgRes.itemListElement || [])
+  const items = (gkgRes.itemListElement || [])
   return _.map(items, _gkgParser)
 }
 /**
@@ -148,17 +146,17 @@ function gkgParser(gkgRes) {
  */
 /* istanbul ignore next */
 function _gkgParser(item) {
-  let att = {
-    color: "purple",
-    pretext: _.get(item, "result.description"),
-    title: _.get(item, "result.name"),
-    title_link: _.get(item, "result.detailedDescription.url"),
-    text: _.get(item, "result.detailedDescription.articleBody"),
+  const att = {
+    color: 'purple',
+    pretext: _.get(item, 'result.description'),
+    title: _.get(item, 'result.name'),
+    title_link: _.get(item, 'result.detailedDescription.url'),
+    text: _.get(item, 'result.detailedDescription.articleBody'),
     fieldMat: [
       // the "short" key defaults to true
-      ["Type", _.join(_.get(item, "result.@type"), ", "), false]
+      ['Type', _.join(_.get(item, 'result.@type'), ', '), false],
     ],
-    thumb_url: _.get(item, "result.image.contentUrl")
+    thumb_url: _.get(item, 'result.image.contentUrl'),
   }
   return att
 }
@@ -170,11 +168,11 @@ function _gkgParser(item) {
  * @example
  * gen(res, gseachRes, slackAtt.gsearchParser)
  * // => gsearchRes as array of Slack attachments
- * 
+ *
  */
 /* istanbul ignore next */
 function gsearchParser(gsearchRes) {
-  let items = (gsearchRes.links || [])
+  const items = (gsearchRes.links || [])
   return _.compact(_.map(items, _gsearchParser))
 }
 /**
@@ -182,25 +180,25 @@ function gsearchParser(gsearchRes) {
  */
 /* istanbul ignore next */
 function _gsearchParser(item) {
-  if (!_.get(item, "href")) { return null }
-  let att = {
-    color: "indigo",
-    title: _.get(item, "title"),
-    title_link: _.get(item, "href"),
-    text: _.get(item, "description"),
+  if (!_.get(item, 'href')) { return null }
+  const att = {
+    color: 'indigo',
+    title: _.get(item, 'title'),
+    title_link: _.get(item, 'href'),
+    text: _.get(item, 'description'),
     fieldMat: [
       // the "short" key defaults to true
-      ["url", _.get(item, "link"), false]
-    ]
+      ['url', _.get(item, 'link'), false],
+    ],
   }
   return att
 }
 
 
-let slackAtt = {
-  gen: gen,
-  gkgParser: gkgParser,
-  gsearchParser: gsearchParser
+const slackAtt = {
+  gen,
+  gkgParser,
+  gsearchParser,
 }
 
 module.exports = slackAtt

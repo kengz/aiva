@@ -1,36 +1,37 @@
-'use strict';
+
+
 module.exports = {
-  up: function(queryInterface, Sequelize) {
+  up(queryInterface, Sequelize) {
     return queryInterface.createTable('Cronjobs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       adapter: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       userid: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       pattern: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       command: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
+        type: Sequelize.DATE,
+      },
+    })
   },
-  down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Cronjobs');
-  }
-};
+  down(queryInterface, Sequelize) {
+    return queryInterface.dropTable('Cronjobs')
+  },
+}

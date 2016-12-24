@@ -18,19 +18,17 @@ const LIBPATH = path.join(__dirname, '..', 'lib')
 const jsIOClient = require(path.join(LIBPATH, 'client'))
 
 // import other languages via child_process
-let ioClientCmds = _.pickBy({
-    ruby: {
+const ioClientCmds = _.pickBy({
+  ruby: {
       // install_dependency: "gem install socket.io-client-simple activesupport",
-      client: path.join(LIBPATH, 'client.rb')
-    },
-    python: {
-      // install_dependency: "python -m pip install socketIO-client",
-      client: path.join(LIBPATH, 'client.py')
-    }
+    client: path.join(LIBPATH, 'client.rb'),
   },
-  (args, cmd) => {
-    return global.config.get("ACTIVATE_IO_CLIENTS").get(cmd)
-  })
+  python: {
+      // install_dependency: "python -m pip install socketIO-client",
+    client: path.join(LIBPATH, 'client.py'),
+  },
+},
+  (args, cmd) => global.config.get('ACTIVATE_IO_CLIENTS').get(cmd))
 
 /* istanbul ignore next */
 const adapterCount = (process.env.NODE_ENV === 'test') ? 1 : _.size(activeAdapters)
@@ -43,7 +41,7 @@ const CLIENT_COUNT = 1 + _.size(ioClientCmds) + adapterCount + nlpServerCount
 /* istanbul ignore next */
 function ioClient() {
   // the child processes,kill all on death
-  let children = []
+  const children = []
 
   /* istanbul ignore next */
   process.on('exit', () => {
@@ -60,9 +58,9 @@ function ioClient() {
   _.each(ioClientCmds, (cmds, lang) => {
     // spawn ioclients for other lang
     global.log.info(`Starting socketIO client for ${lang} at ${process.env.IOPORT}`)
-    let cp = spawn('/bin/sh', ['-c', `
+    const cp = spawn('/bin/sh', ['-c', `
       ${srcCmd}
-      ${lang} ${cmds['client']}
+      ${lang} ${cmds.client}
       `], { stdio: [process.stdin, process.stdout, 'pipe'] })
     children.push(cp)
 
@@ -81,10 +79,10 @@ function ioClient() {
 /* istanbul ignore next */
 function ioStart() {
   polyIO.server({
-      port: process.env.IOPORT,
-      clientCount: CLIENT_COUNT,
-      debug: process.env['npm_config_debug']
-    })
+    port: process.env.IOPORT,
+    clientCount: CLIENT_COUNT,
+    debug: process.env.npm_config_debug,
+  })
     .then(ioClient)
   return global.ioPromise
 }

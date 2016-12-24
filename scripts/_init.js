@@ -18,13 +18,13 @@ module.exports = (robot) => {
   global.robot = robot
 
   // wake up, init
-  co(function*() {
+  co(function* () {
     /* istanbul ignore next */
     if (robot.adapter.constructor.name === 'Shell') {
       // set for Shell local dev
       robot.brain.data.users = global.users
     }
-    yield Promise.delay(10); // wait to connect, get users
+    yield Promise.delay(10) // wait to connect, get users
     // emit 'ready' event to kick off initialization
     robot.emit('ready')
   }).catch(global.log.error)
@@ -42,8 +42,8 @@ module.exports = (robot) => {
 
   // ensure bot name
   robot.respond(/bot info/i, (res) => {
-    let envelope = res.envelope
-    let info = _.join([
+    const envelope = res.envelope
+    const info = _.join([
       `robot.name: ${robot.name}`,
       `process.env.NODE_ENV: ${process.env.NODE_ENV}`,
       `adapter: ${process.env.ADAPTER}`,
@@ -51,7 +51,7 @@ module.exports = (robot) => {
       `user.name: ${_.get(envelope, 'user.username') || _.get(envelope, 'user.name')}`,
       `room: ${envelope.room}`,
       `server time: ${new Date()}`,
-      ], '\n')
+    ], '\n')
     res.send(info)
   })
 
@@ -59,10 +59,10 @@ module.exports = (robot) => {
   robot.respond(/write brain/i, (res) => {
     try {
       fs.writeFile(brainDumpPath, JSON.stringify(robot.brain.data))
-      res.send(`Brain written to output.`)
+      res.send('Brain written to output.')
     } catch (e) {
       /* istanbul ignore next */
-      res.send(`No permission to write brain to output.`)
+      res.send('No permission to write brain to output.')
     }
   })
 }

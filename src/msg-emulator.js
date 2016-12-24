@@ -9,19 +9,19 @@ const { User } = require(path.join(__dirname, '..', 'db', 'models', 'index'))
 // const msgEmulator = require('msg-emulator')
 // msgEmulator.receive(userid, 'ping')
 function receive(userid, text) {
-  let adapter = process.env.ADAPTER
-  let emulMsgID = `${userid}-${new Date().toISOString()}`
+  const adapter = process.env.ADAPTER
+  const emulMsgID = `${userid}-${new Date().toISOString()}`
   User.find({
-      where: { adapter: adapter, userid: userid }
-    })
+    where: { adapter, userid },
+  })
     .then((user) => {
-      let envelope = JSON.parse(user.envelope)
-      let message = new TextMessage(envelope, `${global.robot.name} ${text}`, emulMsgID)
+      const envelope = JSON.parse(user.envelope)
+      const message = new TextMessage(envelope, `${global.robot.name} ${text}`, emulMsgID)
       global.robot.receive(message)
       // global.robot.send(envelope, 'Direct message')
     })
 }
 
 module.exports = {
-  receive: receive
+  receive,
 }

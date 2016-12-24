@@ -10,16 +10,16 @@ module.exports = (robot) => {
 
   // call the hello.py methods
   robot.respond(/hello-io\s*(.+)/i, (res) => {
-    let lang = res.match[1]
+    const lang = res.match[1]
 
     // use the global client to pass to the hello.py client
     // this returns a promise
     global.client.pass({
         // must specify at least the following keys
-        input: 'Hello from user.',
-        to: `hello.${lang}`,
-        intent: 'sayHi'
-      })
+      input: 'Hello from user.',
+      to: `hello.${lang}`,
+      intent: 'sayHi',
+    })
       // this goes through hello.py -> client.js
       // respond to user when client.js resolves the promise
       .then((reply) => {

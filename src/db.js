@@ -24,18 +24,14 @@ function createDb() {
     dbConfig.username,
     dbConfig.password,
     dbConfig)
-  let nodeEnvs = ['test', 'development', 'production']
-  let createDbQueries = _.map(nodeEnvs, (nodeEnv) => {
-    return "CREATE DATABASE " + _.get(dbEnvConfig, `${nodeEnv}.database`) + ";"
-  })
+  const nodeEnvs = ['test', 'development', 'production']
+  const createDbQueries = _.map(nodeEnvs, nodeEnv => `CREATE DATABASE ${_.get(dbEnvConfig, `${nodeEnv}.database`)};`)
 
   return Promise.any(
-    _.map(createDbQueries, (createDbQuery) => {
-      return sysSeq.query(createDbQuery)
-    })).then(() => {
-    sysSeq.close()
-    log.info(`Created the aiva databases`)
-  }).catch(e => { log.error(JSON.stringify(e, null, 2)) })
+    _.map(createDbQueries, createDbQuery => sysSeq.query(createDbQuery))).then(() => {
+      sysSeq.close()
+      log.info('Created the aiva databases')
+    }).catch((e) => { log.error(JSON.stringify(e, null, 2)) })
 }
 
 /* istanbul ignore next */
@@ -44,11 +40,7 @@ function authDb() {
     .authenticate()
     .then((e) => {
       log.info('Authenticated database successfully')
-    }).catch((e) => {
-      return createDb()
-    }).finally(() => {
-      return sequelize.close()
-    })
+    }).catch(e => createDb()).finally(() => sequelize.close())
 }
 
 /* istanbul ignore next */
@@ -66,8 +58,8 @@ function migrateDb() {
 }
 
 module.exports = {
-  authDb: authDb,
-  migrateDb: migrateDb
+  authDb,
+  migrateDb,
 }
 
 /* istanbul ignore next */

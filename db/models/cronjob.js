@@ -1,16 +1,17 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Cronjob = sequelize.define('Cronjob', {
+
+
+module.exports = function (sequelize, DataTypes) {
+  const Cronjob = sequelize.define('Cronjob', {
     adapter: DataTypes.STRING,
     userid: DataTypes.STRING,
     pattern: DataTypes.STRING,
-    command: DataTypes.TEXT
+    command: DataTypes.TEXT,
   }, {
     classMethods: {
-      associate: function(models) {
+      associate(models) {
         // associations can be defined here
-      }
-    }
-  });
-  return Cronjob;
-};
+      },
+    },
+  })
+  return Cronjob
+}

@@ -8,12 +8,12 @@ const log = require(path.join(SRCPATH, 'log'))
 const { setEnv } = require(path.join(SRCPATH, 'env'))
 const { migrateDb } = require(path.join(SRCPATH, 'db'))
 global.chai = require('chai') // chai assertation library
-chai.use(require("chai-as-promised"))
+chai.use(require('chai-as-promised'))
 global.should = chai.should()
 global.sinon = require('sinon') // sinon spy/stub library
 global.Helper = require('hubot-test-helper')
 global.Promise.config({ warnings: false })
-global.DEFAULT_ROOM = "bot-test" // set for test
+global.DEFAULT_ROOM = 'bot-test' // set for test
 global.A = require(path.join(__dirname, 'asset')) // global asset
 
 // set the hubot say handlers for unit tests: send reply to room
@@ -36,14 +36,14 @@ function startProcess() {
       // set the port to test
       process.env.NODE_ENV = 'test'
       process.env.ADAPTER = 'Shell'
-      log.info(`Starting aiva test process`)
+      log.info('Starting aiva test process')
       setEnv()
       process.env.PORT = 9090
       process.env.IOPORT = 7676
       log.info(`Test is using PORT: ${process.env.PORT}; IOPORT: ${process.env.IOPORT}`)
     } catch (e) {
       log.error(JSON.stringify(e, null, 2))
-      log.error("No config and not in CI, please provide your config file.")
+      log.error('No config and not in CI, please provide your config file.')
       reject()
       process.exit(1)
     }
@@ -61,5 +61,5 @@ function start() {
 }
 
 module.exports = {
-  start: start
+  start,
 }
