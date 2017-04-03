@@ -97,3 +97,28 @@ def classify(msg):
     }
     # the py client will send this to target <to>
     return reply
+
+def getSimilarWord(input_word):
+    input_v = nlp(input_word)
+    high_score = 0
+    high_convo = {}
+    commands = CONVO_CLASSES['commands'] # default
+    topic_convo = commands['queries_wordvecs']
+    # max([input_v.similarity(q_v) for q_v in topic_convo]) if topic_convo else 0
+    for index, conv in enumerate(topic_convo, start=0):
+        local_high_score = input_v.similarity(conv)
+        if (local_high_score > high_score):
+            high_score = local_high_score
+            high_convo = commands['queries'][index]
+    convo = { 'convo': high_convo }
+    convo['score'] = high_score
+    return convo
+
+def getCommand(msg):
+    reply = {
+        'output': getSimilarWord(msg.get('input')),
+        'to': msg.get('from'),
+        'from': ioid,
+        'hash': msg.get('hash')
+    }
+    return reply

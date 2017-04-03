@@ -6,8 +6,9 @@ const { Chatlog, User } = require('../db/models/index')
 /* istanbul ignore next */
 module.exports = (robot) => {
   /* istanbul ignore next */
-  robot.respond(/.*/, (res) => {
-    if (process.env.CI) {
+  //robot.respond(/.*/, (res) => {
+  /*if (process.env.CI) {
+	global.log.info('returning due to CI');
       return
     }
     const str = res.match[0].replace(`${robot.name} `, '')
@@ -18,18 +19,18 @@ module.exports = (robot) => {
     })
     .then((reply) => {
       const convo = reply.output
-      global.log.info(`Convo Score ${convo.score}, Topic: ${convo.topic}`)
+      //global.log.info(`Convo Score ${convo.score}, Topic: ${convo.topic}`)
       if (convo.topic === 'exception') {
         return
       }
       res.send(convo.response)
     }).catch(global.log.error)
-  })
+  })*/
 
   // catch all chatlogs
-  robot.hear(/.*/, () => {})
+  //robot.hear(/.*/, () => {})
 
-  robot.receiveMiddleware((context, next, done) => {
+  /*robot.receiveMiddleware((context, next, done) => {
     const envelope = context.response.envelope
     const adapter = process.env.ADAPTER
     const userid = _.toString(_.get(envelope, 'user.id'))
@@ -54,7 +55,7 @@ module.exports = (robot) => {
 
     _.each(inlogs, (inlog) => {
       Chatlog.create(inlog)
-      global.log.debug(`[In log]: ${inlog.message}`)
+      //global.log.debug(`[In log]: ${inlog.message}`)
     })
 
     return next(done)
@@ -63,7 +64,7 @@ module.exports = (robot) => {
   robot.responseMiddleware((context, next, done) => {
     const target = context.response.envelope
 
-    // global.log.info(JSON.stringify(target, null, 2))
+    //global.log.info("context", JSON.stringify(target, null, 2))
     const replies = context.strings
     const outlogs = _.map(replies, text => ({
       adapter: process.env.ADAPTER,
@@ -75,9 +76,11 @@ module.exports = (robot) => {
       message: text,
     }))
     _.each(outlogs, (outlog) => {
-      Chatlog.create(outlog)
-      global.log.debug(`[Out log]: ${outlog.message}`)
+      if (outlog && outlog.message && typeof(outlog.message) === "string"){
+        //global.log.debug('[Out log]:'+ JSON.stringify(outlog) )
+        Chatlog.create(outlog)
+      }
     })
     return next(done)
-  })
+  })*/
 }
