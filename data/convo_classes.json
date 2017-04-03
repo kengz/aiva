@@ -10,26 +10,13 @@
     ],
     "weighted_keywords": []
   },
-  "weather": {
-    "queries": [
-      "How is the weather?",
-      "The weather please",
-      "What's the weather like?"
-    ],
-    "responses": [
-      "It is raining today.",
-      "it is quite sunny today.",
-      "No idea, I live in the cloud and it's always sunny :)"
-    ],
-    "weighted_keywords": ["weather"]
-  },
   "info": {
     "queries": [
       "Who are you?",
       "What are you?"
     ],
     "responses": [
-      "I am AIVA the bot."
+      "I am the bot for Accion."
     ],
     "weighted_keywords": []
   },
@@ -39,9 +26,19 @@
       "Who is your creator?"
     ],
     "responses": [
-      "I'm created by kengz",
-      "kengz created me"
+      "I'm created by Devender Gupta",
+      "Devender Gupta created me"
     ],
+    "weighted_keywords": []
+  },
+  "commands":{
+    "queries":[
+      "Get",
+      "Update",
+      "Create",
+      "Delete"
+    ],
+    "responses": [],
     "weighted_keywords": []
   },
   "exception": {
