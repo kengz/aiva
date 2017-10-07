@@ -19,7 +19,9 @@
     "reset": "bin/reset",
     "production": "mkdir -p ./logs; NODE_ENV=production ./node_modules/forever/bin/forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-production -m 10 -a index.js | tee ./logs/aiva-production.log",
     "development": "mkdir -p ./logs; NODE_ENV=development ./node_modules/forever/bin/forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-development -m 10 -a index.js | tee ./logs/aiva-development.log",
-    "server": "node src/start-io.js"
+    "server": "node src/start-io.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -62,8 +64,9 @@
     "randombytes": "^2.0.3",
     "require-dir": "^0.3.0",
     "sequelize": "^3.24.3",
-    "socket.io-client": "^1.4.5",
-    "winston": "^2.2.0"
+    "socket.io-client": "^2.0.2",
+    "winston": "^2.2.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -84,5 +87,6 @@
   },
   "engines": {
     "node": ">=6"
-  }
+  },
+  "snyk": true
 }

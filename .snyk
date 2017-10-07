@@ -1,0 +1,72 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - hubot > express > connect > body-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > socket.io-client > engine.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io-client > engine.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io-client > engine.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > engine.io > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > engine.io > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > socket.io-adapter > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > socket.io-adapter > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > socket.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > socket.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > send > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > socket.io-client > engine.io-client > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > compression > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > connect-timeout > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > express-session > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > finalhandler > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > morgan > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > serve-index > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - hubot > express > connect > serve-static > send > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > socket.io-adapter > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > socket.io-client > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > socket.io-client > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - poly-socketio > socket.io-client > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
+    - cgkb > spacy-nlp > poly-socketio > socket.io-client > socket.io-parser > debug:
+        patched: '2017-09-30T00:59:10.012Z'
