@@ -21,7 +21,8 @@
     "development": "mkdir -p ./logs; NODE_ENV=development ./node_modules/forever/bin/forever --minUptime=1000 --spinSleepTime=1000 --killSignal=SIGTERM --uid aiva-development -m 10 -a index.js | tee ./logs/aiva-development.log",
     "server": "node src/start-io.js",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -66,7 +67,7 @@
     "sequelize": "^3.24.3",
     "socket.io-client": "^2.0.2",
     "winston": "^2.2.0",
-    "snyk": "^1.41.1"
+    "snyk": "^1.83.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
