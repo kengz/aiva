@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.7.1
+version: v1.12.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -70,3 +70,11 @@ patch:
         patched: '2017-09-30T00:59:10.012Z'
     - cgkb > spacy-nlp > poly-socketio > socket.io-client > socket.io-parser > debug:
         patched: '2017-09-30T00:59:10.012Z'
+  'npm:mime:20170907':
+    - hubot > express > send > mime:
+        patched: '2018-06-30T06:41:44.169Z'
+    - hubot > express > connect > serve-static > send > mime:
+        patched: '2018-06-30T06:41:44.169Z'
+  'npm:tunnel-agent:20170305':
+    - hubot-slack > @slack/client > request > tunnel-agent:
+        patched: '2018-06-30T06:41:44.169Z'
