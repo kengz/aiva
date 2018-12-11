@@ -63,6 +63,7 @@
     "require-dir": "^0.3.0",
     "sequelize": "^3.24.3",
     "socket.io-client": "^1.4.5",
+    "spacy-nlp": "github:eswidler/spacy-nlp",
     "winston": "^2.2.0"
   },
   "devDependencies": {
