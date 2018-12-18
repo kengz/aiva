@@ -65,8 +65,40 @@ The command installs the dependencies via `bin/install && npm install`, and prep
 
 See `bin/install` for the full list, and customize your own. This also runs the same sequence as the CircleCI build in `circle.yml`.
 
-**Docker**. We also offer a Docker image [kengz/aiva](https://hub.docker.com/r/kengz/aiva/). It runs the same except with an extra layer of Docker. See [Docker installation](http://kengz.me/aiva/#docker-installation) for more.
+**Install spaCy and Socket.IO**
+```shell
+pip install -U socketIO-client           # for communication with interface
+pip install -U spacy
+python -m spacy download en              # download spaCy's models
+python -m spacy download en_core_web_md  # additional spaCy models 
+```
+**Install Neo4j**
+Adapted from kengz's [blog post](https://explosion.ai/blog/chatbot-node-js-spacy):
 
+If you haven't installed Neo4j, you can do so with the following:
+```shell
+if which neo4j >/dev/null; then
+  echo "Neo4j is already installed"
+else
+  if [ $(uname) == "Darwin" ]; then
+    brew install neo4j
+  else
+    wget -O - https://debian.neo4j.org/neotechnology.gpg.key | sudo apt-key add -
+    echo 'deb http://debian.neo4j.org/repo stable/' | sudo tee /etc/apt/sources.list.d/neo4j.list
+    sudo apt-get update
+    sudo apt-get -y install neo4j
+  fi
+fi
+```
+
+Start Neo4j
+```shell
+neo4j start             # for Mac
+service neo4j start     # for Linux
+```
+Log into neo4j for the first time at http:∕∕localhost:7474 with default username (neo4j) and password (neo4j). It will ask you to change the password.  You can use 0000 for this demo, but if you change the password, you'll need to copy your neo4j credentials into `node_modules/cgkb/config/db.json`
+
+**Docker**. We also offer a Docker image [kengz/aiva](https://hub.docker.com/r/kengz/aiva/). It runs the same except with an extra layer of Docker. See [Docker installation](http://kengz.me/aiva/#docker-installation) for more.
 
 ## <a name="run"></a>Run
 

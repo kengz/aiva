@@ -10,7 +10,7 @@ import os
 import six
 import socket
 import websocket
-from socketIO_client import SocketIO, WebsocketTransport
+from socketIO_client_nexus import SocketIO, WebsocketTransport
 from py import *
 
 

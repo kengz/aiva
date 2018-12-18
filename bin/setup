@@ -111,13 +111,13 @@ else
 fi
 
 # install pip modules
-if python3 -m pip show six autocorrect websocket socketIO-client spacy >/dev/null; then
+if python3 -m pip show six autocorrect websocket socketIO-client-nexus spacy >/dev/null; then
   echo "Pip modules already installed"
 else
   python3 -m pip install -U six
   python3 -m pip install -U autocorrect
   python3 -m pip install -U websocket
-  python3 -m pip install -U socketIO-client
+  python3 -m pip install -U socketIO-client-nexus
   python3 -m pip install -U spacy
 fi
 echo "spaCy model:"
